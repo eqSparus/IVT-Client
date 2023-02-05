@@ -1,0 +1,126 @@
+@use "properties" as prop;
+@use "default";
+@use "utils";
+@use "sass:color";
+@use "sass:list";
+@use "sass:map";
+@use "sass:math";
+
+
+$color-buttons: (
+    "standard": (prop.$button-standard-color, prop.$button-standard-text-color)
+);
+
+
+$property-buttons: (
+    "":(p-x: 31px, p-y: 14px, radius: 4px, border: 1px, font-size: 1.4rem, font-weight:500),
+    "-sm":(p-x: 10px, p-y: 7px, radius: 5px, border: 1px, font-size: 1.2rem, font-weight:500)
+);
+
+
+$font-size-text: (
+    20,
+    24,
+    26,
+    32,
+    48,
+    64
+);
+
+
+$margin-size: (
+    10,
+    15,
+    20,
+    24,
+    30,
+    40,
+    48,
+    50,
+    60,
+    64,
+    80,
+    100
+);
+
+
+$type-spacing: (
+    "":"",
+    "l":"-left",
+    "r":"-right",
+    "t":"-top",
+    "b":"-bottom"
+);
+
+
+html,
+body {
+    font-family: default-font, Verdana, sans-serif;
+    overflow-x: hidden;
+    @include utils.scrollbar(prop.$main-color, prop.$body-color);
+}
+
+
+%btn {
+    font-family: prop.$standard-font;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:not(:disabled):hover {
+        transition: 0.2s;
+    }
+
+    &:disabled {
+        cursor: default
+    }
+}
+
+
+@each $title,
+$colors in $color-buttons {
+
+
+    @each $type,
+    $property in $property-buttons {
+
+        .btn-#{$title}#{$type} {
+            @extend %btn;
+            @include utils.button-size($font-size: map-get($property, "font-size"), $border-radius: map-get($property, "radius"),
+                $p-x: map-get($property, "p-x"), $p-y: map-get($property, "p-y"), $font-weight: map-get($property, "font-weight"));
+            background: nth($colors, 1);
+            color: nth($colors, 2);
+            border: map-get($property, "border") solid nth($colors, 1);
+
+            &:not(:disabled):hover {
+                background: adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+                border: map-get($property, "border") solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+            }
+
+            &:disabled {
+                color: adjust-color($color: nth($colors, 2), $red: -255, $green: -255, $blue: -255, $alpha: -0.74);
+                background: adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+                border: map-get($property, "border") solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+            }
+        }
+    }
+
+}
+
+
+@each $size in $font-size-text {
+    .fs-#{$size} {
+        font-size: utils.calcFontSize($size - $size / 5, $size, 1280, 1920);
+    }
+}
+
+
+@each $size in $margin-size {
+
+    @each $title,
+    $type in $type-spacing {
+        .m#{$title}-#{$size} {
+            margin#{$type}: #{$size/10}rem;
+        }
+    }
+}

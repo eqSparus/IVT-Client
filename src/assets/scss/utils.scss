@@ -1,0 +1,36 @@
+@mixin button-size($font-weight: 500, $font-size: 2rem, $border-radius: 0, $p-x: 30px, $p-y: 15px) {
+    border-radius: $border-radius;
+    font-weight: $font-weight;
+    font-size: $font-size;
+    padding: $p-y $p-x;
+}
+
+@mixin scrollbar($color-slider, $color-body) {
+
+    scrollbar-width: thin;
+    scrollbar-color: $color-slider $color-body;
+
+    *::-webkit-scrollbar,
+    html *::-webkit-scrollbar {
+        height: 10px;
+        width: 10px;
+    }
+
+    *::-webkit-scrollbar-track,
+    html *::-webkit-scrollbar-track {
+        background: $color-body;
+    }
+
+    *::-webkit-scrollbar-thumb,
+    html *::-webkit-scrollbar-thumb {
+        background-color: $color-slider;
+        border: 1px solid $color-body;
+    }
+}
+
+@function calcFontSize($f-min, $f-max, $v-min, $v-max) {
+    $k: ($f-max - $f-min)/($v-max - $v-min);
+    $b: $f-min - $k * $v-min;
+    $b: $b * 1px;
+    @return calc(#{$k} * 100vw + #{$b});
+}
