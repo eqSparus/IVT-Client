@@ -43,7 +43,6 @@ $margin-size: (
     100
 );
 
-
 $type-spacing: (
     "":"",
     "l":"-left",
@@ -110,7 +109,7 @@ $colors in $color-buttons {
 
 @each $size in $font-size-text {
     .fs-#{$size} {
-        font-size: utils.calcFontSize($size - $size / 5, $size, 1280, 1920);
+        font-size: utils.calcFontSize($size - $size / 5, $size, 1024, 4096);
     }
 }
 
