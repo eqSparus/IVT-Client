@@ -26,13 +26,13 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'TheFooter',
+  name: 'TheFooterScreen',
   setup() {
     /* eslint-disable */
         function init() {
             const myMap = new ymaps.Map('map', {
-                center: [55.76, 37.64],
-                zoom: 7,
+                center: [55.025157, 73.292771],
+                zoom: 16,
             });
         }
         ymaps.ready(init);

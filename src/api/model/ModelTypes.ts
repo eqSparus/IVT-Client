@@ -25,10 +25,11 @@ export type InformationForEntrant = {
     items: InformationForEntrantItem[]
 }
 
-export type ConnectionTeacher = {
+export type InfoAboutDepartment = {
     id: string,
-    logo: string,
-    link: string
+    address: string,
+    phone: string,
+    email: string
 }
 
 export type Teacher = {
@@ -39,8 +40,4 @@ export type Teacher = {
     lastName: string,
     post: string,
     scientificDegree: string,
-    phone: string,
-    address: string,
-    email: string,
-    links: ConnectionTeacher[]
 }
