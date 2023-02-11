@@ -1,24 +1,24 @@
 <template>
-    <div class="footer-container">
+    <footer class="footer-container">
 
         <div id="map" class="map"></div>
 
-        <div class="finish-info mt-50 mb-30">
+        <div class="information">
             <div>
-                <span class="fs-24 span-title">Телефон</span>
-                <span class="fs-24 span-new-line span-content">+7 (3812) 72-90-55</span>
+                <span class="fs-24 title">Телефон</span>
+                <span class="fs-24 span-new-line content">+7 (3812) 72-90-55</span>
             </div>
             <div>
-                <span class="fs-24 span-title">Электронная почта:</span>
-                <span class="fs-24 span-new-line span-content">ivt@omgtu.ru</span>
+                <span class="fs-24 title">Электронная почта:</span>
+                <span class="fs-24 span-new-line content">ivt@omgtu.ru</span>
             </div>
             <div>
-                <span class="fs-24 span-title">Адрес:</span>
-                <span class="fs-24 span-new-line span-content">Пр. Мира, 11 гл. корпус, каб. П-102</span>
+                <span class="fs-24 title">Адрес:</span>
+                <span class="fs-24 span-new-line content">Пр. Мира, 11 гл. корпус, каб. П-102</span>
             </div>
         </div>
 
-    </div>
+    </footer>
 </template>
 
 <script lang="ts">
@@ -41,23 +41,24 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/properties.scss' as prop;
+$background-color: #111111;
+$title-color: #FFFFFF;
 
 @media screen and (min-width: 1500px) {
-  .map {
-    height: 520px;
-  }
+    .map {
+        height: 520px;
+    }
 
 }
 
 @media screen and (max-width: 1500px) {
-  .map {
-    height: 350px;
-  }
+    .map {
+        height: 350px;
+    }
 }
 
 .footer-container {
-    background: prop.$background-black-color;
+    background: $background-color;
     padding-top: 5rem;
     overflow: hidden;
 
@@ -65,26 +66,28 @@ export default defineComponent({
     flex-flow: column;
 
 
-    .finish-info {
+    .information {
 
         display: flex;
         flex-flow: row;
         justify-content: space-around;
+        margin-top: 2.5%;
+        margin-bottom: 1.5%;
 
         .span-new-line {
             display: block;
         }
 
         span {
-            color: prop.$title-text-while-color;
+            color: $title-color;
         }
 
-        .span-title {
+        .title {
             font-weight: 700;
             font-style: normal;
         }
 
-        .span-content {
+        .content {
             font-weight: 400;
             font-style: normal;
         }

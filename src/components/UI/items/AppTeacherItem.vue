@@ -6,22 +6,22 @@
         <div class="item-container">
 
             <div class="block-main-left" v-if="isMain">
-                <span class="span-new-line span-header fs-32">{{ teacher.lastName }}</span>
-                <span class="fs-32 span-header">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
-                <span class="fs-20 span-post span-new-line mt-10">{{ teacher.post }}</span>
-                <span class="fs-20 span-content span-new-line mt-10">{{ teacher.scientificDegree }}</span>
+                <span class="span-new-line header fs-32">{{ teacher.lastName }}</span>
+                <span class="fs-32 header">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
+                <span class="fs-20 post span-new-line mt-10">{{ teacher.post }}</span>
+                <span class="fs-20 content span-new-line mt-10">{{ teacher.scientificDegree }}</span>
             </div>
             <div v-else class="block-secondary-left">
-                <span class="span-new-line span-header fs-32">{{ teacher.lastName }}</span>
-                <span class="fs-32 span-header">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
+                <span class="span-new-line header fs-32">{{ teacher.lastName }}</span>
+                <span class="fs-32 header">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
             </div>
 
             <div class="block-main-right" v-if="isMain">
                 <slot></slot>
             </div>
             <div v-else class="block-secondary-right">
-                <span v-if="teacher.post" class="fs-20 span-post span-new-line mt-10">{{ teacher.post }}</span>
-                <span class="fs-20 span-content span-new-line mt-10">{{ teacher.scientificDegree }}</span>
+                <span v-if="teacher.post" class="fs-20 post span-new-line mt-10">{{ teacher.post }}</span>
+                <span class="fs-20 content span-new-line mt-10">{{ teacher.scientificDegree }}</span>
             </div>
 
         </div>
@@ -59,12 +59,10 @@ $text-color-additional: #11111180;
 
     .img-size {
         width: 300px;
-        height: auto;
     }
 
     .img-size-main {
         width: 368px;
-        height: auto;
     }
 }
 
@@ -72,12 +70,10 @@ $text-color-additional: #11111180;
 
     .img-size {
         width: 190px;
-        height: auto;
     }
 
     .img-size-main {
         width: 250px;
-        height: auto;
     }
 }
 
@@ -85,6 +81,14 @@ $text-color-additional: #11111180;
     display: grid;
     grid-template-columns: 1fr 4fr;
     background: $background-item;
+
+    .img-size{
+        height: auto;
+    }
+
+    .img-size-main{
+        height: auto;
+    }
 
     .item-container {
         display: grid;
@@ -112,25 +116,25 @@ $text-color-additional: #11111180;
         }
     }
 
-    .span-post {
+    .post {
         color: $text-color-selection;
         font-weight: 400;
         font-style: normal;
     }
 
-    .span-content {
+    .content {
         color: $text-color-main;
         font-weight: 400;
         font-style: normal;
     }
 
-    .span-header {
+    .header {
         color: $text-color-main;
         font-weight: 500;
         font-style: normal;
     }
 
-    .span-additional {
+    .additional {
         color: $text-color-additional;
         font-weight: 400;
         font-style: normal;

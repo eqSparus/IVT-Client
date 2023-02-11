@@ -20,7 +20,7 @@ import { InformationForEntrant } from '@/api/model/ModelTypes';
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({
-  name: 'AppEntrantItem',
+  name: 'AppEntrantScreenItem',
   props: {
     entrant: {
       type: Object as PropType<InformationForEntrant>,

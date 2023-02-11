@@ -1,45 +1,42 @@
 <template>
-    <app-block-info-screen title="О кафедре" :is-while="true">
+    <app-base-screen title="О кафедре" :is-second="true">
         <div class="about-screen-container">
-            <app-about-item v-for="info in aboutInformation" :key="info.id" :info="info" />
+            <app-about-screen-item v-for="(info, index) in information" :key="info.id" :about-info="info" :icon-index="index" />
         </div>
-    </app-block-info-screen>
+    </app-base-screen>
 </template>
 
 <script lang="ts">
 
 import { InformationFaculty } from '@/api/model/ModelTypes';
 import { defineComponent, ref } from 'vue';
-import AppBlockInfoScreen from '@/components/UI/AppBlockInfoScreen.vue';
-import AppAboutItem from '@/components/UI/items/AppAboutItem.vue';
+import AppBaseScreen from '@/components/UI/AppBaseScreen.vue';
+import AppAboutScreenItem from '@/components/UI/items/AppAboutScreenItem.vue';
 
 export default defineComponent({
   name: 'TheAboutScreen',
-  components: { AppBlockInfoScreen, AppAboutItem },
+  components: { AppBaseScreen, AppAboutScreenItem },
   setup() {
-    const aboutInformation = ref<Array<InformationFaculty>>([
+    const information = ref<Array<InformationFaculty>>([
       {
         id: '1',
-        icon: 'human',
         title: 'Выпускники',
         description: 'Наши выпускники получают широкие знания в области разработки программного обеспечения, построения высоконагруженных информационных систем, программирования мобильных устройств',
       },
       {
         id: '2',
-        icon: 'book',
         title: 'Профили',
         description: 'Специальность имеет множество профилей обучения, предполагающих специализацию на определенных аспектах информационных систем, технологиях, учет отраслевой специфики',
       },
       {
         id: '3',
-        icon: 'suitcase',
         title: 'Профессии',
         description: 'У наших выпускников огромный выбор профессий. Выпускники могут быть программистами, верстальщиками, web-администраторами. Это лишь меньшая часть списка профессий',
       },
     ]);
 
     return {
-      aboutInformation,
+      information,
     };
   },
 });

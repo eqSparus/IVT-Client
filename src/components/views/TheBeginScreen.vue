@@ -11,7 +11,7 @@
 
             <!-- mt-48 mt-64 -->
             <div class="begin-screen-button">
-                <input type="button" value="УЗНАТЬ БОЛЬШЕ" class="btn-standard" @click="scrollByScreen" />
+                <input type="button" value="УЗНАТЬ БОЛЬШЕ" class="btn-standard" @click="scrollToScreen" />
             </div>
 
             <div class="begin-screen-links">
@@ -45,28 +45,31 @@ export default defineComponent({
   },
   setup(props) {
     const { scrollTo } = useScroll();
-    const scrollByScreen = () => {
+    const scrollToScreen = () => {
       scrollTo(props.scrollSelect);
     };
 
     return {
-      scrollByScreen,
+      scrollToScreen,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/properties.scss' as prop;
 
-@media screen and (min-width: 1920px) {
+$background-color: #111111;
+$title-color: #FFFFFF;
+$description-color: #ABAAB0;
+
+@media screen and (max-width: 1920px) {
     img {
         width: 455px;
     }
 
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1500px) {
     img {
         width: 300px;
     }
@@ -79,22 +82,28 @@ export default defineComponent({
 }
 
 .begin-screen {
-    background: prop.$background-black-color;
+    background: $background-color;
     width: 100vw;
     height: 100%;
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
     padding: 15% 10%;
 
+    // display: grid;
+    // grid-template-columns: 1.5fr 1fr;
+    display: flex;
+    flex: row;
+    justify-content: space-between;
+
     .begin-screen-block-left {
-        margin-top: 12%;
+        align-self: flex-end;
 
         .begin-screen-button {
-            margin-top: 5%;
+            // margin-top: 5%;
+            margin-top: 7%;
         }
 
         .begin-screen-links {
-            margin-top: 7%;
+            // margin-top: 7%;
+            margin-top: 9%;
 
             a {
                 margin-right: 2rem;
@@ -103,23 +112,24 @@ export default defineComponent({
 
         h1 {
             line-height: 99%;
-            color: prop.$title-text-while-color;
+            color: $title-color;
             font-weight: bold;
             font-style: normal;
             user-select: none;
         }
 
         h3 {
-            color: prop.$title-description-text-color;
+            color: $description-color;
             font-weight: 300;
             font-style: normal;
             user-select: none;
-            margin-top: 2.5%;
+            // margin-top: 2.5%;
+            margin-top: 3.5%;
         }
     }
 
     .begin-screen-block-right {
-        justify-self: flex-end;
+        // justify-self: flex-end;
         align-self: center;
 
         img {

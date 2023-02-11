@@ -3,16 +3,16 @@
 
     <div class="item-icon ml-20">
       <div class="circle">
-        <img :src="svgImage.get(info.icon)" alt="Картинка" />
+        <img :src="icons[iconIndex]" alt="Иконка" />
       </div>
     </div>
 
-    <div class="item-title mt-15">
-      <h4 class="title fs-48">{{ info.title }}</h4>
+    <div class="item-title">
+      <h4 class="title fs-48">{{ aboutInfo.title }}</h4>
     </div>
 
-    <div class="item-description mt-15">
-      <p class="description fs-32">{{ info.description }}</p>
+    <div class="item-description">
+      <p class="description fs-32">{{ aboutInfo.description }}</p>
     </div>
 
   </div>
@@ -26,22 +26,22 @@ import bookSvg from '@/assets/images/icons/book.svg';
 import suitcaseSvg from '@/assets/images/icons/suitcase.svg';
 
 export default defineComponent({
-  name: 'AppAboutItem',
+  name: 'AppAboutScreenItem',
   props: {
-    info: {
+    aboutInfo: {
       type: Object as PropType<InformationFaculty>,
       required: true,
     },
+    iconIndex: {
+      type: Number,
+      default: 0,
+    },
   },
   setup() {
-    const svgImage = new Map<string, string>([
-      ['human', humanSvg],
-      ['book', bookSvg],
-      ['suitcase', suitcaseSvg],
-    ]);
+    const icons = [humanSvg, bookSvg, suitcaseSvg];
 
     return {
-      svgImage,
+      icons,
     };
   },
 });
@@ -96,6 +96,8 @@ $description-text-color: #7B7A83;
   }
 
   .item-title {
+    margin-top: 1.5rem;
+
     .title {
       color: $title-text-color;
       font-weight: 500;
@@ -104,6 +106,8 @@ $description-text-color: #7B7A83;
   }
 
   .item-description {
+    margin-top: 1.5rem;
+
     .description {
       font-weight: 400;
       font-style: normal;

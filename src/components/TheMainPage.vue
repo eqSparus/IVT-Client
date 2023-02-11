@@ -6,11 +6,11 @@
     <the-header-screen :anchors="anchors" @click-entry="showEntryModal"/>
 
     <main class="main-container">
-      <the-begin-screen :scroll-select="'#about'"/>
+      <the-begin-screen :scroll-select="'#about'" />
 
       <the-about-screen id="about" />
 
-      <the-direction-screen id="direction" />
+      <the-directions-screen id="direction" />
 
       <the-entrant-screen id="entrant" />
 
@@ -24,11 +24,11 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-// import TheHeaderTwoVersion from '@/components/TheHeaderTwoVersion.vue';
+// import TheHeaderTwoVersion from '@/components/views/TheHeaderTwoVersion.vue';
 import TheHeaderScreen from '@/components/views/TheHeaderScreen.vue';
 import TheBeginScreen from '@/components/views/TheBeginScreen.vue';
 import TheAboutScreen from '@/components/views/TheAboutScreen.vue';
-import TheDirectionScreen from '@/components/views/TheDirectionScreen.vue';
+import TheDirectionsScreen from '@/components/views/TheDirectionsScreen.vue';
 import TheEntrantScreen from '@/components/views/TheEntrantScreen.vue';
 import TheFooterScreen from '@/components/views/TheFooterScreen.vue';
 import TheTeachersScreen from '@/components/views/TheTeachersScreen.vue';
@@ -40,7 +40,7 @@ export default defineComponent({
     TheHeaderScreen,
     TheBeginScreen,
     TheAboutScreen,
-    TheDirectionScreen,
+    TheDirectionsScreen,
     TheEntrantScreen,
     TheTeachersScreen,
     TheFooterScreen,
@@ -67,7 +67,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@use '@/assets/scss/properties.scss' as prop;
 
 .main-container {
   display: grid;

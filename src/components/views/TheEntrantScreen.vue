@@ -1,10 +1,10 @@
 <template>
-    <app-block-info-screen title="Абитуриенту" :is-while="true">
-        <div class="single-container">
-            <app-entrant-item :class="[index === 0 ? '' : 'mt-30']" v-for="(info, index) in entrantInformation"
+    <app-base-screen title="Абитуриенту" :is-second="true">
+        <div class="entrant-screen-container">
+            <app-entrant-screen-item :class="[index === 0 ? '' : 'mt-30']" v-for="(info, index) in information"
                 :key="info.id" :entrant="info" />
         </div>
-    </app-block-info-screen>
+    </app-base-screen>
 </template>
 
 <script lang="ts">
@@ -12,14 +12,14 @@
 import { defineComponent, ref } from 'vue';
 import { InformationForEntrant } from '@/api/model/ModelTypes';
 
-import AppBlockInfoScreen from '../UI/AppBlockInfoScreen.vue';
-import AppEntrantItem from '../UI/items/AppEntrantItem.vue';
+import AppBaseScreen from '../UI/AppBaseScreen.vue';
+import AppEntrantScreenItem from '../UI/items/AppEntrantScreenItem.vue';
 
 export default defineComponent({
   name: 'TheEntrantScreen',
-  components: { AppBlockInfoScreen, AppEntrantItem },
+  components: { AppBaseScreen, AppEntrantScreenItem },
   setup() {
-    const entrantInformation = ref<Array<InformationForEntrant>>([
+    const information = ref<Array<InformationForEntrant>>([
       {
         id: '1',
         title: 'Бакалавриат',
@@ -96,14 +96,14 @@ export default defineComponent({
     ]);
 
     return {
-      entrantInformation,
+      information,
     };
   },
 });
 </script>
 
 <style lang="scss" scoped>
-.single-container {
+.entrant-screen-container {
     display: grid;
     grid-template-columns: 1fr;
     width: 95%;

@@ -1,5 +1,5 @@
 <template>
-  <header class="header" @mouseover="mouseover" @mouseleave="mouseleave" @focus="mouseover" @blur="mouseleave">
+  <header class="header" @mouseover="showMenu" @mouseleave="notShowMenu" @focus="showMenu" @blur="notShowMenu">
     <transition name="header">
 
       <nav class="header-content" v-show="isShow">
@@ -47,11 +47,11 @@ export default defineComponent({
   setup() {
     const isShow = ref<boolean>(false);
 
-    const mouseover = () => {
+    const showMenu = () => {
       isShow.value = true;
     };
 
-    const mouseleave = () => {
+    const notShowMenu = () => {
       isShow.value = false;
     };
 
@@ -59,8 +59,8 @@ export default defineComponent({
 
     return {
       isShow,
-      mouseover,
-      mouseleave,
+      showMenu,
+      notShowMenu,
       scrollTo,
     };
   },
@@ -112,7 +112,7 @@ $header-link-hover-color: #6162FF;
       display: flex;
       flex-flow: row;
       align-items: center;
-      justify-content: end;
+      justify-content: flex-end;
       width: 100%;
 
       .header-menu-links {
