@@ -50,10 +50,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$background-item: #FFFFFF;
-$text-color-main: #111111;
-$text-color-selection: #6162FF;
-$text-color-additional: #11111180;
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 @media screen and (min-width: 1500px) {
 
@@ -80,13 +78,13 @@ $text-color-additional: #11111180;
 .item {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    background: $background-item;
+    background: prop.$teacher-item-background-color;
 
-    .img-size{
+    .img-size {
         height: auto;
     }
 
-    .img-size-main{
+    .img-size-main {
         height: auto;
     }
 
@@ -117,27 +115,20 @@ $text-color-additional: #11111180;
     }
 
     .post {
-        color: $text-color-selection;
-        font-weight: 400;
-        font-style: normal;
+        @include utils.fontStyle($color: prop.$teacher-item-selection-color);
     }
 
     .content {
-        color: $text-color-main;
-        font-weight: 400;
-        font-style: normal;
+        @include utils.fontStyle($color: prop.$teacher-item-main-color);
     }
 
     .header {
-        color: $text-color-main;
-        font-weight: 500;
-        font-style: normal;
+        @include utils.fontStyle($weight: 500,
+            $color: prop.$teacher-item-main-color);
     }
 
     .additional {
-        color: $text-color-additional;
-        font-weight: 400;
-        font-style: normal;
+        @include utils.fontStyle($color: prop.$teacher-item-additional-color);
     }
 
     .span-new-line {

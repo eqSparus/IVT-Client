@@ -31,25 +31,22 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$text-color-title: #000000;
-$text-color-item-title: #111111;
-$text-color-item-content: #2E2E2E;
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 .item {
   h3 {
     text-align: justify;
-    font-weight: 500;
-    font-style: normal;
-    color: $text-color-title;
+    @include utils.fontStyle($weight: 500,
+      $color: prop.$entrant-item-title-color);
   }
 
   .item-content {
 
     h5 {
       text-align: justify;
-      font-weight: 600;
-      font-style: normal;
-      color: $text-color-item-title;
+      @include utils.fontStyle($weight: 600,
+        $color: prop.$entrant-item-title-content-color);
     }
 
     ul {
@@ -58,10 +55,8 @@ $text-color-item-content: #2E2E2E;
       list-style: none;
 
       li {
-        font-weight: 400;
         text-align: justify;
-        font-style: normal;
-        color: $text-color-item-content;
+        @include utils.fontStyle($color: prop.$entrant-item-content-color);
 
         &:before {
           content: "·";

@@ -57,10 +57,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
-$background-color: #111111;
-$title-color: #FFFFFF;
-$description-color: #ABAAB0;
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 @media screen and (max-width: 1920px) {
     img {
@@ -82,7 +80,7 @@ $description-color: #ABAAB0;
 }
 
 .begin-screen {
-    background: $background-color;
+    background: prop.$begin-screen-background-color;
     width: 100vw;
     height: 100%;
     padding: 15% 10%;
@@ -112,16 +110,14 @@ $description-color: #ABAAB0;
 
         h1 {
             line-height: 99%;
-            color: $title-color;
-            font-weight: bold;
-            font-style: normal;
+            @include utils.fontStyle($color: prop.$begin-screen-title-color,
+                $weight: 700);
             user-select: none;
         }
 
         h3 {
-            color: $description-color;
-            font-weight: 300;
-            font-style: normal;
+            @include utils.fontStyle($weight: 300,
+                $color: prop.$begin-screen-description-color);
             user-select: none;
             // margin-top: 2.5%;
             margin-top: 3.5%;

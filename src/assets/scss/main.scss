@@ -47,7 +47,8 @@ html,
 body {
     font-family: default-font, Verdana, sans-serif;
     overflow-x: hidden;
-    @include utils.scrollbar(prop.$main-color, prop.$body-color);
+    @include utils.scrollbar(prop.$scroll-slider-color,
+     prop.$scroll-slider-body-color);
 }
 
 

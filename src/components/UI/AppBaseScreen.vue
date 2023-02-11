@@ -35,10 +35,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$background-main-color: #111111;
-$text-main-color: #FFFFFF;
-$background-second-color: #FFFFFF;
-$text-second-color: #111111;
+@use '@/assets/scss/properties.scss' as prop;
 
 .base-screen {
   width: 100vw;
@@ -47,13 +44,13 @@ $text-second-color: #111111;
   padding: 5.2% 0 13% 0;
 
   &.main {
-    background: $background-main-color;
-    color: $text-main-color;
+    background: prop.$base-screen-main-background-color;
+    color: prop.$base-screen-main-text-color;
   }
 
   &.second {
-    background: $background-second-color;
-    color: $text-second-color;
+    background: prop.$base-screen-second-background-color;
+    color: prop.$base-screen-second-text-color;
   }
 
   .base-screen-container {

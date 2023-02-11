@@ -57,11 +57,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$icon-svg-filter-color: invert(45%) sepia(83%) saturate(4231%) hue-rotate(226deg) brightness(99%) contrast(103%);
+@use '@/assets/scss/properties.scss' as prop;
 
 a {
   &:hover {
-    filter: $icon-svg-filter-color;
+    filter: prop.$icon-svg-hover-color;
   }
 }
 </style>

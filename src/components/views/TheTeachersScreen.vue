@@ -105,9 +105,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$text-color-main: #111111;
-$text-color-additional: #11111180;
-$color-line: #6162FF;
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 .teachers-screen-container {
   display: grid;
@@ -131,8 +130,8 @@ $color-line: #6162FF;
   grid-template-columns: 1fr 3.3fr;
 
   .line {
-    border: 2px solid $color-line;
-    background: $color-line;
+    border: 2px solid prop.$teacher-screen-color-line;
+    background: prop.$teacher-screen-color-line;
     justify-self: center;
   }
 
@@ -142,15 +141,11 @@ $color-line: #6162FF;
 }
 
 .content {
-  color: $text-color-main;
-  font-weight: 400;
-  font-style: normal;
+  @include utils.fontStyle($color: prop.$teacher-screen-main-color);
 }
 
 .additional {
-  color: $text-color-additional;
-  font-weight: 400;
-  font-style: normal;
+  @include utils.fontStyle($color: prop.$teacher-screen-additional-color);
 }
 
 .span-new-line {

@@ -48,9 +48,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$circle-color: #E5E3FF;
-$title-text-color: #111111;
-$description-text-color: #7B7A83;
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 @media screen and (min-width: 1500px) {
   .item-size {
@@ -82,7 +81,7 @@ $description-text-color: #7B7A83;
       width: 58px;
       height: 58px;
       border-radius: 50%;
-      background: $circle-color;
+      background: prop.$about-item-circle-color;
 
       img {
         position: absolute;
@@ -99,9 +98,8 @@ $description-text-color: #7B7A83;
     margin-top: 1.5rem;
 
     .title {
-      color: $title-text-color;
-      font-weight: 500;
-      font-style: normal;
+      @include utils.fontStyle($weight:500,
+      $color:prop.$about-item-title-color);
     }
   }
 
@@ -109,9 +107,7 @@ $description-text-color: #7B7A83;
     margin-top: 1.5rem;
 
     .description {
-      font-weight: 400;
-      font-style: normal;
-      color: $description-text-color;
+      @include utils.fontStyle($color:prop.$about-item-description-color);
       line-height: 99%;
     }
   }

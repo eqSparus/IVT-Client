@@ -1,30 +1,53 @@
-$main-color: #6162FF;
-$body-color: #333333;
-
-$additional-white-color: #7B7B84;
-$additional-dark-color: #ABABAF;
-
-$icon-dark-color: #7B7C89;
-$icon-white-color: #E5E3FF;
-
-
-// Цвета фонов
-$background-while-color: #FFFFFF;
-$background-black-color: #111111;
-
-// Цвета для текста
-$title-text-while-color: #FFFFFF;
-$title-text-black-color: #111111;
-$title-description-text-color: #ABAAB0;
-
-
-$description-text-color: #7B7A83;
-
-// Цвета для кнопок и иконок
+// Общее
 $button-standard-color: #6162FF;
 $button-standard-text-color: #FFFFFF;
-$circle-color: #E5E3FF;
-
-
-// Шрифт текст
+$scroll-slider-color: #6162FF;
+$scroll-slider-body-color: #333333;
 $standard-font: default-font, Verdana, sans-serif;
+$icon-svg-hover-color: invert(45%) sepia(83%) saturate(4231%) hue-rotate(226deg) brightness(99%) contrast(103%);
+
+// Стандартный экран
+$base-screen-main-background-color: #111111;
+$base-screen-main-text-color: #FFFFFF;
+$base-screen-second-background-color: #FFFFFF;
+$base-screen-second-text-color: #111111;
+
+// Меню 
+$header-background-menu-color: #1A1A1A22;
+$header-link-color: #ABAAB0;
+$header-link-hover-color: #6162FF;
+
+// Начальный экран
+$begin-screen-background-color: #111111;
+$begin-screen-title-color: #FFFFFF;
+$begin-screen-description-color: #ABAAB0;
+
+// Элемент списка о кафедре
+$about-item-circle-color: #E5E3FF;
+$about-item-title-color: #111111;
+$about-item-description-color: #7B7A83;
+
+// Элемент списка направлений кафедры
+$direction-item-background-color: #282828;
+$direction-item-title-color: #FFFFFF;
+$direction-item-text-color: #FFFFFF80;
+
+// Элемент списка информации абитуриенту
+$entrant-item-title-color: #000000;
+$entrant-item-title-content-color: #111111;
+$entrant-item-content-color: #2E2E2E;
+
+// Экран преподавателей
+$teacher-screen-color-line: #6162FF;
+$teacher-screen-main-color: #111111;
+$teacher-screen-additional-color: #11111180;
+
+// Элемент списка информации о преподавателе
+$teacher-item-background-color: #FFFFFF;
+$teacher-item-main-color: #111111;
+$teacher-item-selection-color: #6162FF;
+$teacher-item-additional-color: #11111180;
+
+// Подвал сайта
+$footer-background-color: #111111;
+$footer-text-color: #FFFFFF;

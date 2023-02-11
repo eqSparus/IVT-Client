@@ -55,9 +55,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$item-background-color: #282828;
-$title-color: #FFFFFF;
-$text-color: rgba(255, 255, 255, 0.5);
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 @media screen and (min-width: 1500px) {
   .item-size {
@@ -83,7 +82,7 @@ $text-color: rgba(255, 255, 255, 0.5);
   display: flex;
   flex-flow: column;
   border-radius: 8px;
-  background: $item-background-color;
+  background: prop.$direction-item-background-color;
 
   &.item-size {
     height: auto;
@@ -108,16 +107,13 @@ $text-color: rgba(255, 255, 255, 0.5);
       padding: 11% 5%;
 
       .title {
-        color: $title-color;
-        font-weight: 700;
-        font-style: normal;
+        @include utils.fontStyle($weight:700,
+        $color:prop.$direction-item-title-color);
       }
 
       span {
         display: block;
-        color: $text-color;
-        font-weight: 400;
-        font-style: normal;
+        @include utils.fontStyle($color:prop.$direction-item-text-color);
       }
 
     }

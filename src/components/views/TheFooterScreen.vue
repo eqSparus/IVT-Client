@@ -41,8 +41,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$background-color: #111111;
-$title-color: #FFFFFF;
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 @media screen and (min-width: 1500px) {
     .map {
@@ -58,7 +58,7 @@ $title-color: #FFFFFF;
 }
 
 .footer-container {
-    background: $background-color;
+    background: prop.$footer-background-color;
     padding-top: 5rem;
     overflow: hidden;
 
@@ -78,18 +78,13 @@ $title-color: #FFFFFF;
             display: block;
         }
 
-        span {
-            color: $title-color;
-        }
-
         .title {
-            font-weight: 700;
-            font-style: normal;
+            @include utils.fontStyle($weight: 700,
+                $color: prop.$footer-text-color);
         }
 
         .content {
-            font-weight: 400;
-            font-style: normal;
+            @include utils.fontStyle($color: prop.$footer-text-color);
         }
     }
 

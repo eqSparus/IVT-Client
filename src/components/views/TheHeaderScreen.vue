@@ -68,9 +68,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$background-header-menu-color: #1A1A1A22;
-$header-link-color: #ABAAB0;
-$header-link-hover-color: #6162FF;
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 .header {
   position: fixed;
@@ -117,31 +116,28 @@ $header-link-hover-color: #6162FF;
 
       .header-menu-links {
 
-        background: $background-header-menu-color;
+        background: prop.$header-background-menu-color;
         border-radius: 143px;
         mix-blend-mode: difference;
         padding: 1.4rem 3rem;
 
         .link {
-          font-weight: 400;
-          font-style: normal;
-          color: $header-link-color;
+          @include utils.fontStyle($color: prop.$header-link-color);
           border: none;
-          text-decoration: none;
           background: transparent;
 
-          &.link-margin{
+          &.link-margin {
             margin-right: 5rem;
           }
 
           &:hover {
-            color: $header-link-hover-color;
+            color: prop.$header-link-hover-color;
             cursor: pointer;
           }
         }
       }
 
-      .header-menu-button{
+      .header-menu-button {
         margin: 0 2.5% 0 2.5%;
       }
     }
