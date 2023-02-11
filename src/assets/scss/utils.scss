@@ -28,6 +28,12 @@
     }
 }
 
+@mixin fontStyle($color: #FFFFFF, $weight: 400, $style: normal) {
+    font-weight: $weight ;
+    font-style: $style;
+    color: $color;
+}
+
 @function calcFontSize($f-min, $f-max, $v-min, $v-max) {
     $k: ($f-max - $f-min)/($v-max - $v-min);
     $b: $f-min - $k * $v-min;
