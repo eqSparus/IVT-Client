@@ -1,6 +1,5 @@
 export type InformationFaculty = {
     id: string,
-    icon: string,
     title: string,
     description: string
 }
