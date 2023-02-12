@@ -1,7 +1,7 @@
 <template>
     <div class="item">
 
-        <img :src="teacher.image" :class="[isMain ? 'img-size-main' : 'img-size']" alt="Заведующий кафедры" />
+        <img :src="teacher.image" :class="[isMain ? 'img-size-main' : 'img-size']" alt="Фотография преподователя" />
 
         <div class="item-container">
 
@@ -53,28 +53,6 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
 
-@media screen and (min-width: 1500px) {
-
-    .img-size {
-        width: 300px;
-    }
-
-    .img-size-main {
-        width: 368px;
-    }
-}
-
-@media screen and (max-width: 1500px) {
-
-    .img-size {
-        width: 190px;
-    }
-
-    .img-size-main {
-        width: 250px;
-    }
-}
-
 .item {
     display: grid;
     grid-template-columns: 1fr 4fr;
@@ -86,6 +64,28 @@ export default defineComponent({
 
     .img-size-main {
         height: auto;
+    }
+
+    @media screen and (min-width: 1500px) {
+
+        .img-size {
+            width: 300px;
+        }
+
+        .img-size-main {
+            width: 368px;
+        }
+    }
+
+    @media screen and (max-width: 1500px) {
+
+        .img-size {
+            width: 190px;
+        }
+
+        .img-size-main {
+            width: 250px;
+        }
     }
 
     .item-container {

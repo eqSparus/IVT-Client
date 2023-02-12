@@ -2,7 +2,7 @@
   <div class="item item-size">
 
     <div class="item-drawing">
-      <img :src="drawings[index]" alt="Рисунок" />
+      <img :src="drawings[index]" alt="Рисунок фигур в формате svg" />
     </div>
 
     <div class="item-content-container">

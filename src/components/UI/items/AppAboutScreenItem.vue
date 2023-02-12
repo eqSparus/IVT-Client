@@ -51,26 +51,26 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
 
-@media screen and (min-width: 1500px) {
-  .item-size {
-    width: 415px;
-    height: auto;
-  }
-
-}
-
-@media screen and (max-width: 1500px) {
-  .item-size {
-    width: 300px;
-    height: auto;
-  }
-
-}
-
 .item {
 
   display: flex;
   flex-flow: column;
+
+  &.item-size {
+    height: auto;
+
+    @media screen and (min-width: 1500px) {
+      & {
+        width: 415px;
+      }
+    }
+
+    @media screen and (max-width: 1500px) {
+      & {
+        width: 300px;
+      }
+    }
+  }
 
   .item-icon {
     width: 78px;
@@ -98,8 +98,8 @@ export default defineComponent({
     margin-top: 1.5rem;
 
     .title {
-      @include utils.fontStyle($weight:500,
-      $color:prop.$about-item-title-color);
+      @include utils.fontStyle($weight: 500,
+        $color: prop.$about-item-title-color);
     }
   }
 
@@ -107,7 +107,7 @@ export default defineComponent({
     margin-top: 1.5rem;
 
     .description {
-      @include utils.fontStyle($color:prop.$about-item-description-color);
+      @include utils.fontStyle($color: prop.$about-item-description-color);
       line-height: 99%;
     }
   }

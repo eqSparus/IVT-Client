@@ -22,7 +22,7 @@
 
         <div class="begin-screen-block-right">
             <!-- Cкоректировать размеры, подумать над заменой на <svg> -->
-            <img src="@/assets/images/logo.svg" alt="Логотип" />
+            <img src="@/assets/images/logo.svg" alt="Большой логотип кафедры" />
         </div>
 
     </section>
@@ -59,25 +59,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
-
-@media screen and (max-width: 1920px) {
-    img {
-        width: 455px;
-    }
-
-}
-
-@media screen and (max-width: 1500px) {
-    img {
-        width: 300px;
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    img {
-        width: 250px;
-    }
-}
 
 .begin-screen {
     background: prop.$begin-screen-background-color;
@@ -130,6 +111,25 @@ export default defineComponent({
 
         img {
             height: auto;
+
+            @media screen and (max-width: 1920px) {
+                & {
+                    width: 455px;
+                }
+
+            }
+
+            @media screen and (max-width: 1500px) {
+                & {
+                    width: 300px;
+                }
+            }
+
+            @media screen and (max-width: 1200px) {
+                & {
+                    width: 250px;
+                }
+            }
         }
     }
 
