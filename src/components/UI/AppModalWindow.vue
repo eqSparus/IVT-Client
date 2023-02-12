@@ -1,22 +1,23 @@
 <template>
   <Teleport to="body">
-    <div class="background-modal-window" v-if="isShow" @click="closeModal" @keydown.esc="closeModal">
-      <div class="modal-window" @click.stop>
+    <transition name="modal">
+      <div class="background-modal-window" v-if="isShow" @click="closeModal" @keydown.esc="closeModal">
+        <div class="modal-window" @click.stop>
 
-        <div v-if="title" class="modal-title fs-20">
-          <h3 v-if="title">{{ title }}</h3>
-        </div>
+          <div v-if="title" class="modal-title fs-20">
+            <h3 v-if="title">{{ title }}</h3>
+          </div>
 
-        <div class="modal-content">
-          <slot></slot>
-        </div>
+          <div class="modal-content">
+            <slot></slot>
+          </div>
 
-        <div v-if="$slots.footer" class="modal-footer">
-          <slot name="footer"></slot>
+          <div v-if="$slots.footer" class="modal-footer">
+            <slot name="footer"></slot>
+          </div>
         </div>
       </div>
-
-    </div>
+    </transition>
   </Teleport>
 </template>
 
@@ -61,9 +62,27 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
 
+.modal-enter-active,
+.modal-leave-active {
+  transition: all 0.5s ease;
+
+  .modal-window {
+    transition: all 0.5s ease;
+  }
+}
+
+.modal-enter-from,
+.modal-leave-to {
+  .modal-window {
+    transform: translateY(-20vh);
+  }
+
+  opacity: 0;
+}
+
 .background-modal-window {
   @include utils.scrollbar(prop.$scroll-slider-color,
-        prop.$scroll-slider-body-color);
+    prop.$scroll-slider-body-color);
   overflow-y: auto;
   position: fixed;
   top: 0;

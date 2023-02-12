@@ -73,7 +73,7 @@
 <script lang="ts">
 
 import {
-  computed, defineComponent, ref,
+  computed, defineComponent,
 } from 'vue';
 import AppLinkIcon from '@/components/UI/AppLinkIcon.vue';
 import useScroll from '@/hooks/useScroll';
