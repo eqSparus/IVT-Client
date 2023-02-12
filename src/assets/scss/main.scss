@@ -6,9 +6,13 @@
 
 
 $color-buttons: (
-    "standard": (prop.$button-standard-color, prop.$button-standard-text-color)
+    "standard": (prop.$button-standard-color, prop.$button-standard-text-color),
+    "warning": (prop.$button-warning-color, prop.$button-warning-text-color),
 );
 
+$color-fields: (
+    "standard":(prop.$field-standard-color, prop.$field-standard-text-color)
+);
 
 $property-buttons: (
     "":(p-x: 31px, p-y: 14px, radius: 4px, border: 1px, font-size: 1.4rem, font-weight:500),
@@ -41,12 +45,18 @@ $type-spacing: (
 );
 
 
-html,
-body {
-    font-family: default-font, Verdana, sans-serif;
-    overflow-x: hidden;
+html {
     @include utils.scrollbar(prop.$scroll-slider-color,
-     prop.$scroll-slider-body-color);
+        prop.$scroll-slider-body-color);
+
+    body {
+        overflow-x: hidden;
+        font-family: default-font, Verdana, sans-serif;
+
+        &.modal-open {
+            overflow: hidden;
+        }
+    }
 }
 
 
@@ -95,6 +105,41 @@ $colors in $color-buttons {
     }
 
 }
+
+%field {
+    font-size: 2rem;
+    background: transparent;
+    padding: 5px 10px;
+    font-weight: 400;
+    font-style: normal;
+    border-radius: 5px;
+}
+
+
+@each $title,
+$colors in $color-fields {
+
+    .field-#{$title} {
+        @extend %field;
+        border: 2px solid nth($colors, 1);
+        color: nth($colors, 2);
+
+        &:not(:disabled, :focus):hover {
+            border: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+        }
+
+        &:focus {
+            outline: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+            border: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+        }
+
+        &:disabled {
+            border: 2px solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+        }
+
+    }
+}
+
 
 
 @each $size in $font-size-text {

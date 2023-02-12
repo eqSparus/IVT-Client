@@ -1,6 +1,10 @@
 // Общее
 $button-standard-color: #6162FF;
 $button-standard-text-color: #FFFFFF;
+$button-warning-color: #FF9C18;
+$button-warning-text-color: #FFFFFF;
+$field-standard-color: #6162FF;
+$field-standard-text-color: #111111;
 $scroll-slider-color: #6162FF;
 $scroll-slider-body-color: #333333;
 $standard-font: default-font, Verdana, sans-serif;
@@ -11,6 +15,11 @@ $base-screen-main-background-color: #111111;
 $base-screen-main-text-color: #FFFFFF;
 $base-screen-second-background-color: #FFFFFF;
 $base-screen-second-text-color: #111111;
+
+// Модальное окно
+$modal-window-area-color: #0000008f;
+$modal-window-background-color: #FFFFFF;
+$modal-window-text-color: #111111;
 
 // Меню 
 $header-background-menu-color: #1A1A1A22;
