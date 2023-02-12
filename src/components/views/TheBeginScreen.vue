@@ -1,6 +1,47 @@
 <template>
     <section class="begin-screen">
 
+        <app-modal-window :isShow="isShow" title="Редактировать информацию о кафедре" @close="changeShowModal">
+
+            <div class="begin-edit-container">
+                <input type="text" placeholder="Введите название кафедры" class="field-standard"
+                    aria-label="Введите название кафедры" />
+
+                <input type="text" placeholder="Введите девиз кафедры" class="field-standard mt-10"
+                    aria-label="Введите девиз кафедры" />
+
+                <div class="edit-block mt-10">
+
+                    <input type="phone" placeholder="Введите телефон кафедры" class="field-standard"
+                        aria-label="Введите телефон кафедры" />
+
+                    <input type="email" placeholder="Введите почту кафедры" class="field-standard"
+                        aria-label="Введите почту кафедры" />
+
+                </div>
+
+                <input type="text" placeholder="Введите адрес кафедры" class="field-standard mt-10"
+                    aria-label="Введите адрес кафедры" />
+
+                <app-department-link-item class="mt-10" />
+                <app-department-link-item class="mt-10" />
+
+                <div class="edit-block mt-20">
+                    <input type="button" value="ДОБАВИТЬ ССЫЛКУ" class="btn-standard" />
+                    <input type="button" value="ОБНОВИТЬ" class="btn-standard" />
+                </div>
+            </div>
+
+            <template #footer>
+                <div class="footer-container">
+                    <div class="block-end">
+                        <input type="button" value="ЗАКРЫТЬ" class="btn-warning" @click="changeShowModal" />
+                    </div>
+                </div>
+            </template>
+
+        </app-modal-window>
+
         <div class="begin-screen-block-left">
             <div>
                 <h1 class="fs-64">Информатика<br>и вычислительная техника</h1>
@@ -12,6 +53,7 @@
             <!-- mt-48 mt-64 -->
             <div class="begin-screen-button">
                 <input type="button" value="УЗНАТЬ БОЛЬШЕ" class="btn-standard" @click="scrollToScreen" />
+                <input v-if="isAuth" type="button" value="РЕДАКТИРОВАТЬ" class="btn-standard" @click="changeShowModal" />
             </div>
 
             <div class="begin-screen-links">
@@ -30,12 +72,18 @@
 
 <script lang="ts">
 
-import { defineComponent } from 'vue';
+import {
+  computed, defineComponent, ref,
+} from 'vue';
 import AppLinkIcon from '@/components/UI/AppLinkIcon.vue';
 import useScroll from '@/hooks/useScroll';
+import { useStore } from 'vuex';
+import useShowModal from '@/hooks/useShowModal';
+import AppModalWindow from '../UI/AppModalWindow.vue';
+import AppDepartmentLinkItem from '../UI/items/AppDepartmentLinkItem.vue';
 
 export default defineComponent({
-  components: { AppLinkIcon },
+  components: { AppLinkIcon, AppModalWindow, AppDepartmentLinkItem },
   name: 'TheBeginScreen',
   props: {
     scrollSelect: {
@@ -44,13 +92,20 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const store = useStore();
     const { scrollTo } = useScroll();
+
+    const { isShow, changeShowModal } = useShowModal();
+
     const scrollToScreen = () => {
       scrollTo(props.scrollSelect);
     };
 
     return {
+      isAuth: computed(() => store.getters.isAuth),
+      isShow,
       scrollToScreen,
+      changeShowModal,
     };
   },
 });
@@ -59,6 +114,31 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
+
+.begin-edit-container {
+    display: flex;
+    flex-flow: column;
+    width: 50vw;
+
+    .edit-block {
+        display: flex;
+        flex-flow: row;
+        gap: 10px;
+
+        input {
+            flex: 1;
+        }
+    }
+}
+
+.footer-container {
+    display: flex;
+    flex-flow: column;
+
+    .block-end {
+        align-self: flex-end;
+    }
+}
 
 .begin-screen {
     background: prop.$begin-screen-background-color;
@@ -78,6 +158,10 @@ export default defineComponent({
         .begin-screen-button {
             // margin-top: 5%;
             margin-top: 7%;
+
+            input {
+                margin-right: 2rem;
+            }
         }
 
         .begin-screen-links {

@@ -1,0 +1,108 @@
+<template>
+  <Teleport to="body">
+    <div class="background-modal-window" v-if="isShow" @click="closeModal" @keydown.esc="closeModal">
+      <div class="modal-window" @click.stop>
+
+        <div v-if="title" class="modal-title fs-20">
+          <h3 v-if="title">{{ title }}</h3>
+        </div>
+
+        <div class="modal-content">
+          <slot></slot>
+        </div>
+
+        <div v-if="$slots.footer" class="modal-footer">
+          <slot name="footer"></slot>
+        </div>
+      </div>
+
+    </div>
+  </Teleport>
+</template>
+
+<script lang="ts">
+
+import { defineComponent, onUpdated } from 'vue';
+
+export default defineComponent({
+  name: 'AppModalWindow',
+  props: {
+    isShow: {
+      type: Boolean,
+      require: true,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+  },
+  emits: ['close'],
+  setup(prop, context) {
+    onUpdated(() => {
+      if (prop.isShow) {
+        document.body.classList.add('modal-open');
+      } else {
+        document.body.classList.remove('modal-open');
+      }
+    });
+
+    const closeModal = () => {
+      context.emit('close');
+    };
+
+    return {
+      closeModal,
+    };
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
+
+.background-modal-window {
+  @include utils.scrollbar(prop.$scroll-slider-color,
+        prop.$scroll-slider-body-color);
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: prop.$modal-window-area-color;
+  z-index: 99999;
+
+  .modal-window {
+    background: prop.$modal-window-background-color;
+    margin: 20vh auto;
+    border-radius: 20px;
+    display: flex;
+    flex-flow: column;
+    width: auto;
+
+    .modal-title {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid black;
+
+      h3 {
+        @include utils.fontStyle($weight: 400, $color: prop.$modal-window-text-color);
+      }
+    }
+
+    .modal-content {
+      padding: 20px;
+    }
+
+    .modal-footer {
+      border-top: 1px solid black;
+      padding: 20px;
+    }
+
+  }
+}
+</style>

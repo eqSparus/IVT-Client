@@ -1,5 +1,18 @@
 <template>
   <header class="header" @mouseover="showMenu" @mouseleave="notShowMenu" @focus="showMenu" @blur="notShowMenu">
+
+    <app-modal-window :is-show="isShowModalWindow" @close="changeShowModal" title="Авторизация">
+
+      <div class="modal-container">
+        <input class="field-standard mt-10" type="email" placeholder="Введите электроную почту"
+          aria-label="Введите электроную почту" />
+        <input class="field-standard mt-10" type="password" placeholder="Введите пароль" aria-label="Введите пароль" />
+
+        <input type="button" class="btn-standard mt-20" value="ВОЙТИ" @click="loginUser" />
+      </div>
+
+    </app-modal-window>
+
     <transition name="header">
 
       <nav class="header-content" v-show="isShow">
@@ -17,7 +30,7 @@
           </div>
 
           <div class="header-menu-button">
-            <input type="button" value="ВОЙТИ" class="btn-standard-sm" @click="$emit('click-entry')" />
+            <input type="button" :value="textBtn" class="btn-standard-sm" @click="clickBtn" />
           </div>
 
         </div>
@@ -28,8 +41,14 @@
 
 <script lang="ts">
 
-import { defineComponent, PropType, ref } from 'vue';
+import {
+  computed, defineComponent, PropType, ref,
+} from 'vue';
 import useScroll from '@/hooks/useScroll';
+import useShowModal from '@/hooks/useShowModal';
+import useAuthentication from '@/hooks/useAuthentication';
+import { useStore } from 'vuex';
+import AppModalWindow from '../UI/AppModalWindow.vue';
 
 export type Anchor = {
   title: string,
@@ -37,6 +56,7 @@ export type Anchor = {
 }
 
 export default defineComponent({
+  components: { AppModalWindow },
   name: 'TheHeaderScreen',
   props: {
     anchors: {
@@ -46,6 +66,7 @@ export default defineComponent({
   },
   setup() {
     const isShow = ref<boolean>(false);
+    const store = useStore();
 
     const showMenu = () => {
       isShow.value = true;
@@ -57,11 +78,37 @@ export default defineComponent({
 
     const { scrollTo } = useScroll();
 
+    const { isShow: isShowModalWindow, changeShowModal } = useShowModal();
+
+    const {
+      email, password, login, logout,
+    } = useAuthentication();
+
+    const clickBtn = () => {
+      if (store.getters.isAuth) {
+        logout();
+      } else {
+        changeShowModal();
+      }
+    };
+
+    const loginUser = () => {
+      login();
+      isShowModalWindow.value = false;
+    };
+
     return {
       isShow,
+      isShowModalWindow,
+      email,
+      password,
+      textBtn: computed(() => (store.getters.isAuth ? 'ВЫЙТИ' : 'ВОЙТИ')),
       showMenu,
       notShowMenu,
+      changeShowModal,
       scrollTo,
+      loginUser,
+      clickBtn,
     };
   },
 });
@@ -71,11 +118,17 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
 
+.modal-container {
+  display: flex;
+  flex-flow: column;
+  width: 20vw;
+}
+
 .header {
   position: fixed;
   height: 9%;
   width: 100%;
-  z-index: 99999;
+  z-index: 555;
   padding-top: 1rem;
 
   .header-leave-to,
