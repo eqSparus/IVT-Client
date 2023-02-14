@@ -36,6 +36,15 @@
         </div>
       </nav>
     </transition>
+
+    <transition name="hint">
+      <div class="hint-container" v-show="!isShow">
+        <div class="hint-block">
+
+        </div>
+      </div>
+    </transition>
+
   </header>
 </template>
 
@@ -129,7 +138,6 @@ export default defineComponent({
   height: 9%;
   width: 100%;
   z-index: 555;
-  padding-top: 1rem;
 
   .header-leave-to,
   .header-enter-from {
@@ -142,12 +150,37 @@ export default defineComponent({
     transition: all 0.5s ease-in;
   }
 
+  .hint-leave-to,
+  .hint-enter-from {
+    transform: translateY(70px);
+    opacity: 0;
+  }
+
+  .hint-leave-active,
+  .hint-enter-active {
+    transition: all 0.5s ease-in;
+  }
+
+  .hint-container {
+    display: flex;
+    justify-content: center;
+
+    .hint-block {
+      padding: 3px;
+      border-radius: 0 0 10px 10px;
+      width: 10%;
+      background: prop.$header-hint-block-color;
+      border: 1px solid prop.$header-hint-block-color;
+    }
+  }
+
   .header-content {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
     position: absolute;
     width: 100%;
+    padding-top: 1rem;
 
     .header-logo {
       align-self: center;

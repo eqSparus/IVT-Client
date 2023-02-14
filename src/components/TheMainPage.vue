@@ -1,8 +1,6 @@
 <template>
   <div>
 
-    <!-- <the-header-two-version /> -->
-
     <the-header-screen :anchors="anchors" @click-entry="showEntryModal"/>
 
     <main class="main-container">
@@ -24,7 +22,6 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-// import TheHeaderTwoVersion from '@/components/views/TheHeaderTwoVersion.vue';
 import TheHeaderScreen from '@/components/views/TheHeaderScreen.vue';
 import TheBeginScreen from '@/components/views/TheBeginScreen.vue';
 import TheAboutScreen from '@/components/views/TheAboutScreen.vue';
@@ -36,7 +33,6 @@ import TheTeachersScreen from '@/components/views/TheTeachersScreen.vue';
 export default defineComponent({
   name: 'TheMainPage',
   components: {
-    // TheHeaderTwoVersion,
     TheHeaderScreen,
     TheBeginScreen,
     TheAboutScreen,
