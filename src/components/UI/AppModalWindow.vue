@@ -1,7 +1,10 @@
 <template>
   <Teleport to="body">
     <transition name="modal">
-      <div class="background-modal-window" v-if="isShow" @click="closeModal" @keydown.esc="closeModal">
+      <div class="background-modal-window"
+           v-if="isShow"
+           @click="closeModal"
+           @keydown.esc="closeModal">
         <div class="modal-window" @click.stop>
 
           <div v-if="title" class="modal-title fs-20">
@@ -12,9 +15,17 @@
             <slot></slot>
           </div>
 
-          <div v-if="$slots.footer" class="modal-footer">
-            <slot name="footer"></slot>
+          <div class="modal-footer" v-if="isFooter">
+            <div v-if="$slots.footer">
+              <slot name="footer"></slot>
+            </div>
+            <div class="footer-container" v-else>
+              <div class="block-end">
+                <input type="button" value="ЗАКРЫТЬ" class="btn-warning" @click="closeModal"/>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     </transition>
@@ -35,6 +46,10 @@ export default defineComponent({
     title: {
       type: String,
       default: '',
+    },
+    isFooter: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ['close'],
@@ -120,6 +135,15 @@ export default defineComponent({
     .modal-footer {
       border-top: 1px solid black;
       padding: 20px;
+
+      .footer-container {
+        display: flex;
+        flex-flow: column;
+
+        .block-end {
+          align-self: flex-end;
+        }
+      }
     }
 
   }
