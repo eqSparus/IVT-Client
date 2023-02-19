@@ -1,7 +1,7 @@
 <template>
     <footer class="footer-container">
 
-        <div id="map" class="map"></div>
+<!--        <div id="map" class="map"></div>-->
 
         <div class="information">
             <div>
@@ -28,14 +28,15 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'TheFooterScreen',
   setup() {
+    // TODO Вернуть карту
     /* eslint-disable */
-        function init() {
-            const myMap = new ymaps.Map('map', {
-                center: [55.025157, 73.292771],
-                zoom: 16,
-            });
-        }
-        ymaps.ready(init);
+        // function init() {
+        //     const myMap = new ymaps.Map('map', {
+        //         center: [55.025157, 73.292771],
+        //         zoom: 16,
+        //     });
+        // }
+        // ymaps.ready(init);
     },
 });
 </script>

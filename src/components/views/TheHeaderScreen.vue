@@ -1,14 +1,31 @@
 <template>
-  <header class="header" @mouseover="showMenu" @mouseleave="notShowMenu" @focus="showMenu" @blur="notShowMenu">
+  <header class="header"
+          @mouseover="isShow = true"
+          @mouseleave="isShow = false"
+          @focus="isShow = true"
+          @blur="isShow = false">
 
-    <app-modal-window :is-show="isShowModalWindow" @close="changeShowModal" title="Авторизация">
+    <app-modal-window :is-show="isShowModalWindow"
+                      @close="changeShowModal"
+                      title="Авторизация">
 
       <div class="modal-container">
-        <input class="field-standard mt-10" type="email" placeholder="Введите электроную почту"
-          aria-label="Введите электроную почту" />
-        <input class="field-standard mt-10" type="password" placeholder="Введите пароль" aria-label="Введите пароль" />
+        <input class="field-standard mt-10"
+               type="email"
+               v-model="email"
+               placeholder="Введите электроную почту"
+               aria-label="Введите электроную почту"/>
 
-        <input type="button" class="btn-standard mt-20" value="ВОЙТИ" @click="loginUser" />
+        <input class="field-standard mt-10"
+               type="password"
+               v-model="password"
+               placeholder="Введите пароль"
+               aria-label="Введите пароль"/>
+
+        <input type="button"
+               class="btn-standard mt-20"
+               value="ВОЙТИ"
+               @click="loginUser"/>
       </div>
 
     </app-modal-window>
@@ -18,19 +35,24 @@
       <nav class="header-content" v-show="isShow">
 
         <div class="header-logo">
-          <img src="@/assets/images/logo.svg" alt="Логотим" />
+          <img src="@/assets/images/logo.svg" alt="Логотим"/>
         </div>
 
         <div class="header-menu">
 
           <div class="header-menu-links">
-            <input v-for="(anchor, index) in anchors" :key="anchor.title" type="button" :value="anchor.title"
-              :class="[index !== anchors.length - 1 ? 'link-margin' : '', 'link', 'fs-24']"
-              @click="scrollTo(anchor.select)" />
+            <input v-for="(anchor, index) in anchors" :key="anchor.title"
+                   type="button"
+                   :value="anchor.title"
+                   :class="[index !== anchors.length - 1 ? 'link-margin' : '', 'link', 'fs-24']"
+                   @click="scrollTo(anchor.select)"/>
           </div>
 
           <div class="header-menu-button">
-            <input type="button" :value="textBtn" class="btn-standard-sm" @click="clickBtn" />
+            <input type="button"
+                   :value="textBtn"
+                   class="btn-standard-sm"
+                   @click="clickLoginOrLogout"/>
           </div>
 
         </div>
@@ -39,9 +61,7 @@
 
     <transition name="hint">
       <div class="hint-container" v-show="!isShow">
-        <div class="hint-block">
-
-        </div>
+        <div class="hint-block"/>
       </div>
     </transition>
 
@@ -75,25 +95,22 @@ export default defineComponent({
   },
   setup() {
     const isShow = ref<boolean>(false);
+    const { scrollTo } = useScroll();
     const store = useStore();
 
-    const showMenu = () => {
-      isShow.value = true;
-    };
-
-    const notShowMenu = () => {
-      isShow.value = false;
-    };
-
-    const { scrollTo } = useScroll();
-
-    const { isShow: isShowModalWindow, changeShowModal } = useShowModal();
+    const {
+      isShow: isShowModalWindow,
+      changeShowModal,
+    } = useShowModal();
 
     const {
-      email, password, login, logout,
+      email,
+      password,
+      login,
+      logout,
     } = useAuthentication();
 
-    const clickBtn = () => {
+    const clickLoginOrLogout = () => {
       if (store.getters.isAuth) {
         logout();
       } else {
@@ -112,12 +129,10 @@ export default defineComponent({
       email,
       password,
       textBtn: computed(() => (store.getters.isAuth ? 'ВЫЙТИ' : 'ВОЙТИ')),
-      showMenu,
-      notShowMenu,
       changeShowModal,
       scrollTo,
       loginUser,
-      clickBtn,
+      clickLoginOrLogout,
     };
   },
 });

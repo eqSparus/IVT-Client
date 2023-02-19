@@ -1,22 +1,37 @@
 <template>
-    <app-base-screen title="О кафедре" :is-second="true">
-        <div class="about-screen-container">
-            <app-about-screen-item v-for="(info, index) in information" :key="info.id" :about-info="info" :icon-index="index" />
-        </div>
-    </app-base-screen>
+  <app-base-screen title="О кафедре" :is-second="true">
+
+    <the-modal-change-about :info-faculty="information" :is-show="isShow" @close="changeShowModal"/>
+
+    <div class="about-screen-container">
+      <app-about-screen-item v-for="(info, index) in information" :key="info.id" :about-info="info"
+                             :icon-index="index"/>
+      <div class="about-change mt-20" v-if="isAuth">
+        <input type="button" class="btn-standard" value="РЕДАКТИРОВАТЬ" @click="changeShowModal"/>
+      </div>
+    </div>
+  </app-base-screen>
 </template>
 
 <script lang="ts">
 
 import { InformationFaculty } from '@/api/model/ModelTypes';
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import AppBaseScreen from '@/components/UI/AppBaseScreen.vue';
 import AppAboutScreenItem from '@/components/UI/items/AppAboutScreenItem.vue';
+import { useStore } from 'vuex';
+import TheModalChangeAbout from '@/components/UI/modals/TheModalChangeAbout.vue';
+import useShowModal from '@/hooks/useShowModal';
 
 export default defineComponent({
   name: 'TheAboutScreen',
-  components: { AppBaseScreen, AppAboutScreenItem },
+  components: {
+    TheModalChangeAbout,
+    AppBaseScreen,
+    AppAboutScreenItem,
+  },
   setup() {
+    const store = useStore();
     const information = ref<Array<InformationFaculty>>([
       {
         id: '1',
@@ -35,8 +50,16 @@ export default defineComponent({
       },
     ]);
 
+    const {
+      isShow,
+      changeShowModal,
+    } = useShowModal();
+
     return {
       information,
+      isAuth: computed(() => store.getters.isAuth),
+      isShow,
+      changeShowModal,
     };
   },
 });
@@ -44,8 +67,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .about-screen-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+
+  .about-change {
+    grid-column: 1/4;
+  }
 }
 </style>
