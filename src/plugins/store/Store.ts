@@ -1,33 +1,49 @@
 import { createStore, Store } from 'vuex';
+import { InformationDepartment, Link } from '@/api/model/ModelTypes';
 
 interface State {
-    isAthentication: boolean
+  isAuthentication: boolean,
+  informationOfDepartment: InformationDepartment,
 }
 
 export default createStore({
   state() {
     return {
-      isAthentication: false,
+      isAuthentication: false,
+      informationOfDepartment: {} as InformationDepartment,
     };
   },
   getters: {
     isAuth(state: State): boolean {
-      return state.isAthentication;
+      return state.isAuthentication;
+    },
+    getInformationOfDepartment(state: State) {
+      return state.informationOfDepartment;
     },
   },
   mutations: {
     login(state: State) {
-      state.isAthentication = true;
+      state.isAuthentication = true;
     },
     logout(state: State) {
-      state.isAthentication = false;
+      state.isAuthentication = false;
+    },
+    saveInformationDepartment(state: State, information: InformationDepartment) {
+      state.informationOfDepartment = information;
+    },
+    addDepartmentLink(state: State, link: Link) {
+      state.informationOfDepartment.links.push(link);
+    },
+    removeLink(state: State, id: string) {
+      const index = state.informationOfDepartment.links.findIndex((li) => li.id === id);
+      state.informationOfDepartment.links.splice(index, 1);
     },
   },
 });
 
 declare module '@vue/runtime-core' {
 
-    interface ComponentCustomProperties {
-        $store: Store<State>
-    }
+  interface ComponentCustomProperties {
+    $store: Store<State>;
+  }
 }
