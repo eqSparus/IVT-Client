@@ -3,7 +3,7 @@
 
     <div class="item-icon ml-20">
       <div class="circle">
-        <img :src="icons[iconIndex]" alt="Иконка" />
+        <img :src="icons[iconIndex]" alt="Иконка"/>
       </div>
     </div>
 
@@ -99,7 +99,7 @@ export default defineComponent({
 
     .title {
       @include utils.fontStyle($weight: 500,
-        $color: prop.$about-item-title-color);
+      $color: prop.$about-item-title-color);
     }
   }
 

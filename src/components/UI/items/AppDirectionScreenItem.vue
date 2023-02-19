@@ -58,41 +58,44 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
 
-@media screen and (min-width: 1500px) {
-  .item-size {
-    width: 415px;
-  }
-
-  img {
-    width: 415px;
-  }
-}
-
-@media screen and (max-width: 1500px) {
-  .item-size {
-    width: 300px;
-  }
-
-  img {
-    width: 300px;
-  }
-}
+//@media screen and (min-width: 1500px) {
+//  .item-size {
+//    width: 415px;
+//  }
+//
+//  img {
+//    width: 415px;
+//  }
+//}
+//
+//@media screen and (max-width: 1500px) {
+//  .item-size {
+//    width: 300px;
+//  }
+//
+//  img {
+//    width: 300px;
+//  }
+//}
 
 .item {
   display: flex;
   flex-flow: column;
   border-radius: 8px;
   background: prop.$direction-item-background-color;
+  width: auto;
 
-  &.item-size {
-    height: auto;
-  }
+  //&.item-size {
+  //  height: auto;
+  //}
 
   .item-drawing {
     display: flex;
-    justify-content: flex-end;
+    flex-flow: row;
 
     img {
+      width: 100%;
+      min-width: auto;
       border-radius: 8px 8px 0 0;
     }
   }
