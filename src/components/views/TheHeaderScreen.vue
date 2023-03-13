@@ -1,41 +1,19 @@
 <template>
   <header class="header"
-          @mouseover="isShow = true"
-          @mouseleave="isShow = false"
-          @focus="isShow = true"
-          @blur="isShow = false">
+          @mouseover="isShowMenu = true"
+          @mouseleave="isShowMenu = false"
+          @focus="isShowMenu = true"
+          @blur="isShowMenu = false">
 
-    <app-modal-window :is-show="isShowModalWindow"
-                      @close="changeShowModal"
-                      title="Авторизация">
-
-      <div class="modal-container">
-        <input class="field-standard mt-10"
-               type="email"
-               v-model="email"
-               placeholder="Введите электроную почту"
-               aria-label="Введите электроную почту"/>
-
-        <input class="field-standard mt-10"
-               type="password"
-               v-model="password"
-               placeholder="Введите пароль"
-               aria-label="Введите пароль"/>
-
-        <input type="button"
-               class="btn-standard mt-20"
-               value="ВОЙТИ"
-               @click="loginUser"/>
-      </div>
-
-    </app-modal-window>
+    <the-modal-authorization :is-show="isShowModalWindow"
+                             @close="changeShowModal"/>
 
     <transition name="header">
 
-      <nav class="header-content" v-show="isShow">
+      <nav class="header-content" v-show="isShowMenu">
 
         <div class="header-logo">
-          <img src="@/assets/images/logo.svg" alt="Логотим"/>
+          <img src="@/assets/images/logo.svg" alt="Логотип"/>
         </div>
 
         <div class="header-menu">
@@ -51,7 +29,7 @@
           <div class="header-menu-button">
             <input type="button"
                    :value="textBtn"
-                   class="btn-standard-sm"
+                   :class="textBtn === 'выйти'? 'btn-warning-sm': 'btn-standard-sm'"
                    @click="clickLoginOrLogout"/>
           </div>
 
@@ -60,7 +38,7 @@
     </transition>
 
     <transition name="hint">
-      <div class="hint-container" v-show="!isShow">
+      <div class="hint-container" v-show="!isShowMenu">
         <div class="hint-block"/>
       </div>
     </transition>
@@ -75,9 +53,9 @@ import {
 } from 'vue';
 import useScroll from '@/hooks/useScroll';
 import useShowModal from '@/hooks/useShowModal';
-import useAuthentication from '@/hooks/useAuthentication';
 import { useStore } from 'vuex';
-import AppModalWindow from '../UI/AppModalWindow.vue';
+import TheModalAuthorization from '@/components/modals/user/TheModalAuthorization.vue';
+import { exit } from '@/api/user/AuthUserApi';
 
 export type Anchor = {
   title: string,
@@ -85,8 +63,10 @@ export type Anchor = {
 }
 
 export default defineComponent({
-  components: { AppModalWindow },
-  name: 'TheHeaderScreen',
+  components: {
+    TheModalAuthorization,
+  },
+  icon: 'TheHeaderScreen',
   props: {
     anchors: {
       type: Object as PropType<Array<Anchor>>,
@@ -94,7 +74,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const isShow = ref<boolean>(false);
+    const isShowMenu = ref<boolean>(false);
     const { scrollTo } = useScroll();
     const store = useStore();
 
@@ -103,35 +83,25 @@ export default defineComponent({
       changeShowModal,
     } = useShowModal();
 
-    const {
-      email,
-      password,
-      login,
-      logout,
-    } = useAuthentication();
-
-    const clickLoginOrLogout = () => {
-      if (store.getters.isAuth) {
-        logout();
+    const clickLoginOrLogout = async () => {
+      if (store.getters['auth/isAuth']) {
+        try {
+          await exit(store.getters['auth/getRefreshToken']);
+          store.commit('auth/removeTokens');
+        } catch (e) {
+          store.commit('auth/removeTokens');
+        }
       } else {
         changeShowModal();
       }
     };
 
-    const loginUser = () => {
-      login();
-      isShowModalWindow.value = false;
-    };
-
     return {
-      isShow,
+      isShowMenu,
       isShowModalWindow,
-      email,
-      password,
-      textBtn: computed(() => (store.getters.isAuth ? 'ВЫЙТИ' : 'ВОЙТИ')),
+      textBtn: computed(() => (store.getters['auth/isAuth'] ? 'выйти' : 'войти')),
       changeShowModal,
       scrollTo,
-      loginUser,
       clickLoginOrLogout,
     };
   },
@@ -141,12 +111,6 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
-
-.modal-container {
-  display: flex;
-  flex-flow: column;
-  width: 20vw;
-}
 
 .header {
   position: fixed;

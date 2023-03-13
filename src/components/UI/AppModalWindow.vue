@@ -37,7 +37,7 @@
 import { defineComponent, onUpdated } from 'vue';
 
 export default defineComponent({
-  name: 'AppModalWindow',
+  icon: 'AppModalWindow',
   props: {
     isShow: {
       type: Boolean,
@@ -91,7 +91,6 @@ export default defineComponent({
   .modal-window {
     transform: translateY(-20vh);
   }
-
   opacity: 0;
 }
 
@@ -119,7 +118,7 @@ export default defineComponent({
     width: auto;
 
     .modal-title {
-      padding: 10px;
+      padding: 10px 20px;
       text-align: center;
       border-bottom: 1px solid black;
 

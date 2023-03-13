@@ -20,7 +20,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'AppBaseScreen',
+  icon: 'AppBaseScreen',
   props: {
     title: {
       type: String,

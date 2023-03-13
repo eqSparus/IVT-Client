@@ -1,17 +1,25 @@
+export type User = {
+  email: string,
+  password: string
+}
+
+export type Tokens = {
+  accessToken: string,
+  refreshToken: string,
+}
+
 export type Link = {
-  id: string,
-  name: string,
+  id?: string,
+  icon: string,
   href: string
 }
 
 export type InformationDepartment = {
-  id: string,
   title: string,
   slogan: string,
   phone: string,
   email: string,
   address: string,
-  links: Array<Link>
 }
 
 export type InformationFaculty = {
@@ -21,11 +29,11 @@ export type InformationFaculty = {
 }
 
 export type InformationDirection = {
-  id: string,
+  id?: string,
   title: string,
   degree: string,
-  formTraining: string,
-  durationTraining: string
+  form: string,
+  duration: number
 }
 
 export type InformationForEntrantItem = {
@@ -40,11 +48,10 @@ export type InformationForEntrant = {
   items: InformationForEntrantItem[]
 }
 
-export type InfoAboutDepartment = {
-  id: string,
-  address: string,
-  phone: string,
-  email: string
+export type AboutDepartment = {
+  id?: string,
+  title: string,
+  description: string,
 }
 
 export type Teacher = {

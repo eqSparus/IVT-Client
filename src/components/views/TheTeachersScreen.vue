@@ -5,17 +5,17 @@
       <app-teacher-item :teacher="teacherMain" :is-main="true">
         <div class="block-top">
           <span class="additional fs-20">Адрес</span>
-          <span class="fs-20 span-new-line content">{{ infoAboutDepartment.address }}</span>
+          <span class="fs-20 span-new-line content">{{ address }}</span>
         </div>
         <div class="block-bottom">
           <div>
             <span class="additional fs-20">Телефон</span>
-            <span class="fs-20 span-new-line content">{{ infoAboutDepartment.phone }}</span>
+            <span class="fs-20 span-new-line content">{{ phone }}</span>
           </div>
 
           <div>
             <span class="additional fs-20">Почта</span>
-            <span class="fs-20 span-new-line content">{{ infoAboutDepartment.email }}</span>
+            <span class="fs-20 span-new-line content">{{ email }}</span>
           </div>
         </div>
       </app-teacher-item>
@@ -23,7 +23,7 @@
       <div class="list-teacher" v-for="(teacher, index) in teachers" :key="teacher.id">
         <div class="line" :style="[index === teachers.length - 1 ? 'height: 65%' : '']">
         </div>
-        <app-teacher-item class="teacher" :teacher="teacher" />
+        <app-teacher-item class="teacher" :teacher="teacher"/>
       </div>
 
     </div>
@@ -33,19 +33,24 @@
 
 <script lang="ts">
 
-import { Teacher, InfoAboutDepartment } from '@/api/model/ModelTypes';
-import { defineComponent, ref } from 'vue';
+import { Teacher } from '@/api/model/ModelTypes';
+import { computed, defineComponent, ref } from 'vue';
 import teacher1 from '@/assets/images/teachers/1.png';
 import teacher2 from '@/assets/images/teachers/2.png';
 import teacher3 from '@/assets/images/teachers/3.png';
 import teacher4 from '@/assets/images/teachers/4.png';
+import { useStore } from 'vuex';
 import AppTeacherItem from '../UI/items/AppTeacherItem.vue';
 import AppBaseScreen from '../UI/AppBaseScreen.vue';
 
 export default defineComponent({
-  name: 'TheTeachersScreen',
-  components: { AppBaseScreen, AppTeacherItem },
+  icon: 'TheTeachersScreen',
+  components: {
+    AppBaseScreen,
+    AppTeacherItem,
+  },
   setup() {
+    const store = useStore();
     const teacherMain = ref<Teacher>(
       {
         id: '1',
@@ -88,17 +93,12 @@ export default defineComponent({
       },
     ]);
 
-    const infoAboutDepartment = ref<InfoAboutDepartment>({
-      id: '1',
-      phone: '(3812) 652208, 653314',
-      address: '644050, г.Омск-50 пр.Мира 11, корпус 8, каб.321',
-      email: 'ivt@omgtu.ru',
-    });
-
     return {
       teacherMain,
       teachers,
-      infoAboutDepartment,
+      address: computed(() => store.getters['department/getDepartment'].address),
+      email: computed(() => store.getters['department/getDepartment'].email),
+      phone: computed(() => store.getters['department/getDepartment'].phone),
     };
   },
 });

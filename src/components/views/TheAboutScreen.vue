@@ -1,11 +1,11 @@
 <template>
   <app-base-screen title="О кафедре" :is-second="true">
 
-    <the-modal-change-about :info-faculty="information" :is-show="isShow" @close="changeShowModal"/>
+    <the-modal-change-about :abouts="abouts" :is-show="isShow" @close="changeShowModal"/>
 
     <div class="about-screen-container">
-      <app-about-screen-item v-for="(info, index) in information" :key="info.id" :about-info="info"
-                             :icon-index="index"/>
+      <app-about-screen-item v-for="(about) in abouts" :key="about.id" :about-info="about"
+                             :icon-index="about.order - 1"/>
       <div class="about-change mt-20" v-if="isAuth">
         <input type="button" class="btn-standard" value="РЕДАКТИРОВАТЬ" @click="changeShowModal"/>
       </div>
@@ -15,16 +15,15 @@
 
 <script lang="ts">
 
-import { InformationFaculty } from '@/api/model/ModelTypes';
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent } from 'vue';
 import AppBaseScreen from '@/components/UI/AppBaseScreen.vue';
-import AppAboutScreenItem from '@/components/UI/items/AppAboutScreenItem.vue';
+import AppAboutScreenItem from '@/components/views/items/AppAboutScreenItem.vue';
 import { useStore } from 'vuex';
-import TheModalChangeAbout from '@/components/UI/modals/TheModalChangeAbout.vue';
+import TheModalChangeAbout from '@/components/modals/about/TheModalChangeAbout.vue';
 import useShowModal from '@/hooks/useShowModal';
 
 export default defineComponent({
-  name: 'TheAboutScreen',
+  icon: 'TheAboutScreen',
   components: {
     TheModalChangeAbout,
     AppBaseScreen,
@@ -32,23 +31,6 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const information = ref<Array<InformationFaculty>>([
-      {
-        id: '1',
-        title: 'Выпускники',
-        description: 'Наши выпускники получают широкие знания в области разработки программного обеспечения, построения высоконагруженных информационных систем, программирования мобильных устройств',
-      },
-      {
-        id: '2',
-        title: 'Профили',
-        description: 'Специальность имеет множество профилей обучения, предполагающих специализацию на определенных аспектах информационных систем, технологиях, учет отраслевой специфики',
-      },
-      {
-        id: '3',
-        title: 'Профессии',
-        description: 'У наших выпускников огромный выбор профессий. Выпускники могут быть программистами, верстальщиками, web-администраторами. Это лишь меньшая часть списка профессий',
-      },
-    ]);
 
     const {
       isShow,
@@ -56,8 +38,8 @@ export default defineComponent({
     } = useShowModal();
 
     return {
-      information,
-      isAuth: computed(() => store.getters.isAuth),
+      abouts: computed(() => store.getters['about/getAboutInfo']),
+      isAuth: computed(() => store.getters['auth/isAuth']),
       isShow,
       changeShowModal,
     };

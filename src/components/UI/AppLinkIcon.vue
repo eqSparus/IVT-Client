@@ -1,27 +1,21 @@
 <template>
   <a :href="href" target="_blank">
-    <img :src="getLinksByName(name)" :alt="alt" />
+    <img :src="icon" :alt="alt" />
   </a>
 </template>
 
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import vkLink from '@/assets/images/links/vk-link.svg';
-import omgtuLink from '@/assets/images/links/omgtu-link.svg';
-import whatsappLink from '@/assets/images/links/whatsapp-link.svg';
-import telegramLink from '@/assets/images/links/telegram-link.svg';
-import emailLink from '@/assets/images/links/email-link.svg';
-import defaultLink from '@/assets/images/links/message-link.svg';
 
 export default defineComponent({
-  name: 'AppLinlIcon',
+  icon: 'AppLinkIcon',
   props: {
     href: {
       type: String,
       required: true,
     },
-    name: {
+    icon: {
       type: String,
       required: true,
     },
@@ -29,29 +23,6 @@ export default defineComponent({
       type: String,
       default: 'Инока',
     },
-  },
-  setup() {
-    const reg = /\/img\/|-link.\w+.svg/g;
-    const links = new Map<string, string>([
-      [vkLink.replace(reg, ''), vkLink],
-      [omgtuLink.replace(reg, ''), omgtuLink],
-      [whatsappLink.replace(reg, ''), whatsappLink],
-      [emailLink.replace(reg, ''), emailLink],
-      [telegramLink.replace(reg, ''), telegramLink],
-    ]);
-
-    const getLinksByName = (name: string): string => {
-      const img = links.get(name);
-      if (img) {
-        return img;
-      }
-      console.error('Иконка не найдена');
-      return defaultLink;
-    };
-
-    return {
-      getLinksByName,
-    };
   },
 });
 </script>
@@ -61,7 +32,7 @@ export default defineComponent({
 
 a {
   &:hover {
-    filter: prop.$icon-svg-hover-color;
+    filter: prop.$icon-svg-hover-color-info;
   }
 }
 </style>

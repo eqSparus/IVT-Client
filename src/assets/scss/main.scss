@@ -6,73 +6,74 @@
 
 
 $color-buttons: (
-    "standard": (prop.$button-standard-color, prop.$button-standard-text-color),
-    "warning": (prop.$button-warning-color, prop.$button-warning-text-color),
+        "standard": (prop.$button-standard-color, prop.$button-standard-text-color),
+        "warning": (prop.$button-warning-color, prop.$button-warning-text-color),
 );
 
 $color-fields: (
-    "standard":(prop.$field-standard-color, prop.$field-standard-text-color)
+        "standard":(prop.$field-standard-color, prop.$field-standard-text-color)
 );
 
 $property-buttons: (
-    "":(p-x: 31px, p-y: 14px, radius: 4px, border: 1px, font-size: 1.4rem, font-weight:500),
-    "-sm":(p-x: 10px, p-y: 7px, radius: 5px, border: 1px, font-size: 1.2rem, font-weight:500)
+        "":(p-x: 31px, p-y: 14px, radius: 4px, border: 1px, font-size: 1.4rem, font-weight:500),
+        "-sm":(p-x: 10px, p-y: 7px, radius: 5px, border: 1px, font-size: 1.2rem, font-weight:500),
 );
 
-
 $font-size-text: (
-    20,
-    24,
-    26,
-    32,
-    48,
-    64
+        18,
+        20,
+        24,
+        26,
+        32,
+        48,
+        64
 );
 
 
 $margin-size: (
-    10,
-    20,
-    30
+        10,
+        20,
+        30
 );
 
 $type-spacing: (
-    "":"",
-    "l":"-left",
-    "r":"-right",
-    "t":"-top",
-    "b":"-bottom"
+        "":"",
+        "l":"-left",
+        "r":"-right",
+        "t":"-top",
+        "b":"-bottom"
 );
 
 
 html {
-    @include utils.scrollbar(prop.$scroll-slider-color,
-        prop.$scroll-slider-body-color);
+  @include utils.scrollbar(prop.$scroll-slider-color,
+          prop.$scroll-slider-body-color);
 
-    body {
-        overflow-x: hidden;
-        font-family: default-font, Verdana, sans-serif;
+  body {
+    overflow-x: hidden;
+    font-family: default-font, Verdana, sans-serif;
 
-        &.modal-open {
-            overflow: hidden;
-        }
+    &.modal-open {
+      overflow: hidden;
     }
+  }
 }
 
 
 %btn {
-    font-family: prop.$standard-font;
-    text-align: center;
-    text-decoration: none;
-    cursor: pointer;
+  font-family: prop.$standard-font;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
 
-    &:not(:disabled):hover {
-        transition: 0.2s;
-    }
+  &:not(:disabled):hover {
+    transition: 0.2s;
+  }
 
-    &:disabled {
-        cursor: default
-    }
+  &:disabled {
+    cursor: default
+  }
 }
 
 
@@ -80,81 +81,134 @@ html {
 $colors in $color-buttons {
 
 
-    @each $type,
-    $property in $property-buttons {
+  @each $type,
+  $property in $property-buttons {
 
-        .btn-#{$title}#{$type} {
-            @extend %btn;
-            @include utils.button-size($font-size: map-get($property, "font-size"), $border-radius: map-get($property, "radius"),
-                $p-x: map-get($property, "p-x"), $p-y: map-get($property, "p-y"), $font-weight: map-get($property, "font-weight"));
-            background: nth($colors, 1);
-            color: nth($colors, 2);
-            border: map-get($property, "border") solid nth($colors, 1);
+    .btn-#{$title}#{$type} {
+      @extend %btn;
+      @include utils.button-size($font-size: map-get($property, "font-size"), $border-radius: map-get($property, "radius"),
+      $p-x: map-get($property, "p-x"), $p-y: map-get($property, "p-y"), $font-weight: map-get($property, "font-weight"));
+      background: nth($colors, 1);
+      color: nth($colors, 2);
+      border: map-get($property, "border") solid nth($colors, 1);
 
-            &:not(:disabled):hover {
-                background: adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
-                border: map-get($property, "border") solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
-            }
+      &:not(:disabled):hover {
+        background: adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+        border: map-get($property, "border") solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      }
 
-            &:disabled {
-                color: adjust-color($color: nth($colors, 2), $red: -255, $green: -255, $blue: -255, $alpha: -0.74);
-                background: adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
-                border: map-get($property, "border") solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
-            }
-        }
+      &:disabled {
+        color: adjust-color($color: nth($colors, 2), $red: -255, $green: -255, $blue: -255, $alpha: -0.74);
+        background: adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+        border: map-get($property, "border") solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+      }
+    }
+  }
+}
+
+@each $title,
+$colors in $color-buttons {
+
+  .btn-#{$title}-icon {
+
+    border-radius: 5px;
+    background: nth($colors, 1);
+    border: 1px solid nth($colors, 1);
+
+    img {
+      height: 100%;
+      width: 100%;
     }
 
+    &:not(:disabled):hover {
+      transition: 0.2s;
+      cursor: pointer;
+      background: adjust-color(nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      border: 1px solid adjust-color(nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+
+      img {
+        filter: prop.$icon-svg-hover-color;
+      }
+    }
+
+    &:disabled {
+      color: adjust-color($color: nth($colors, 2), $red: -255, $green: -255, $blue: -255, $alpha: -0.74);
+      background: adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+      border: 1px solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+
+      img {
+        filter: prop.$icon-svg-hover-color;
+      }
+    }
+
+  }
 }
 
 %field {
-    font-size: 2rem;
-    background: transparent;
-    padding: 5px 10px;
-    font-weight: 400;
-    font-style: normal;
-    border-radius: 5px;
+  font-size: 2rem;
+  background: transparent;
+  padding: 5px 10px;
+  font-weight: 400;
+  font-style: normal;
+  border-radius: 5px;
+  appearance: none;
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 
 @each $title,
 $colors in $color-fields {
 
-    .field-#{$title} {
-        @extend %field;
-        border: 2px solid nth($colors, 1);
-        color: nth($colors, 2);
+  .field-#{$title} {
+    @extend %field;
+    border: 2px solid nth($colors, 1);
+    color: nth($colors, 2);
 
-        &:not(:disabled, :focus):hover {
-            border: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
-        }
-
-        &:focus {
-            outline: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
-            border: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
-        }
-
-        &:disabled {
-            border: 2px solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
-        }
-
+    &:not(:disabled, :focus):hover {
+      border: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
     }
+
+    &:focus {
+      outline: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      border: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+    }
+
+    &:disabled {
+      border: 2px solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+    }
+
+  }
 }
 
+.field-fail {
+  font-size: 1.2rem;
+  @include utils.fontStyle(prop.$warning-color, 400);
+}
 
+.field-label {
+  color: black;
+  font-size: 2rem;
+}
 
 @each $size in $font-size-text {
-    .fs-#{$size} {
-        font-size: utils.calcFontSize($size - $size / 5, $size, 1024, 1920);
-    }
+  .fs-#{$size} {
+    font-size: utils.calcFontSize($size - $size / 5, $size, 1024, 1920);
+  }
 }
 
 
 @each $size in $margin-size {
 
-    @each $title,
-    $type in $type-spacing {
-        .m#{$title}-#{$size} {
-            margin#{$type}: #{$size/10}rem;
-        }
+  @each $title,
+  $type in $type-spacing {
+    .m#{$title}-#{$size} {
+      margin#{$type}: #{$size/10}rem;
     }
+  }
 }

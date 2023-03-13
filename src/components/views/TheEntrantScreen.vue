@@ -16,7 +16,7 @@ import AppBaseScreen from '../UI/AppBaseScreen.vue';
 import AppEntrantScreenItem from '../UI/items/AppEntrantScreenItem.vue';
 
 export default defineComponent({
-  name: 'TheEntrantScreen',
+  icon: 'TheEntrantScreen',
   components: { AppBaseScreen, AppEntrantScreenItem },
   setup() {
     const information = ref<Array<InformationForEntrant>>([

@@ -1,14 +1,19 @@
 <template>
   <section class="begin-screen">
 
-    <the-modal-change-information-department :is-show="isShowDepartment" @close="changeShowModalDepartment"/>
+    <the-modal-change-department
+      :is-show="isShowDepartment"
+      @close="changeShowModalDepartment"
+      :department="department"
+      :links="links"/>
 
     <the-modal-setting-account :is-show="isShowAccount" @close="changeShowModalAccount"/>
 
     <div class="begin-screen-block-left">
+
       <div>
-        <h1 class="fs-64">Информатика<br>и вычислительная техника</h1>
-        <h3 class="fs-32"> {{ informationOfDepartment.slogan }} </h3>
+        <h1 class="fs-64"> {{ title }} </h1>
+        <h3 class="fs-32"> {{ slogan }} </h3>
       </div>
 
       <div class="begin-screen-button">
@@ -19,15 +24,15 @@
       </div>
 
       <div class="begin-screen-links">
-        <app-link-icon v-for="link in informationOfDepartment.links" :key="link.id"
+        <app-link-icon v-for="link in links" :key="link.id"
                        :href="link.href"
-                       :name="link.name"
-                       :alt="`Иконка ${link.name}`"/>
+                       :icon="link.icon"
+                       :alt="`Иконка ${link.icon}`"/>
       </div>
     </div>
 
     <div class="begin-screen-block-right">
-      <!-- Cкоректировать размеры, подумать над заменой на <svg> -->
+      <!-- TODO Скорректировать размеры, подумать над заменой на <svg> -->
       <img src="@/assets/images/logo.svg" alt="Большой логотип кафедры"/>
     </div>
 
@@ -43,18 +48,17 @@ import AppLinkIcon from '@/components/UI/AppLinkIcon.vue';
 import useScroll from '@/hooks/useScroll';
 import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
-import TheModalChangeInformationDepartment from '@/components/UI/modals/TheModalChangeInformationDepartment.vue';
-import { InformationDepartment } from '@/api/model/ModelTypes';
-import TheModalSettingAccount from '@/components/UI/modals/TheModalSettingAccount.vue';
+import TheModalChangeDepartment from '@/components/modals/departmnet/TheModalChangeDepartment.vue';
+import TheModalSettingAccount from '@/components/modals/user/TheModalSettingAccount.vue';
 
 export default defineComponent(
   {
     components: {
       TheModalSettingAccount,
-      TheModalChangeInformationDepartment,
+      TheModalChangeDepartment,
       AppLinkIcon,
     },
-    name: 'TheBeginScreen',
+    icon: 'TheBeginScreen',
     props: {
       scrollSelect: {
         type: String,
@@ -80,13 +84,16 @@ export default defineComponent(
       };
 
       return {
-        isAuth: computed(() => store.getters.isAuth),
+        isAuth: computed(() => store.getters['auth/isAuth']),
         isShowDepartment,
         isShowAccount,
-        informationOfDepartment: computed(() => store.getters.getInformationOfDepartment as InformationDepartment),
         scrollToScreen,
         changeShowModalDepartment,
         changeShowModalAccount,
+        department: computed(() => store.getters['department/getDepartment']),
+        title: computed(() => store.getters['department/getDepartment'].title),
+        slogan: computed(() => store.getters['department/getDepartment'].slogan),
+        links: computed(() => store.getters['siteLinks/getLinks']),
       };
     },
   },

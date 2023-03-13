@@ -6,11 +6,11 @@
     <transition name="select-open">
       <div class="item-select-container" v-if="isOpen">
         <img class="item-select"
-             v-for="option in options" :key="option.name"
-             :src="option.img"
-             :alt="`Иконка ${option.name}`"
-             @click="changeSelect(option.name)"
-             @keyup.enter="changeSelect(option.name)"/>
+             v-for="option in options" :key="option"
+             :src="option"
+             :alt="`Иконка ${option}`"
+             @click="changeSelect(option)"
+             @keyup.enter="changeSelect(option)"/>
       </div>
     </transition>
   </div>
@@ -19,18 +19,13 @@
 <script lang="ts">
 
 import { defineComponent, PropType, ref } from 'vue';
-import imgDefault from '@/assets/images/links/message-link.svg';
-
-export type SelectIcon = {
-  name: string,
-  img: string,
-}
 
 export default defineComponent({
-  name: 'AppSelect',
+  icon: 'AppSelect',
+  emits: ['changeIcon'],
   props: {
     options: {
-      type: Object as PropType<Array<SelectIcon>>,
+      type: Array as PropType<Array<string>>,
       required: true,
     },
     select: {
@@ -38,22 +33,23 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(prop) {
-    const active = ref<string>(imgDefault);
+  setup(prop, { emit }) {
+    const active = ref<string>('http://localhost:8080/api/v1/images/links/message-link.svg');
     const isOpen = ref<boolean>(false);
 
-    const selectImg = prop.options.find((op) => op.name === prop.select);
+    const selectImg = prop.options.find((op) => op === prop.select);
 
     if (selectImg) {
-      active.value = selectImg.img;
+      active.value = selectImg;
     }
 
     const changeSelect = (title: string) => {
-      const el = prop.options.find((op) => op.name === title);
+      const el = prop.options.find((op) => op === title);
       if (el) {
-        active.value = el.img;
+        active.value = el;
         isOpen.value = false;
       }
+      emit('changeIcon', active.value);
     };
 
     return {
