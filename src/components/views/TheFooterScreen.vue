@@ -6,15 +6,15 @@
     <div class="information">
       <div>
         <span class="fs-24 title">Телефон</span>
-        <span class="fs-24 span-new-line content">+7 (3812) 72-90-55</span>
+        <span class="fs-24 span-new-line content">{{ phone }}</span>
       </div>
       <div>
         <span class="fs-24 title">Электронная почта:</span>
-        <span class="fs-24 span-new-line content">ivt@omgtu.ru</span>
+        <span class="fs-24 span-new-line content">{{ email }}</span>
       </div>
       <div>
         <span class="fs-24 title">Адрес:</span>
-        <span class="fs-24 span-new-line content">Пр. Мира, 11 гл. корпус, каб. П-102</span>
+        <span class="fs-24 span-new-line content">{{ address }}</span>
       </div>
     </div>
 
@@ -23,11 +23,14 @@
 
 <script lang="ts">
 
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   icon: 'TheFooterScreen',
   setup() {
+    const store = useStore();
+
     /* eslint-disable */
     function init() {
       const myMap = new ymaps.Map('map', {
@@ -37,6 +40,12 @@ export default defineComponent({
     }
 
     ymaps.ready(init);
+
+    return {
+      address: computed(() => store.getters['department/getDepartment'].address),
+      email: computed(() => store.getters['department/getDepartment'].email),
+      phone: computed(() => store.getters['department/getDepartment'].phone),
+    };
   },
 });
 </script>

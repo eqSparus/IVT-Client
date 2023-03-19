@@ -10,6 +10,7 @@ import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'AppPlusMinusButton',
+  emits: ['action'],
   props: {
     isPlus: {
       type: Boolean,

@@ -1,102 +1,51 @@
 <template>
-    <app-base-screen title="Абитуриенту" :is-second="true">
-        <div class="entrant-screen-container">
-            <app-entrant-screen-item :class="[index === 0 ? '' : 'mt-30']" v-for="(info, index) in information"
-                :key="info.id" :entrant="info" />
-        </div>
-    </app-base-screen>
+  <app-base-screen title="Абитуриенту" :is-second="true">
+
+    <the-modal-change-entrant :is-show="isShow"
+                           @close="changeShowModal"/>
+
+    <div class="entrant-screen-container">
+      <app-entrant-screen-item :class="[index === 0 ? '' : 'mt-30']" v-for="(entrant, index) in entrants"
+                               :key="entrant.id" :entrant="entrant"/>
+
+      <div class="entrant-change mt-20" v-if="isAuth">
+        <input type="button"
+               class="btn-standard"
+               @click="changeShowModal"
+               value="Добавить">
+      </div>
+    </div>
+  </app-base-screen>
 </template>
 
 <script lang="ts">
 
-import { defineComponent, ref } from 'vue';
-import { InformationForEntrant } from '@/api/model/ModelTypes';
-
+import { computed, defineComponent } from 'vue';
+import AppEntrantScreenItem from '@/components/views/items/AppEntrantScreenItem.vue';
+import { useStore } from 'vuex';
+import useShowModal from '@/hooks/useShowModal';
+import TheModalChangeEntrant from '@/components/modals/entrant/TheModalChangeEntrant.vue';
 import AppBaseScreen from '../UI/AppBaseScreen.vue';
-import AppEntrantScreenItem from '../UI/items/AppEntrantScreenItem.vue';
 
 export default defineComponent({
   icon: 'TheEntrantScreen',
-  components: { AppBaseScreen, AppEntrantScreenItem },
+  components: {
+    TheModalChangeEntrant,
+    AppBaseScreen,
+    AppEntrantScreenItem,
+  },
   setup() {
-    const information = ref<Array<InformationForEntrant>>([
-      {
-        id: '1',
-        title: 'Бакалавриат',
-        items: [
-          {
-            id: '1',
-            title: '09.03.01 - "Информатика и вычислительная техника" на 2023/2024 учебный год определена квота в 85 бюджетных места.',
-            descriptions: [
-              'Вычислительные машины, комплексы, системы и сети - 30 бюджетных мест',
-              'Технологии разработки программного обеспечения - 30 бюджетных мест',
-              'Автоматизированные системы обработки информации и управления - 25 бюджетных мест',
-            ],
-          },
-          {
-            id: '2',
-            title: 'На направлении присутствуют места для студентов с возможностью оплаты обучения:',
-            descriptions: [
-              '5 мест очной формы обучения',
-              '100 мест заочной формы обучения',
-            ],
-          },
-          {
-            id: '3',
-            title: 'Обязательные предметы для поступления:',
-            descriptions: [
-              'Математика',
-              'Русский язык',
-            ],
-          },
-          {
-            id: '4',
-            title: 'Предметы по выбору абитуриента в порядке приоритета:',
-            descriptions: [
-              'Информатика и информационно-коммуникационные технологии',
-              'Физика',
-              'Химия',
-              'Иностранный язык',
-            ],
-          },
-        ],
-      },
-      {
-        id: '2',
-        title: 'Магистратура',
-        items: [
-          {
-            id: '5',
-            title: '09.04.01 - "Информатика и вычислительная техника" на 2023/2024 учебный год определена квота в 40 бюджетных мест. Ведётся набор по трём профилям подготовки магистров (цифры распределения по профилям - примерные):',
-            descriptions: [
-              'Применение искусственного интеллекта в энергетике - 14 бюджетных мест',
-              'Информационное и программное обеспечение автоматизированных систем - 13 бюджетных мест',
-              'Безопасность и этика искусственного интеллекта - 13 бюджетных мест',
-            ],
-          },
-          {
-            id: '6',
-            title: 'На направлении присутствуют места для студентов с возможностью оплаты обучения:',
-            descriptions: [
-              '10 мест очной формы обучения',
-              '50 мест заочной формы обучения',
-            ],
-          },
-          {
-            id: '7',
-            title: 'Абитуриент должен направить следующие документы:',
-            descriptions: [
-              'Заявление о приеме в вуз',
-              'Документ государственного образца об высшем образовании и два экземпляра его копий',
-              '2 фотографии размером 3х4 см и предъявить документ, удостоверяющий личность (паспорт, удостоверение личности)',
-            ],
-          },
-        ],
-      },
-    ]);
+    const store = useStore();
+    const {
+      isShow,
+      changeShowModal,
+    } = useShowModal();
 
     return {
-      information,
+      entrants: computed(() => store.getters['entrant/getEntrants']),
+      isAuth: computed(() => store.getters['auth/isAuth']),
+      isShow,
+      changeShowModal,
     };
   },
 });
@@ -104,9 +53,14 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .entrant-screen-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 95%;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 95%;
+  margin: 0 auto;
+
+  .entrant-change {
+    display: flex;
+    justify-content: center;
+  }
 }
 </style>

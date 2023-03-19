@@ -1,4 +1,4 @@
-import { AboutDepartment, InformationDirection, Link } from '@/api/model/ModelTypes';
+import { AboutDepartment, Entrant, InformationDirection, Link, Teacher } from '@/api/model/ModelTypes';
 
 export interface RootState {
   version: string;
@@ -28,4 +28,12 @@ export interface AboutState {
 
 export interface DirectionState {
   directions: Array<InformationDirection>;
+}
+
+export interface EntrantState {
+  entrants: Array<Entrant>;
+}
+
+export interface TeacherState {
+  teachers: Array<Teacher>
 }

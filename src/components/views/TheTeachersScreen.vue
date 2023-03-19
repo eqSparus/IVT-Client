@@ -1,5 +1,17 @@
 <template>
   <app-base-screen title="Состав кафедры">
+
+    <the-modal-change-teacher :is-show="isShow"
+                              :teachers="teachers"
+                              @close="changeShowModal"/>
+
+    <div class="teacher-change mb-20">
+      <input type="button"
+             @click="changeShowModal"
+             class="btn-standard"
+             value="редактировать">
+    </div>
+
     <div class="teachers-screen-container">
 
       <app-teacher-item :teacher="teacherMain" :is-main="true">
@@ -36,21 +48,26 @@
 import { Teacher } from '@/api/model/ModelTypes';
 import { computed, defineComponent, ref } from 'vue';
 import teacher1 from '@/assets/images/teachers/1.png';
-import teacher2 from '@/assets/images/teachers/2.png';
-import teacher3 from '@/assets/images/teachers/3.png';
-import teacher4 from '@/assets/images/teachers/4.png';
 import { useStore } from 'vuex';
-import AppTeacherItem from '../UI/items/AppTeacherItem.vue';
+import AppTeacherItem from '@/components/views/items/AppTeacherItem.vue';
+import TheModalChangeTeacher from '@/components/modals/teacher/TheModalChangeTeacher.vue';
+import useShowModal from '@/hooks/useShowModal';
 import AppBaseScreen from '../UI/AppBaseScreen.vue';
 
 export default defineComponent({
   icon: 'TheTeachersScreen',
   components: {
+    TheModalChangeTeacher,
     AppBaseScreen,
     AppTeacherItem,
   },
   setup() {
     const store = useStore();
+    const {
+      isShow,
+      changeShowModal,
+    } = useShowModal();
+
     const teacherMain = ref<Teacher>(
       {
         id: '1',
@@ -59,43 +76,16 @@ export default defineComponent({
         lastName: 'Грицай',
         post: 'Заведующий кафедрой',
         scientificDegree: 'Кандидат технических наук, доцент',
-        image: teacher1,
+        pathImg: teacher1,
       },
     );
 
-    const teachers = ref<Array<Teacher>>([
-      {
-        id: '2',
-        firstName: 'Виктор',
-        middleName: 'Ильич',
-        lastName: 'Потапов',
-        post: 'Основатель кафедры',
-        scientificDegree: 'Профессор, доктор технических наук, заслуженный деятель науки и техники РФ',
-        image: teacher2,
-      },
-      {
-        id: '3',
-        firstName: 'Ольга',
-        middleName: 'Павловна',
-        lastName: 'Шафеева',
-        post: 'Заместитель заведующего кафедрой',
-        scientificDegree: 'Доцент, кандидат технических наук',
-        image: teacher3,
-      },
-      {
-        id: '4',
-        firstName: 'Марина',
-        middleName: 'Спартаковна',
-        lastName: 'Дорошенко',
-        post: '',
-        scientificDegree: 'Старший преподаватель',
-        image: teacher4,
-      },
-    ]);
-
     return {
+      isShow,
+      changeShowModal,
       teacherMain,
-      teachers,
+      teachers: computed(() => store.getters['teacher/getTeachers']),
+      isAuth: computed(() => store.getters['auth/isAuth']),
       address: computed(() => store.getters['department/getDepartment'].address),
       email: computed(() => store.getters['department/getDepartment'].email),
       phone: computed(() => store.getters['department/getDepartment'].phone),
@@ -107,6 +97,11 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
+
+.teacher-change {
+  display: flex;
+  justify-content: center;
+}
 
 .teachers-screen-container {
   display: grid;

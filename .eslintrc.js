@@ -17,5 +17,10 @@ module.exports = {
     indent: ['error', 2],
     'max-len': 'off',
     'linebreak-style': 0,
+    'vuejs-accessibility/label-has-for': ['error', {
+      required: {
+        some: ['nesting', 'id'],
+      },
+    }],
   },
 };

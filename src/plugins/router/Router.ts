@@ -15,9 +15,9 @@ const router = createRouter({
       component: TheMainPage,
       alias: ['/main'],
       async beforeEnter(to, from, next) {
-        if (store.getters.isAuth) {
+        if (store.getters['auth/isAuth']) {
           try {
-            const data = await refreshToken(store.getters.getRefreshToken);
+            const data = await refreshToken(store.getters['auth/getRefreshToken']);
             store.commit('auth/setTokens', {
               accessToken: data.accessToken,
               refreshToken: data.refreshToken,
@@ -40,6 +40,8 @@ const router = createRouter({
         store.commit('siteLinks/setLinks', data.department.links);
         store.commit('about/setAbout', data.about);
         store.commit('direction/setDirections', data.directions);
+        store.commit('entrant/setEntrants', data.entrants);
+        store.commit('teacher/setTeachers', data.teachers);
         next();
       },
     },

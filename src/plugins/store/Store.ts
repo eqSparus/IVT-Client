@@ -4,6 +4,8 @@ import department from '@/plugins/store/modules/department.module';
 import siteLinks from '@/plugins/store/modules/links.module';
 import about from '@/plugins/store/modules/about.module';
 import direction from '@/plugins/store/modules/direction.module';
+import entrant from '@/plugins/store/modules/entrant.module';
+import teacher from '@/plugins/store/modules/teacher.module';
 
 const store = createStore({
   state: {
@@ -15,6 +17,8 @@ const store = createStore({
     siteLinks,
     about,
     direction,
+    entrant,
+    teacher,
   },
 });
 

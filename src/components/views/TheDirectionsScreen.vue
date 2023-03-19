@@ -4,12 +4,17 @@
       :directions="directions"
       :is-show="isShow"
       @close="changeShowModal"/>
+
     <div :class="[directions.length === 3? 'gap-5':'gap-1','directions-screen-container']">
-      <app-direction-screen-item v-for="(info, index) in directions" :key="info.id" :index-drawing="index"
+      <app-direction-screen-item v-for="(info, index) in directions" :key="info.id"
+                                 :index-drawing="index"
                                  :direction-info="info"/>
     </div>
     <div class="direction-change mt-20" v-if="isAuth">
-      <input type="button" class="btn-standard" value="редактировать" @click="changeShowModal"/>
+      <input type="button"
+             class="btn-standard"
+             value="редактировать"
+             @click="changeShowModal"/>
     </div>
   </app-base-screen>
 </template>

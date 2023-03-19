@@ -36,9 +36,8 @@ AuthorizedRequest.interceptors.response.use((response) => response, async (error
     if (config.url === '/exit') {
       config.data = JSON.stringify({ token: data.refreshToken });
     }
-    console.log(config);
     return AuthorizedRequest(config)
-      .then(() => store.commit('auth/removeTokens'));
+      .catch(() => store.commit('auth/removeTokens'));
   } catch (e) {
     store.commit('auth/removeTokens');
     return Promise.reject(error);

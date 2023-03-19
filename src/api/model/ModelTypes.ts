@@ -48,6 +48,23 @@ export type InformationForEntrant = {
   items: InformationForEntrantItem[]
 }
 
+export type EntrantPoint = {
+  pointId?: string,
+  point: string,
+}
+
+export type EntrantItem = {
+  itemId?: string,
+  name: string,
+  points: Array<EntrantPoint>,
+}
+
+export type Entrant = {
+  id?: string,
+  title: string,
+  items: Array<EntrantItem>,
+}
+
 export type AboutDepartment = {
   id?: string,
   title: string,
@@ -56,7 +73,7 @@ export type AboutDepartment = {
 
 export type Teacher = {
   id: string,
-  image: string,
+  pathImg: string,
   firstName: string,
   middleName: string,
   lastName: string,

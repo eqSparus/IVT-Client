@@ -1,7 +1,7 @@
 <template>
     <div class="item">
 
-        <img :src="teacher.image" :class="[isMain ? 'img-size-main' : 'img-size']" alt="Фотография преподователя" />
+        <img :src="teacher.pathImg" :class="[isMain ? 'img-size-main' : 'img-size']" alt="Фотография преподавателя" />
 
         <div class="item-container">
 
