@@ -30,9 +30,9 @@
            v-model="departmentValue.slogan"/>
 
     <div class="double-block mt-10">
-        <label class="field-label block" for="phone">Номер телефона кафедры</label>
+      <label class="field-label block" for="phone">Номер телефона кафедры</label>
 
-        <label class="field-label block" for="email">Почта кафедры</label>
+      <label class="field-label block" for="email">Почта кафедры</label>
     </div>
 
     <div class="double-block">
@@ -40,7 +40,7 @@
           Поле не должно быть пустым
         </span>
 
-        <span class="field-fail block" v-if="validate.email.$invalid && validate.email.$dirty">
+      <span class="field-fail block" v-if="validate.email.$invalid && validate.email.$dirty">
           Поле не должно быть пустым и быть адресом эл. почты
         </span>
     </div>
@@ -60,7 +60,6 @@
              id="email"
              @blur="validate.email.$touch()"
              v-model="departmentValue.email"/>
-
     </div>
 
     <label class="field-label mt-10" for="address">Адрес кафедры</label>
@@ -75,6 +74,12 @@
            v-model="departmentValue.address"
            aria-label="Введите адрес кафедры"/>
 
+    <label class="field-label mt-10" for="leader-teacher">Заведующий кафедры</label>
+    <app-select id="leader-teacher"
+                :options="teachers"
+                @change="departmentValue.leaderId = $event"
+                :select="departmentValue.leaderId"/>
+
     <input type="button"
            value="обновить"
            class="btn-standard mt-20"
@@ -87,21 +92,26 @@
 <script lang="ts">
 
 import {
+  computed,
   defineComponent,
   PropType,
   reactive,
   ref,
 } from 'vue';
-import { InformationDepartment } from '@/api/model/ModelTypes';
+import { InformationDepartment, Teacher } from '@/api/model/ModelTypes';
 import { email, required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import updateDepartment from '@/api/DepartmentApi';
 import { useStore } from 'vuex';
 import AppMessageAlert from '@/components/UI/AppMessageAlert.vue';
+import AppSelect, { SelectOption } from '@/components/UI/AppSelect.vue';
 
 export default defineComponent({
   name: 'TheSettingDepartment',
-  components: { AppMessageAlert },
+  components: {
+    AppSelect,
+    AppMessageAlert,
+  },
   props: {
     department: {
       type: Object as PropType<InformationDepartment>,
@@ -116,6 +126,7 @@ export default defineComponent({
       email: props.department.email,
       phone: props.department.phone,
       address: props.department.address,
+      leaderId: props.department.leaderId,
     });
     const isMessage = ref<boolean>(false);
 
@@ -147,16 +158,28 @@ export default defineComponent({
         phone: data.phone,
         email: data.email,
         address: data.address,
+        leaderId: data.leaderId,
       };
       store.commit('department/setDepartment', newDepartment);
       isMessage.value = true;
     };
-
+    const teachers = computed(() => {
+      const teacherOptions: Array<SelectOption> = [];
+      const storeTeachers = store.getters['teacher/getTeachers'];
+      storeTeachers.forEach((t: Teacher) => {
+        teacherOptions.push({
+          value: t.id,
+          content: `${t.lastName} ${t.firstName} ${t.middleName}`,
+        });
+      });
+      return teacherOptions;
+    });
     return {
       isMessage,
       departmentValue,
       validate,
       updateDepartmentEvent,
+      teachers,
     };
   },
 });

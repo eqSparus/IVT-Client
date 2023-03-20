@@ -11,6 +11,7 @@ const DepartmentModule: Module<DepartmentState, RootState> = {
       phone: '',
       email: '',
       address: '',
+      leaderId: '',
     };
   },
   mutations: {
@@ -20,6 +21,7 @@ const DepartmentModule: Module<DepartmentState, RootState> = {
       state.phone = department.phone;
       state.email = department.email;
       state.address = department.address;
+      state.leaderId = department.leaderId;
     },
   },
   getters: {

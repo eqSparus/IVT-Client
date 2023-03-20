@@ -35,6 +35,7 @@ const router = createRouter({
           phone: departmentInfo.phone,
           email: departmentInfo.email,
           address: departmentInfo.address,
+          leaderId: departmentInfo.leaderId,
         });
 
         store.commit('siteLinks/setLinks', data.department.links);

@@ -33,18 +33,18 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(prop, { emit }) {
+  setup(props, { emit }) {
     const active = ref<string>('http://localhost:8080/api/v1/images/links/message-link.svg');
     const isOpen = ref<boolean>(false);
 
-    const selectImg = prop.options.find((op) => op === prop.select);
+    const selectImg = props.options.find((op) => op === props.select);
 
     if (selectImg) {
       active.value = selectImg;
     }
 
     const changeSelect = (title: string) => {
-      const el = prop.options.find((op) => op === title);
+      const el = props.options.find((op) => op === title);
       if (el) {
         active.value = el;
         isOpen.value = false;

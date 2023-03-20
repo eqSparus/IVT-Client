@@ -11,11 +11,12 @@ export interface AuthState {
 
 export interface DepartmentState {
   id?: string,
-  title?: string,
-  slogan?: string,
-  phone?: string,
-  email?: string,
-  address?: string,
+  title: string,
+  slogan: string,
+  phone: string,
+  email: string,
+  address: string,
+  leaderId: string,
 }
 
 export interface SiteLinksState {
@@ -35,5 +36,5 @@ export interface EntrantState {
 }
 
 export interface TeacherState {
-  teachers: Array<Teacher>
+  teachers: Array<Teacher>;
 }

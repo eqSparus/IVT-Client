@@ -1,11 +1,13 @@
 <template>
-  <div class="edit-teacher-container">
+  <div v-if="show" class="edit-teacher-container">
 
     <div class="edit-container">
 
       <div class="edit-block">
         <div class="img-cropper">
+          <img v-if="!cropperFile" :src="teacher.pathImg" alt="" class="cropper">
           <cropper :src="cropperFile"
+                   v-if="cropperFile"
                    ref="cropperImgRef"
                    class="cropper"
                    :stencil-props="{
@@ -101,6 +103,7 @@
           <div class="block-column">
             <input type="button"
                    class="btn-warning"
+                   :disabled="isTeacherLeader"
                    @click="removeTeacher"
                    value="удалить">
           </div>
@@ -115,7 +118,8 @@
 <script lang="ts">
 
 import {
-  defineComponent, onUpdated, PropType, ref,
+  computed,
+  defineComponent, PropType, ref,
 } from 'vue';
 import { Teacher } from '@/api/model/ModelTypes';
 import { Cropper } from 'vue-advanced-cropper';
@@ -133,6 +137,10 @@ export default defineComponent({
       type: Object as PropType<Teacher>,
       required: true,
     },
+    show: {
+      type: Boolean,
+      required: true,
+    },
   },
   setup(props, { emit }) {
     const store = useStore();
@@ -148,20 +156,6 @@ export default defineComponent({
       lastName: props.teacher.lastName,
       post: props.teacher.post,
       scientificDegree: props.teacher.scientificDegree,
-    });
-
-    onUpdated(() => {
-      if (props.teacher.id !== editableTeacher.value.id) {
-        editableTeacher.value = {
-          id: props.teacher.id,
-          pathImg: props.teacher.pathImg,
-          firstName: props.teacher.firstName,
-          middleName: props.teacher.middleName,
-          lastName: props.teacher.lastName,
-          post: props.teacher.post,
-          scientificDegree: props.teacher.scientificDegree,
-        };
-      }
     });
 
     const rules = {
@@ -221,6 +215,7 @@ export default defineComponent({
       downloadImg,
       removeTeacher,
       updateImgTeacher,
+      isTeacherLeader: computed(() => props.teacher.id === store.getters['department/getDepartment'].leaderId),
     };
   },
 });
@@ -250,13 +245,15 @@ export default defineComponent({
       display: flex;
       flex-flow: column;
       width: 15%;
+      align-self: flex-end;
 
       .img-cropper {
-        width: 100%;
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
 
         .cropper {
-          width: 100%;
-          height: 25vh;
+          height: 200px;
         }
       }
 

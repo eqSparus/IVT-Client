@@ -2,10 +2,10 @@
   <app-base-screen title="Состав кафедры">
 
     <the-modal-change-teacher :is-show="isShow"
-                              :teachers="teachers"
+                              :teachers="allTeachers"
                               @close="changeShowModal"/>
 
-    <div class="teacher-change mb-20">
+    <div class="teacher-change mb-20" v-if="isAuth">
       <input type="button"
              @click="changeShowModal"
              class="btn-standard"
@@ -14,7 +14,7 @@
 
     <div class="teachers-screen-container">
 
-      <app-teacher-item :teacher="teacherMain" :is-main="true">
+      <app-teacher-item :teacher="leaderTeacher" :is-main="true">
         <div class="block-top">
           <span class="additional fs-20">Адрес</span>
           <span class="fs-20 span-new-line content">{{ address }}</span>
@@ -45,9 +45,7 @@
 
 <script lang="ts">
 
-import { Teacher } from '@/api/model/ModelTypes';
-import { computed, defineComponent, ref } from 'vue';
-import teacher1 from '@/assets/images/teachers/1.png';
+import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import AppTeacherItem from '@/components/views/items/AppTeacherItem.vue';
 import TheModalChangeTeacher from '@/components/modals/teacher/TheModalChangeTeacher.vue';
@@ -68,23 +66,12 @@ export default defineComponent({
       changeShowModal,
     } = useShowModal();
 
-    const teacherMain = ref<Teacher>(
-      {
-        id: '1',
-        firstName: 'Александр',
-        middleName: 'Сергеевич',
-        lastName: 'Грицай',
-        post: 'Заведующий кафедрой',
-        scientificDegree: 'Кандидат технических наук, доцент',
-        pathImg: teacher1,
-      },
-    );
-
     return {
       isShow,
       changeShowModal,
-      teacherMain,
-      teachers: computed(() => store.getters['teacher/getTeachers']),
+      leaderTeacher: computed(() => store.getters['teacher/getLeaderTeacher']),
+      teachers: computed(() => store.getters['teacher/getTeacherNotLeader']),
+      allTeachers: computed(() => store.getters['teacher/getTeachers']),
       isAuth: computed(() => store.getters['auth/isAuth']),
       address: computed(() => store.getters['department/getDepartment'].address),
       email: computed(() => store.getters['department/getDepartment'].email),

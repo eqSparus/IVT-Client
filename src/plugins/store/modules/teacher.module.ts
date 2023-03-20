@@ -33,8 +33,14 @@ const TeacherModule: Module<TeacherState, RootState> = {
     },
   },
   getters: {
-    getTeachers(state: TeacherState) {
+    getTeachers(state) {
       return state.teachers;
+    },
+    getLeaderTeacher(state, getters, rootState, rootGetters) {
+      return state.teachers.find((t) => t.id === rootGetters['department/getDepartment'].leaderId);
+    },
+    getTeacherNotLeader(state, getters, rootState, rootGetters) {
+      return state.teachers.filter((t) => t.id !== rootGetters['department/getDepartment'].leaderId);
     },
   },
 };

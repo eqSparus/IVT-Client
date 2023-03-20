@@ -20,6 +20,7 @@ export type InformationDepartment = {
   phone: string,
   email: string,
   address: string,
+  leaderId: string,
 }
 
 export type InformationFaculty = {

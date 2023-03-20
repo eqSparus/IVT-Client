@@ -6,7 +6,9 @@
 
     <div class="change-teacher-container">
       <the-modal-add-teacher v-if="isAdd"/>
-      <the-modal-edit-teacher v-else :teacher="teachers.find((t) => t.id === indexTeacher)"
+      <the-modal-edit-teacher v-else v-for="teacher in teachers" :key="teacher.id"
+                              :teacher="teacher"
+                              :show="teacher.id === indexTeacher"
                               @remove="isAdd = true"/>
     </div>
 
@@ -63,7 +65,6 @@ export default defineComponent({
       indexTeacher,
       selectTeacher,
       addIcon,
-      teacherSelect: computed(() => props.teachers.find((t) => t.id === indexTeacher.value)),
     };
   },
 });

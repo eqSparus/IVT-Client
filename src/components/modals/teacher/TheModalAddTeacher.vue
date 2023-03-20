@@ -223,8 +223,7 @@ export default defineComponent({
         width: 100%;
 
         .cropper {
-          width: 100%;
-          height: 25vh;
+          height: 200px;
         }
       }
 
