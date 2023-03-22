@@ -32,11 +32,15 @@
         </div>
       </app-teacher-item>
 
-      <div class="list-teacher" v-for="(teacher, index) in teachers" :key="teacher.id">
-        <div class="line" :style="[index === teachers.length - 1 ? 'height: 65%' : '']">
+      <transition-group name="teacher">
+        <div class="list-teacher" v-for="teacher in teachers" :key="teacher.id">
+          <app-teacher-item class="teacher" :teacher="teacher"/>
         </div>
-        <app-teacher-item class="teacher" :teacher="teacher"/>
-      </div>
+      </transition-group>
+
+      <button class="fs-24" @click="changeIsAll">
+        {{ textIsAll }}
+      </button>
 
     </div>
 
@@ -45,7 +49,7 @@
 
 <script lang="ts">
 
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import AppTeacherItem from '@/components/views/items/AppTeacherItem.vue';
 import TheModalChangeTeacher from '@/components/modals/teacher/TheModalChangeTeacher.vue';
@@ -61,21 +65,37 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const isAll = ref<boolean>(false);
+
     const {
       isShow,
       changeShowModal,
     } = useShowModal();
 
+    const changeIsAll = () => {
+      isAll.value = !isAll.value;
+    };
+
+    const teachers = computed(() => {
+      if (isAll.value) {
+        return store.getters['teacher/getTeacherNotLeader'];
+      }
+      return store.getters['teacher/getTeacherNotLeader'].slice(0, 4);
+    });
+
     return {
       isShow,
+      isAll,
+      changeIsAll,
       changeShowModal,
       leaderTeacher: computed(() => store.getters['teacher/getLeaderTeacher']),
-      teachers: computed(() => store.getters['teacher/getTeacherNotLeader']),
+      teachers,
       allTeachers: computed(() => store.getters['teacher/getTeachers']),
       isAuth: computed(() => store.getters['auth/isAuth']),
       address: computed(() => store.getters['department/getDepartment'].address),
       email: computed(() => store.getters['department/getDepartment'].email),
       phone: computed(() => store.getters['department/getDepartment'].phone),
+      textIsAll: computed(() => (isAll.value ? 'скрыть' : 'показать всех')),
     };
   },
 });
@@ -107,18 +127,38 @@ export default defineComponent({
   }
 }
 
-.list-teacher {
-  display: grid;
-  grid-template-columns: 1fr 3.3fr;
+.teacher-enter-active,
+.teacher-leave-active {
+  transition: all 0.5s ease;
+}
 
-  .line {
-    border: 2px solid prop.$teacher-screen-color-line;
-    background: prop.$teacher-screen-color-line;
-    justify-self: center;
-  }
+.teacher-enter-from,
+.teacher-leave-to {
+  transform: translateY(-20%);
+  opacity: 0;
+}
+
+.list-teacher {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 
   .teacher {
     margin-top: 3.2%;
+    width: 80%;
+  }
+}
+
+button {
+  border: none;
+  background: none;
+  text-transform: uppercase;
+  color: prop.$info-color;
+  margin-top: 5%;
+
+  &:hover {
+    color: adjust-color($color: prop.$info-color, $red: 37, $green: 26, $blue: -2);;
+    cursor: pointer;
   }
 }
 

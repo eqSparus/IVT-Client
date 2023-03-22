@@ -14,6 +14,8 @@
 
       <the-teachers-screen id="teachers"/>
 
+      <the-partners-screen/>
+
       <the-footer-screen id="contact"/>
     </main>
   </div>
@@ -21,7 +23,7 @@
 
 <script lang="ts">
 
-import { defineComponent, onMounted } from 'vue';
+import { defineComponent } from 'vue';
 import TheHeaderScreen from '@/components/views/TheHeaderScreen.vue';
 import TheBeginScreen from '@/components/views/TheBeginScreen.vue';
 import TheAboutScreen from '@/components/views/TheAboutScreen.vue';
@@ -29,12 +31,12 @@ import TheDirectionsScreen from '@/components/views/TheDirectionsScreen.vue';
 import TheEntrantScreen from '@/components/views/TheEntrantScreen.vue';
 import TheFooterScreen from '@/components/views/TheFooterScreen.vue';
 import TheTeachersScreen from '@/components/views/TheTeachersScreen.vue';
-import { useStore } from 'vuex';
-import { getData } from '@/api/DataApi';
+import ThePartnersScreen from '@/components/views/ThePartnersScreen.vue';
 
 export default defineComponent({
   icon: 'TheMainPage',
   components: {
+    ThePartnersScreen,
     TheHeaderScreen,
     TheBeginScreen,
     TheAboutScreen,

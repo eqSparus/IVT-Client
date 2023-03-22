@@ -104,6 +104,11 @@ export default defineComponent({
     const addDirection = async () => {
       const data = await createDirection(direction.value);
       store.commit('direction/addDirection', data);
+      direction.value.title = '';
+      direction.value.form = '';
+      direction.value.degree = '';
+      direction.value.duration = 0;
+      validate.value.$reset();
     };
 
     return {

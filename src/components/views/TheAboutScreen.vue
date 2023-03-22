@@ -4,11 +4,11 @@
     <the-modal-change-about :abouts="abouts" :is-show="isShow" @close="changeShowModal"/>
 
     <div class="about-screen-container">
-      <app-about-screen-item v-for="(about) in abouts" :key="about.id" :about-info="about"
-                             :icon-index="about.order - 1"/>
-      <div class="about-change mt-20" v-if="isAuth">
+      <div class="about-change mb-20" v-if="isAuth">
         <input type="button" class="btn-standard" value="РЕДАКТИРОВАТЬ" @click="changeShowModal"/>
       </div>
+      <app-about-screen-item v-for="(about) in abouts" :key="about.id" :about-info="about"
+                             :icon-index="about.order - 1"/>
     </div>
   </app-base-screen>
 </template>

@@ -108,6 +108,7 @@ export default defineComponent({
 .directions-container {
   display: flex;
   flex-flow: column;
+  min-width: 50vw;
 
   .directions-items {
     display: flex;

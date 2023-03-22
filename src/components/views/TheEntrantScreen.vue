@@ -2,18 +2,17 @@
   <app-base-screen title="Абитуриенту" :is-second="true">
 
     <the-modal-change-entrant :is-show="isShow"
-                           @close="changeShowModal"/>
+                              @close="changeShowModal"/>
 
     <div class="entrant-screen-container">
-      <app-entrant-screen-item :class="[index === 0 ? '' : 'mt-30']" v-for="(entrant, index) in entrants"
-                               :key="entrant.id" :entrant="entrant"/>
-
       <div class="entrant-change mt-20" v-if="isAuth">
         <input type="button"
                class="btn-standard"
                @click="changeShowModal"
                value="Добавить">
       </div>
+      <app-entrant-screen-item :class="[index === 0 ? '' : 'mt-30']" v-for="(entrant, index) in entrants"
+                               :key="entrant.id" :entrant="entrant"/>
     </div>
   </app-base-screen>
 </template>

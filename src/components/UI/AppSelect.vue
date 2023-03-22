@@ -5,15 +5,16 @@
       {{ content }}
     </button>
 
-    <div class="option-container" v-if="isOpen">
-      <p class="option"
-         @click="changeSelect(option.value)"
-         @keyup.enter="changeSelect(option.value)"
-         v-for="option in options" :key="option.value">
-        {{ option.content }}
-      </p>
-    </div>
-
+    <transition name="options">
+      <div class="option-container" v-if="isOpen">
+        <p class="option"
+           @click="changeSelect(option.value)"
+           @keyup.enter="changeSelect(option.value)"
+           v-for="option in options" :key="option.value">
+          {{ option.content }}
+        </p>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -73,6 +74,17 @@ export default defineComponent({
   display: flex;
   flex-flow: column;
   position: relative;
+
+  .options-enter-active,
+  .options-leave-active {
+    transition: all 0.5s ease;
+  }
+
+  .options-enter-from,
+  .options-leave-to {
+    transform: translateY(-20%);
+    opacity: 0;
+  }
 
   .option-container {
     z-index: 333;
