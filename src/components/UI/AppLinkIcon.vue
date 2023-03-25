@@ -1,5 +1,5 @@
 <template>
-  <a :href="href" target="_blank">
+  <a class="link-icon" :href="href" target="_blank">
     <img :src="icon" :alt="alt" />
   </a>
 </template>
@@ -21,18 +21,18 @@ export default defineComponent({
     },
     alt: {
       type: String,
-      default: 'Инока',
+      default: 'Иконка',
     },
   },
 });
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/properties.scss' as props;
 
-a {
+.link-icon {
   &:hover {
-    filter: prop.$icon-svg-hover-color-info;
+    filter: props.$icon-svg-hover-color-info;
   }
 }
 </style>

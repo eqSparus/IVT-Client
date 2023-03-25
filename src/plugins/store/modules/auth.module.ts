@@ -1,13 +1,13 @@
-import { Tokens } from '@/api/model/ModelTypes';
 import { Module } from 'vuex';
 import { AuthState, RootState } from '@/plugins/store/types';
+import { authentication, refreshToken } from '@/api/user/UserApi';
+import { User } from '@/types/UserTypes';
 
 const AuthModule: Module<AuthState, RootState> = {
   namespaced: true,
   state() {
     return {
       accessToken: localStorage.getItem('access'),
-      refreshToken: localStorage.getItem('refresh'),
     };
   },
   getters: {
@@ -17,22 +17,28 @@ const AuthModule: Module<AuthState, RootState> = {
     getAccessToken(state: AuthState): string | null {
       return state.accessToken;
     },
-    getRefreshToken(state: AuthState): string | null {
-      return state.refreshToken;
-    },
   },
   mutations: {
-    setTokens(state: AuthState, tokens: Tokens) {
-      state.accessToken = tokens.accessToken;
-      state.refreshToken = tokens.refreshToken;
-      localStorage.setItem('access', tokens.accessToken);
-      localStorage.setItem('refresh', tokens.refreshToken);
+    setAccessToken(state: AuthState, token: string) {
+      state.accessToken = token;
+      localStorage.setItem('access', token);
     },
-    removeTokens(state: AuthState) {
+    removeAccessToken(state: AuthState) {
       state.accessToken = null;
-      state.refreshToken = null;
       localStorage.removeItem('access');
-      localStorage.removeItem('refresh');
+    },
+  },
+  actions: {
+    async login({ commit }, user: User) {
+      const data = await authentication({
+        email: user.email,
+        password: user.password,
+      });
+      commit('setAccessToken', data.accessToken);
+    },
+    async refresh({ commit }) {
+      const data = await refreshToken();
+      commit('setAccessToken', data.accessToken);
     },
   },
 };

@@ -1,4 +1,4 @@
-import { AboutDepartment, Entrant, InformationDirection, Link, Teacher } from '@/api/model/ModelTypes';
+import { AboutDepartment, Entrant, Direction, Link, Teacher, Department } from '@/types/SiteContentTypes';
 
 export interface RootState {
   version: string;
@@ -6,17 +6,10 @@ export interface RootState {
 
 export interface AuthState {
   accessToken: null | string,
-  refreshToken: null | string,
 }
 
 export interface DepartmentState {
-  id?: string,
-  title: string,
-  slogan: string,
-  phone: string,
-  email: string,
-  address: string,
-  leaderId: string,
+  department: Department;
 }
 
 export interface SiteLinksState {
@@ -28,7 +21,7 @@ export interface AboutState {
 }
 
 export interface DirectionState {
-  directions: Array<InformationDirection>;
+  directions: Array<Direction>;
 }
 
 export interface EntrantState {

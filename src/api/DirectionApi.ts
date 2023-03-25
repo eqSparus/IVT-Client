@@ -1,13 +1,9 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
-import { InformationDirection } from '@/api/model/ModelTypes';
+import { Direction } from '@/types/SiteContentTypes';
+import EndPoints from '@/api/EndPoints';
 
-export const createDirection = async (direction: InformationDirection) => {
-  const response = await authorizedRequests.post('/direction', JSON.stringify({
-    title: direction.title,
-    degree: direction.degree,
-    form: direction.form,
-    duration: direction.duration,
-  }), {
+export const createDirection = async (direction: Direction) => {
+  const response = await authorizedRequests.post(EndPoints.DIRECTION, JSON.stringify(direction), {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -15,16 +11,8 @@ export const createDirection = async (direction: InformationDirection) => {
   return response.data;
 };
 
-export const putDirection = async (direction: InformationDirection) => {
-  const response = await authorizedRequests.put('/direction', JSON.stringify({
-    title: direction.title,
-    degree: direction.degree,
-    form: direction.form,
-    duration: direction.duration,
-  }), {
-    params: {
-      id: direction.id,
-    },
+export const putDirection = async (direction: Direction) => {
+  const response = await authorizedRequests.put(EndPoints.DIRECTION, JSON.stringify(direction), {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -32,7 +20,7 @@ export const putDirection = async (direction: InformationDirection) => {
   return response.data;
 };
 
-export const deleteDirection = async (id: string) => authorizedRequests.delete('/direction', {
+export const deleteDirection = async (id: string) => authorizedRequests.delete(EndPoints.DIRECTION, {
   params: {
     id,
   },

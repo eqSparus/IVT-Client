@@ -1,8 +1,9 @@
-import { InformationDepartment } from '@/api/model/ModelTypes';
+import { Department } from '@/types/SiteContentTypes';
 import authorizedRequests from '@/api/request/AuthorizedRequests';
+import EndPoints from '@/api/EndPoints';
 
-const updateDepartment = async (department: InformationDepartment) => {
-  const response = await authorizedRequests.put('/department', JSON.stringify(department), {
+const updateDepartment = async (department: Department) => {
+  const response = await authorizedRequests.put(EndPoints.DEPARTMENT, JSON.stringify(department), {
     headers: {
       'Content-Type': 'application/json',
     },

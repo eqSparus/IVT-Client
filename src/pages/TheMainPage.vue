@@ -1,10 +1,10 @@
 <template>
   <div>
 
-    <the-header-screen :anchors="anchors"/>
+    <the-header-menu :anchors="anchors"/>
 
     <main class="main-container">
-      <the-begin-screen :scroll-select="'#about'"/>
+      <the-primary-screen :scroll-select="'#about'"/>
 
       <the-about-screen id="about"/>
 
@@ -24,21 +24,21 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
-import TheHeaderScreen from '@/components/views/TheHeaderScreen.vue';
-import TheBeginScreen from '@/components/views/TheBeginScreen.vue';
-import TheAboutScreen from '@/components/views/TheAboutScreen.vue';
-import TheDirectionsScreen from '@/components/views/TheDirectionsScreen.vue';
-import TheEntrantScreen from '@/components/views/TheEntrantScreen.vue';
-import TheFooterScreen from '@/components/views/TheFooterScreen.vue';
-import TheTeachersScreen from '@/components/views/TheTeachersScreen.vue';
-import ThePartnersScreen from '@/components/views/ThePartnersScreen.vue';
+import TheHeaderMenu from '@/components/views/header/TheHeaderMenu.vue';
+import ThePrimaryScreen from '@/components/views/primary/ThePrimaryScreen.vue';
+import TheAboutScreen from '@/components/views/about/TheAboutScreen.vue';
+import TheDirectionsScreen from '@/components/views/direction/TheDirectionsScreen.vue';
+import TheEntrantScreen from '@/components/views/entrant/TheEntrantScreen.vue';
+import TheFooterScreen from '@/components/views/footer/TheFooterScreen.vue';
+import TheTeachersScreen from '@/components/views/teacher/TheTeachersScreen.vue';
+import ThePartnersScreen from '@/components/views/partner/ThePartnersScreen.vue';
 
 export default defineComponent({
   icon: 'TheMainPage',
   components: {
     ThePartnersScreen,
-    TheHeaderScreen,
-    TheBeginScreen,
+    TheHeaderMenu,
+    ThePrimaryScreen,
     TheAboutScreen,
     TheDirectionsScreen,
     TheEntrantScreen,

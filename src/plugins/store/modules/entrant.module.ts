@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
 import { EntrantState, RootState } from '@/plugins/store/types';
-import { Entrant } from '@/api/model/ModelTypes';
+import { Entrant } from '@/types/SiteContentTypes';
 
 const DirectionModule: Module<EntrantState, RootState> = {
   namespaced: true,

@@ -1,7 +1,15 @@
 import AuthorizedRequests from '@/api/request/AuthorizedRequests';
+import UserEndPoints from '@/api/user/UserEndPoints';
 
-export const exit = async (token: string) => {
-  const response = await AuthorizedRequests.post('/exit', JSON.stringify({ token }), {
+export const requestExit = async () => {
+  const response = await AuthorizedRequests.post(UserEndPoints.EXIT, {}, {
+    withCredentials: true,
+  });
+  return response.data;
+};
+
+export const requestChangePassword = async (password: string) => {
+  const response = await AuthorizedRequests.post(UserEndPoints.CHANGE_PASSWORD, JSON.stringify({ password }), {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -9,17 +17,8 @@ export const exit = async (token: string) => {
   return response.data;
 };
 
-export const changePassword = async (password: string) => {
-  const response = await AuthorizedRequests.post('/change/password', JSON.stringify({ password }), {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-  return response.data;
-};
-
-export const sendChangeEmail = async (email: string) => {
-  const response = await AuthorizedRequests.post('/change/email', JSON.stringify({ email }), {
+export const requestSendChangeEmail = async (email: string) => {
+  const response = await AuthorizedRequests.post(UserEndPoints.CHANGE_EMAIL, JSON.stringify({ email }), {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -28,7 +27,7 @@ export const sendChangeEmail = async (email: string) => {
 };
 
 export const changeEmailByToken = async (token: string) => {
-  const response = await AuthorizedRequests.post('/change/email', {}, {
+  const response = await AuthorizedRequests.post(UserEndPoints.CHANGE_EMAIL, {}, {
     params: {
       token,
     },

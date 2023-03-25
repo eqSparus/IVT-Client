@@ -2,7 +2,7 @@
   <div class="app-select" @mouseleave="isOpen = false" @blur="isOpen = false" @keyup.esc="isOpen = false">
 
     <button @click="isOpen = !isOpen">
-      {{ content }}
+      {{ selectContent }}
     </button>
 
     <transition name="options">
@@ -44,21 +44,23 @@ export default defineComponent({
     const isOpen = ref<boolean>(false);
     const selectValue = ref<string>(props.select);
     const defaultSelect = props.options.find((op) => op.value === selectValue.value);
-    const content = ref<string>(defaultSelect!.content);
+    const selectContent = ref<string>('');
+    if (defaultSelect) {
+      selectContent.value = defaultSelect.content;
+    }
 
     const changeSelect = (value: string) => {
-      console.log(value);
       const el = props.options.find((op) => op.value === value);
       if (el) {
         selectValue.value = el.value;
-        content.value = el.content;
+        selectContent.value = el.content;
         isOpen.value = false;
       }
       emit('change', selectValue.value);
     };
 
     return {
-      content,
+      selectContent,
       isOpen,
       changeSelect,
     };

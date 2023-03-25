@@ -1,11 +1,9 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
-import { Link } from '@/api/model/ModelTypes';
+import { Link } from '@/types/SiteContentTypes';
+import EndPoints from '@/api/EndPoints';
 
-export const createLink = async (href: string, icon: string) => {
-  const response = await authorizedRequests.post('/link', JSON.stringify({
-    href,
-    icon,
-  }), {
+export const createLink = async (link: Link) => {
+  const response = await authorizedRequests.post(EndPoints.SITE_LINK, JSON.stringify(link), {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -14,13 +12,7 @@ export const createLink = async (href: string, icon: string) => {
 };
 
 export const putLink = async (link: Link) => {
-  const response = await authorizedRequests.put('/link', JSON.stringify({
-    href: link.href,
-    icon: link.icon,
-  }), {
-    params: {
-      id: link.id,
-    },
+  const response = await authorizedRequests.put(EndPoints.SITE_LINK, JSON.stringify(link), {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -28,7 +20,7 @@ export const putLink = async (link: Link) => {
   return response.data;
 };
 
-export const deleteLink = async (id: string) => authorizedRequests.delete('/link', {
+export const deleteLink = async (id: string) => authorizedRequests.delete(EndPoints.SITE_LINK, {
   params: {
     id,
   },

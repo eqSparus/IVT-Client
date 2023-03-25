@@ -1,8 +1,10 @@
 import axios from 'axios';
-import { User } from '@/api/model/ModelTypes';
+import { User } from '@/types/UserTypes';
+import UserEndPoints from '@/api/user/UserEndPoints';
 
 export const authentication = async (user: User) => {
-  const response = await axios.post('/login', JSON.stringify(user), {
+  const response = await axios.post(UserEndPoints.LOGIN, JSON.stringify(user), {
+    withCredentials: true,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -11,7 +13,7 @@ export const authentication = async (user: User) => {
 };
 
 export const sendRecoverPasswordEmail = async (email: string) => {
-  const response = await axios.post('/recover/pass', {}, {
+  const response = await axios.post(UserEndPoints.RECOVER_PASSWORD, {}, {
     params: {
       email,
     },
@@ -20,7 +22,7 @@ export const sendRecoverPasswordEmail = async (email: string) => {
 };
 
 export const recoverPasswordByToken = async (password: string, token: string) => {
-  const response = await axios.post('/recover/pass', JSON.stringify({ password }), {
+  const response = await axios.post(UserEndPoints.RECOVER_PASSWORD, JSON.stringify({ password }), {
     params: {
       token,
     },
@@ -32,12 +34,9 @@ export const recoverPasswordByToken = async (password: string, token: string) =>
   return response.data;
 };
 
-export const refreshToken = async (token: string) => {
-  const response = await axios.post('/refresh', JSON.stringify({ token }), {
-    headers: {
-      'Content-Type': 'application/json',
-    },
+export const refreshToken = async () => {
+  const response = await axios.post(UserEndPoints.REFRESH_TOKEN, {}, {
+    withCredentials: true,
   });
-
   return response.data;
 };

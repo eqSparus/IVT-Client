@@ -5,7 +5,6 @@ import store from '@/plugins/store/Store';
 import { refreshToken } from '@/api/user/UserApi';
 import TheActivateEmail from '@/pages/TheActivateEmail.vue';
 import { getData } from '@/api/DataApi';
-import { Link } from '@/api/model/ModelTypes';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -17,27 +16,15 @@ const router = createRouter({
       async beforeEnter(to, from, next) {
         if (store.getters['auth/isAuth']) {
           try {
-            const data = await refreshToken(store.getters['auth/getRefreshToken']);
-            store.commit('auth/setTokens', {
-              accessToken: data.accessToken,
-              refreshToken: data.refreshToken,
-            });
+            const data = await refreshToken();
+            store.commit('auth/setAccessToken', data.accessToken);
           } catch (e) {
-            store.commit('auth/removeTokens');
+            store.commit('auth/removeAccessToken');
           }
         }
 
         const data = await getData();
-        const departmentInfo = data.department.mainInfo;
-        store.commit('department/setDepartment', {
-          title: departmentInfo.title,
-          slogan: departmentInfo.slogan,
-          phone: departmentInfo.phone,
-          email: departmentInfo.email,
-          address: departmentInfo.address,
-          leaderId: departmentInfo.leaderId,
-        });
-
+        store.commit('department/setDepartment', data.department.mainInfo);
         store.commit('siteLinks/setLinks', data.department.links);
         store.commit('about/setAbout', data.about);
         store.commit('direction/setDirections', data.directions);

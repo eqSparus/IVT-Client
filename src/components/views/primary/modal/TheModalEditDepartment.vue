@@ -1,0 +1,90 @@
+<template>
+  <app-base-modal :is-show="isShow"
+                  :title="modalTitle"
+                  @close="$emit('close')"
+                  :is-footer="true">
+
+    <div class="modal-size">
+
+      <div class="begin-edit-container" >
+
+        <the-setting-department v-if="isWindow" :department="department"/>
+        <the-setting-links v-else :links="links"/>
+
+        <input type="button"
+               :value="btnText"
+               class="btn-standard mt-20"
+               @click="isWindow = !isWindow"/>
+      </div>
+    </div>
+  </app-base-modal>
+</template>
+
+<script lang="ts">
+import {
+  computed,
+  defineComponent,
+  PropType,
+  ref,
+} from 'vue';
+import AppBaseModal from '@/components/UI/AppBaseModal.vue';
+import { Department, Link } from '@/types/SiteContentTypes';
+import TheSettingDepartment from '@/components/views/primary/modal/TheSettingDepartment.vue';
+import TheSettingLinks from '@/components/views/primary/modal/TheSettingLinks.vue';
+
+export default defineComponent({
+  icon: 'TheModalEditDepartment',
+  components: {
+    TheSettingLinks,
+    TheSettingDepartment,
+    AppBaseModal,
+  },
+  props: {
+    isShow: {
+      type: Boolean,
+      required: true,
+    },
+    department: {
+      type: Object as PropType<Department>,
+      required: true,
+    },
+    links: {
+      type: Array as PropType<Array<Link>>,
+      required: true,
+    },
+  },
+  emits: ['close'],
+  setup() {
+    const isWindow = ref<boolean>(true);
+
+    return {
+      isWindow,
+      btnText: computed(() => (isWindow.value ? 'изменить ссылки' : 'изменить информацию о кафедре')),
+      modalTitle: computed(() => (isWindow.value ? 'Информация о кафедре' : 'Ссылки на сайты кафедры')),
+    };
+  },
+});
+</script>
+
+<style lang="scss" scoped>
+
+.modal-size {
+  width: 50vw;
+
+  .begin-edit-container {
+    display: flex;
+    flex-flow: column;
+
+    .edit-block {
+      display: flex;
+      flex-flow: row;
+      gap: 10px;
+
+      input {
+        flex: 1;
+      }
+    }
+  }
+}
+
+</style>

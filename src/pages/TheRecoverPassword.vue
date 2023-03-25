@@ -13,32 +13,40 @@
       <div class="recover-content">
 
         <div class="fail-message fs-18 mt-10"
-             v-if="valid.isPasswordSame">
+             v-if="valid.password.samePassword.$invalid && valid.password.$dirty && valid.repeatPassword.$dirty">
           Пароли должны совпадать
         </div>
 
         <label class="field-label mt-20 mb-10" for="password">Введите новый пароль</label>
-        <span v-if="valid.isPasswordLength"
-              class="field-fail">*Пароль должен быть в пределах от 12 до 64 символов</span>
-        <span v-if="valid.isPasswordRequired" class="field-fail">*Поле не должны быть пустыми</span>
+        <span v-if="(valid.password.minLength.$invalid || valid.password.maxLength.$invalid) && valid.password.$dirty"
+              class="field-fail">
+          Пароль должен быть в пределах от 12 до 64 символов
+        </span>
+        <span v-if="valid.password.required.$invalid && valid.password.$dirty"
+              class="field-fail">
+          Поле не должны быть пустыми
+        </span>
         <input type="password"
                id="password"
                v-model="password"
-               @blur="validate.password.$touch()"
+               @blur="valid.password.$touch()"
                class="field-standard">
 
         <label class="field-label mt-20 mb-10" for="repeat-password">Повторите новый пароль</label>
-        <span v-if="valid.isRepeatPasswordRequired" class="field-fail">*Поле не должны быть пустыми</span>
+        <span v-if="valid.repeatPassword.$invalid && valid.repeatPassword.$dirty"
+              class="field-fail">
+          Поле не должны быть пустыми
+        </span>
         <input type="password"
                id="repeat-password"
                v-model="repeatPassword"
-               @blur="validate.repeatPassword.$touch()"
+               @blur="valid.repeatPassword.$touch()"
                class="field-standard">
 
         <input type="button"
                class="btn-standard mt-30"
                value="восстановить пароль"
-               :disabled="valid.isDisableBtnPassword"
+               :disabled="valid.password.$invalid || valid.repeatPassword.$invalid"
                @click="recoverPassword">
       </div>
     </div>
@@ -65,7 +73,6 @@ export default defineComponent({
     const {
       password,
       repeatPassword,
-      validate,
       valid,
     } = useChangePassword();
 
@@ -78,13 +85,12 @@ export default defineComponent({
         repeatPassword.value = '';
         isMessage.value = true;
       }
-      validate.value.$reset();
+      valid.value.$reset();
     };
 
     return {
       password,
       repeatPassword,
-      validate,
       isMessage,
       valid,
       recoverPassword,

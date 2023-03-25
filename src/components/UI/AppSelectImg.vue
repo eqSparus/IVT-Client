@@ -1,16 +1,17 @@
 <template>
   <div class="custom-select" @mouseleave="isOpen = false" @blur="isOpen = false" @keyup.esc="isOpen = false">
     <div class="active-option" @click="isOpen = !isOpen" @keyup.tab="isOpen = !isOpen">
-      <img :src="active" alt="Выбраня иконка"/>
+      <!--TODO Сменить адрес-->
+      <img :src="select.img" :alt="select.img"/>
     </div>
     <transition name="select-open">
       <div class="item-select-container" v-if="isOpen">
         <img class="item-select"
              v-for="option in options" :key="option"
-             :src="option"
-             :alt="`Иконка ${option}`"
-             @click="changeSelect(option)"
-             @keyup.enter="changeSelect(option)"/>
+             :src="option.img"
+             :alt="option.img"
+             @click="changeSelect(option.value)"
+             @keyup.enter="changeSelect(option.value)"/>
       </div>
     </transition>
   </div>
@@ -20,41 +21,37 @@
 
 import { defineComponent, PropType, ref } from 'vue';
 
+export type SelectOption = {
+  img: string,
+  value: string,
+}
+
 export default defineComponent({
   icon: 'AppSelect',
   emits: ['changeIcon'],
   props: {
     options: {
-      type: Array as PropType<Array<string>>,
+      type: Array as PropType<Array<SelectOption>>,
       required: true,
     },
     select: {
-      type: String,
+      type: Object as PropType<SelectOption>,
       required: true,
     },
   },
   setup(props, { emit }) {
-    const active = ref<string>('http://localhost:8080/api/v1/images/links/message-link.svg');
     const isOpen = ref<boolean>(false);
 
-    const selectImg = props.options.find((op) => op === props.select);
-
-    if (selectImg) {
-      active.value = selectImg;
-    }
-
-    const changeSelect = (title: string) => {
-      const el = props.options.find((op) => op === title);
+    const changeSelect = (value: string) => {
+      const el = props.options.find((op) => op.value === value);
       if (el) {
-        active.value = el;
         isOpen.value = false;
+        emit('changeIcon', el.value, el.img);
       }
-      emit('changeIcon', active.value);
     };
 
     return {
       isOpen,
-      active,
       changeSelect,
     };
   },

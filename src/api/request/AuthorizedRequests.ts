@@ -20,26 +20,18 @@ AuthorizedRequest.interceptors.response.use((response) => response, async (error
     config,
   } = error;
 
-  const storeRefreshToken = store.getters['auth/getRefreshToken'];
-
-  if (response.status !== 401 || !storeRefreshToken) {
+  if (response.status !== 401) {
     return Promise.reject(error);
   }
 
   try {
-    const data = await refreshToken(storeRefreshToken);
-    store.commit('auth/setTokens', {
-      accessToken: data.accessToken,
-      refreshToken: data.refreshToken,
-    });
+    const data = await refreshToken();
+    store.commit('auth/setAccessToken', data.accessToken);
     config.headers.Authorization = data.accessToken;
-    if (config.url === '/exit') {
-      config.data = JSON.stringify({ token: data.refreshToken });
-    }
     return AuthorizedRequest(config)
-      .catch(() => store.commit('auth/removeTokens'));
+      .catch(() => store.commit('auth/removeAccessToken'));
   } catch (e) {
-    store.commit('auth/removeTokens');
+    store.commit('auth/removeAccessToken');
     return Promise.reject(error);
   }
 });

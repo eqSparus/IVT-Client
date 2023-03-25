@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
 import { AboutState, RootState } from '@/plugins/store/types';
-import { AboutDepartment } from '@/api/model/ModelTypes';
+import { AboutDepartment } from '@/types/SiteContentTypes';
 
 const AboutDepartmentModule: Module<AboutState, RootState> = {
   namespaced: true,
