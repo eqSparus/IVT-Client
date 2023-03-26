@@ -3,18 +3,17 @@
                     @close="close"
                     :title="modalTitle">
 
-    <app-message-alert :message="alertMessage"
-                       :type="alertTypeMessage"
-                       @vanish="alertMessage = ''"
-                       :timeout="3000"/>
+    <app-list-alert :time="3000"
+                    :alerts="alerts"
+                    @deleteAlert="alerts.splice(0, 1)"/>
 
     <div class="modal-container">
       <the-login v-if="!isRecoverPassword"
                  @access="close"
-                 @fail="messageWarning('Не верная почта или пароль')"/>
+                 @fail="alerts.push({ type: 'warning', message: 'Не верная почта или пароль' })"/>
       <the-recover-password v-else
-                            @access="messageInfo('Проверьте почту')"
-                            @fail="messageWarning('Неверный адрес электронной почты')"/>
+                            @access="alerts.push({ type: 'info', message: 'Проверьте почту' })"
+                            @fail="alerts.push({ type: 'warning', message: 'Неверный адрес электронной почты' })"/>
       <div class="forgot-block mt-10">
         <input type="button"
                class="forgot-password"
@@ -29,16 +28,16 @@
 
 import { computed, defineComponent, ref } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
-import AppMessageAlert, { AlertType } from '@/components/UI/AppMessageAlert.vue';
 import TheLogin from '@/components/views/header/modal/TheLogin.vue';
 import TheRecoverPassword from '@/components/views/header/modal/TheRecoverPassword.vue';
+import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 
 export default defineComponent({
   icon: 'TheModalAuthorization',
   components: {
+    AppListAlert,
     TheRecoverPassword,
     TheLogin,
-    AppMessageAlert,
     AppModalWindow,
   },
   emits: ['close'],
@@ -50,32 +49,18 @@ export default defineComponent({
   },
   setup(prop, context) {
     const isRecoverPassword = ref<boolean>(false);
-    const alertMessage = ref<string>('');
-    const alertTypeMessage = ref<AlertType>('info');
-
-    const messageInfo = (m: string) => {
-      alertTypeMessage.value = 'info';
-      alertMessage.value = m;
-    };
-
-    const messageWarning = (m: string) => {
-      alertTypeMessage.value = 'warning';
-      alertMessage.value = m;
-    };
+    const alerts = ref<Array<AlertMessage>>([]);
 
     const close = () => {
       isRecoverPassword.value = false;
-      alertMessage.value = '';
+      alerts.value.splice(0, alerts.value.length);
       context.emit('close');
     };
 
     return {
       isRecoverPassword,
-      alertMessage,
-      alertTypeMessage,
+      alerts,
       close,
-      messageInfo,
-      messageWarning,
       modalTitle: computed(() => (isRecoverPassword.value ? 'Восстановления пароля' : 'Авторизация')),
       textChangeBtn: computed(() => (isRecoverPassword.value ? 'Вернуться' : 'Забыли пароль?')),
     };

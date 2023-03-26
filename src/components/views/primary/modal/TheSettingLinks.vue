@@ -1,10 +1,9 @@
 <template>
   <div class="setting-links-container">
 
-    <app-message-alert type="info"
-                       :timeout="3000"
-                       :message="alertMessage"
-                       @vanish="alertMessage = ''"/>
+    <app-list-alert :alerts="alerts"
+                    :time="3000"
+                    @deleteAlert="alerts.splice(0, 1)"/>
 
     <app-link-item v-for="link in links" :key="link.id"
                    :link="link"
@@ -47,13 +46,13 @@ import {
 import AppLinkItem from '@/components/views/primary/modal/AppLinkItem.vue';
 import { Link } from '@/types/SiteContentTypes';
 import AppSelectImg from '@/components/UI/AppSelectImg.vue';
-import AppMessageAlert from '@/components/UI/AppMessageAlert.vue';
 import useEditSiteLinks from '@/hooks/useEditSiteLinks';
+import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 
 export default defineComponent({
   name: 'TheSettingLinks',
   components: {
-    AppMessageAlert,
+    AppListAlert,
     AppSelectImg,
     AppLinkItem,
   },
@@ -64,7 +63,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const alertMessage = ref<string>('');
+    const alerts = ref<Array<AlertMessage>>([]);
 
     // TODO Сменить адрес
     const optionLinks = [
@@ -103,22 +102,52 @@ export default defineComponent({
     } = useEditSiteLinks();
 
     const addLink = async () => {
-      await add();
-      alertMessage.value = 'Новая ссылка добавлена';
+      try {
+        await add();
+        alerts.value.push({
+          type: 'info',
+          message: 'Ссылка добавлена',
+        });
+      } catch (e) {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Не удалось добавить ссылку',
+        });
+      }
     };
 
     const removeLink = (id: string) => {
-      remove(id);
-      alertMessage.value = 'Ссылка удалена';
+      try {
+        remove(id);
+        alerts.value.push({
+          type: 'info',
+          message: 'Ссылка удалена',
+        });
+      } catch (e) {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Не удалось удалить ссылку',
+        });
+      }
     };
 
-    const updateLink = (oldLink: Link, link: Link) => {
-      update(oldLink, link);
-      alertMessage.value = 'Ссылка обновлена';
+    const updateLink = async (link: Link) => {
+      try {
+        await update(link);
+        alerts.value.push({
+          type: 'info',
+          message: 'Ссылка обновлена',
+        });
+      } catch (e) {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Не удалось обновить ссылку',
+        });
+      }
     };
 
     return {
-      alertMessage,
+      alerts,
       optionLinks,
       newLink,
       valid,

@@ -18,7 +18,7 @@
 <script lang="ts">
 
 import { defineComponent, ref } from 'vue';
-import { sendRecoverPasswordEmail } from '@/api/user/UserApi';
+import { requestSendRecoverPasswordEmail } from '@/api/user/UserApi';
 
 export default defineComponent({
   name: 'TheRecoverPassword',
@@ -28,7 +28,7 @@ export default defineComponent({
 
     const recoverPassword = async () => {
       try {
-        await sendRecoverPasswordEmail(email.value);
+        await requestSendRecoverPasswordEmail(email.value);
         emit('access');
       } catch (e) {
         emit('fail');

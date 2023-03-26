@@ -2,7 +2,7 @@ import { Department } from '@/types/SiteContentTypes';
 import { ref } from 'vue';
 import { email, required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-import updateDepartment from '@/api/DepartmentApi';
+import requestUpdateDepartment from '@/api/DepartmentApi';
 import { useStore } from 'vuex';
 
 const useEditDepartment = (dep: Department) => {
@@ -36,23 +36,9 @@ const useEditDepartment = (dep: Department) => {
   };
   const valid = useVuelidate(rules, department.value);
 
-  const update = async (success: () => void, fail: () => void) => {
-    if (department.value.title !== dep.title
-      || department.value.slogan !== dep.slogan
-      || department.value.email !== dep.email
-      || department.value.phone !== dep.phone
-      || department.value.address !== dep.address
-      || department.value.leaderId !== dep.leaderId) {
-      try {
-        const data = await updateDepartment(department.value);
-        store.commit('department/setDepartment', data);
-        success();
-      } catch (e) {
-        fail();
-      }
-    } else {
-      fail();
-    }
+  const update = async () => {
+    const data = await requestUpdateDepartment(department.value);
+    store.commit('department/setDepartment', data);
   };
 
   return {

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { User } from '@/types/UserTypes';
 import UserEndPoints from '@/api/user/UserEndPoints';
 
-export const authentication = async (user: User) => {
+export const requestAuthentication = async (user: User) => {
   const response = await axios.post(UserEndPoints.LOGIN, JSON.stringify(user), {
     withCredentials: true,
     headers: {
@@ -12,7 +12,7 @@ export const authentication = async (user: User) => {
   return response.data;
 };
 
-export const sendRecoverPasswordEmail = async (email: string) => {
+export const requestSendRecoverPasswordEmail = async (email: string) => {
   const response = await axios.post(UserEndPoints.RECOVER_PASSWORD, {}, {
     params: {
       email,
@@ -21,7 +21,7 @@ export const sendRecoverPasswordEmail = async (email: string) => {
   return response.data;
 };
 
-export const recoverPasswordByToken = async (password: string, token: string) => {
+export const requestRecoverPassword = async (password: string, token: string) => {
   const response = await axios.post(UserEndPoints.RECOVER_PASSWORD, JSON.stringify({ password }), {
     params: {
       token,

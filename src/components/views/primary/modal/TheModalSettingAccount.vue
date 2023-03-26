@@ -1,13 +1,12 @@
 <template>
   <app-base-modal :is-show="isShow"
-                    title="Настройки пользователя"
-                    @close="closeModal"
-                    :is-footer="true">
+                  title="Настройки пользователя"
+                  @close="closeModal"
+                  :is-footer="true">
 
-    <app-message-alert :message="alertMessage"
-                       :type="alertTypeMessage"
-                       :timeout="3000"
-                       @vanish="alertMessage = ''"/>
+    <app-list-alert :alerts="alerts"
+                    :time="3000"
+                    @deleteAlert="alerts.splice(0, 1)"/>
 
     <div class="account-setting-container">
 
@@ -88,13 +87,13 @@
 import { defineComponent, ref } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
 import useChangePassword from '@/hooks/useChangePassword';
-import AppMessageAlert, { AlertType } from '@/components/UI/AppMessageAlert.vue';
-import { requestChangePassword, requestSendChangeEmail } from '@/api/user/AuthUserApi';
+import { requestEditPassword, requestSendEditEmail } from '@/api/user/AuthUserApi';
+import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 
 export default defineComponent({
   icon: 'TheModalSettingAccount',
   components: {
-    AppMessageAlert,
+    AppListAlert,
     AppBaseModal,
   },
   emits: ['close'],
@@ -105,8 +104,7 @@ export default defineComponent({
     },
   },
   setup(prop, { emit }) {
-    const alertTypeMessage = ref<AlertType>('info');
-    const alertMessage = ref<string>('');
+    const alerts = ref<Array<AlertMessage>>([]);
 
     const {
       email,
@@ -117,12 +115,16 @@ export default defineComponent({
 
     const changePassword = async () => {
       try {
-        await requestChangePassword(password.value);
-        alertTypeMessage.value = 'info';
-        alertMessage.value = 'Смена пароля прошла успешно!';
+        await requestEditPassword(password.value);
+        alerts.value.push({
+          type: 'info',
+          message: 'Смена пароля прошла успешно!',
+        });
       } catch (e) {
-        alertTypeMessage.value = 'warning';
-        alertMessage.value = 'Смена пароля не удалась!';
+        alerts.value.push({
+          type: 'warning',
+          message: 'Смена пароля не удалась!',
+        });
       }
       password.value = '';
       repeatPassword.value = '';
@@ -131,12 +133,16 @@ export default defineComponent({
 
     const changeEmail = async () => {
       try {
-        await requestSendChangeEmail(email.value);
-        alertTypeMessage.value = 'info';
-        alertMessage.value = 'Проверьте почту!';
+        await requestSendEditEmail(email.value);
+        alerts.value.push({
+          type: 'info',
+          message: 'Проверьте почту!',
+        });
       } catch (e) {
-        alertTypeMessage.value = 'warning';
-        alertMessage.value = 'Смена почты не удалась!';
+        alerts.value.push({
+          type: 'warning',
+          message: 'Смена почты не удалась!',
+        });
       }
       email.value = '';
       valid.value.$reset();
@@ -146,7 +152,7 @@ export default defineComponent({
       password.value = '';
       repeatPassword.value = '';
       email.value = '';
-      alertMessage.value = '';
+      alerts.value.splice(0, alerts.value.length);
       valid.value.$reset();
       emit('close');
     };
@@ -156,8 +162,7 @@ export default defineComponent({
       password,
       repeatPassword,
       valid,
-      alertTypeMessage,
-      alertMessage,
+      alerts,
       changePassword,
       changeEmail,
       closeModal,

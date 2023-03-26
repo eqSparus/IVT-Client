@@ -4,7 +4,7 @@ import TheRecoverPassword from '@/pages/TheRecoverPassword.vue';
 import store from '@/plugins/store/Store';
 import { refreshToken } from '@/api/user/UserApi';
 import TheActivateEmail from '@/pages/TheActivateEmail.vue';
-import { getData } from '@/api/DataApi';
+import { requestGetData } from '@/api/DataApi';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -23,7 +23,7 @@ const router = createRouter({
           }
         }
 
-        const data = await getData();
+        const data = await requestGetData();
         store.commit('department/setDepartment', data.department.mainInfo);
         store.commit('siteLinks/setLinks', data.department.links);
         store.commit('about/setAbout', data.about);

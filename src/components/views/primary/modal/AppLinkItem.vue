@@ -16,7 +16,7 @@
              @blur="validate.href.$touch()"
              class="field-standard"/>
 
-      <button @click="$emit('updateLink', link, editLink)"
+      <button @click="updateLink"
               :disabled="validate.href.$invalid"
               class="btn-standard-icon btn-position">
         <img :src="refreshIcon"
@@ -59,7 +59,7 @@ export default defineComponent({
       required: true,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const editLink = ref<Link>({
       id: props.link.id,
       href: props.link.href,
@@ -73,11 +73,19 @@ export default defineComponent({
       },
     };
 
+    const updateLink = () => {
+      if (props.link.icon !== editLink.value.icon
+        || props.link.href !== editLink.value.href) {
+        emit('updateLink', editLink.value);
+      }
+    };
+
     const validate = useVuelidate(rules, editLink.value);
 
     return {
       validate,
       editLink,
+      updateLink,
       trashcanIcon,
       refreshIcon,
     };

@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
 import { AuthState, RootState } from '@/plugins/store/types';
-import { authentication, refreshToken } from '@/api/user/UserApi';
+import { requestAuthentication, refreshToken } from '@/api/user/UserApi';
 import { User } from '@/types/UserTypes';
 
 const AuthModule: Module<AuthState, RootState> = {
@@ -30,7 +30,7 @@ const AuthModule: Module<AuthState, RootState> = {
   },
   actions: {
     async login({ commit }, user: User) {
-      const data = await authentication({
+      const data = await requestAuthentication({
         email: user.email,
         password: user.password,
       });

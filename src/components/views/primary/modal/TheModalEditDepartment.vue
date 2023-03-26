@@ -1,12 +1,12 @@
 <template>
   <app-base-modal :is-show="isShow"
                   :title="modalTitle"
-                  @close="$emit('close')"
+                  @close="closeModal"
                   :is-footer="true">
 
     <div class="modal-size">
 
-      <div class="begin-edit-container" >
+      <div class="begin-edit-container">
 
         <the-setting-department v-if="isWindow" :department="department"/>
         <the-setting-links v-else :links="links"/>
@@ -54,13 +54,19 @@ export default defineComponent({
     },
   },
   emits: ['close'],
-  setup() {
+  setup(props, { emit }) {
     const isWindow = ref<boolean>(true);
+
+    const closeModal = () => {
+      isWindow.value = true;
+      emit('close');
+    };
 
     return {
       isWindow,
       btnText: computed(() => (isWindow.value ? 'изменить ссылки' : 'изменить информацию о кафедре')),
       modalTitle: computed(() => (isWindow.value ? 'Информация о кафедре' : 'Ссылки на сайты кафедры')),
+      closeModal,
     };
   },
 });

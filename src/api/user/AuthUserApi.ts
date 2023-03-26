@@ -8,7 +8,7 @@ export const requestExit = async () => {
   return response.data;
 };
 
-export const requestChangePassword = async (password: string) => {
+export const requestEditPassword = async (password: string) => {
   const response = await AuthorizedRequests.post(UserEndPoints.CHANGE_PASSWORD, JSON.stringify({ password }), {
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +17,7 @@ export const requestChangePassword = async (password: string) => {
   return response.data;
 };
 
-export const requestSendChangeEmail = async (email: string) => {
+export const requestSendEditEmail = async (email: string) => {
   const response = await AuthorizedRequests.post(UserEndPoints.CHANGE_EMAIL, JSON.stringify({ email }), {
     headers: {
       'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const requestSendChangeEmail = async (email: string) => {
   return response.data;
 };
 
-export const changeEmailByToken = async (token: string) => {
+export const requestEditEmail = async (token: string) => {
   const response = await AuthorizedRequests.post(UserEndPoints.CHANGE_EMAIL, {}, {
     params: {
       token,

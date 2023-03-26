@@ -1,10 +1,9 @@
 <template>
   <div class="setting-container">
 
-    <app-message-alert :message="alertMessage"
-                       :type="alertType"
-                       :timeout="3000"
-                       @vanish="alertMessage = ''"/>
+    <app-list-alert :alerts="alerts"
+                    :time="3000"
+                    @deleteAlert="alerts.splice(0, 1)"/>
 
     <label class="field-label" for="title">Название кафедры</label>
     <span class="field-fail" v-if="valid.title.$invalid && valid.title.$dirty">
@@ -98,15 +97,15 @@ import {
 } from 'vue';
 import { Department, Teacher } from '@/types/SiteContentTypes';
 import { useStore } from 'vuex';
-import AppMessageAlert, { AlertType } from '@/components/UI/AppMessageAlert.vue';
 import AppSelect from '@/components/UI/AppSelect.vue';
 import useEditDepartment from '@/hooks/useEditDepartment';
+import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 
 export default defineComponent({
   name: 'TheSettingDepartment',
   components: {
+    AppListAlert,
     AppSelect,
-    AppMessageAlert,
   },
   props: {
     department: {
@@ -116,8 +115,7 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
-    const alertMessage = ref<string>('');
-    const alertType = ref<AlertType>('info');
+    const alerts = ref<Array<AlertMessage>>([]);
 
     const {
       department: departmentValue,
@@ -126,13 +124,25 @@ export default defineComponent({
     } = useEditDepartment(props.department);
 
     const updateDepartment = async () => {
-      await update(() => {
-        alertType.value = 'info';
-        alertMessage.value = 'Данные обновлены';
-      }, () => {
-        alertType.value = 'warning';
-        alertMessage.value = 'Данные не могу быть обновлены';
-      });
+      if (departmentValue.value.title !== props.department.title
+        || departmentValue.value.slogan !== props.department.slogan
+        || departmentValue.value.email !== props.department.email
+        || departmentValue.value.phone !== props.department.phone
+        || departmentValue.value.address !== props.department.address
+        || departmentValue.value.leaderId !== props.department.leaderId) {
+        try {
+          await update();
+          alerts.value.push({
+            message: 'Данные обновлены',
+            type: 'info',
+          });
+        } catch (e) {
+          alerts.value.push({
+            message: 'Не удалось обновить данные',
+            type: 'warning',
+          });
+        }
+      }
     };
 
     const teachers = computed(() => store.getters['teacher/getTeachers']
@@ -141,12 +151,11 @@ export default defineComponent({
         content: `${t.lastName} ${t.firstName} ${t.middleName}`,
       })));
     return {
-      alertMessage,
-      alertType,
+      alerts,
       departmentValue,
       valid,
-      updateDepartment,
       teachers,
+      updateDepartment,
     };
   },
 });

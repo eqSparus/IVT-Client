@@ -16,7 +16,7 @@
 <script lang="ts">
 
 import { defineComponent, onMounted } from 'vue';
-import { changeEmailByToken } from '@/api/user/AuthUserApi';
+import { requestEditEmail } from '@/api/user/AuthUserApi';
 import { useRoute, useRouter } from 'vue-router';
 
 export default defineComponent({
@@ -27,7 +27,7 @@ export default defineComponent({
     const { token } = route.query;
 
     onMounted(async () => {
-      await changeEmailByToken(token as string);
+      await requestEditEmail(token as string);
       await router.push('/main');
     });
   },

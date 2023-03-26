@@ -57,7 +57,7 @@
 
 import { defineComponent, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { recoverPasswordByToken } from '@/api/user/UserApi';
+import { requestRecoverPassword } from '@/api/user/UserApi';
 import useChangePassword from '@/hooks/useChangePassword';
 import AppMessageAlert from '@/components/UI/AppMessageAlert.vue';
 
@@ -78,7 +78,7 @@ export default defineComponent({
 
     const recoverPassword = async () => {
       try {
-        await recoverPasswordByToken(password.value, token as string);
+        await requestRecoverPassword(password.value, token as string);
         await router.push('/main');
       } catch (e) {
         password.value = '';
