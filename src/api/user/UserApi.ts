@@ -34,6 +34,15 @@ export const requestRecoverPassword = async (password: string, token: string) =>
   return response.data;
 };
 
+export const requestIsValidTokenPassword = async (token: string) => {
+  const response = await axios.post(UserEndPoints.RECOVER_IS_VALID_PASSWORD, {}, {
+    params: {
+      token,
+    },
+  });
+  return response.data;
+};
+
 export const refreshToken = async () => {
   const response = await axios.post(UserEndPoints.REFRESH_TOKEN, {}, {
     withCredentials: true,

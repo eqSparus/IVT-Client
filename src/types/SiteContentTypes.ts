@@ -43,6 +43,7 @@ export type AboutDepartment = {
   id?: string,
   title: string,
   description: string,
+  icon?: string,
 }
 
 export type Teacher = {

@@ -2,7 +2,7 @@
   <div class="item-about">
 
     <label class="field-label" for="title">Введите описание</label>
-    <span class="field-fail" v-if="validate.title.$invalid && validate.title.$dirty">
+    <span class="field-fail" v-if="valid.title.$invalid && valid.title.$dirty">
        Поле не должно быть пустым
     </span>
     <input type="text"
@@ -10,11 +10,11 @@
            placeholder="Введите название"
            v-model="changeAbout.title"
            id="title"
-           @blur="validate.title.$touch()"
+           @blur="valid.title.$touch()"
            aria-label="Введите название"/>
 
     <label class="field-label mt-10" for="description">Введите описание</label>
-    <span class="field-fail" v-if="validate.description.$invalid && validate.description.$dirty">
+    <span class="field-fail" v-if="valid.description.$invalid && valid.description.$dirty">
       Поле не должно быть пустым
     </span>
     <textarea placeholder="Введите описание"
@@ -22,15 +22,15 @@
               class="field-standard item-description"
               v-model="changeAbout.description"
               rows="10"
-              @blur="validate.description.$touch()"
+              @blur="valid.description.$touch()"
               aria-label="Введите описание">
 
         </textarea>
 
     <input type="button"
            value="применить"
-           :disabled="validate.title.$invalid || validate.description.$invalid"
-           @click="$emit('updateAbout', changeAbout)"
+           :disabled="valid.$invalid"
+           @click="editAbout"
            class="btn-standard mt-20">
   </div>
 </template>
@@ -43,15 +43,15 @@ import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 
 export default defineComponent({
-  name: 'AppChangeAboutItem',
-  emits: ['updateAbout'],
+  name: 'AppEditAboutBlock',
+  emits: ['update'],
   props: {
     about: {
       type: Object as PropType<AboutDepartment>,
       required: true,
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const changeAbout = ref({
       id: props.about.id,
       title: props.about.title,
@@ -67,11 +67,19 @@ export default defineComponent({
       },
     };
 
-    const validate = useVuelidate(rules, changeAbout);
+    const editAbout = () => {
+      if (props.about.title !== changeAbout.value.title
+        || props.about.description !== changeAbout.value.description) {
+        emit('update', changeAbout.value);
+      }
+    };
+
+    const valid = useVuelidate(rules, changeAbout);
 
     return {
-      validate,
+      valid,
       changeAbout,
+      editAbout,
     };
   },
 });

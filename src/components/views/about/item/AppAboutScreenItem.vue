@@ -1,9 +1,8 @@
 <template>
   <div class="item item-size">
-
     <div class="item-icon ml-20">
       <div class="circle">
-        <img :src="icons[iconIndex]" alt="Иконка"/>
+        <img :src="aboutInfo.icon" :alt="aboutInfo.icon"/>
       </div>
     </div>
 
@@ -14,16 +13,12 @@
     <div class="item-description">
       <p class="description fs-32">{{ aboutInfo.description }}</p>
     </div>
-
   </div>
 </template>
 
 <script lang="ts">
 import { AboutDepartment } from '@/types/SiteContentTypes';
 import { defineComponent, PropType } from 'vue';
-import humanSvg from '@/assets/images/icons/human.svg';
-import bookSvg from '@/assets/images/icons/book.svg';
-import suitcaseSvg from '@/assets/images/icons/suitcase.svg';
 
 export default defineComponent({
   icon: 'AppAboutScreenItem',
@@ -32,17 +27,6 @@ export default defineComponent({
       type: Object as PropType<AboutDepartment>,
       required: true,
     },
-    iconIndex: {
-      type: Number,
-      default: 0,
-    },
-  },
-  setup() {
-    const icons = [humanSvg, bookSvg, suitcaseSvg];
-
-    return {
-      icons,
-    };
   },
 });
 </script>

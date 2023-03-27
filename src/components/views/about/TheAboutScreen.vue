@@ -1,14 +1,19 @@
 <template>
   <app-base-screen title="О кафедре" :is-second="true">
 
-    <the-modal-change-about :abouts="abouts" :is-show="isShow" @close="changeShowModal"/>
+    <the-modal-edit-about :abouts="abouts"
+                            :is-show="isShow"
+                            @close="changeShowModal"/>
 
     <div class="about-screen-container">
       <div class="about-change mb-20" v-if="isAuth">
-        <input type="button" class="btn-standard" value="РЕДАКТИРОВАТЬ" @click="changeShowModal"/>
+        <input type="button"
+               class="btn-standard"
+               value="редактировать"
+               @click="changeShowModal"/>
       </div>
-      <app-about-screen-item v-for="(about) in abouts" :key="about.id" :about-info="about"
-                             :icon-index="about.order - 1"/>
+      <app-about-screen-item v-for="about in abouts" :key="about.id"
+                             :about-info="about"/>
     </div>
   </app-base-screen>
 </template>
@@ -19,13 +24,13 @@ import { computed, defineComponent } from 'vue';
 import AppBaseScreen from '@/components/UI/AppBaseScreen.vue';
 import AppAboutScreenItem from '@/components/views/about/item/AppAboutScreenItem.vue';
 import { useStore } from 'vuex';
-import TheModalChangeAbout from '@/components/views/about/modal/TheModalChangeAbout.vue';
+import TheModalEditAbout from '@/components/views/about/modal/TheModalEditAbout.vue';
 import useShowModal from '@/hooks/useShowModal';
 
 export default defineComponent({
   icon: 'TheAboutScreen',
   components: {
-    TheModalChangeAbout,
+    TheModalEditAbout,
     AppBaseScreen,
     AppAboutScreenItem,
   },
@@ -38,9 +43,9 @@ export default defineComponent({
     } = useShowModal();
 
     return {
+      isShow,
       abouts: computed(() => store.getters['about/getAboutInfo']),
       isAuth: computed(() => store.getters['auth/isAuth']),
-      isShow,
       changeShowModal,
     };
   },

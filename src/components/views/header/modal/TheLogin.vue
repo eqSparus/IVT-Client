@@ -47,6 +47,8 @@ export default defineComponent({
         password.value = '';
         emit('access');
       } catch (e) {
+        email.value = '';
+        password.value = '';
         emit('fail');
       }
     };

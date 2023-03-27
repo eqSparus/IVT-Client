@@ -4,11 +4,15 @@
                     @close="$emit('close')"
                     :is-footer="true">
 
+    <app-list-alert :time="3000"
+                    :alerts="alerts"
+                    @deleteAlert="alerts.splice(0, 1)"/>
+
     <div class="modal-about-container">
 
       <div class="item-about" v-for="about in abouts" :key="about.id">
-        <app-change-about-item :about="about"
-                               @updateAbout="updateAbout"/>
+        <app-edit-about-block :about="about"
+                               @update="updateAbout"/>
       </div>
 
     </div>
@@ -18,17 +22,19 @@
 
 <script lang="ts">
 
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
 import { AboutDepartment } from '@/types/SiteContentTypes';
-import putAboutDepartment from '@/api/AboutDepartmentApi';
+import requestUpdateAboutDepartment from '@/api/AboutDepartmentApi';
 import { useStore } from 'vuex';
-import AppChangeAboutItem from '@/components/views/about/modal/AppChangeAboutItem.vue';
+import AppEditAboutBlock from '@/components/views/about/modal/AppEditAboutBlock.vue';
+import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 
 export default defineComponent({
-  icon: 'TheModalChangeAbout',
+  icon: 'TheModalEditAbout',
   components: {
-    AppChangeAboutItem,
+    AppListAlert,
+    AppEditAboutBlock,
     AppModalWindow,
   },
   props: {
@@ -43,13 +49,26 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
+    const alerts = ref<Array<AlertMessage>>([]);
 
     const updateAbout = async (about: AboutDepartment) => {
-      const data = await putAboutDepartment(about);
-      store.commit('about/updateAbout', data);
+      try {
+        const data = await requestUpdateAboutDepartment(about);
+        store.commit('about/updateAbout', data);
+        alerts.value.push({
+          type: 'info',
+          message: 'Данные успешно обновлены',
+        });
+      } catch (e) {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Не удалось обновить данные',
+        });
+      }
     };
 
     return {
+      alerts,
       updateAbout,
     };
   },

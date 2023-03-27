@@ -8,8 +8,8 @@
 
       <div class="begin-edit-container">
 
-        <the-setting-department v-if="isWindow" :department="department"/>
-        <the-setting-links v-else :links="links"/>
+        <the-edit-department v-if="isWindow" :department="department"/>
+        <the-edit-links v-else :links="links"/>
 
         <input type="button"
                :value="btnText"
@@ -29,14 +29,14 @@ import {
 } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
 import { Department, Link } from '@/types/SiteContentTypes';
-import TheSettingDepartment from '@/components/views/primary/modal/TheSettingDepartment.vue';
-import TheSettingLinks from '@/components/views/primary/modal/TheSettingLinks.vue';
+import TheEditDepartment from '@/components/views/primary/modal/TheEditDepartment.vue';
+import TheEditLinks from '@/components/views/primary/modal/TheEditLinks.vue';
 
 export default defineComponent({
   icon: 'TheModalEditDepartment',
   components: {
-    TheSettingLinks,
-    TheSettingDepartment,
+    TheEditLinks,
+    TheEditDepartment,
     AppBaseModal,
   },
   props: {

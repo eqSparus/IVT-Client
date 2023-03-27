@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import TheMainPage from '@/pages/TheMainPage.vue';
-import TheRecoverPassword from '@/pages/TheRecoverPassword.vue';
+import TheRecoverPasswordPage from '@/pages/TheRecoverPasswordPage.vue';
 import store from '@/plugins/store/Store';
-import { refreshToken } from '@/api/user/UserApi';
-import TheActivateEmail from '@/pages/TheActivateEmail.vue';
+import { refreshToken, requestIsValidTokenPassword } from '@/api/user/UserApi';
+import TheActivateEmailPage from '@/pages/TheActivateEmailPage.vue';
 import { requestGetData } from '@/api/DataApi';
 
 const router = createRouter({
@@ -35,11 +35,24 @@ const router = createRouter({
     },
     {
       path: '/recover',
-      component: TheRecoverPassword,
+      component: TheRecoverPasswordPage,
+      async beforeEnter(to, from, next) {
+        const { token } = to.query;
+        if (token) {
+          const data = await requestIsValidTokenPassword(token as string);
+          if (data) {
+            next();
+          } else {
+            next('/main');
+          }
+        } else {
+          next('/main');
+        }
+      },
     },
     {
       path: '/activatemail',
-      component: TheActivateEmail,
+      component: TheActivateEmailPage,
     },
   ],
 });

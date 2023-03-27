@@ -4,11 +4,9 @@
 
       <h3 class="fs-32">Восстановить пароль</h3>
 
-      <app-message-alert message="Вы уже восстанавливали пароль по этой ссылке или время доступа ссылки истекло"
-                         type="warning"
-                         :is-show="isMessage"
-                         :timeout="5000"
-                         @vanish="isMessage = false;"/>
+      <app-list-alert :time="3000"
+                      :alerts="alerts"
+                      @deletaAlert="alerts.splice(0, 1)"/>
 
       <div class="recover-content">
 
@@ -59,16 +57,18 @@ import { defineComponent, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { requestRecoverPassword } from '@/api/user/UserApi';
 import useChangePassword from '@/hooks/useChangePassword';
-import AppMessageAlert from '@/components/UI/AppMessageAlert.vue';
+import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 
 export default defineComponent({
-  icon: 'TheRecoverPassword',
-  components: { AppMessageAlert },
+  icon: 'TheRecoverPasswordPage',
+  components: {
+    AppListAlert,
+  },
   setup() {
+    const alerts = ref<Array<AlertMessage>>([]);
     const route = useRoute();
     const router = useRouter();
     const { token } = route.query;
-    const isMessage = ref<boolean>(false);
 
     const {
       password,
@@ -83,7 +83,10 @@ export default defineComponent({
       } catch (e) {
         password.value = '';
         repeatPassword.value = '';
-        isMessage.value = true;
+        alerts.value.push({
+          type: 'warning',
+          message: 'Вы уже восстанавливали пароль по этой ссылке или время доступа ссылки истекло',
+        });
       }
       valid.value.$reset();
     };
@@ -91,7 +94,7 @@ export default defineComponent({
     return {
       password,
       repeatPassword,
-      isMessage,
+      alerts,
       valid,
       recoverPassword,
     };
