@@ -54,8 +54,6 @@ export default defineComponent({
   }
 
   .base-screen-container {
-    // display: grid;
-    // grid-template-columns: 1fr;
     display: flex;
     flex-flow: column;
     margin: 0 auto;

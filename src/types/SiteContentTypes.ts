@@ -19,7 +19,8 @@ export type Direction = {
   title: string,
   degree: string,
   form: string,
-  duration: number
+  duration: number,
+  position: number,
 }
 
 export type EntrantPoint = {

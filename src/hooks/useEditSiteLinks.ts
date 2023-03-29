@@ -35,9 +35,6 @@ const useEditSiteLinks = () => {
   const add = async () => {
     const data = await requestCreateLink(newLink.value);
     store.commit('siteLinks/addLink', data);
-    newLink.value.href = '';
-    newLink.value.icon = 'http://localhost:8080/api/v1/images/links/default-link.svg';
-    valid.value.$reset();
   };
 
   return {

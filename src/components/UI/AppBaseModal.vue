@@ -124,6 +124,7 @@ export default defineComponent({
       border-bottom: 1px solid black;
 
       h3 {
+        user-select: none;
         @include utils.fontStyle($weight: 400, $color: prop.$modal-window-text-color);
       }
     }

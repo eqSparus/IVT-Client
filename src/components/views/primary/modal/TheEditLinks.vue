@@ -108,6 +108,9 @@ export default defineComponent({
           type: 'info',
           message: 'Ссылка добавлена',
         });
+        newLink.value.href = '';
+        newLink.value.icon = 'http://localhost:8080/api/v1/images/links/default-link.svg';
+        valid.value.$reset();
       } catch (e) {
         alerts.value.push({
           type: 'warning',

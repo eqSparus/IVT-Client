@@ -86,7 +86,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
-import useChangePassword from '@/hooks/useChangePassword';
+import useChangePassword from '@/hooks/useEditAccount';
 import { requestEditPassword, requestSendEditEmail } from '@/api/user/AuthUserApi';
 import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 

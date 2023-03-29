@@ -19,13 +19,13 @@
     </span>
     <textarea placeholder="Введите описание"
               id="description"
-              class="field-standard item-description"
+              class="field-standard field-area"
               v-model="changeAbout.description"
               rows="10"
               @blur="valid.description.$touch()"
               aria-label="Введите описание">
 
-        </textarea>
+    </textarea>
 
     <input type="button"
            value="применить"
@@ -92,11 +92,6 @@ export default defineComponent({
 .item-about {
   display: flex;
   flex-flow: column;
-
-  .item-description {
-    resize: none;
-    @include utils.scrollbar(prop.$scroll-slider-color, prop.$scroll-slider-body-color)
-  }
 }
 
 </style>

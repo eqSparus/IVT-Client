@@ -1,5 +1,5 @@
 <template>
-  <div class="item item-size">
+  <div class="item">
     <div class="item-icon ml-20">
       <div class="circle">
         <img :src="aboutInfo.icon" :alt="aboutInfo.icon"/>
@@ -36,25 +36,8 @@ export default defineComponent({
 @use '@/assets/scss/utils.scss' as utils;
 
 .item {
-
   display: flex;
   flex-flow: column;
-
-  &.item-size {
-    height: auto;
-
-    @media screen and (min-width: 1500px) {
-      & {
-        width: 415px;
-      }
-    }
-
-    @media screen and (max-width: 1500px) {
-      & {
-        width: 300px;
-      }
-    }
-  }
 
   .item-icon {
     width: 78px;
@@ -68,6 +51,7 @@ export default defineComponent({
       background: prop.$about-item-circle-color;
 
       img {
+        user-select: none;
         position: absolute;
         top: 25%;
         right: 25%;
@@ -92,7 +76,6 @@ export default defineComponent({
 
     .description {
       @include utils.fontStyle($color: prop.$about-item-description-color);
-      line-height: 99%;
     }
   }
 

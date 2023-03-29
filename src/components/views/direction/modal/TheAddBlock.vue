@@ -1,13 +1,13 @@
 <template>
   <div class="direction-add">
     <label class="field-label" for="title">Название</label>
-    <span v-if="validate.title.$invalid && validate.title.$dirty" class="field-fail">
+    <span v-if="valid.title.$invalid && valid.title.$dirty" class="field-fail">
       Поле не должно быть пустым
     </span>
     <textarea id="title"
               v-model="direction.title"
               class="field-standard item-title"
-              @blur="validate.title.$touch()"
+              @blur="valid.title.$touch()"
               placeholder="Введите название"
               rows="2">
 
@@ -16,40 +16,40 @@
     <div class="directions-add-center mt-10">
       <div class="block">
         <label class="field-label" for="degree">Степень обучение</label>
-        <span v-if="validate.degree.$invalid && validate.degree.$dirty" class="field-fail">
+        <span v-if="valid.degree.$invalid && valid.degree.$dirty" class="field-fail">
           Поле не должно быть пустым
         </span>
         <input type="text"
                id="degree"
                v-model="direction.degree"
                placeholder="Введите степень"
-               @blur="validate.degree.$touch()"
+               @blur="valid.degree.$touch()"
                class="field-standard text-while">
       </div>
 
       <div class="block">
         <label class="field-label" for="form">Форма обучения</label>
-        <span v-if="validate.form.$invalid && validate.form.$dirty" class="field-fail">
+        <span v-if="valid.form.$invalid && valid.form.$dirty" class="field-fail">
           Поле не должно быть пустым
         </span>
         <input type="text"
                id="form"
                v-model="direction.form"
                placeholder="Введите форма обучения"
-               @blur="validate.form.$touch()"
+               @blur="valid.form.$touch()"
                class="field-standard text-while">
       </div>
 
       <div class="block">
         <label class="field-label" for="duration">Время обучения</label>
-        <span v-if="validate.duration.$invalid && validate.duration.$dirty" class="field-fail">
+        <span v-if="valid.duration.$invalid && valid.duration.$dirty" class="field-fail">
           Число должно быть от 1 до 10
         </span>
         <input type="number"
                id="duration"
                v-model.number="direction.duration"
                placeholder="Введите время обучения"
-               @blur="validate.duration.$touch()"
+               @blur="valid.duration.$touch()"
                class="field-standard text-while">
       </div>
     </div>
@@ -57,62 +57,35 @@
     <input type="button"
            class="btn-standard mt-20"
            @click="addDirection"
-           :disabled="validate.$invalid"
+           :disabled="valid.$invalid"
            value="добавить">
   </div>
 </template>
 
 <script lang="ts">
 
-import { defineComponent, ref, toRefs } from 'vue';
-import { Direction } from '@/types/SiteContentTypes';
-import { createDirection } from '@/api/DirectionApi';
-import { useStore } from 'vuex';
-import useVuelidate from '@vuelidate/core';
-import { maxValue, minValue, required } from '@vuelidate/validators';
+import { defineComponent } from 'vue';
+import useEditDirection from '@/hooks/useEditDirection';
 
 export default defineComponent({
-  name: 'TheModalDirectionAdd',
-  setup() {
-    const store = useStore();
-    const direction = ref<Direction>({
-      title: '',
-      degree: '',
-      form: '',
-      duration: 0,
-    });
+  name: 'TheAddBlock',
+  setup(props, { emit }) {
+    const {
+      direction,
+      valid,
+    } = useEditDirection();
 
-    const rules = {
-      title: {
-        required,
-      },
-      degree: {
-        required,
-      },
-      form: {
-        required,
-      },
-      duration: {
-        required,
-        minValue: minValue(1),
-        maxValue: maxValue(10),
-      },
-    };
-
-    const validate = useVuelidate(rules, toRefs(direction.value));
-
-    const addDirection = async () => {
-      const data = await createDirection(direction.value);
-      store.commit('direction/addDirection', data);
+    const addDirection = () => {
+      emit('add', direction.value);
       direction.value.title = '';
       direction.value.form = '';
       direction.value.degree = '';
       direction.value.duration = 0;
-      validate.value.$reset();
+      valid.value.$reset();
     };
 
     return {
-      validate,
+      valid,
       direction,
       addDirection,
     };

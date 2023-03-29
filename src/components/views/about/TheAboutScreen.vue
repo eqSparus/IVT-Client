@@ -5,13 +5,14 @@
                             :is-show="isShow"
                             @close="changeShowModal"/>
 
+    <div class="about-change mb-20" v-if="isAuth">
+      <input type="button"
+             class="btn-standard"
+             value="редактировать"
+             @click="changeShowModal"/>
+    </div>
+
     <div class="about-screen-container">
-      <div class="about-change mb-20" v-if="isAuth">
-        <input type="button"
-               class="btn-standard"
-               value="редактировать"
-               @click="changeShowModal"/>
-      </div>
       <app-about-screen-item v-for="about in abouts" :key="about.id"
                              :about-info="about"/>
     </div>
@@ -53,13 +54,16 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.about-screen-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
 
-  .about-change {
-    grid-column: 1/4;
-  }
+.about-change{
+  display: flex;
+  justify-content: center;
+}
+
+.about-screen-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  gap: 5%;
 }
 </style>

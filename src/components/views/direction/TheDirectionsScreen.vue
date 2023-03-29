@@ -1,6 +1,6 @@
 <template>
   <app-base-screen title="Направления">
-    <the-modal-change-directions
+    <the-modal-edit-directions
       :directions="directions"
       :is-show="isShow"
       @close="changeShowModal"/>
@@ -13,7 +13,7 @@
     </div>
     <div :class="[directions.length === 3? 'gap-5':'gap-1','directions-screen-container']">
       <app-direction-screen-item v-for="(info, index) in directions" :key="info.id"
-                                 :index-drawing="index"
+                                 :index-drawing="Number(index)"
                                  :direction-info="info"/>
     </div>
   </app-base-screen>
@@ -24,14 +24,14 @@
 import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
-import TheModalChangeDirections from '@/components/views/direction/modal/TheModalChangeDirections.vue';
+import TheModalEditDirections from '@/components/views/direction/modal/TheModalEditDirections.vue';
 import AppDirectionScreenItem from '@/components/views/direction/item/AppDirectionScreenItem.vue';
 import AppBaseScreen from '../../UI/AppBaseScreen.vue';
 
 export default defineComponent({
   icon: 'TheDirectionsScreen',
   components: {
-    TheModalChangeDirections,
+    TheModalEditDirections,
     AppBaseScreen,
     AppDirectionScreenItem,
   },

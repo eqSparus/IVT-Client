@@ -44,7 +44,8 @@ export default defineComponent({
   setup(props) {
     const drawings = [direction1, direction2, direction3];
 
-    const index = computed(() => props.indexDrawing - (drawings.length * (Math.floor(props.indexDrawing / drawings.length))));
+    const index = computed(() => props.indexDrawing
+      - (drawings.length * (Math.floor(props.indexDrawing / drawings.length))));
 
     return {
       drawings,

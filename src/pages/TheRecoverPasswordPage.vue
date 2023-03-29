@@ -56,7 +56,7 @@
 import { defineComponent, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { requestRecoverPassword } from '@/api/user/UserApi';
-import useChangePassword from '@/hooks/useChangePassword';
+import useChangePassword from '@/hooks/useEditAccount';
 import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 
 export default defineComponent({

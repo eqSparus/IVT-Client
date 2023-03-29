@@ -26,7 +26,7 @@ const DirectionModule: Module<DirectionState, RootState> = {
   },
   getters: {
     getDirections(state: DirectionState) {
-      return state.directions;
+      return state.directions.sort((a, b) => a.position - b.position);
     },
   },
 };

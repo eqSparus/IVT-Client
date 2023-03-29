@@ -152,7 +152,7 @@ $colors in $color-buttons {
   font-style: normal;
   border-radius: 5px;
   appearance: none;
-  -moz-appearance:textfield;
+  -moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
@@ -184,6 +184,11 @@ $colors in $color-fields {
     }
 
   }
+}
+
+.field-area {
+  resize: none;
+  @include utils.scrollbar(prop.$scroll-slider-color, prop.$scroll-slider-body-color)
 }
 
 .field-fail {

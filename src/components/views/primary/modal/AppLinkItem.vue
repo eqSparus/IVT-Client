@@ -17,7 +17,7 @@
              class="field-standard"/>
 
       <button @click="updateLink"
-              :disabled="validate.href.$invalid"
+              :disabled="validate.$invalid"
               class="btn-standard-icon btn-position">
         <img :src="refreshIcon"
              class="icon-trashcan"
