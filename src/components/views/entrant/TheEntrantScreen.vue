@@ -9,7 +9,7 @@
         <input type="button"
                class="btn-standard"
                @click="changeShowModal"
-               value="Добавить">
+               value="добавить">
       </div>
       <app-entrant-screen-item :class="[index === 0 ? '' : 'mt-30']" v-for="(entrant, index) in entrants"
                                :key="entrant.id" :entrant="entrant"/>
@@ -23,7 +23,7 @@ import { computed, defineComponent } from 'vue';
 import AppEntrantScreenItem from '@/components/views/entrant/item/AppEntrantScreenItem.vue';
 import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
-import TheModalChangeEntrant from '@/components/views/entrant/modal/TheModalChangeEntrant.vue';
+import TheModalChangeEntrant from '@/components/views/entrant/modal/TheModalEditEntrant.vue';
 import AppBaseScreen from '../../UI/AppBaseScreen.vue';
 
 export default defineComponent({
@@ -41,9 +41,9 @@ export default defineComponent({
     } = useShowModal();
 
     return {
+      isShow,
       entrants: computed(() => store.getters['entrant/getEntrants']),
       isAuth: computed(() => store.getters['auth/isAuth']),
-      isShow,
       changeShowModal,
     };
   },

@@ -1,4 +1,7 @@
 <template>
+  <app-list-alert :time="3000"
+                  :alerts="alerts"
+                  @deleteAlert="deleteAlert()"/>
   <router-view>
 
   </router-view>
@@ -6,9 +9,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import AppListAlert from '@/components/UI/AppListAlert.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
-  icon: 'App',
+  name: 'App',
+  components: { AppListAlert },
+  setup() {
+    const {
+      alerts,
+      deleteAlert,
+    } = useAlerts();
+
+    return {
+      alerts,
+      deleteAlert,
+    };
+  },
 });
 </script>
 

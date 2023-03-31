@@ -4,10 +4,6 @@
                     @close="$emit('close')"
                     :is-footer="true">
 
-    <app-list-alert :time="3000"
-                    :alerts="alerts"
-                    @deleteAlert="alerts.splice(0, 1)"/>
-
     <div class="modal-about-container">
 
       <div class="item-about" v-for="about in abouts" :key="about.id">
@@ -22,18 +18,17 @@
 
 <script lang="ts">
 
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
 import { AboutDepartment } from '@/types/SiteContentTypes';
 import requestUpdateAboutDepartment from '@/api/AboutDepartmentApi';
 import { useStore } from 'vuex';
 import AppEditAboutBlock from '@/components/views/about/modal/AppEditAboutBlock.vue';
-import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'TheModalEditAbout',
   components: {
-    AppListAlert,
     AppEditAboutBlock,
     AppModalWindow,
   },
@@ -49,7 +44,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const alerts = ref<Array<AlertMessage>>([]);
+    const { alerts } = useAlerts();
 
     const updateAbout = async (about: AboutDepartment) => {
       try {

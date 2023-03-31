@@ -4,10 +4,6 @@
                     :is-footer="true"
                     @close="close">
 
-    <app-list-alert :alerts="alerts"
-                    :time="3000"
-                    @deleteAlert="alerts.splice(0, 1)"/>
-
     <div class="directions-container">
       <div class="directions-items">
         <transition-group name="direction-items">
@@ -45,13 +41,12 @@ import { Direction } from '@/types/SiteContentTypes';
 import AppDirectionsItem from '@/components/views/direction/modal/AppDirectionItem.vue';
 import AppPlusMinusButton from '@/components/UI/AppPlusMinusButton.vue';
 import TheAddBlock from '@/components/views/direction/modal/TheAddBlock.vue';
-import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
 import useEditDirection, { EditDirection } from '@/hooks/useEditDirection';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'TheModalEditDirections',
   components: {
-    AppListAlert,
     TheAddBlock,
     AppPlusMinusButton,
     AppDirectionsItem,
@@ -69,7 +64,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const alerts = ref<Array<AlertMessage>>([]);
+    const { alerts } = useAlerts();
     const isAdd = ref<boolean>(false);
 
     const {

@@ -3,10 +3,6 @@
                     @close="close"
                     :title="modalTitle">
 
-    <app-list-alert :time="3000"
-                    :alerts="alerts"
-                    @deleteAlert="alerts.splice(0, 1)"/>
-
     <div class="modal-container">
       <the-login v-if="!isRecoverPassword"
                  @access="close"
@@ -30,12 +26,11 @@ import { computed, defineComponent, ref } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
 import TheLogin from '@/components/views/header/modal/TheLogin.vue';
 import TheRecoverPassword from '@/components/views/header/modal/TheRecoverPassword.vue';
-import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'TheModalAuthorization',
   components: {
-    AppListAlert,
     TheRecoverPassword,
     TheLogin,
     AppModalWindow,
@@ -49,11 +44,11 @@ export default defineComponent({
   },
   setup(prop, context) {
     const isRecoverPassword = ref<boolean>(false);
-    const alerts = ref<Array<AlertMessage>>([]);
+
+    const { alerts } = useAlerts();
 
     const close = () => {
       isRecoverPassword.value = false;
-      alerts.value.splice(0, alerts.value.length);
       context.emit('close');
     };
 

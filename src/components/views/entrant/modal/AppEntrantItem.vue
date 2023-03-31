@@ -2,6 +2,7 @@
   <div class="item">
     <div class="item-row">
       <textarea class="text-area field-standard"
+                placeholder="Введите название раздела"
                 aria-label="Введите название пункта"
                 @input="$emit('update:name', $event)"
                 :value="item.name">
@@ -23,6 +24,7 @@
       <div class="item-row mt-10" v-for="(point, index) in item.points" :key="point">
         <textarea class="text-area field-standard"
                   aria-label="Введите название пункта"
+                  placeholder="Введите название пункта"
                   @input="point.point = $event.target.value"
                   :value="point.point">
         </textarea>

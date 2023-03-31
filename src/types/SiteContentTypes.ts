@@ -24,12 +24,10 @@ export type Direction = {
 }
 
 export type EntrantPoint = {
-  pointId?: string,
   point: string,
 }
 
 export type EntrantItem = {
-  itemId?: string,
   name: string,
   points: Array<EntrantPoint>,
 }

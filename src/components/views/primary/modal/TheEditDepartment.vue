@@ -1,10 +1,6 @@
 <template>
   <div class="setting-container">
 
-    <app-list-alert :alerts="alerts"
-                    :time="3000"
-                    @deleteAlert="alerts.splice(0, 1)"/>
-
     <label class="field-label" for="title">Название кафедры</label>
     <span class="field-fail" v-if="valid.title.$invalid && valid.title.$dirty">
       Поле не должно быть пустым
@@ -93,18 +89,16 @@ import {
   computed,
   defineComponent,
   PropType,
-  ref,
 } from 'vue';
 import { Department, Teacher } from '@/types/SiteContentTypes';
 import { useStore } from 'vuex';
 import AppSelect from '@/components/UI/AppSelect.vue';
 import useEditDepartment from '@/hooks/useEditDepartment';
-import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   name: 'TheSettingDepartment',
   components: {
-    AppListAlert,
     AppSelect,
   },
   props: {
@@ -115,7 +109,7 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
-    const alerts = ref<Array<AlertMessage>>([]);
+    const { alerts } = useAlerts();
 
     const {
       department: departmentValue,

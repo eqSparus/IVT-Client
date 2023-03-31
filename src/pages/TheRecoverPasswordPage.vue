@@ -4,10 +4,6 @@
 
       <h3 class="fs-32">Восстановить пароль</h3>
 
-      <app-list-alert :time="3000"
-                      :alerts="alerts"
-                      @deletaAlert="alerts.splice(0, 1)"/>
-
       <div class="recover-content">
 
         <div class="fail-message fs-18 mt-10"
@@ -53,19 +49,16 @@
 
 <script lang="ts">
 
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { requestRecoverPassword } from '@/api/user/UserApi';
 import useChangePassword from '@/hooks/useEditAccount';
-import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'TheRecoverPasswordPage',
-  components: {
-    AppListAlert,
-  },
   setup() {
-    const alerts = ref<Array<AlertMessage>>([]);
+    const { alerts } = useAlerts();
     const route = useRoute();
     const router = useRouter();
     const { token } = route.query;

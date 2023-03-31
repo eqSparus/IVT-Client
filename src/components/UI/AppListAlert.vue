@@ -1,13 +1,15 @@
 <template>
-  <div class="alert-list">
-    <transition-group name="alerts">
-      <app-message-alert v-for="alert in alerts" :key="alert"
-                         :message="alert.message"
-                         :timeout="time"
-                         :type="alert.type"
-                         @vanish="$emit('deleteAlert')"/>
-    </transition-group>
-  </div>
+  <Teleport to="body">
+    <div class="alert-list">
+      <transition-group name="alerts">
+        <app-message-alert v-for="alert in alerts" :key="alert"
+                           :message="alert.message"
+                           :timeout="time"
+                           :type="alert.type"
+                           @vanish="$emit('deleteAlert')"/>
+      </transition-group>
+    </div>
+  </Teleport>
 </template>
 
 <script lang="ts">
@@ -46,6 +48,7 @@ export default defineComponent({
   width: auto;
   display: flex;
   flex-flow: column;
+  z-index: 9999999;
 
   .alerts-move,
   .alerts-enter-active,

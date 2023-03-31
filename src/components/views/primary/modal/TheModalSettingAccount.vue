@@ -4,10 +4,6 @@
                   @close="closeModal"
                   :is-footer="true">
 
-    <app-list-alert :alerts="alerts"
-                    :time="3000"
-                    @deleteAlert="alerts.splice(0, 1)"/>
-
     <div class="account-setting-container">
 
       <div class="setting-email">
@@ -84,16 +80,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
 import useChangePassword from '@/hooks/useEditAccount';
 import { requestEditPassword, requestSendEditEmail } from '@/api/user/AuthUserApi';
-import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'TheModalSettingAccount',
   components: {
-    AppListAlert,
     AppBaseModal,
   },
   emits: ['close'],
@@ -104,7 +99,7 @@ export default defineComponent({
     },
   },
   setup(prop, { emit }) {
-    const alerts = ref<Array<AlertMessage>>([]);
+    const { alerts } = useAlerts();
 
     const {
       email,

@@ -1,10 +1,6 @@
 <template>
   <div class="setting-links-container">
 
-    <app-list-alert :alerts="alerts"
-                    :time="3000"
-                    @deleteAlert="alerts.splice(0, 1)"/>
-
     <app-link-item v-for="link in links" :key="link.id"
                    :link="link"
                    :links="optionLinks"
@@ -41,18 +37,17 @@
 <script lang="ts">
 
 import {
-  defineComponent, PropType, ref,
+  defineComponent, PropType,
 } from 'vue';
 import AppLinkItem from '@/components/views/primary/modal/AppLinkItem.vue';
 import { Link } from '@/types/SiteContentTypes';
 import AppSelectImg from '@/components/UI/AppSelectImg.vue';
 import useEditSiteLinks from '@/hooks/useEditSiteLinks';
-import AppListAlert, { AlertMessage } from '@/components/UI/AppListAlert.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   name: 'TheSettingLinks',
   components: {
-    AppListAlert,
     AppSelectImg,
     AppLinkItem,
   },
@@ -63,7 +58,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const alerts = ref<Array<AlertMessage>>([]);
+    const { alerts } = useAlerts();
 
     // TODO Сменить адрес
     const optionLinks = [
@@ -109,6 +104,7 @@ export default defineComponent({
           message: 'Ссылка добавлена',
         });
         newLink.value.href = '';
+        // TODO сменить
         newLink.value.icon = 'http://localhost:8080/api/v1/images/links/default-link.svg';
         valid.value.$reset();
       } catch (e) {

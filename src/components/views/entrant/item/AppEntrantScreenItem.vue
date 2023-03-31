@@ -1,10 +1,10 @@
 <template>
   <div class="item">
 
-    <the-modal-add-entrant :is-show="isShow"
-                           @close="changeShowModal"
-                           :modal-title="`Изменить раздел &quot${entrant.title}&quot`"
-                           :entrant="entrant"/>
+    <the-modal-edit-entrant :is-show="isShow"
+                            @close="changeShowModal"
+                            :modal-title="`Изменить раздел &quot${entrant.title}&quot`"
+                            :entrant="entrant"/>
 
     <div class="item-title">
       <h3 class="fs-32 ml-20">{{ entrant.title }}</h3>
@@ -17,19 +17,19 @@
       </button>
       <button v-if="isAuth"
               class="btn-warning-icon ml-10"
-              @click="deleteEntrantEvent">
+              @click="deleteEntrant">
         <img :src="trashcanIcon"
              alt="assets/images/icon/trashcan.svg">
       </button>
     </div>
 
-    <div v-for="(item, index) in entrant.items" :key="item.itemId"
+    <div v-for="(item, index) in entrant.items" :key="item"
          :class="[index === 0 ? 'mt-10' : 'mt-30', 'item-content']">
 
       <h5 class="fs-24 ml-20">{{ item.name }}</h5>
 
       <ul>
-        <li class="fs-24" v-for="point in item.points" :key="point.pointId">{{ point.point }}</li>
+        <li class="fs-24" v-for="point in item.points" :key="point">{{ point.point }}</li>
       </ul>
     </div>
   </div>
@@ -43,11 +43,12 @@ import refreshIcon from '@/assets/images/icons/refresh.svg';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
-import { deleteEntrant } from '@/api/EntrantApi';
-import TheModalAddEntrant from '@/components/views/entrant/modal/TheModalChangeEntrant.vue';
+import TheModalEditEntrant from '@/components/views/entrant/modal/TheModalEditEntrant.vue';
+import useEditEntrant from '@/hooks/useEditEntrant';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
-  components: { TheModalAddEntrant },
+  components: { TheModalEditEntrant },
   icon: 'AppEntrantScreenItem',
   props: {
     entrant: {
@@ -56,6 +57,7 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const { alerts } = useAlerts();
     const store = useStore();
 
     const {
@@ -63,16 +65,28 @@ export default defineComponent({
       changeShowModal,
     } = useShowModal();
 
-    const deleteEntrantEvent = async () => {
-      await deleteEntrant(props.entrant.id as string);
-      store.commit('entrant/removeEntrant', props.entrant.id);
+    const { remove } = useEditEntrant();
+
+    const deleteEntrant = async () => {
+      try {
+        await remove(props.entrant.id as string);
+        alerts.value.push({
+          type: 'info',
+          message: 'Успешное удаление',
+        });
+      } catch (e) {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Не удалось удалить',
+        });
+      }
     };
 
     return {
       isShow,
       isAuth: computed(() => store.getters['auth/isAuth']),
       changeShowModal,
-      deleteEntrantEvent,
+      deleteEntrant,
       refreshIcon,
       trashcanIcon,
     };
