@@ -68,12 +68,6 @@
            v-model="departmentValue.address"
            aria-label="Введите адрес кафедры"/>
 
-    <label class="field-label mt-10" for="leader-teacher">Заведующий кафедры</label>
-    <app-select id="leader-teacher"
-                :options="teachers"
-                @change="departmentValue.leaderId = $event"
-                :select="departmentValue.leaderId"/>
-
     <input type="button"
            value="обновить"
            class="btn-standard mt-20"
@@ -92,15 +86,11 @@ import {
 } from 'vue';
 import { Department, Teacher } from '@/types/SiteContentTypes';
 import { useStore } from 'vuex';
-import AppSelect from '@/components/UI/AppSelect.vue';
 import useEditDepartment from '@/hooks/useEditDepartment';
 import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   name: 'TheSettingDepartment',
-  components: {
-    AppSelect,
-  },
   props: {
     department: {
       type: Object as PropType<Department>,
@@ -122,8 +112,7 @@ export default defineComponent({
         || departmentValue.value.slogan !== props.department.slogan
         || departmentValue.value.email !== props.department.email
         || departmentValue.value.phone !== props.department.phone
-        || departmentValue.value.address !== props.department.address
-        || departmentValue.value.leaderId !== props.department.leaderId) {
+        || departmentValue.value.address !== props.department.address) {
         try {
           await update();
           alerts.value.push({

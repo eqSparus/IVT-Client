@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('action')">
+  <button @click="$emit('action')" :title="title">
     <img :src="pathImg" alt="Фотография преподавателя">
   </button>
 </template>
@@ -16,6 +16,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    title: {
+      type: String,
+      default: '',
+    },
   },
 });
 </script>
@@ -25,7 +29,7 @@ export default defineComponent({
 button {
   background: none;
   border: none;
-  padding: 0 5px 0 5px;
+  padding: 0;
 
   img {
     transition: all 0.2s ease-out;

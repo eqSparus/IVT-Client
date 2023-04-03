@@ -13,7 +13,6 @@ const useEditDepartment = (dep: Department) => {
     email: dep.email,
     phone: dep.phone,
     address: dep.address,
-    leaderId: dep.leaderId,
   });
 
   const rules = {

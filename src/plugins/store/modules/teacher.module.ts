@@ -29,18 +29,22 @@ const TeacherModule: Module<TeacherState, RootState> = {
       id: string
     }) {
       const indexUpdate = state.teachers.findIndex((t) => t.id === data.id);
-      state.teachers[indexUpdate].pathImg = data.path;
+      state.teachers[indexUpdate].urlImg = `${data.path}?range=${Date.now()}`;
+    },
+    updatePositionTeacher(state: TeacherState, data: {
+      position: string,
+      id: string
+    }) {
+      const indexUpdate = state.teachers.findIndex((t) => t.id === data.id);
+      state.teachers[indexUpdate].position = Number(data.position);
     },
   },
   getters: {
     getTeachers(state) {
-      return state.teachers;
+      return state.teachers.sort((a, b) => a.position - b.position);
     },
-    getLeaderTeacher(state, getters, rootState, rootGetters) {
-      return state.teachers.find((t) => t.id === rootGetters['department/getDepartment'].leaderId);
-    },
-    getTeacherNotLeader(state, getters, rootState, rootGetters) {
-      return state.teachers.filter((t) => t.id !== rootGetters['department/getDepartment'].leaderId);
+    getMinPosition(state) {
+      return state.teachers.reduce((pr, cu) => (pr.position < cu.position ? pr : cu)).position;
     },
   },
 };

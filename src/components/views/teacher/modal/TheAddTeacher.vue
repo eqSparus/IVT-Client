@@ -1,18 +1,12 @@
 <template>
   <div class="add-teacher-container">
 
-    <app-message-alert type="warning"
-                       message="Файл не загружен"
-                       :is-show="isMessageShow"
-                       :timeout="1500"
-                       @vanish="isMessageShow = false"/>
-
     <div class="change-container">
 
       <div class="change-container-block">
         <div class="img-cropper">
           <cropper :src="cropperFile"
-                   ref="cropperImgRef"
+                   ref="cropperRef"
                    class="cropper"
                    :stencil-props="{
                     handlers:{},
@@ -27,11 +21,11 @@
                    image-restriction="stencil"/>
         </div>
         <label class="btn-standard mt-10" for="img-teacher">
-          Загрузить фото
+          Загрузить
         </label>
         <input type="file"
-               ref="imgFileRef"
-               @change="downloadImg"
+               ref="imgRef"
+               @change="uploadImg"
                style="display: none"
                id="img-teacher">
       </div>
@@ -40,25 +34,25 @@
         <div class="double-block">
           <div class="block-column">
             <label class="field-label" for="last-name">Имя преподавателя*</label>
-            <span class="field-fail" v-if="validate.firstName.$invalid && validate.firstName.$dirty">
+            <span class="field-fail" v-if="valid.firstName.$invalid && valid.firstName.$dirty">
               Поле не должно быть пустым
             </span>
             <input type="text"
                    class="field-standard"
                    v-model="newTeacher.firstName"
-                   @blur="validate.firstName.$touch()"
+                   @blur="valid.firstName.$touch()"
                    placeholder="Введите имя преподавателя"
                    id="last-name">
           </div>
 
           <div class="block-column">
             <label class="field-label" for="first-name">Фамилия преподавателя*</label>
-            <span class="field-fail" v-if="validate.lastName.$invalid && validate.lastName.$dirty">
+            <span class="field-fail" v-if="valid.lastName.$invalid && valid.lastName.$dirty">
               Поле не должно быть пустым
             </span>
             <input type="text"
                    class="field-standard"
-                   @blur="validate.lastName.$touch()"
+                   @blur="valid.lastName.$touch()"
                    v-model="newTeacher.lastName"
                    placeholder="Введите фамилия преподавателя"
                    id="first-name">
@@ -75,22 +69,31 @@
                    id="middle-name">
           </div>
           <div class="block-column">
-            <label class="field-label mt-10" for="post-name">Должность преподавателя</label>
+            <label class="field-label mt-10" for="post-department">Должность на кафедре</label>
             <input type="text"
-                   id="post-name"
-                   v-model="newTeacher.post"
+                   id="post-department"
+                   v-model="newTeacher.postDepartment"
                    class="field-standard"
-                   placeholder="Введите должность преподавателя">
+                   placeholder="Введите должность на кафедре">
           </div>
         </div>
 
-        <label class="field-label mt-10" for="scientific-degree">Ученая степень</label>
+        <label class="field-label mt-10" for="post-teacher">Должность преподавателя</label>
         <textarea class="field-standard text-area"
-                  id="scientific-degree"
-                  v-model="newTeacher.scientificDegree"
-                  placeholder="Введите ученую степень преподавателя">
+                  id="post-teacher"
+                  v-model="newTeacher.postTeacher"
+                  placeholder="Введите должность преподавателя">
 
         </textarea>
+
+        <label class="field-label  mt-10" for="post-additional">
+          Дополнительная должность
+        </label>
+        <input type="text"
+               class="field-standard"
+               id="post-additional"
+               placeholder="Введите дополнительную должность"
+               v-model="newTeacher.postAdditional">
       </div>
 
     </div>
@@ -98,7 +101,7 @@
     <input type="button"
            class="btn-standard mt-20"
            value="создать"
-           :disabled="validate.$invalid"
+           :disabled="valid.$invalid"
            @click="addTeacher">
 
   </div>
@@ -106,89 +109,75 @@
 
 <script lang="ts">
 
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { Cropper } from 'vue-advanced-cropper';
 import 'vue-advanced-cropper/dist/style.css';
-import { required } from '@vuelidate/validators';
-import useVuelidate from '@vuelidate/core';
-import AppMessageAlert from '@/components/UI/AppMessageAlert.vue';
-import { createTeacher } from '@/api/TeacherApi';
-import { useStore } from 'vuex';
+import useImg from '@/hooks/useImg';
+import useEditTeacher from '@/hooks/useEditTeacher';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
-  name: 'TheModalAddTeacher',
+  name: 'TheAddTeacher',
   components: {
-    AppMessageAlert,
     Cropper,
   },
   setup() {
-    const store = useStore();
-    const imgFileRef = ref<InstanceType<typeof HTMLInputElement>>();
-    const cropperFile = ref<string | ArrayBuffer | null>();
-    const cropperImgRef = ref<typeof Cropper | null>(null);
-    const isMessageShow = ref<boolean>(false);
-    const newTeacher = reactive({
-      firstName: '',
-      lastName: '',
-      middleName: '',
-      post: '',
-      scientificDegree: '',
-    });
+    const { alerts } = useAlerts();
 
-    const rules = {
-      firstName: {
-        required,
-      },
-      lastName: {
-        required,
-      },
-    };
+    const {
+      imgRef,
+      cropperRef,
+      cropperFile,
+      uploadImg,
+      resizedImg,
+    } = useImg();
 
-    const validate = useVuelidate(rules, newTeacher);
+    const {
+      teacher: newTeacher,
+      valid,
+      add,
+    } = useEditTeacher();
 
-    const downloadImg = () => {
-      const reader = new FileReader();
-      const file = (imgFileRef.value as HTMLInputElement).files?.[0];
-      reader.readAsDataURL(file as File);
-      reader.onload = (e) => {
-        cropperFile.value = e.target?.result;
-      };
-    };
-
-    const addTeacher = async () => {
-      if (cropperFile.value && cropperImgRef.value) {
-        const { canvas } = cropperImgRef.value.getResult();
-        canvas.toBlob(async (bl: Blob) => {
-          const form = new FormData();
-          form.append('img', bl, 'img.jpg');
-          form.append('data', new Blob([JSON.stringify(newTeacher)], {
-            type: 'application/json',
-          }));
-          const data = await createTeacher(form);
-          store.commit('teacher/setTeacher', data);
-          newTeacher.firstName = '';
-          newTeacher.lastName = '';
-          newTeacher.middleName = '';
-          newTeacher.post = '';
-          newTeacher.scientificDegree = '';
-          cropperFile.value = null;
-          validate.value.$reset();
-        }, 'image/jpeg');
+    const addTeacher = () => {
+      if (cropperFile.value) {
+        resizedImg(async (bl: Blob) => {
+          try {
+            await add(newTeacher.value, bl);
+            newTeacher.value.firstName = '';
+            newTeacher.value.lastName = '';
+            newTeacher.value.middleName = '';
+            newTeacher.value.postDepartment = '';
+            newTeacher.value.postTeacher = '';
+            newTeacher.value.postAdditional = '';
+            cropperFile.value = null;
+            valid.value.$reset();
+            alerts.value.push({
+              type: 'info',
+              message: 'Преподаватель добавлен',
+            });
+          } catch (e) {
+            alerts.value.push({
+              type: 'warning',
+              message: 'Не удалось добавить преподавателя',
+            });
+          }
+        });
       } else {
-        isMessageShow.value = true;
+        alerts.value.push({
+          type: 'warning',
+          message: 'Фотография преподавателя не загружена',
+        });
       }
     };
 
     return {
-      isMessageShow,
-      imgFileRef,
-      cropperImgRef,
+      imgRef,
+      cropperRef,
       cropperFile,
       newTeacher,
-      validate,
-      setTeacher: addTeacher,
-      downloadImg,
+      valid,
       addTeacher,
+      uploadImg,
     };
   },
 });
@@ -217,13 +206,12 @@ export default defineComponent({
     .change-container-block {
       display: flex;
       flex-flow: column;
-      width: 15%;
 
       .img-cropper {
-        width: 100%;
+        width: 25rem;
 
         .cropper {
-          height: 200px;
+          height: 25rem;
         }
       }
 

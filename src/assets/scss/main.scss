@@ -29,14 +29,19 @@ $font-size-text: (
         64
 );
 
+$indents-type: (
+        "p":"padding",
+        "m":"margin"
+);
 
-$margin-size: (
+$indents-size: (
+        5,
         10,
         20,
         30
 );
 
-$type-spacing: (
+$spacing-type: (
         "":"",
         "l":"-left",
         "r":"-right",
@@ -110,14 +115,14 @@ $colors in $color-buttons {
 $colors in $color-buttons {
 
   .btn-#{$title}-icon {
-
     border-radius: 5px;
     background: nth($colors, 1);
     border: 1px solid nth($colors, 1);
+    padding: 5px;
 
     img {
-      height: 100%;
       width: 100%;
+      height: 100%;
     }
 
     &:not(:disabled):hover {
@@ -182,7 +187,6 @@ $colors in $color-fields {
     &:disabled {
       border: 2px solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
     }
-
   }
 }
 
@@ -208,12 +212,13 @@ $colors in $color-fields {
 }
 
 
-@each $size in $margin-size {
+@each $name, $type in $indents-type {
 
-  @each $title,
-  $type in $type-spacing {
-    .m#{$title}-#{$size} {
-      margin#{$type}: #{$size/10}rem;
+  @each $size in $indents-size {
+    @each $title, $spacing in $spacing-type {
+      .#{$name}#{$title}-#{$size} {
+        #{$type}#{$spacing}: #{$size/10}rem;
+      }
     }
   }
 }

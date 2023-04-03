@@ -32,7 +32,6 @@ import TheEntrantScreen from '@/components/views/entrant/TheEntrantScreen.vue';
 import TheFooterScreen from '@/components/views/footer/TheFooterScreen.vue';
 import TheTeachersScreen from '@/components/views/teacher/TheTeachersScreen.vue';
 import ThePartnersScreen from '@/components/views/partner/ThePartnersScreen.vue';
-import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'TheMainPage',

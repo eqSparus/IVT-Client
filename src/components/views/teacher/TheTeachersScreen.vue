@@ -1,44 +1,55 @@
 <template>
   <app-base-screen title="Состав кафедры">
 
-    <the-modal-change-teacher :is-show="isShow"
-                              :teachers="allTeachers"
-                              @close="changeShowModal"/>
+    <the-modal-edit-teacher :is-show="isShowEditTeacher"
+                            :teachers="allTeachers"
+                            @close="changeShowEditTeacher"/>
+
+    <the-modal-edit-position-teacher :is-show="isShowEditPosition"
+                                     :teachers="allTeachers"
+                                     @close="changeShowEditPosition"/>
 
     <div class="teacher-change mb-20" v-if="isAuth">
       <input type="button"
-             @click="changeShowModal"
+             @click="changeShowEditTeacher"
              class="btn-standard"
-             value="редактировать">
+             value="изменить состав">
+      <input type="button"
+             @click="changeShowEditPosition"
+             class="btn-standard ml-20"
+             value="изменить последовательность">
     </div>
 
     <div class="teachers-screen-container">
 
-      <app-teacher-item :teacher="leaderTeacher" :is-main="true">
-        <div class="block-top">
-          <span class="additional fs-20">Адрес</span>
-          <span class="fs-20 span-new-line content">{{ address }}</span>
-        </div>
-        <div class="block-bottom">
-          <div>
-            <span class="additional fs-20">Телефон</span>
-            <span class="fs-20 span-new-line content">{{ phone }}</span>
-          </div>
+      <div class="list-teacher">
+        <transition-group name="teacher">
+          <app-teacher-item class="teacher"
+                            v-for="teacher in listTeachers" :key="teacher.id"
+                            :teacher="teacher"
+                            :is-main="teacher.position === minPosition">
+            <div v-if="teacher.position === minPosition">
+              <div class="block-top">
+                <span class="additional fs-20">Адрес</span>
+                <span class="fs-20 span-new-line content">{{ address }}</span>
+              </div>
+              <div class="block-bottom">
+                <div>
+                  <span class="additional fs-20">Телефон</span>
+                  <span class="fs-20 span-new-line content">{{ phone }}</span>
+                </div>
 
-          <div>
-            <span class="additional fs-20">Почта</span>
-            <span class="fs-20 span-new-line content">{{ email }}</span>
-          </div>
-        </div>
-      </app-teacher-item>
+                <div>
+                  <span class="additional fs-20">Почта</span>
+                  <span class="fs-20 span-new-line content">{{ email }}</span>
+                </div>
+              </div>
+            </div>
+          </app-teacher-item>
+        </transition-group>
+      </div>
 
-      <transition-group name="teacher">
-        <div class="list-teacher" v-for="teacher in teachers" :key="teacher.id">
-          <app-teacher-item class="teacher" :teacher="teacher"/>
-        </div>
-      </transition-group>
-
-      <button class="fs-24" @click="changeIsAll">
+      <button v-if="allTeachers.length > 4" class="fs-24" @click="changeIsAll">
         {{ textIsAll }}
       </button>
 
@@ -52,14 +63,16 @@
 import { computed, defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import AppTeacherItem from '@/components/views/teacher/item/AppTeacherItem.vue';
-import TheModalChangeTeacher from '@/components/views/teacher/modal/TheModalChangeTeacher.vue';
+import TheModalEditTeacher from '@/components/views/teacher/modal/TheModalEditTeacher.vue';
 import useShowModal from '@/hooks/useShowModal';
+import TheModalEditPositionTeacher from '@/components/views/teacher/modal/TheModalEditPositionTeacher.vue';
 import AppBaseScreen from '../../UI/AppBaseScreen.vue';
 
 export default defineComponent({
   icon: 'TheTeachersScreen',
   components: {
-    TheModalChangeTeacher,
+    TheModalEditPositionTeacher,
+    TheModalEditTeacher,
     AppBaseScreen,
     AppTeacherItem,
   },
@@ -68,34 +81,41 @@ export default defineComponent({
     const isAll = ref<boolean>(false);
 
     const {
-      isShow,
-      changeShowModal,
+      isShow: isShowEditTeacher,
+      changeShowModal: changeShowEditTeacher,
+    } = useShowModal();
+
+    const {
+      isShow: isShowEditPosition,
+      changeShowModal: changeShowEditPosition,
     } = useShowModal();
 
     const changeIsAll = () => {
       isAll.value = !isAll.value;
     };
 
-    const teachers = computed(() => {
+    const listTeachers = computed(() => {
       if (isAll.value) {
-        return store.getters['teacher/getTeacherNotLeader'];
+        return store.getters['teacher/getTeachers'];
       }
-      return store.getters['teacher/getTeacherNotLeader'].slice(0, 4);
+      return store.getters['teacher/getTeachers'].slice(0, 4);
     });
 
     return {
-      isShow,
+      isShowEditTeacher,
+      isShowEditPosition,
       isAll,
       changeIsAll,
-      changeShowModal,
-      leaderTeacher: computed(() => store.getters['teacher/getLeaderTeacher']),
-      teachers,
+      changeShowEditTeacher,
+      changeShowEditPosition,
+      listTeachers,
+      minPosition: computed(() => store.getters['teacher/getMinPosition']),
       allTeachers: computed(() => store.getters['teacher/getTeachers']),
       isAuth: computed(() => store.getters['auth/isAuth']),
+      textIsAll: computed(() => (isAll.value ? 'скрыть' : 'показать всех')),
       address: computed(() => store.getters['department/getDepartment'].address),
       email: computed(() => store.getters['department/getDepartment'].email),
       phone: computed(() => store.getters['department/getDepartment'].phone),
-      textIsAll: computed(() => (isAll.value ? 'скрыть' : 'показать всех')),
     };
   },
 });
@@ -111,10 +131,10 @@ export default defineComponent({
 }
 
 .teachers-screen-container {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   width: 95%;
-  margin: 0 auto;
 
   .block-top {
     margin-bottom: 8.5%;
@@ -145,7 +165,12 @@ export default defineComponent({
 
   .teacher {
     margin-top: 3.2%;
-    width: 80%;
+    width: 90%;
+
+    &:first-child {
+      margin-top: 0;
+      width: 100%;
+    }
   }
 }
 

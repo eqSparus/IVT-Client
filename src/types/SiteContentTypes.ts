@@ -11,7 +11,6 @@ export type Department = {
   phone: string,
   email: string,
   address: string,
-  leaderId: string,
 }
 
 export type Direction = {
@@ -47,10 +46,18 @@ export type AboutDepartment = {
 
 export type Teacher = {
   id?: string,
-  pathImg: string,
+  urlImg: string,
   firstName: string,
   middleName: string,
   lastName: string,
-  post: string,
-  scientificDegree: string,
+  postDepartment: string,
+  postTeacher: string,
+  postAdditional: string,
+  position: number,
+}
+
+export type Partner = {
+  id?: string,
+  href: string,
+  urlImg: string,
 }

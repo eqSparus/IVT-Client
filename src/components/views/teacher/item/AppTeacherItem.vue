@@ -4,15 +4,16 @@
     </div>
     <div class="item">
 
-      <img :src="teacher.pathImg" :class="[isMain ? 'img-size-main' : 'img-size']" alt="Фотография преподавателя"/>
+      <img :src="teacher.urlImg" :class="[isMain ? 'img-size-main' : 'img-size']" alt="Фотография преподавателя"/>
 
       <div class="item-container">
 
         <div class="block-main-left" v-if="isMain">
           <span class="span-new-line header fs-32">{{ teacher.lastName }}</span>
           <span class="fs-32 header">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
-          <span class="fs-20 post span-new-line mt-10">{{ teacher.post }}</span>
-          <span class="fs-20 content span-new-line mt-10">{{ teacher.scientificDegree }}</span>
+          <span class="fs-20 post span-new-line mt-10">{{ teacher.postDepartment }}</span>
+          <span class="fs-20 content span-new-line mt-10">{{ teacher.postTeacher }}</span>
+          <span class="fs-20 content span-new-line mt-10">{{ teacher.postAdditional }}</span>
         </div>
         <div v-else class="block-secondary-left">
           <span class="span-new-line header fs-32">{{ teacher.lastName }}</span>
@@ -23,8 +24,9 @@
           <slot></slot>
         </div>
         <div v-else class="block-secondary-right">
-          <span v-if="teacher.post" class="fs-20 post span-new-line mt-10">{{ teacher.post }}</span>
-          <span class="fs-20 content span-new-line mt-10">{{ teacher.scientificDegree }}</span>
+          <span v-if="teacher.postDepartment" class="fs-20 post span-new-line mt-10">{{ teacher.postDepartment }}</span>
+          <span class="fs-20 content span-new-line mt-10">{{ teacher.postTeacher }}</span>
+          <span class="fs-20 content span-new-line mt-10">{{ teacher.postAdditional }}</span>
         </div>
 
       </div>
@@ -48,7 +50,6 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-
   },
 });
 </script>
