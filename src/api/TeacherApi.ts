@@ -2,7 +2,7 @@ import authorizedRequests from '@/api/request/AuthorizedRequests';
 import { Teacher } from '@/types/SiteContentTypes';
 import EndPoints from '@/api/EndPoints';
 
-export const createTeacher = async (body: FormData) => {
+export const requestCreateTeacher = async (body: FormData) => {
   const response = await authorizedRequests.post(EndPoints.TEACHER, body, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -11,7 +11,7 @@ export const createTeacher = async (body: FormData) => {
   return response.data;
 };
 
-export const updateTeacher = async (teacher: Omit<Teacher, 'urlImg' | 'position'>) => {
+export const requestUpdateTeacher = async (teacher: Omit<Teacher, 'urlImg' | 'position'>) => {
   const response = await authorizedRequests.put(EndPoints.TEACHER, JSON.stringify(teacher), {
     headers: {
       'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export const updateTeacher = async (teacher: Omit<Teacher, 'urlImg' | 'position'
   return response.data;
 };
 
-export const updateTeacherImg = async (body: FormData, id: string) => {
+export const requestUpdateTeacherImg = async (body: FormData, id: string) => {
   const response = await authorizedRequests.patch(EndPoints.TEACHER, body, {
     params: {
       id,
@@ -32,7 +32,7 @@ export const updateTeacherImg = async (body: FormData, id: string) => {
   return response.data;
 };
 
-export const updateTeacherPosition = async (position: number, id: string) => {
+export const requestUpdateTeacherPosition = async (position: number, id: string) => {
   const response = await authorizedRequests.patch(EndPoints.TEACHER, {}, {
     params: {
       id,
@@ -45,7 +45,7 @@ export const updateTeacherPosition = async (position: number, id: string) => {
   return response.data;
 };
 
-export const deleteTeacher = async (id: string) => {
+export const requestDeleteTeacher = async (id: string) => {
   const response = await authorizedRequests.delete(EndPoints.TEACHER, {
     params: {
       id,

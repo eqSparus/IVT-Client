@@ -12,9 +12,11 @@
     </div>
 
     <div class="partners-container mt-20">
-      <img :src="iss" alt="assets/images/partners/coreDataNet.png">
-      <img :src="zigma" alt="assets/images/partners/iss.png">
-      <img :src="coreDataNew" alt="assets/images/partners/zigma.png">
+      <a v-for="partner in partners" :key="partner.id"
+         :href="partner.href"
+         target="_blank">
+        <img :src="partner.urlImg" :alt="partner.urlImg">
+      </a>
     </div>
   </app-base-screen>
 </template>
@@ -23,9 +25,6 @@
 
 import { computed, defineComponent } from 'vue';
 import AppBaseScreen from '@/components/UI/AppBaseScreen.vue';
-import coreDataNew from '@/assets/images/partners/coreDataNet.png';
-import iss from '@/assets/images/partners/iss.png';
-import zigma from '@/assets/images/partners/zigma.png';
 import TheModalEditPartner from '@/components/views/partner/modal/TheModalEditPartner.vue';
 import useShowModal from '@/hooks/useShowModal';
 import { useStore } from 'vuex';
@@ -47,9 +46,7 @@ export default defineComponent({
       isShow,
       changeShowModal,
       isAuth: computed(() => store.getters['auth/isAuth']),
-      coreDataNew,
-      iss,
-      zigma,
+      partners: computed(() => store.getters['partner/getPartners']),
     };
   },
 });
@@ -63,9 +60,10 @@ export default defineComponent({
 }
 
 .partners-container {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(33.3%, 1fr));
+  justify-items: center;
+  row-gap: 50%;
 }
 
 </style>

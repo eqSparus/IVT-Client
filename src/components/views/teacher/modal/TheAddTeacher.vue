@@ -70,30 +70,38 @@
           </div>
           <div class="block-column">
             <label class="field-label mt-10" for="post-department">Должность на кафедре</label>
-            <input type="text"
-                   id="post-department"
-                   v-model="newTeacher.postDepartment"
-                   class="field-standard"
-                   placeholder="Введите должность на кафедре">
+            <app-tooltip text="Должность преподавателя по АУП (Административно-управленческий персонал) например
+зав. кафедры, заместитель зав. кафедры и тд.">
+              <input type="text"
+                     id="post-department"
+                     v-model="newTeacher.postDepartment"
+                     class="field-standard"
+                     placeholder="Введите должность на кафедре">
+            </app-tooltip>
           </div>
         </div>
 
         <label class="field-label mt-10" for="post-teacher">Должность преподавателя</label>
-        <textarea class="field-standard text-area"
-                  id="post-teacher"
-                  v-model="newTeacher.postTeacher"
-                  placeholder="Введите должность преподавателя">
+        <app-tooltip text="Должность преподавателя по ППС (профессорско-преподавательский состав) например
+профессор, доцент, стр. преподаватель, ассистент и тд.">
+                  <textarea class="field-standard text-area"
+                            id="post-teacher"
+                            v-model="newTeacher.postTeacher"
+                            placeholder="Введите должность преподавателя">
 
         </textarea>
+        </app-tooltip>
 
         <label class="field-label  mt-10" for="post-additional">
           Дополнительная должность
         </label>
-        <input type="text"
-               class="field-standard"
-               id="post-additional"
-               placeholder="Введите дополнительную должность"
-               v-model="newTeacher.postAdditional">
+        <app-tooltip text="Дополнительная должность преподавателя с предприятия при наличие таковой">
+          <input type="text"
+                 class="field-standard"
+                 id="post-additional"
+                 placeholder="Введите дополнительную должность"
+                 v-model="newTeacher.postAdditional">
+        </app-tooltip>
       </div>
 
     </div>
@@ -115,10 +123,12 @@ import 'vue-advanced-cropper/dist/style.css';
 import useImg from '@/hooks/useImg';
 import useEditTeacher from '@/hooks/useEditTeacher';
 import useAlerts from '@/hooks/useAlerts';
+import AppTooltip from '@/components/UI/AppTooltip.vue';
 
 export default defineComponent({
   name: 'TheAddTeacher',
   components: {
+    AppTooltip,
     Cropper,
   },
   setup() {

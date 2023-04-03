@@ -3,10 +3,10 @@ import { ref } from 'vue';
 import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import {
-  createTeacher,
-  deleteTeacher,
-  updateTeacher,
-  updateTeacherImg, updateTeacherPosition,
+  requestCreateTeacher,
+  requestDeleteTeacher,
+  requestUpdateTeacher,
+  requestUpdateTeacherImg, requestUpdateTeacherPosition,
 } from '@/api/TeacherApi';
 import { useStore } from 'vuex';
 
@@ -42,24 +42,24 @@ const useEditTeacher = (customTeacher: EditTeacher = defaultTeacher) => {
     formData.append('data', new Blob([JSON.stringify(addTeacher)], {
       type: 'application/json',
     }));
-    const data = await createTeacher(formData);
+    const data = await requestCreateTeacher(formData);
     store.commit('teacher/setTeacher', data);
   };
 
   const update = async () => {
-    const data = await updateTeacher(teacher.value);
+    const data = await requestUpdateTeacher(teacher.value);
     store.commit('teacher/updateTeacher', data);
   };
 
   const remove = async (id: string) => {
-    await deleteTeacher(id);
+    await requestDeleteTeacher(id);
     store.commit('teacher/removeTeacher', id);
   };
 
   const updateImg = async (img: Blob, id: string) => {
     const formData = new FormData();
     formData.append('img', img, 'img.jpg');
-    const data = await updateTeacherImg(formData, id);
+    const data = await requestUpdateTeacherImg(formData, id);
     store.commit('teacher/updateImgTeacher', {
       path: data.url,
       id,
@@ -67,7 +67,7 @@ const useEditTeacher = (customTeacher: EditTeacher = defaultTeacher) => {
   };
 
   const updatePosition = async (position: number, id: string) => {
-    const data = await updateTeacherPosition(position, id);
+    const data = await requestUpdateTeacherPosition(position, id);
     store.commit('teacher/updatePositionTeacher', {
       position: data.position,
       id,

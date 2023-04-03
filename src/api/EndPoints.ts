@@ -6,4 +6,5 @@ export default {
   ENTRANT: '/entrant',
   SITE_LINK: '/link',
   TEACHER: '/teacher',
+  PARTNER: '/partner',
 } as const;

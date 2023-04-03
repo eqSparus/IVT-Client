@@ -6,6 +6,7 @@ import about from '@/plugins/store/modules/about.module';
 import direction from '@/plugins/store/modules/direction.module';
 import entrant from '@/plugins/store/modules/entrant.module';
 import teacher from '@/plugins/store/modules/teacher.module';
+import partner from '@/plugins/store/modules/partner.module';
 
 const store = createStore({
   state: {
@@ -19,6 +20,7 @@ const store = createStore({
     direction,
     entrant,
     teacher,
+    partner,
   },
 });
 

@@ -30,6 +30,7 @@ const router = createRouter({
         store.commit('direction/setDirections', data.directions);
         store.commit('entrant/setEntrants', data.entrants);
         store.commit('teacher/setTeachers', data.teachers);
+        store.commit('partner/setPartners', data.partners);
         next();
       },
     },

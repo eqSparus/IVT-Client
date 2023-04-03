@@ -1,4 +1,4 @@
-import { AboutDepartment, Entrant, Direction, Link, Teacher, Department } from '@/types/SiteContentTypes';
+import { AboutDepartment, Entrant, Direction, Link, Teacher, Department, Partner } from '@/types/SiteContentTypes';
 
 export interface RootState {
   version: string;
@@ -30,4 +30,8 @@ export interface EntrantState {
 
 export interface TeacherState {
   teachers: Array<Teacher>;
+}
+
+export interface PartnerState {
+  partners: Array<Partner>;
 }
