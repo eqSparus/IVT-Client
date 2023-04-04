@@ -71,7 +71,7 @@
           <div class="block-column">
             <label class="field-label mt-10" for="post-department">Должность на кафедре</label>
             <app-tooltip text="Должность преподавателя по АУП (Административно-управленческий персонал) например
-зав. кафедры, заместитель зав. кафедры и тд.">
+зав. кафедрой, заместитель зав. кафедры и тд.">
               <input type="text"
                      id="post-department"
                      v-model="newTeacher.postDepartment"

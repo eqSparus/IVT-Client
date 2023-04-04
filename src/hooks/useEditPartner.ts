@@ -31,7 +31,7 @@ const useEditPartner = (customPartner: EditPartner = defaultPartner) => {
 
   const add = async (addPartner: EditPartner, img: Blob) => {
     const formData = new FormData();
-    formData.append('img', img, 'partner.jpg');
+    formData.append('img', img, 'partner.png');
     formData.append('data', new Blob([JSON.stringify(addPartner)], {
       type: 'application/json',
     }));
@@ -51,7 +51,7 @@ const useEditPartner = (customPartner: EditPartner = defaultPartner) => {
 
   const updateImg = async (img: Blob, id: string) => {
     const formData = new FormData();
-    formData.append('img', img, 'partner.jpg');
+    formData.append('img', img, 'partner.png');
     const data = await requestUpdatePartnerImg(formData, id);
     store.commit('partner/updateImgPartner', {
       path: data.url,
@@ -65,6 +65,7 @@ const useEditPartner = (customPartner: EditPartner = defaultPartner) => {
     add,
     update,
     remove,
+    updateImg,
   };
 };
 

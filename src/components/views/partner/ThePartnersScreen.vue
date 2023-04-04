@@ -1,22 +1,19 @@
 <template>
   <app-base-screen title="Партнёры" :is-second="true">
 
-    <the-modal-edit-partner :is-show="isShow"
+    <the-modal-add-partner :is-show="isShow"
                             @close="changeShowModal"/>
 
     <div class="partners-change" v-if="isAuth">
       <input type="button"
              class="btn-standard"
              @click="changeShowModal"
-             value="редактировать">
+             value="добавить">
     </div>
 
     <div class="partners-container mt-20">
-      <a v-for="partner in partners" :key="partner.id"
-         :href="partner.href"
-         target="_blank">
-        <img :src="partner.urlImg" :alt="partner.urlImg">
-      </a>
+      <app-partner-item v-for="partner in partners" :key="partner.id"
+                        :partner="partner"/>
     </div>
   </app-base-screen>
 </template>
@@ -25,14 +22,16 @@
 
 import { computed, defineComponent } from 'vue';
 import AppBaseScreen from '@/components/UI/AppBaseScreen.vue';
-import TheModalEditPartner from '@/components/views/partner/modal/TheModalEditPartner.vue';
+import TheModalAddPartner from '@/components/views/partner/modal/TheModalAddPartner.vue';
 import useShowModal from '@/hooks/useShowModal';
 import { useStore } from 'vuex';
+import AppPartnerItem from '@/components/views/partner/item/AppPartnerItem.vue';
 
 export default defineComponent({
   name: 'ThePartnersScreen',
   components: {
-    TheModalEditPartner,
+    AppPartnerItem,
+    TheModalAddPartner,
     AppBaseScreen,
   },
   setup() {

@@ -5,9 +5,9 @@
 
       <div class="edit-block">
         <div class="img-cropper">
-          <img v-if="!cropperFile" :src="teacher.urlImg" alt="" class="cropper">
+          <img v-if="!cropperFile" :src="teacher.urlImg" :alt="teacher.urlImg" class="cropper">
           <cropper :src="cropperFile"
-                   v-if="cropperFile"
+                   v-else
                    ref="cropperRef"
                    class="cropper"
                    :stencil-props="{
@@ -79,7 +79,7 @@
           <div class="block-column">
             <label class="field-label mt-10" for="post-department">Должность на кафедре</label>
             <app-tooltip text="Должность преподавателя по АУП (Административно-управленческий персонал) например
-зав. кафедры, заместитель зав. кафедры и тд.">
+зав. кафедрой, заместитель зав. кафедры и тд.">
               <input type="text"
                      id="post-department"
                      v-model="editableTeacher.postDepartment"
@@ -248,6 +248,11 @@ export default defineComponent({
               message: 'Не удалось обновить фотографию',
             });
           }
+        });
+      } else {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Загрузите новую фотографию',
         });
       }
     };
