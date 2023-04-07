@@ -3,20 +3,20 @@
 @use "utils";
 @use "sass:color";
 @use "sass:list";
-
+@import "extends";
 
 $color-buttons: (
-        "standard": (prop.$button-standard-color, prop.$button-standard-text-color),
-        "warning": (prop.$button-warning-color, prop.$button-warning-text-color),
+        "standard": (prop.$primary-color, prop.$main-second-color),
+        "warning": (prop.$warning-color, prop.$main-second-color),
 );
 
 $color-fields: (
-        "standard":(prop.$field-standard-color, prop.$field-standard-text-color)
+        "standard":(prop.$primary-color, prop.$main-first-color)
 );
 
 $property-buttons: (
-        "":(p-x: 31px, p-y: 14px, radius: 4px, border: 1px, font-size: 1.4rem, font-weight:500),
-        "-sm":(p-x: 10px, p-y: 7px, radius: 5px, border: 1px, font-size: 1.2rem, font-weight:500),
+        "":(p-x: 3.1rem, p-y: 1.4rem, radius: 0.4rem, border: 0.1rem, font-size: 1.4rem, font-weight: 500),
+        "-sm":(p-x: 1rem, p-y: 0.7rem, radius: 0.5rem, border: 0.1rem, font-size: 1.2rem, font-weight: 500),
 );
 
 $font-size-text: (
@@ -51,8 +51,20 @@ $spacing-type: (
 
 
 html {
-  @include utils.scrollbar(prop.$scroll-slider-color,
-          prop.$scroll-slider-body-color);
+  @extend %standard-scroll-bar;
+
+  @media screen and (-webkit-min-device-pixel-ratio: 1) {
+    font-size: 10px;
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2) {
+    font-size: 7.5px;
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 3) {
+    font-size: 5px;
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 4) {
+    font-size: 2.5px;
+  }
 
   body {
     overflow-x: hidden;
@@ -63,24 +75,6 @@ html {
     }
   }
 }
-
-
-%btn {
-  font-family: prop.$standard-font;
-  text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  text-transform: uppercase;
-
-  &:not(:disabled):hover {
-    transition: 0.2s;
-  }
-
-  &:disabled {
-    cursor: default
-  }
-}
-
 
 @each $title,
 $colors in $color-buttons {
@@ -115,10 +109,10 @@ $colors in $color-buttons {
 $colors in $color-buttons {
 
   .btn-#{$title}-icon {
-    border-radius: 5px;
+    border-radius: 0.5rem;
     background: nth($colors, 1);
-    border: 1px solid nth($colors, 1);
-    padding: 5px;
+    border: 0.1rem solid nth($colors, 1);
+    padding: 0.5rem;
 
     img {
       width: 100%;
@@ -129,7 +123,7 @@ $colors in $color-buttons {
       transition: 0.2s;
       cursor: pointer;
       background: adjust-color(nth($colors, 1), $red: 37, $green: 26, $blue: -2);
-      border: 1px solid adjust-color(nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      border: 0.1rem solid adjust-color(nth($colors, 1), $red: 37, $green: 26, $blue: -2);
 
       img {
         filter: prop.$icon-svg-hover-color;
@@ -139,7 +133,7 @@ $colors in $color-buttons {
     &:disabled {
       color: adjust-color($color: nth($colors, 2), $red: -255, $green: -255, $blue: -255, $alpha: -0.74);
       background: adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
-      border: 1px solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+      border: 0.1rem solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
 
       img {
         filter: prop.$icon-svg-hover-color;
@@ -149,50 +143,33 @@ $colors in $color-buttons {
   }
 }
 
-%field {
-  font-size: 2rem;
-  background: transparent;
-  padding: 5px 10px;
-  font-weight: 400;
-  font-style: normal;
-  border-radius: 5px;
-  appearance: none;
-  -moz-appearance: textfield;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
 
 @each $title,
 $colors in $color-fields {
 
   .field-#{$title} {
     @extend %field;
-    border: 2px solid nth($colors, 1);
+    border: 0.2rem solid nth($colors, 1);
     color: nth($colors, 2);
 
     &:not(:disabled, :focus):hover {
-      border: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
     }
 
     &:focus {
-      outline: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
-      border: 2px solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      outline: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
     }
 
     &:disabled {
-      border: 2px solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+      border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
     }
   }
 }
 
 .field-area {
   resize: none;
-  @include utils.scrollbar(prop.$scroll-slider-color, prop.$scroll-slider-body-color)
+  @extend %standard-scroll-bar;
 }
 
 .field-fail {

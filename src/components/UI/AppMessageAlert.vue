@@ -51,15 +51,15 @@ export default defineComponent({
   .message-alert {
     user-select: none;
     background: white;
-    margin: 10px 0;
-    padding: 15px 3em 15px 15px;
-    border-left-width: 5px;
+    margin: 1rem 0;
+    padding: 1.5rem 3em 1.5rem 1.5rem;
+    border-left-width: 0.5rem;
     border-left-style: solid;
   }
 
   .message-info {
-    @include util.fontStyle(prop.$info-color);
-    border-left-color: prop.$info-color;
+    @include util.fontStyle(prop.$primary-color);
+    border-left-color: prop.$primary-color;
   }
 
   .message-warning {

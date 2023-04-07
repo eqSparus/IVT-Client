@@ -7,22 +7,16 @@
            @keydown.esc="closeModal">
         <div class="modal-window" @click.stop>
 
-          <div v-if="title" class="modal-title">
-            <h3 class="fs-32">{{ title }}</h3>
-          </div>
+          <h3 v-if="title" class="modal-title fs-32">{{ title }}</h3>
 
           <div class="modal-content">
             <slot></slot>
           </div>
 
           <div class="modal-footer" v-if="isFooter">
-            <div v-if="$slots.footer">
-              <slot name="footer"></slot>
-            </div>
+            <slot v-if="$slots.footer" name="footer"></slot>
             <div class="footer-container" v-else>
-              <div class="block-end">
-                <input type="button" value="закрыть" class="btn-warning" @click="closeModal"/>
-              </div>
+              <input type="button" value="закрыть" class="btn-warning" @click="closeModal"/>
             </div>
           </div>
 
@@ -75,7 +69,8 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as utils;
+@use '@/assets/scss/utils.scss';
+@import '@/assets/scss/extends.scss';
 
 .modal-enter-active,
 .modal-leave-active {
@@ -96,54 +91,44 @@ export default defineComponent({
 }
 
 .background-modal-window {
-  @include utils.scrollbar(prop.$scroll-slider-color,
-    prop.$scroll-slider-body-color);
+  @extend %standard-scroll-bar;
   overflow-y: auto;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background: prop.$modal-window-area-color;
+  background: prop.$main-first-transparent-color;
   z-index: 99999;
 
   .modal-window {
-    background: prop.$modal-window-background-color;
     margin: 20vh auto;
-    border-radius: 20px;
+    background: prop.$main-second-color;
+    border-radius: 2rem;
     display: flex;
     flex-flow: column;
-    width: auto;
+    max-width: max-content;
 
     .modal-title {
-      padding: 10px 20px;
+      padding: 1rem 2rem;
       text-align: center;
-      border-bottom: 1px solid black;
-
-      h3 {
-        user-select: none;
-        @include utils.fontStyle($weight: 400, $color: prop.$modal-window-text-color);
-      }
+      border-bottom: 1px solid prop.$main-first-color;
+      user-select: none;
+      @include utils.fontStyle($color: prop.$main-first-color);
     }
 
     .modal-content {
-      padding: 20px;
+      padding: 2rem;
     }
 
     .modal-footer {
-      border-top: 1px solid black;
-      padding: 20px;
+      border-top: 1px solid prop.$main-first-color;
+      padding: 2rem;
 
       .footer-container {
         display: flex;
         flex-flow: column;
-
-        .block-end {
-          align-self: flex-end;
-        }
+        align-items: flex-end;
       }
     }
 

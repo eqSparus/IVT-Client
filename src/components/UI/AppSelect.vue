@@ -71,6 +71,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as props;
 @use '@/assets/scss/utils.scss' as utils;
+@import '@/assets/scss/extends.scss';
 
 .app-select {
   display: flex;
@@ -94,18 +95,17 @@ export default defineComponent({
     width: 100%;
     height: 300%;
     top: 100%;
-    background: props.$select-img-background-color;
-    border-bottom: 2px solid adjust-color($color: props.$info-color, $red: 37, $green: 26, $blue: -2);
-    border-right: 2px solid adjust-color($color: props.$info-color, $red: 37, $green: 26, $blue: -2);
-    border-left: 2px solid adjust-color($color: props.$info-color, $red: 37, $green: 26, $blue: -2);
+    background: props.$main-second-color;
+    border-bottom: 0.2rem solid adjust-color($color: props.$info-color, $red: 37, $green: 26, $blue: -2);
+    border-right: 0.2rem solid adjust-color($color: props.$info-color, $red: 37, $green: 26, $blue: -2);
+    border-left: 0.2rem solid adjust-color($color: props.$info-color, $red: 37, $green: 26, $blue: -2);
     border-radius: 0 0 5px 5px;
     overflow-y: scroll;
-    @include utils.scrollbar(props.$scroll-slider-color,
-      props.$scroll-slider-body-color);
+    @extend %standard-scroll-bar;
 
     .option {
       z-index: 444;
-      padding: 5px 15px;
+      padding: 0.5rem 1.5rem;
       font-size: 2rem;
 
       &:hover {
@@ -118,14 +118,14 @@ export default defineComponent({
   button {
     text-align: start;
     background: none;
-    border: props.$info-color solid 2px;
-    border-radius: 8px;
-    padding: 5px 15px 5px 15px;
+    border: props.$info-color solid 0.2rem;
+    border-radius: 0.8rem;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
     font-size: 2rem;
 
     &:hover {
       cursor: pointer;
-      border: 2px solid adjust-color($color: props.$info-color, $red: 37, $green: 26, $blue: -2);
+      border: 0.2rem solid adjust-color($color: props.$info-color, $red: 37, $green: 26, $blue: -2);
     }
   }
 }

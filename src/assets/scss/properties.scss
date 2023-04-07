@@ -1,4 +1,22 @@
-// Общее
+$primary-color: #6162FF;
+$warning-color: #FF9C18;
+$main-first-color: #111111;
+$main-first-extra-color:#282828;
+$main-first-additional-color: #333333;
+$main-first-transparent-color: #0000008f;
+$main-second-color: #FFFFFF;
+$main-second-additional-color: #ABAAB0;
+$main-second-transparent-color: #ABAAB0E5;
+
+$standard-font: default-font, Verdana, sans-serif;
+
+$icon-svg-hover-color: invert(97%) sepia(97%) saturate(0%) hue-rotate(308deg) brightness(104%) contrast(104%);
+$icon-svg-hover-color-info: invert(45%) sepia(83%) saturate(4231%) hue-rotate(226deg) brightness(99%) contrast(103%);
+$icon-svg-hover-color-primary: invert(45%) sepia(83%) saturate(4231%) hue-rotate(226deg) brightness(99%) contrast(103%);
+$icon-svg-hover-color-warning: invert(58%) sepia(75%) saturate(530%) hue-rotate(349deg) brightness(100%) contrast(102%);
+
+
+//============================================
 $button-standard-color: #6162FF;
 $button-standard-text-color: #FFFFFF;
 $button-warning-color: #FF9C18;
@@ -7,10 +25,7 @@ $field-standard-color: #6162FF;
 $field-standard-text-color: #111111;
 $scroll-slider-color: #6162FF;
 $scroll-slider-body-color: #333333;
-$standard-font: default-font, Verdana, sans-serif;
-$icon-svg-hover-color-info: invert(45%) sepia(83%) saturate(4231%) hue-rotate(226deg) brightness(99%) contrast(103%);
-$icon-svg-hover-color-warning: invert(58%) sepia(75%) saturate(530%) hue-rotate(349deg) brightness(100%) contrast(102%);
-$icon-svg-hover-color: invert(97%) sepia(97%) saturate(0%) hue-rotate(308deg) brightness(104%) contrast(104%);
+
 $select-img-border-color: #6162FF;
 $select-img-background-color: #FFFFFF;
 $select-img-background-hover-color: #ABAAB0;

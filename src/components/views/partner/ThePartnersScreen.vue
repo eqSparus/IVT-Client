@@ -1,5 +1,5 @@
 <template>
-  <app-base-screen title="Партнёры" :is-second="true">
+  <app-base-screen title="Партнёры" type-screen="second">
 
     <the-modal-add-partner :is-show="isShow"
                             @close="changeShowModal"/>

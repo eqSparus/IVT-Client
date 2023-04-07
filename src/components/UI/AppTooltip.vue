@@ -52,9 +52,9 @@ export default defineComponent({
     position: absolute;
     bottom: 1rem;
     left: 30%;
-    background: #ABAAB0E5;
-    color: black;
-    padding: 10px 10px;
+    background: props.$main-second-transparent-color;
+    color: props.$main-first-color;
+    padding: 1rem 1rem;
     font-size: 1.5rem;
     max-width: 25rem;
 
@@ -63,11 +63,11 @@ export default defineComponent({
       content: "";
       width: 0;
       height: 0;
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-top: 10px solid #ABAAB0E5;
+      border-left: 0.8rem solid transparent;
+      border-right: 0.8rem solid transparent;
+      border-top: 1rem solid props.$main-second-transparent-color;
       left: 20%;
-      bottom: -10px;
+      bottom: -1rem;
     }
   }
 }

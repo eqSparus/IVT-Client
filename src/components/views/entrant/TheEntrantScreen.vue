@@ -1,5 +1,5 @@
 <template>
-  <app-base-screen title="Абитуриенту" :is-second="true">
+  <app-base-screen title="Абитуриенту" type-screen="second">
 
     <the-modal-change-entrant :is-show="isShow"
                               @close="changeShowModal"/>

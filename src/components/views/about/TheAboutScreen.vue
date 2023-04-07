@@ -1,9 +1,9 @@
 <template>
-  <app-base-screen title="О кафедре" :is-second="true">
+  <app-base-screen title="О кафедре" type-screen="second">
 
     <the-modal-edit-about :abouts="abouts"
-                            :is-show="isShow"
-                            @close="changeShowModal"/>
+                          :is-show="isShow"
+                          @close="changeShowModal"/>
 
     <div class="about-change mb-20" v-if="isAuth">
       <input type="button"
@@ -55,7 +55,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.about-change{
+.about-change {
   display: flex;
   justify-content: center;
 }

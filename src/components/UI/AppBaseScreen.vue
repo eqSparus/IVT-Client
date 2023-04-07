@@ -1,8 +1,8 @@
 <template>
-  <section :class="[isSecond ? 'second' : 'main', 'base-screen']">
+  <section :class="[typeScreen, 'base-screen']">
     <div class="base-screen-container">
 
-      <div class="base-screen-title">
+      <div v-if="title" class="base-screen-title">
         <h1 class="fs-48">
           {{ title }}
         </h1>
@@ -17,18 +17,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+
+export type TypeScreen = 'main' | 'second';
 
 export default defineComponent({
   icon: 'AppBaseScreen',
   props: {
     title: {
       type: String,
-      required: true,
+      default: '',
     },
-    isSecond: {
-      type: Boolean,
-      default: false,
+    typeScreen: {
+      type: String as PropType<TypeScreen>,
+      default: 'main',
     },
   },
 });
@@ -36,21 +38,22 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
 
 .base-screen {
   width: 100vw;
   overflow: hidden;
   height: 100%;
-  padding: 5.2% 0 13% 0;
+  padding: 10rem 0 25rem 0;
 
   &.main {
-    background: prop.$base-screen-main-background-color;
-    color: prop.$base-screen-main-text-color;
+    background: prop.$main-first-color;
+    color: prop.$main-second-color;
   }
 
   &.second {
-    background: prop.$base-screen-second-background-color;
-    color: prop.$base-screen-second-text-color;
+    background: prop.$main-second-color;
+    color: prop.$main-first-color;
   }
 
   .base-screen-container {
@@ -60,15 +63,12 @@ export default defineComponent({
     width: 90%;
 
     .base-screen-title {
-
-      h1 {
-        font-weight: 700;
-        font-style: normal;
-      }
+      font-weight: 700;
+      font-style: normal;
     }
 
     .base-screen-content {
-      margin-top: 4.6%;
+      margin-top: 8rem;
     }
   }
 }

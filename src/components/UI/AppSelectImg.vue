@@ -80,13 +80,13 @@ export default defineComponent({
   }
 
   .active-option {
-    padding: 5px 15px;
-    border: 2px solid prop.$select-img-border-color;
-    border-radius: 5px;
+    padding: 0.5rem 1.5rem;
+    border: 0.2rem solid prop.$primary-color;
+    border-radius: 0.5rem;
 
     &:not(:focus):hover {
       cursor: pointer;
-      border: 2px solid adjust-color($color: prop.$select-img-border-color, $red: 37, $green: 26, $blue: -2);
+      border: 0.2rem solid adjust-color($color: prop.$primary-color, $red: 37, $green: 26, $blue: -2);
     }
   }
 
@@ -94,19 +94,19 @@ export default defineComponent({
     z-index: 333;
     position: absolute;
     top: 100%;
-    background: prop.$select-img-background-color;
-    border-bottom: 2px solid adjust-color($color: prop.$select-img-border-color, $red: 37, $green: 26, $blue: -2);
-    border-right: 2px solid adjust-color($color: prop.$select-img-border-color, $red: 37, $green: 26, $blue: -2);
-    border-left: 2px solid adjust-color($color: prop.$select-img-border-color, $red: 37, $green: 26, $blue: -2);
-    border-radius: 0 0 5px 5px;
+    background: prop.$main-second-color;
+    border-bottom: 0.2rem solid adjust-color($color: prop.$primary-color, $red: 37, $green: 26, $blue: -2);
+    border-right: 0.2rem solid adjust-color($color: prop.$primary-color, $red: 37, $green: 26, $blue: -2);
+    border-left: 0.2rem solid adjust-color($color: prop.$primary-color, $red: 37, $green: 26, $blue: -2);
+    border-radius: 0 0 0.5rem 0.5rem;
 
     .item-select {
       z-index: 444;
-      padding: 5px 15px;
+      padding: 0.5rem 1.5rem;
 
       &:hover {
         cursor: pointer;
-        background: prop.$select-img-background-hover-color;
+        background: prop.$main-second-additional-color;
       }
     }
   }

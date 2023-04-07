@@ -110,9 +110,6 @@ export default defineComponent(
   width: 100vw;
   height: 100%;
   padding: 15% 10%;
-
-  // display: grid;
-  // grid-template-columns: 1.5fr 1fr;
   display: flex;
   flex-flow: row;
   justify-content: space-between;
@@ -121,8 +118,7 @@ export default defineComponent(
     align-self: flex-end;
 
     .begin-screen-button {
-      // margin-top: 5%;
-      margin-top: 7%;
+      margin-top: 7.5rem;
 
       input {
         margin-right: 2rem;
@@ -130,8 +126,7 @@ export default defineComponent(
     }
 
     .begin-screen-links {
-      // margin-top: 7%;
-      margin-top: 9%;
+      margin-top: 10rem;
 
       a {
         margin-right: 2rem;

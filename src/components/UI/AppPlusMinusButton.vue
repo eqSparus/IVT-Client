@@ -29,25 +29,23 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as props;
 @use '@/assets/scss/utils.scss' as utils;
 
-$color-hover: #282828;
-$color: adjust-color(props.$direction-item-background-color, $red: 160, $green: 160, $blue: 160);
+$color: adjust-color(props.$main-first-extra-color, $red: 160, $green: 160, $blue: 160);
 
 .btn-plus {
   background: none;
-  border-radius: 8px;
-  border: 3px solid $color;
+  border-radius: 0.8rem;
+  border: 0.3rem solid $color;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: $color;
-  font-weight: 700;
+  @include utils.fontStyle($color: $color, $weight: 700);
   font-size: utils.calcFontSize(18, 24, 1024, 1920);
 
   &:hover {
     transition: all 0.2s ease-in;
     cursor: pointer;
-    color: $color-hover;
-    border: 3px solid $color-hover;
+    color: props.$main-first-extra-color;
+    border: 0.3rem solid props.$main-first-extra-color;
   }
 }
 

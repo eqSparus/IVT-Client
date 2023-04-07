@@ -46,7 +46,7 @@ $red: #D52B1E;
 .spin-w {
   width: 20vw;
   height: 20vw;
-  border: 8px solid;
+  border: 0.8rem solid;
   border-color: transparent $while transparent $while;
   border-radius: 50%;
   animation: spinner 5s linear infinite;
@@ -55,7 +55,7 @@ $red: #D52B1E;
 .spin-b {
   width: 90%;
   height: 90%;
-  border: 8px solid;
+  border: 0.8rem solid;
   border-color: $blue transparent $blue transparent;
   border-radius: 50%;
   animation: spinner 5s linear infinite;
@@ -64,7 +64,7 @@ $red: #D52B1E;
 .spin-r {
   width: 90%;
   height: 90%;
-  border: 8px solid;
+  border: 0.8rem solid;
   border-color: transparent $red transparent $red;
   border-radius: 50%;
   animation: spinner 5s linear infinite;

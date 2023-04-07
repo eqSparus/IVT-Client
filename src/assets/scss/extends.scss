@@ -1,0 +1,35 @@
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss' as utils;
+
+%standard-scroll-bar {
+  @include utils.scrollbar(prop.$primary-color,
+          prop.$main-first-additional-color);
+}
+
+
+%btn {
+  font-family: prop.$standard-font;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:not(:disabled):hover {
+    transition: 0.2s;
+  }
+
+  &:disabled {
+    cursor: default
+  }
+}
+
+%field {
+  font-size: 2rem;
+  background: transparent;
+  padding: 0.5rem 1rem;
+  font-weight: 400;
+  font-style: normal;
+  border-radius: 0.5rem;
+  appearance: none;
+  -moz-appearance: textfield;
+}

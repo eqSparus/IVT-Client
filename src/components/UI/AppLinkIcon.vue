@@ -1,6 +1,6 @@
 <template>
   <a class="link-icon" :href="href" target="_blank">
-    <img :src="icon" :alt="alt" />
+    <img :src="icon" :alt="alt"/>
   </a>
 </template>
 
@@ -31,8 +31,14 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as props;
 
 .link-icon {
+
   &:hover {
-    filter: props.$icon-svg-hover-color-info;
+    filter: props.$icon-svg-hover-color-primary;
+  }
+
+  img {
+    width: 2.4rem;
+    height: 2.4rem;
   }
 }
 </style>
