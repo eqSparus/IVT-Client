@@ -185,8 +185,13 @@ button {
   margin-top: 8rem;
 
   &:hover {
-    color: adjust-color($color: prop.$info-color, $red: 37, $green: 26, $blue: -2);;
+    color: adjust-color($color: prop.$info-color, $red: 37, $green: 26, $blue: -2);
     cursor: pointer;
+  }
+
+  &:focus {
+    color: adjust-color($color: prop.$info-color, $red: 37, $green: 26, $blue: -2);
+    outline: none;
   }
 }
 

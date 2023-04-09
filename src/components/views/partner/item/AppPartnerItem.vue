@@ -55,6 +55,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/properties.scss' as prop;
 
 .partner-item {
   display: flex;
@@ -64,6 +65,10 @@ export default defineComponent({
   a {
     img {
       width: 30rem;
+    }
+    &:focus{
+      outline: none;
+      border-bottom: 0.2rem solid prop.$info-color;
     }
   }
 

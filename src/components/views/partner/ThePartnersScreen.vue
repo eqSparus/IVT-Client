@@ -2,7 +2,7 @@
   <app-base-screen title="Партнёры" type-screen="second">
 
     <the-modal-add-partner :is-show="isShow"
-                            @close="changeShowModal"/>
+                           @close="changeShowModal"/>
 
     <div class="partners-change" v-if="isAuth">
       <input type="button"

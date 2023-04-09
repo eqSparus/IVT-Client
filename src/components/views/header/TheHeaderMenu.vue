@@ -2,6 +2,7 @@
   <header class="header"
           @mouseover="isShowMenu = true"
           @mouseleave="isShowMenu = isPhone"
+          tabindex="0"
           @focus="isShowMenu = true"
           @blur="isShowMenu = isPhone">
 
@@ -27,6 +28,9 @@
             <li v-for="(anchor, index) in anchors" :key="anchor.title"
                 :class="{'link-margin': index !== anchors.length - 1, 'link': true, 'fs-24': true}"
                 @click="scrollTo(anchor.select)"
+                tabindex="0"
+                @focus="isShowMenu = true"
+                @blur="isShowMenu = false"
                 @keyup.enter="scrollTo(anchor.select)">
               {{ anchor.title }}
             </li>
@@ -35,6 +39,8 @@
           <div class="header-menu-button">
             <input type="button"
                    :value="textBtn"
+                   @focus="isShowMenu = true"
+                   @blur="isShowMenu = false"
                    :class="textBtn === 'выйти'? 'btn-warning-sm': 'btn-standard-sm'"
                    @click="eventLoginOrLogout"/>
           </div>
@@ -82,8 +88,8 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const isPhone = window.screen.width < 1100;
-    const isShowMenu = ref<boolean>(isPhone);
+    const isPhone = computed(() => window.screen.width < 1100);
+    const isShowMenu = ref<boolean>(isPhone.value);
     const { scrollTo } = useScroll();
 
     const {
@@ -127,6 +133,10 @@ export default defineComponent({
   height: 9%;
   width: 100%;
   z-index: 555;
+
+  &:focus {
+    outline: none;
+  }
 
   .header-leave-to,
   .header-enter-from {
@@ -252,6 +262,11 @@ export default defineComponent({
           &:hover {
             color: prop.$primary-color;
             cursor: pointer;
+          }
+
+          &:focus {
+            color: prop.$primary-color;
+            outline: none;
           }
         }
       }

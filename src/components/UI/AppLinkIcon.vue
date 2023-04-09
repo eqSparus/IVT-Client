@@ -36,6 +36,11 @@ export default defineComponent({
     filter: props.$icon-svg-hover-color-primary;
   }
 
+  &:focus {
+    filter: props.$icon-svg-hover-color-primary;
+    outline: none;
+  }
+
   img {
     width: 2.4rem;
     height: 2.4rem;
