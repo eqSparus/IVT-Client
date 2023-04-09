@@ -125,6 +125,11 @@ export default defineComponent({
             type: 'warning',
           });
         }
+      } else {
+        alerts.value.push({
+          message: 'Данные не изменены',
+          type: 'warning',
+        });
       }
     };
 

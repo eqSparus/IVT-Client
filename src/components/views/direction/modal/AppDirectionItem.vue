@@ -87,6 +87,7 @@ import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
 import arrowCircleArrow from '@/assets/images/icons/arrow-circle.svg';
 import useEditDirection from '@/hooks/useEditDirection';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'AppDirectionsItem',
@@ -106,6 +107,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const { alerts } = useAlerts();
     const {
       direction: editDirection,
       valid,
@@ -123,6 +125,11 @@ export default defineComponent({
         || editDirection.value.form !== props.direction.form
         || editDirection.value.duration !== props.direction.duration) {
         emit('update', editDirection.value);
+      } else {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Данные не изменены',
+        });
       }
     };
 

@@ -30,12 +30,10 @@
                @change="uploadImg"
                style="display: none"
                id="img-teacher">
-        <button @click="updateImgTeacher"
-                class="btn-standard-icon btn-position mt-20">
-          <img :src="refreshIcon"
-               class="icon-trashcan"
-               alt="assets/images/icon/refresh.svg">
-        </button>
+        <input type="button"
+               value="обновить"
+               class="btn-standard mt-20"
+               @click="updateImgTeacher">
       </div>
 
       <div class="edit-block ml-20">
@@ -213,6 +211,11 @@ export default defineComponent({
             message: 'Не удалось обновить преподавателя',
           });
         }
+      } else {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Данные не изменены',
+        });
       }
     };
 

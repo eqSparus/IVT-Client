@@ -49,7 +49,7 @@
         </transition-group>
       </div>
 
-      <button v-if="allTeachers.length > 4" class="fs-24" @click="changeIsAll">
+      <button v-if="allTeachers.length > 5" class="fs-24" @click="changeIsAll">
         {{ textIsAll }}
       </button>
 
@@ -98,7 +98,7 @@ export default defineComponent({
       if (isAll.value) {
         return store.getters['teacher/getTeachers'];
       }
-      return store.getters['teacher/getTeachers'].slice(0, 4);
+      return store.getters['teacher/getTeachers'].slice(0, 5);
     });
 
     return {

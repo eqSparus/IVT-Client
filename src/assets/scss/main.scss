@@ -8,6 +8,7 @@
 $color-buttons: (
         "standard": (prop.$primary-color, prop.$main-second-color),
         "warning": (prop.$warning-color, prop.$main-second-color),
+        "transparent": (transparent, prop.$main-second-color),
 );
 
 $color-fields: (

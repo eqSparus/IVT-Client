@@ -44,6 +44,7 @@ import refreshIcon from '@/assets/images/icons/refresh.svg';
 import { Link } from '@/types/SiteContentTypes';
 import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'AppLinkItem',
@@ -60,6 +61,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const { alerts } = useAlerts();
     const editLink = ref<Link>({
       id: props.link.id,
       href: props.link.href,
@@ -77,6 +79,11 @@ export default defineComponent({
       if (props.link.icon !== editLink.value.icon
         || props.link.href !== editLink.value.href) {
         emit('updateLink', editLink.value);
+      } else {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Данные не изменены',
+        });
       }
     };
 

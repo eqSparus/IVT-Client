@@ -41,6 +41,7 @@ import { defineComponent, PropType, ref } from 'vue';
 import { AboutDepartment } from '@/types/SiteContentTypes';
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   name: 'AppEditAboutBlock',
@@ -52,6 +53,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const { alerts } = useAlerts();
     const changeAbout = ref({
       id: props.about.id,
       title: props.about.title,
@@ -71,6 +73,11 @@ export default defineComponent({
       if (props.about.title !== changeAbout.value.title
         || props.about.description !== changeAbout.value.description) {
         emit('update', changeAbout.value);
+      } else {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Данные не изменены',
+        });
       }
     };
 

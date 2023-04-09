@@ -112,6 +112,10 @@ export default defineComponent(
   padding: 15% 10%;
   display: flex;
 
+  @media only screen and (max-width: 1000px){
+    padding-top: 30%;
+  }
+
   @media only screen and (min-width: 1000px) {
     flex-flow: row;
   }

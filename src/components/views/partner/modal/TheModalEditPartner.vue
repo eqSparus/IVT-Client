@@ -138,6 +138,11 @@ export default defineComponent({
             message: 'Не удалось обновить партнера',
           });
         }
+      } else {
+        alerts.value.push({
+          type: 'warning',
+          message: 'Данные не изменены',
+        });
       }
     };
 
