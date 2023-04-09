@@ -39,14 +39,19 @@ export default defineComponent({
   display: flex;
   flex-flow: column;
 
+  @media only screen and (max-width: 1000px){
+    text-align: center;
+    align-items: center;
+  }
+
   .item-icon {
-    width: 78px;
-    height: 78px;
+    width: 7.8rem;
+    height: 7.8rem;
 
     .circle {
       position: relative;
-      width: 58px;
-      height: 58px;
+      width: 5.8rem;
+      height: 5.8rem;
       border-radius: 50%;
       background: prop.$about-item-circle-color;
 
@@ -55,8 +60,8 @@ export default defineComponent({
         position: absolute;
         top: 25%;
         right: 25%;
-        width: 64px;
-        height: 64px;
+        width: 6.4rem;
+        height: 6.4rem;
       }
     }
 

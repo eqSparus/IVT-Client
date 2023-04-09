@@ -60,7 +60,7 @@ export default defineComponent({
 
 .partners-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(33.3%, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   justify-items: center;
   row-gap: 50%;
 }

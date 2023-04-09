@@ -2,9 +2,9 @@
   <section class="begin-screen">
 
     <the-modal-edit-department :is-show="isShowDepartment"
-                                 @close="changeShowModalDepartment"
-                                 :department="department"
-                                 :links="links"/>
+                               @close="changeShowModalDepartment"
+                               :department="department"
+                               :links="links"/>
 
     <the-modal-setting-account :is-show="isShowAccount"
                                @close="changeShowModalAccount"/>
@@ -40,6 +40,7 @@
     </div>
 
     <div class="begin-screen-block-right">
+      <div class="img-background"></div>
       <img src="@/assets/images/logo.svg" alt="/assets/images/logo.svg"/>
     </div>
 
@@ -106,27 +107,61 @@ export default defineComponent(
 @use '@/assets/scss/utils.scss' as utils;
 
 .begin-screen {
-  background: prop.$begin-screen-background-color;
+  background: prop.$main-first-color;
   width: 100vw;
-  height: 100%;
   padding: 15% 10%;
   display: flex;
-  flex-flow: row;
-  justify-content: space-between;
+
+  @media only screen and (min-width: 1000px) {
+    flex-flow: row;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    flex-flow: column;
+
+    & > div[class="begin-screen-block-left"] {
+      margin-top: 10rem;
+      order: 2;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      text-align: center;
+
+      h1 {
+        display: none;
+      }
+
+      a {
+        display: none;
+      }
+    }
+
+    & > div {
+      order: 1;
+    }
+  }
 
   .begin-screen-block-left {
-    align-self: flex-end;
+    flex: 2;
 
     .begin-screen-button {
       margin-top: 7.5rem;
 
       input {
-        margin-right: 2rem;
+        @media only screen and (min-width: 1000px) {
+          margin-right: 2rem;
+        }
+
+        @media only screen and (max-width: 1000px) {
+          margin-top: 2rem;
+        }
       }
     }
 
     .begin-screen-links {
-      margin-top: 10rem;
+      @media only screen and (min-width: 1000px) {
+        margin-top: 10rem;
+      }
 
       a {
         margin-right: 2rem;
@@ -134,45 +169,41 @@ export default defineComponent(
     }
 
     h1 {
-      line-height: 99%;
-      @include utils.fontStyle($color: prop.$begin-screen-title-color,
-      $weight: 700);
+      @include utils.fontStyle($color: prop.$main-second-color, $weight: 700);
       user-select: none;
     }
 
     h3 {
-      @include utils.fontStyle($weight: 300,
-      $color: prop.$begin-screen-description-color);
+      @include utils.fontStyle($weight: 300, $color: prop.$main-second-additional-color);
       user-select: none;
-      // margin-top: 2.5%;
-      margin-top: 3.5%;
+      margin-top: 4rem;
     }
   }
 
   .begin-screen-block-right {
-    // justify-self: flex-end;
     align-self: center;
+    flex: 1;
+
+    .img-background {
+      filter: blur(6.55rem);
+      background: adjust-color($color: prop.$primary-color, $alpha: -0.8);
+    }
 
     img {
       height: auto;
+      width: 45vw;
+      max-width: 45rem;
+    }
 
-      @media screen and (max-width: 1920px) {
-        & {
-          width: 455px;
-        }
-
+    @media screen and (max-width: 1000px) {
+      .img-background {
+        position: absolute;
+        width: 45vw;
+        height: 45vw;
       }
 
-      @media screen and (max-width: 1500px) {
-        & {
-          width: 300px;
-        }
-      }
-
-      @media screen and (max-width: 1200px) {
-        & {
-          width: 250px;
-        }
+      img {
+        transform: perspective(25rem) rotateY(-5deg) rotateX(5deg) rotateZ(5deg);
       }
     }
   }

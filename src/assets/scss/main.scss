@@ -15,8 +15,8 @@ $color-fields: (
 );
 
 $property-buttons: (
-        "":(p-x: 3.1rem, p-y: 1.4rem, radius: 0.4rem, border: 0.1rem, font-size: 1.4rem, font-weight: 500),
-        "-sm":(p-x: 1rem, p-y: 0.7rem, radius: 0.5rem, border: 0.1rem, font-size: 1.2rem, font-weight: 500),
+        "":(p-x: 31px, p-y: 14px, radius: 4px, border: 1px, font-size: 14px, font-weight: 500),
+        "-sm":(p-x: 10px, p-y: 7px, radius: 5px, border: 1px, font-size: 12px, font-weight: 500),
 );
 
 $font-size-text: (
@@ -53,17 +53,17 @@ $spacing-type: (
 html {
   @extend %standard-scroll-bar;
 
-  @media screen and (-webkit-min-device-pixel-ratio: 1) {
+  @media only screen and ((-webkit-min-device-pixel-ratio: 1) or (min-device-pixel-ratio: 1)) and (min-width: 2000px) {
+    font-size: 16px;
+  }
+  @media only screen and ((-webkit-min-device-pixel-ratio: 1) or (min-device-pixel-ratio: 1)) and (max-width: 2000px) {
     font-size: 10px;
   }
-  @media screen and (-webkit-min-device-pixel-ratio: 2) {
+  @media only screen and ((-webkit-min-device-pixel-ratio: 1) or (min-device-pixel-ratio: 1)) and (max-width: 1400px) {
+    font-size: 8px;
+  }
+  @media only screen and ((-webkit-min-device-pixel-ratio: 2) or (min-device-pixel-ratio: 2)) {
     font-size: 7.5px;
-  }
-  @media screen and (-webkit-min-device-pixel-ratio: 3) {
-    font-size: 5px;
-  }
-  @media screen and (-webkit-min-device-pixel-ratio: 4) {
-    font-size: 2.5px;
   }
 
   body {
@@ -181,6 +181,7 @@ $colors in $color-fields {
   color: black;
   font-size: 2rem;
 }
+//#{$size / 10}rem
 
 @each $size in $font-size-text {
   .fs-#{$size} {

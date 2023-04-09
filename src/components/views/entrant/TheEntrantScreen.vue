@@ -54,8 +54,11 @@ export default defineComponent({
 .entrant-screen-container {
   display: grid;
   grid-template-columns: 1fr;
-  width: 95%;
   margin: 0 auto;
+
+  @media only screen and (min-width: 1000px) {
+    width: 95%;
+  }
 
   .entrant-change {
     display: flex;

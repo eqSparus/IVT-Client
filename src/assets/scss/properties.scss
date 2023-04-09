@@ -1,12 +1,18 @@
 $primary-color: #6162FF;
 $warning-color: #FF9C18;
 $main-first-color: #111111;
-$main-first-extra-color:#282828;
+$main-first-extra-color: #282828;
+$main-first-elevate-color: #2E2E2E;
 $main-first-additional-color: #333333;
+$main-first-dark-color: #000000;
 $main-first-transparent-color: #0000008f;
+$main-first-transparent-menu-color: #1A1A1A22;
 $main-second-color: #FFFFFF;
 $main-second-additional-color: #ABAAB0;
 $main-second-transparent-color: #ABAAB0E5;
+$main-second-text-transparent-color: #FFFFFF80;
+
+
 
 $standard-font: default-font, Verdana, sans-serif;
 
@@ -69,7 +75,6 @@ $direction-item-text-color: #FFFFFF80;
 // Элемент списка информации абитуриенту
 $entrant-item-title-color: #000000;
 $entrant-item-title-content-color: #111111;
-$entrant-item-content-color: #2E2E2E;
 
 // Экран преподавателей
 $teacher-screen-color-line: #6162FF;

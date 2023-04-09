@@ -58,12 +58,22 @@ export default defineComponent({
 .about-change {
   display: flex;
   justify-content: center;
+  height: 100%;
 }
 
 .about-screen-container {
   display: flex;
-  flex-flow: row;
-  justify-content: center;
-  gap: 5%;
+
+  @media only screen and (min-width: 1000px) {
+    flex-flow: row;
+    justify-content: center;
+    column-gap: 5%;
+  }
+
+  @media only screen and (max-width: 1000px) {
+    flex-flow: column;
+    align-items: center;
+    row-gap: 8rem;
+  }
 }
 </style>

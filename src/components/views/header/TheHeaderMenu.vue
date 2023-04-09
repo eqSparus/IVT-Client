@@ -131,7 +131,7 @@ export default defineComponent({
 
   .hint-leave-to,
   .hint-enter-from {
-    transform: translateY(70px);
+    transform: translateY(7rem);
     opacity: 0;
   }
 
@@ -145,11 +145,11 @@ export default defineComponent({
     justify-content: center;
 
     .hint-block {
-      padding: 3px;
-      border-radius: 0 0 10px 10px;
+      padding: 0.3rem;
+      border-radius: 0 0 1rem 1rem;
       width: 10%;
-      background: prop.$header-hint-block-color;
-      border: 1px solid prop.$header-hint-block-color;
+      background: prop.$primary-color;
+      border: 0.1rem solid prop.$primary-color;
     }
   }
 
@@ -163,11 +163,11 @@ export default defineComponent({
 
     .header-logo {
       align-self: center;
-      margin-left: 2.5%;
+      margin-left: 6rem;
 
       img {
-        width: 41px;
-        height: 41px;
+        width: 4.1rem;
+        height: 4.1rem;
       }
     }
 
@@ -181,13 +181,13 @@ export default defineComponent({
 
       .header-menu-links {
 
-        background: prop.$header-background-menu-color;
-        border-radius: 143px;
+        background: prop.$main-first-transparent-menu-color;
+        border-radius: 14.3rem;
         mix-blend-mode: difference;
         padding: 1.4rem 3rem;
 
         .link {
-          @include utils.fontStyle($color: prop.$header-link-color);
+          @include utils.fontStyle($color: prop.$main-second-additional-color);
           border: none;
           background: transparent;
 
@@ -196,14 +196,14 @@ export default defineComponent({
           }
 
           &:hover {
-            color: prop.$header-link-hover-color;
+            color: prop.$primary-color;
             cursor: pointer;
           }
         }
       }
 
       .header-menu-button {
-        margin: 0 2.5% 0 2.5%;
+        margin: 0 7rem 0 7rem;
       }
     }
 

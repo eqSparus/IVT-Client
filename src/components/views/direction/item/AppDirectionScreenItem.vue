@@ -60,35 +60,30 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
 
-//@media screen and (min-width: 1500px) {
-//  .item-size {
-//    width: 415px;
-//  }
-//
-//  img {
-//    width: 415px;
-//  }
-//}
-//
-//@media screen and (max-width: 1500px) {
-//  .item-size {
-//    width: 300px;
-//  }
-//
-//  img {
-//    width: 300px;
-//  }
-//}
-
 .item {
   display: flex;
-  flex-flow: column;
-  border-radius: 8px;
-  background: prop.$direction-item-background-color;
+  border-radius: 0.8rem;
+  background: prop.$main-first-extra-color;
+  //background: linear-gradient(90deg, prop.$main-first-extra-color, 95%, #545454 100%);
 
-  //&.item-size {
-  //  width: 100%;
-  //}
+  @media only screen and (min-width: 1080px) {
+    flex-flow: column;
+  }
+
+  @media only screen and (max-width: 1080px) {
+    flex-flow: row;
+
+    & > div[class="item-drawing"] {
+      order: 2;
+    }
+
+    & > div[class="item-content-container"] {
+      .item-content {
+        align-self: flex-end;
+        padding: 5% 11%;
+      }
+    }
+  }
 
   .item-drawing {
     display: flex;
@@ -96,8 +91,14 @@ export default defineComponent({
     justify-content: flex-end;
 
     img {
+      height: auto;
       width: 100%;
-      border-radius: 8px 8px 0 0;
+      border-radius: 0.8rem 0.8rem 0 0;
+
+      @media only screen and (max-width: 1080px) {
+        width: auto;
+        height: 120px;
+      }
     }
   }
 
@@ -112,12 +113,12 @@ export default defineComponent({
 
       .title {
         @include utils.fontStyle($weight: 700,
-        $color: prop.$direction-item-title-color);
+        $color: prop.$main-second-color);
       }
 
       span {
         display: block;
-        @include utils.fontStyle($color: prop.$direction-item-text-color);
+        @include utils.fontStyle($color: prop.$main-second-text-transparent-color);
       }
 
     }

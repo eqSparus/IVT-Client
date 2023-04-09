@@ -65,6 +65,12 @@ export default defineComponent({
   }
 }
 
+@media screen and (max-width: 1000px) {
+  .map {
+    display: none;
+  }
+}
+
 .footer-container {
   background: prop.$footer-background-color;
   padding-top: 5rem;
@@ -75,12 +81,21 @@ export default defineComponent({
 
 
   .information {
-
     display: flex;
-    flex-flow: row;
-    justify-content: space-around;
-    margin-top: 2.5%;
-    margin-bottom: 1.5%;
+    margin-bottom: 3rem;
+
+    @media only screen and (min-width: 1000px) {
+      margin-top: 3rem;
+      flex-flow: row;
+      justify-content: space-around;
+    }
+
+    @media only screen and (max-width: 1000px) {
+      flex-flow: column;
+      align-items: center;
+      text-align: center;
+      row-gap: 3rem;
+    }
 
     .span-new-line {
       display: block;

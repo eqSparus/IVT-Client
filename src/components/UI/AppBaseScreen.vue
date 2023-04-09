@@ -65,6 +65,10 @@ export default defineComponent({
     .base-screen-title {
       font-weight: 700;
       font-style: normal;
+
+      @media only screen and (orientation: portrait){
+        text-align: center;
+      }
     }
 
     .base-screen-content {

@@ -1,12 +1,18 @@
-@mixin button-size($font-weight: 500, $font-size: 2rem, $border-radius: 0, $p-x: 3rem, $p-y: 1.5rem) {
+@mixin button-size($font-weight: 500, $font-size: 2px, $border-radius: 0, $p-x: 30px, $p-y: 15px) {
     border-radius: $border-radius;
     font-weight: $font-weight;
     font-size: $font-size;
     padding: $p-y $p-x;
+
+    @media only screen and (min-width: 2000px){
+        border-radius: $border-radius * 1.5;
+        font-weight: $font-weight * 1.5;
+        font-size: $font-size * 1.5;
+        padding: $p-y * 1.5 $p-x * 1.5;
+    }
 }
 
 @mixin scrollbar($color-slider, $color-body) {
-
     scrollbar-width: thin;
     scrollbar-color: $color-slider $color-body;
 

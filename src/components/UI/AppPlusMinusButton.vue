@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-plus" @click="$emit('action')">
+  <button class="btn-plus fs-24" @click="$emit('action')">
     {{ type }}
   </button>
 </template>
@@ -39,7 +39,6 @@ $color: adjust-color(props.$main-first-extra-color, $red: 160, $green: 160, $blu
   justify-content: center;
   align-items: center;
   @include utils.fontStyle($color: $color, $weight: 700);
-  font-size: utils.calcFontSize(18, 24, 1024, 1920);
 
   &:hover {
     transition: all 0.2s ease-in;
