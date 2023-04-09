@@ -98,7 +98,7 @@ export default defineComponent({
   left: 0;
   right: 0;
   bottom: 0;
-  background: prop.$main-first-transparent-color;
+  background: prop.$main-first-dark-transparent-color;
   z-index: 99999;
 
   .modal-window {

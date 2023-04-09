@@ -134,10 +134,9 @@ export default defineComponent({
   display: flex;
   flex-flow: column;
   justify-content: center;
-  width: 95%;
 
   .block-top {
-    margin-bottom: 8.5%;
+    margin-bottom: 4rem;
   }
 
   .block-bottom {
@@ -145,6 +144,26 @@ export default defineComponent({
     flex-flow: row;
     justify-content: space-between;
   }
+
+  .list-teacher {
+    display: flex;
+    flex-flow: column;
+
+    .teacher {
+      width: 80%;
+      margin: 3.2% auto 0 auto;
+
+      @media only screen and (max-width: 1080px) {
+        width: 100%;
+      }
+
+      &:first-child {
+        margin-top: 0;
+        width: 100%;
+      }
+    }
+  }
+
 }
 
 .teacher-enter-active,
@@ -158,28 +177,12 @@ export default defineComponent({
   opacity: 0;
 }
 
-.list-teacher {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-
-  .teacher {
-    margin-top: 3.2%;
-    width: 90%;
-
-    &:first-child {
-      margin-top: 0;
-      width: 100%;
-    }
-  }
-}
-
 button {
   border: none;
   background: none;
   text-transform: uppercase;
   color: prop.$info-color;
-  margin-top: 5%;
+  margin-top: 8rem;
 
   &:hover {
     color: adjust-color($color: prop.$info-color, $red: 37, $green: 26, $blue: -2);;
@@ -188,11 +191,11 @@ button {
 }
 
 .content {
-  @include utils.fontStyle($color: prop.$teacher-screen-main-color);
+  @include utils.fontStyle($color: prop.$main-first-color);
 }
 
 .additional {
-  @include utils.fontStyle($color: prop.$teacher-screen-additional-color);
+  @include utils.fontStyle($color: prop.$main-first-dark-transparent-color);
 }
 
 .span-new-line {

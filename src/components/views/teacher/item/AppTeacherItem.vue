@@ -1,12 +1,10 @@
 <template>
-  <div class="item-container">
-    <div class="line mr-20" v-if="!isMain">
-    </div>
+  <div :class="{'item-container': !isMain}">
     <div class="item">
 
       <img :src="teacher.urlImg" :class="[isMain ? 'img-size-main' : 'img-size']" alt="Фотография преподавателя"/>
 
-      <div class="item-container">
+      <div class="item-content ml-30">
 
         <div class="block-main-left" v-if="isMain">
           <span class="span-new-line header fs-32">{{ teacher.lastName }}</span>
@@ -24,7 +22,9 @@
           <slot></slot>
         </div>
         <div v-else class="block-secondary-right">
-          <span v-if="teacher.postDepartment" class="fs-20 post span-new-line mt-10">{{ teacher.postDepartment }}</span>
+            <span v-if="teacher.postDepartment" class="fs-20 post span-new-line mt-10">{{
+                teacher.postDepartment
+              }}</span>
           <span class="fs-20 content span-new-line mt-10">{{ teacher.postTeacher }}</span>
           <span class="fs-20 content span-new-line mt-10">{{ teacher.postAdditional }}</span>
         </div>
@@ -58,19 +58,17 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss' as utils;
 
-.item-container{
-  display: flex;
-  flex-flow: row;
-}
-
-.line {
-  border: 5px solid prop.$teacher-screen-color-line;
+.item-container {
+  @media only screen and (min-width: 1081px) {
+    border-left: 1rem prop.$info-color solid;
+    padding-left: 3rem;
+  }
 }
 
 .item {
   display: grid;
-  grid-template-columns: 1fr 4fr;
-  background: prop.$teacher-item-background-color;
+  grid-template-columns: auto 4fr;
+  background: prop.$main-second-color;
 
   .img-size {
     height: auto;
@@ -80,33 +78,44 @@ export default defineComponent({
     height: auto;
   }
 
-  @media screen and (min-width: 1500px) {
-
+  @media only screen and (min-width: 1080px) {
     .img-size {
-      width: 300px;
+      width: 30rem;
     }
 
     .img-size-main {
-      width: 368px;
+      width: 36.8rem;
     }
   }
 
-  @media screen and (max-width: 1500px) {
+  @media only screen and (max-width: 1080px) {
+    border-radius: 4px;
 
     .img-size {
-      width: 190px;
+      width: 120px;
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
     }
 
     .img-size-main {
-      width: 250px;
+      width: 120px;
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
     }
   }
 
-  .item-container {
+  .item-content {
     display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    width: 93%;
-    margin: auto auto;
+    align-content: center;
+    padding: 1rem 0 1rem 0;
+
+    @media only screen and (min-width: 1080px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media only screen and (max-width: 1080px) {
+      grid-template-columns: 1fr;
+    }
 
     .block-main-left {
       display: flex;
@@ -114,9 +123,13 @@ export default defineComponent({
     }
 
     .block-main-right {
+      justify-self: start;
       display: flex;
       flex-flow: column;
       width: auto;
+      @media only screen and (max-width: 1080px) {
+        display: none;
+      }
     }
 
     .block-secondary-left {
@@ -124,25 +137,28 @@ export default defineComponent({
     }
 
     .block-secondary-right {
+      width: 90%;
+      justify-self: start;
       align-self: center;
     }
   }
 
   .post {
-    @include utils.fontStyle($color: prop.$teacher-item-selection-color);
+    @include utils.fontStyle($color: prop.$info-color);
   }
 
   .content {
     @include utils.fontStyle($color: prop.$teacher-item-main-color);
+    word-wrap: break-word;
   }
 
   .header {
     @include utils.fontStyle($weight: 500,
-    $color: prop.$teacher-item-main-color);
+    $color: prop.$main-first-color);
   }
 
   .additional {
-    @include utils.fontStyle($color: prop.$teacher-item-additional-color);
+    @include utils.fontStyle($color: prop.$main-first-transparent-color);
   }
 
   .span-new-line {

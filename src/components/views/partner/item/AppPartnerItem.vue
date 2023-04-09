@@ -61,6 +61,12 @@ export default defineComponent({
   flex-flow: row;
   align-items: center;
 
+  a {
+    img {
+      width: 30rem;
+    }
+  }
+
   button {
     width: 4rem;
     height: 4rem;
