@@ -1,46 +1,43 @@
 <template>
   <header class="header"
           @mouseover="isShowMenu = true"
-          @mouseleave="isShowMenu = isPhone"
-          tabindex="0"
+          @mouseleave="isShowMenu = false"
           @focus="isShowMenu = true"
-          @blur="isShowMenu = isPhone">
+          @blur="isShowMenu = false">
 
     <the-modal-authorization :is-show="isShowModalWindow"
                              @close="changeShowModal"/>
+
+    <the-modal-setting-site :is-show="isShowSettingSite"
+                            @close="changeShowSettingSite"/>
 
     <transition name="header">
 
       <div class="header-content" v-show="isShowMenu">
 
         <div class="header-logo">
-          <img src="" alt="assets/images/logo.svg"/>
+          <img src="@/assets/images/logo.svg" alt="assets/images/logo.svg"/>
         </div>
-
-        <label class="btn-transparent-icon btn-phone" for="show-menu">
-          <img :src="menuIcon" class="mr-20" alt="assets/images/menu.svg">
-        </label>
-        <input type="checkbox" id="show-menu" style="display: none">
 
         <nav class="header-menu">
 
           <ul class="header-menu-links">
             <li v-for="(anchor, index) in anchors" :key="anchor.title"
-                :class="{'link-margin': index !== anchors.length - 1, 'link': true, 'fs-24': true}"
+                :class="[{'margin-link': index !== anchors.length - 1},'link', 'fs-24']"
                 @click="scrollTo(anchor.select)"
-                tabindex="0"
-                @focus="isShowMenu = true"
-                @blur="isShowMenu = false"
                 @keyup.enter="scrollTo(anchor.select)">
               {{ anchor.title }}
             </li>
           </ul>
 
+          <img @click="changeShowSettingSite"
+               @keyup.enter="changeShowSettingSite"
+               :src="eyeIcon"
+               alt="/assets/images/icon/eye.svg">
+
           <div class="header-menu-button">
             <input type="button"
                    :value="textBtn"
-                   @focus="isShowMenu = true"
-                   @blur="isShowMenu = false"
                    :class="textBtn === 'выйти'? 'btn-warning-sm': 'btn-standard-sm'"
                    @click="eventLoginOrLogout"/>
           </div>
@@ -68,15 +65,13 @@ import useShowModal from '@/hooks/useShowModal';
 import { useStore } from 'vuex';
 import TheModalAuthorization from '@/components/views/header/modal/TheModalAuthorization.vue';
 import { requestExit } from '@/api/user/AuthUserApi';
-import menuIcon from '@/assets/images/icons/menu.svg';
-
-export type Anchor = {
-  title: string,
-  select: string
-}
+import { Anchor } from '@/types/utilTypes';
+import TheModalSettingSite from '@/components/views/header/modal/TheModalSettingSite.vue';
+import eyeIcon from '@/assets/images/icons/eye.svg';
 
 export default defineComponent({
   components: {
+    TheModalSettingSite,
     TheModalAuthorization,
   },
   icon: 'TheHeaderMenu',
@@ -88,13 +83,17 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    const isPhone = computed(() => window.screen.width < 1100);
-    const isShowMenu = ref<boolean>(isPhone.value);
+    const isShowMenu = ref<boolean>(false);
     const { scrollTo } = useScroll();
 
     const {
       isShow: isShowModalWindow,
       changeShowModal,
+    } = useShowModal();
+
+    const {
+      isShow: isShowSettingSite,
+      changeShowModal: changeShowSettingSite,
     } = useShowModal();
 
     const eventLoginOrLogout = async () => {
@@ -113,12 +112,13 @@ export default defineComponent({
     return {
       isShowMenu,
       isShowModalWindow,
-      isPhone,
+      isShowSettingSite,
+      changeShowSettingSite,
       changeShowModal,
       scrollTo,
       eventLoginOrLogout,
       textBtn: computed(() => (store.getters['auth/isAuth'] ? 'выйти' : 'войти')),
-      menuIcon,
+      eyeIcon,
     };
   },
 });
@@ -133,10 +133,6 @@ export default defineComponent({
   height: 9%;
   width: 100%;
   z-index: 555;
-
-  &:focus {
-    outline: none;
-  }
 
   .header-leave-to,
   .header-enter-from {
@@ -164,10 +160,6 @@ export default defineComponent({
     display: flex;
     justify-content: center;
 
-    @media only screen and (max-width: 1080px) {
-      display: none;
-    }
-
     .hint-block {
       padding: 0.3rem;
       border-radius: 0 0 1rem 1rem;
@@ -183,79 +175,40 @@ export default defineComponent({
     justify-content: space-between;
     position: absolute;
     width: 100%;
-    padding-top: 1rem;
-
-    .btn-phone {
-      @media only screen and (min-width: 1080px) {
-        display: none;
-      }
-
-      @media only screen and (max-width: 1080px) {
-        display: contents;
-
-        img {
-          width: 4rem;
-          height: 4rem;
-        }
-      }
-    }
 
     .header-logo {
       align-self: center;
+      margin-left: 6rem;
 
       img {
-        height: 4rem;
-      }
-
-      @media only screen and (min-width: 1080px) {
-        margin-left: 6rem;
-
-        img {
-          width: 4rem;
-          content: url("@/assets/images/logo.svg");
-        }
-      }
-
-      @media only screen and (max-width: 1080px) {
-        margin-left: 3rem;
-
-        img {
-          width: auto;
-          content: url("@/assets/images/logo-text.svg");
-        }
+        width: 4.1rem;
+        height: 4.1rem;
       }
     }
 
     .header-menu {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: flex-end;
       width: 100%;
-
-      @media only screen and (min-width: 1080px) {
-        display: flex;
-        flex-flow: row;
-        align-items: center;
-        justify-content: flex-end;
-      }
-
-      @media only screen and (max-width: 1080px) {
-        display: none;
-      }
 
       .header-menu-links {
         display: flex;
         flex-flow: row;
+        align-items: center;
         background: prop.$main-first-transparent-menu-color;
         border-radius: 14.3rem;
         mix-blend-mode: difference;
         padding: 1.4rem 3rem;
-        margin: 0;
+        list-style: none;
 
         .link {
           @include utils.fontStyle($color: prop.$main-second-additional-color);
           border: none;
           background: transparent;
-          list-style: none;
 
-          &.link-margin {
+          &.margin-link {
             margin-right: 5rem;
           }
 
@@ -263,19 +216,22 @@ export default defineComponent({
             color: prop.$primary-color;
             cursor: pointer;
           }
+        }
+      }
 
-          &:focus {
-            color: prop.$primary-color;
-            outline: none;
-          }
+      img {
+        width: 3.5rem;
+        height: 3.5rem;
+        margin: 0 3.5rem 0 3.5rem;
+
+        &:hover {
+          cursor: pointer;
+          filter: prop.$icon-svg-hover-color-info;
         }
       }
 
       .header-menu-button {
-        margin: 0 7rem 0 7rem;
-        @media only screen and (max-width: 1080px) {
-          display: none;
-        }
+        margin-right: 5rem;
       }
     }
 

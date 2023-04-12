@@ -1,7 +1,8 @@
 <template>
   <div>
 
-    <the-header-menu :anchors="anchors"/>
+    <the-header-menu class="desktop-menu" :anchors="anchors"/>
+    <the-phone-header-menu class="phone-menu" :anchors="anchors"/>
 
     <main class="main-container">
       <the-primary-screen :scroll-select="'#about'"/>
@@ -32,10 +33,12 @@ import TheEntrantScreen from '@/components/views/entrant/TheEntrantScreen.vue';
 import TheFooterScreen from '@/components/views/footer/TheFooterScreen.vue';
 import TheTeachersScreen from '@/components/views/teacher/TheTeachersScreen.vue';
 import ThePartnersScreen from '@/components/views/partner/ThePartnersScreen.vue';
+import ThePhoneHeaderMenu from '@/components/views/header/ThePhoneHeaderMenu.vue';
 
 export default defineComponent({
   icon: 'TheMainPage',
   components: {
+    ThePhoneHeaderMenu,
     ThePartnersScreen,
     TheHeaderMenu,
     ThePrimaryScreen,
@@ -77,6 +80,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
+
+.desktop-menu {
+
+  @media only screen  and (max-width: 1081px){
+    display: none;
+  }
+}
+
+.phone-menu {
+  @media only screen  and (min-width: 1081px){
+    display: none;
+  }
+}
 
 .main-container {
   display: grid;
