@@ -3,6 +3,7 @@
           @mouseover="isShowMenu = true"
           @mouseleave="isShowMenu = false"
           @focus="isShowMenu = true"
+          tabindex="0"
           @blur="isShowMenu = false">
 
     <the-modal-authorization :is-show="isShowModalWindow"
@@ -25,6 +26,9 @@
             <li v-for="(anchor, index) in anchors" :key="anchor.title"
                 :class="[{'margin-link': index !== anchors.length - 1},'link', 'fs-24']"
                 @click="scrollTo(anchor.select)"
+                tabindex="0"
+                @focus="isShowMenu = true"
+                @blur="isShowMenu = false"
                 @keyup.enter="scrollTo(anchor.select)">
               {{ anchor.title }}
             </li>
@@ -33,6 +37,9 @@
           <img @click="changeShowSettingSite"
                @keyup.enter="changeShowSettingSite"
                :src="eyeIcon"
+               @focus="isShowMenu = true"
+               @blur="isShowMenu = false"
+               tabindex="0"
                alt="/assets/images/icon/eye.svg">
 
           <div class="header-menu-button">
@@ -134,6 +141,10 @@ export default defineComponent({
   width: 100%;
   z-index: 555;
 
+  &:focus {
+    outline: none;
+  }
+
   .header-leave-to,
   .header-enter-from {
     transform: translateY(-60px);
@@ -212,6 +223,11 @@ export default defineComponent({
             margin-right: 5rem;
           }
 
+          &:focus {
+            color: prop.$primary-color;
+            outline: none;
+          }
+
           &:hover {
             color: prop.$primary-color;
             cursor: pointer;
@@ -226,6 +242,11 @@ export default defineComponent({
 
         &:hover {
           cursor: pointer;
+          filter: prop.$icon-svg-hover-color-info;
+        }
+
+        &:focus {
+          outline: none;
           filter: prop.$icon-svg-hover-color-info;
         }
       }

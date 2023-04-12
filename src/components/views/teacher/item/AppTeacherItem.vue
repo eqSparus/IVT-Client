@@ -72,10 +72,12 @@ export default defineComponent({
 
   .img-size {
     height: auto;
+    align-self: center;
   }
 
   .img-size-main {
     height: auto;
+    align-self: center;
   }
 
   @media only screen and (min-width: 1080px) {

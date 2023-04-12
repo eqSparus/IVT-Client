@@ -50,10 +50,12 @@ $spacing-type: (
         "b":"-bottom"
 );
 
+:root {
+  --font-size: 0px;
+}
 
 html {
   @extend %standard-scroll-bar;
-
   $font-size-default: 10px;
 
   @media only screen and ((-webkit-min-device-pixel-ratio: 1) or (min-device-pixel-ratio: 1)) and (min-width: 2000px) {
@@ -69,9 +71,15 @@ html {
     font-size: $font-size-default - 2.5px;
   }
 
+
+
   body {
     overflow-x: hidden;
     font-family: default-font, Verdana, sans-serif;
+
+    .filter-black-white {
+      filter: grayscale(100%);
+    }
 
     &.modal-open {
       overflow: hidden;
@@ -190,8 +198,6 @@ $colors in $color-fields {
   color: black;
   font-size: 2rem;
 }
-
-//#{$size / 10}rem
 
 @each $size in $font-size-text {
   .fs-#{$size} {

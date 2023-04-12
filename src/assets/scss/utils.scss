@@ -44,5 +44,5 @@
     $k: ($f-max - $f-min)/($v-max - $v-min);
     $b: $f-min - $k * $v-min;
     $b: $b * 0.1rem;
-    @return calc(#{$k} * 100vw + #{$b});
+    @return calc(#{$k} * 100vw + #{$b} + var(--font-size));
 }
