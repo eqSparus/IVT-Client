@@ -45,6 +45,8 @@
           <div class="header-menu-button">
             <input type="button"
                    :value="textBtn"
+                   @focus="isShowMenu = true"
+                   @blur="isShowMenu = false"
                    :class="textBtn === 'выйти'? 'btn-warning-sm': 'btn-standard-sm'"
                    @click="eventLoginOrLogout"/>
           </div>

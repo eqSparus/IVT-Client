@@ -57,7 +57,7 @@ export default defineComponent({
 .directions-screen-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-content: center;
+  justify-items: center;
 
   &.gap-1 {
     gap: 1%;

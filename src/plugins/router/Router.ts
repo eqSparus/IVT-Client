@@ -14,7 +14,8 @@ const router = createRouter({
       component: TheMainPage,
       alias: ['/main'],
       async beforeEnter(to, from, next) {
-        if (store.getters['auth/isAuth']) {
+        if (store.getters['auth/isAuth']
+          || !document.cookie.match(/^(.*;)?\s*refresh\s*=\s*[^;]+(.*)?$/)) {
           try {
             const data = await refreshToken();
             store.commit('auth/setAccessToken', data.accessToken);

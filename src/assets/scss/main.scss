@@ -71,15 +71,9 @@ html {
     font-size: $font-size-default - 2.5px;
   }
 
-
-
   body {
     overflow-x: hidden;
     font-family: default-font, Verdana, sans-serif;
-
-    .filter-black-white {
-      filter: grayscale(100%);
-    }
 
     &.modal-open {
       overflow: hidden;

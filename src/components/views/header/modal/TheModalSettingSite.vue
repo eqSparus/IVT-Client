@@ -4,35 +4,15 @@
                   title="Версия для слабовидящих"
                   @close="$emit('close')">
     <div class="setting-site-container">
-      <div class="setting-site-row">
-        <input type="radio"
-               id="textSize0"
-               value="0"
-               @change="toggleTextSize"
-               style="display: none"
-               v-model.number="textSize">
-        <label class="block-size"
-               for="textSize0"
-               style="font-size: 2rem">А</label>
-        <input type="radio"
-               id="textSize2"
-               value="2"
-               @change="toggleTextSize"
-               style="display: none"
-               v-model.number="textSize">
-        <label class="block-size ml-10"
-               for="textSize2"
-               style="font-size: calc(5px + 2rem)">А</label>
-        <input type="radio"
-               id="textSize4"
-               value="4"
-               @change="toggleTextSize"
-               style="display: none"
-               v-model.number="textSize">
-        <label class="block-size ml-10"
-               for="textSize4"
-               style="font-size: calc(10px + 2rem)">А</label>
-      </div>
+      <label class="field-label" for="textSize">Размер текст: {{ textSize * 10 }}</label>
+      <input type="range"
+             min="0"
+             max="1"
+             step="0.1"
+             v-model="textSize"
+             @change="toggleTextSize"
+             id="textSize"
+             class="field-range-standard">
       <input type="button"
              class="btn-standard mt-20"
              :value="colorMode"
@@ -63,16 +43,16 @@ export default defineComponent({
     const toggleTextSize = () => {
       const root = document.querySelector(':root');
       if (root) {
-        (root as HTMLElement).style.setProperty('--font-size', `${textSize.value}px`);
+        (root as HTMLElement).style.setProperty('--font-size', `${textSize.value}rem`);
       }
     };
 
     const toggleFilter = () => {
       if (colorMode.value) {
-        document.body.style.filter = '';
+        document.documentElement.style.filter = '';
         colorMode.value = false;
       } else {
-        document.body.style.filter = 'grayscale(100%)';
+        document.documentElement.style.filter = 'grayscale(100%)';
         colorMode.value = true;
       }
     };
@@ -93,7 +73,6 @@ export default defineComponent({
 .setting-site-container {
   display: flex;
   flex-flow: column;
-  align-items: center;
 
   .setting-site-row {
     display: flex;

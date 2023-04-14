@@ -1,16 +1,19 @@
 <template>
-    <div class="message-alert-container fs-32">
-      <div :class="['message-alert', `message-${type}`]">
-        <span class="fs-26"> {{ message }} </span>
-      </div>
+  <div class="message-alert-container fs-32">
+    <div :class="['message-alert', `message-${type}`]">
+      <img :src="iconAlert" :alt="iconAlert"/>
+      <span class="fs-26 ml-10"> {{ message }} </span>
     </div>
+  </div>
 </template>
 
 <script lang="ts">
 
-import { defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType } from 'vue';
+import iconInfo from '@/assets/images/icons/info.svg';
+import iconWarning from '@/assets/images/icons/warning.svg';
 
-export type AlertType = 'info' | 'warning'
+export type AlertType = 'info' | 'warning';
 
 export default defineComponent({
   icon: 'AppMessageAlert',
@@ -33,6 +36,21 @@ export default defineComponent({
     setTimeout(() => {
       emit('vanish');
     }, props.timeout);
+
+    const iconAlert = computed(() => {
+      switch (props.type) {
+      case 'info':
+        return iconInfo;
+      case 'warning':
+        return iconWarning;
+      default:
+        return iconInfo;
+      }
+    });
+
+    return {
+      iconAlert,
+    };
   },
 });
 </script>
@@ -49,22 +67,38 @@ export default defineComponent({
   z-index: 999999;
 
   .message-alert {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
     user-select: none;
     background: white;
     margin: 1rem 0;
     padding: 1.5rem 3em 1.5rem 1.5rem;
     border-left-width: 0.5rem;
     border-left-style: solid;
+
+    img {
+      height: auto;
+      width: 4rem;
+    }
   }
 
   .message-info {
     @include util.fontStyle(prop.$primary-color);
     border-left-color: prop.$primary-color;
+
+    img {
+      filter: prop.$icon-svg-hover-color-primary;
+    }
   }
 
   .message-warning {
     @include util.fontStyle(prop.$warning-color);
     border-left-color: prop.$warning-color;
+
+    img {
+      filter: prop.$icon-svg-hover-color-warning;
+    }
   }
 }
 
