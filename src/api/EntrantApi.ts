@@ -1,5 +1,5 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
-import { Entrant } from '@/types/SiteContentTypes';
+import { Entrant } from '@/types/site.types';
 import EndPoints from '@/api/EndPoints';
 
 export const requestCreateEntrant = async (entrant: Entrant) => {

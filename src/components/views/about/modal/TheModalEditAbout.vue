@@ -18,7 +18,7 @@
 
 import { defineComponent, PropType } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
-import { AboutDepartment } from '@/types/SiteContentTypes';
+import { AboutDepartment } from '@/types/site.types';
 import requestUpdateAboutDepartment from '@/api/AboutDepartmentApi';
 import { useStore } from 'vuex';
 import AppEditAboutBlock from '@/components/views/about/modal/AppEditAboutBlock.vue';

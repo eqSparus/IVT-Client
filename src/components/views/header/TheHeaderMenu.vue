@@ -74,7 +74,7 @@ import useShowModal from '@/hooks/useShowModal';
 import { useStore } from 'vuex';
 import TheModalAuthorization from '@/components/views/header/modal/TheModalAuthorization.vue';
 import { requestExit } from '@/api/user/AuthUserApi';
-import { Anchor } from '@/types/utilTypes';
+import { Anchor } from '@/types/util.types';
 import TheModalSettingSite from '@/components/views/header/modal/TheModalSettingSite.vue';
 import eyeIcon from '@/assets/images/icons/eye.svg';
 

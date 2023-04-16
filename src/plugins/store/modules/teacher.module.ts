@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
 import { RootState, TeacherState } from '@/plugins/store/types';
-import { Teacher } from '@/types/SiteContentTypes';
+import { Teacher } from '@/types/site.types';
 
 const TeacherModule: Module<TeacherState, RootState> = {
   namespaced: true,

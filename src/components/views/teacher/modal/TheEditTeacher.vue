@@ -153,7 +153,7 @@ import {
   computed,
   defineComponent, PropType,
 } from 'vue';
-import { Teacher } from '@/types/SiteContentTypes';
+import { Teacher } from '@/types/site.types';
 import { Cropper } from 'vue-advanced-cropper';
 import { useStore } from 'vuex';
 import useImg from '@/hooks/useImg';

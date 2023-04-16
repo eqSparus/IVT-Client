@@ -63,7 +63,7 @@
 
 import { defineComponent, PropType } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
-import { Partner } from '@/types/SiteContentTypes';
+import { Partner } from '@/types/site.types';
 import { Cropper } from 'vue-advanced-cropper';
 import useAlerts from '@/hooks/useAlerts';
 import useEditPartner from '@/hooks/useEditPartner';

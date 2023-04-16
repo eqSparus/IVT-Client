@@ -100,7 +100,7 @@
 import {
   defineComponent, PropType,
 } from 'vue';
-import { Direction } from '@/types/SiteContentTypes';
+import { Direction } from '@/types/site.types';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
 import arrowCircleArrow from '@/assets/images/icons/arrow-circle.svg';

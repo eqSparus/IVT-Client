@@ -1,6 +1,6 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
 import EndPoints from '@/api/EndPoints';
-import { Partner } from '@/types/SiteContentTypes';
+import { Partner } from '@/types/site.types';
 
 export const requestCreatePartner = async (body: FormData) => {
   const response = await authorizedRequests.post(EndPoints.PARTNER, body, {

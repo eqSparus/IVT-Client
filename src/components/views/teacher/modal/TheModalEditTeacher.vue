@@ -34,7 +34,7 @@ import {
   defineComponent, PropType, ref,
 } from 'vue';
 import TheAddTeacher from '@/components/views/teacher/modal/TheAddTeacher.vue';
-import { Teacher } from '@/types/SiteContentTypes';
+import { Teacher } from '@/types/site.types';
 import TeacherListItem from '@/components/views/teacher/modal/TeacherListItem.vue';
 import addIcon from '@/assets/images/icons/add.svg';
 import TheEditTeacher from '@/components/views/teacher/modal/TheEditTeacher.vue';

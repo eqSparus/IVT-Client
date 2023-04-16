@@ -1,5 +1,5 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
-import { Link } from '@/types/SiteContentTypes';
+import { Link } from '@/types/site.types';
 import EndPoints from '@/api/EndPoints';
 
 export const requestCreateLink = async (link: Link) => {

@@ -1,4 +1,4 @@
-import { Direction } from '@/types/SiteContentTypes';
+import { Direction } from '@/types/site.types';
 import { ref, toRefs } from 'vue';
 import { maxValue, minValue, required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';

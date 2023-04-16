@@ -43,7 +43,7 @@
 <script lang="ts">
 
 import { defineComponent, PropType, ref } from 'vue';
-import { EntrantItem } from '@/types/SiteContentTypes';
+import { EntrantItem } from '@/types/site.types';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import arrowIcon from '@/assets/images/icons/arrow.svg';
 import AppPlusMinusButton from '@/components/UI/AppPlusMinusButton.vue';

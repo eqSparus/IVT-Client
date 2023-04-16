@@ -21,7 +21,7 @@
 <script lang="ts">
 
 import { computed, defineComponent, PropType } from 'vue';
-import { Partner } from '@/types/SiteContentTypes';
+import { Partner } from '@/types/site.types';
 import { useStore } from 'vuex';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
 import TheModalEditPartner from '@/components/views/partner/modal/TheModalEditPartner.vue';

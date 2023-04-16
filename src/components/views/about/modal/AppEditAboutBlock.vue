@@ -40,7 +40,7 @@
 <script lang="ts">
 
 import { defineComponent, PropType, ref } from 'vue';
-import { AboutDepartment } from '@/types/SiteContentTypes';
+import { AboutDepartment } from '@/types/site.types';
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import useAlerts from '@/hooks/useAlerts';

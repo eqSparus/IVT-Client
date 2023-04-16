@@ -1,5 +1,5 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
-import { AboutDepartment } from '@/types/SiteContentTypes';
+import { AboutDepartment } from '@/types/site.types';
 import EndPoints from '@/api/EndPoints';
 
 const requestUpdateAboutDepartment = async (about: AboutDepartment) => {

@@ -1,4 +1,4 @@
-import { Department } from '@/types/SiteContentTypes';
+import { Department } from '@/types/site.types';
 import { ref } from 'vue';
 import { email, required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';

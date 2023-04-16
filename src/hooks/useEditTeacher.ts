@@ -1,4 +1,4 @@
-import { Teacher } from '@/types/SiteContentTypes';
+import { Teacher } from '@/types/site.types';
 import { ref } from 'vue';
 import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';

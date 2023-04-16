@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { AboutDepartment } from '@/types/SiteContentTypes';
+import { AboutDepartment } from '@/types/site.types';
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({

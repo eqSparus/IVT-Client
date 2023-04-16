@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
 import { DepartmentState, RootState } from '@/plugins/store/types';
-import { Department } from '@/types/SiteContentTypes';
+import { Department } from '@/types/site.types';
 
 const DepartmentModule: Module<DepartmentState, RootState> = {
   namespaced: true,

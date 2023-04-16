@@ -21,7 +21,7 @@
 <script lang="ts">
 
 import { defineComponent, PropType, ref } from 'vue';
-import { Teacher } from '@/types/SiteContentTypes';
+import { Teacher } from '@/types/site.types';
 import useEditTeacher from '@/hooks/useEditTeacher';
 import useAlerts from '@/hooks/useAlerts';
 

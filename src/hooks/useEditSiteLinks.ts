@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { Link } from '@/types/SiteContentTypes';
+import { Link } from '@/types/site.types';
 import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import { requestCreateLink, requestDeleteLink, requestUpdateLink } from '@/api/SiteLinkApi';

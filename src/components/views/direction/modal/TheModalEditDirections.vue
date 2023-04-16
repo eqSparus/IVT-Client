@@ -37,7 +37,7 @@
 
 import { defineComponent, PropType, ref } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
-import { Direction } from '@/types/SiteContentTypes';
+import { Direction } from '@/types/site.types';
 import AppDirectionsItem from '@/components/views/direction/modal/AppDirectionItem.vue';
 import AppPlusMinusButton from '@/components/UI/AppPlusMinusButton.vue';
 import TheAddBlock from '@/components/views/direction/modal/TheAddBlock.vue';

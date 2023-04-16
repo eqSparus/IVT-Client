@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { Partner } from '@/types/SiteContentTypes';
+import { Partner } from '@/types/site.types';
 import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import {

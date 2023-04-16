@@ -12,7 +12,7 @@
                             @fail="alerts.push({ type: 'warning', message: 'Неверный адрес электронной почты' })"/>
       <div class="forgot-block mt-10">
         <input type="button"
-               class="forgot-password"
+               class="forgot-password fs-20"
                @click="isRecoverPassword = !isRecoverPassword"
                :value="textChangeBtn"/>
       </div>
@@ -78,7 +78,6 @@ export default defineComponent({
       background: none;
       border: none;
       color: props.$primary-color;
-      font-size: 0.2rem;
       text-decoration: props.$primary-color 0.2rem underline;
 
       &:hover {

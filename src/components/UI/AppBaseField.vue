@@ -10,7 +10,7 @@
 <script lang="ts">
 
 import { computed, defineComponent, PropType } from 'vue';
-import { FailField } from '@/types/utilTypes';
+import { FailField } from '@/types/util.types';
 
 export default defineComponent({
   name: 'AppBaseField',

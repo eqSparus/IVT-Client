@@ -32,7 +32,7 @@
 <script lang="ts">
 
 import { defineComponent, PropType, ref } from 'vue';
-import { Anchor } from '@/types/utilTypes';
+import { Anchor } from '@/types/util.types';
 import useScroll from '@/hooks/useScroll';
 import menuIcon from '@/assets/images/icons/menu.svg';
 

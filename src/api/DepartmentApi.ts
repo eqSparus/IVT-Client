@@ -1,4 +1,4 @@
-import { Department } from '@/types/SiteContentTypes';
+import { Department } from '@/types/site.types';
 import authorizedRequests from '@/api/request/AuthorizedRequests';
 import EndPoints from '@/api/EndPoints';
 

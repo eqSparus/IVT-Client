@@ -1,6 +1,6 @@
 import { Module } from 'vuex';
 import { PartnerState, RootState } from '@/plugins/store/types';
-import { Partner } from '@/types/SiteContentTypes';
+import { Partner } from '@/types/site.types';
 
 const PartnerModule: Module<PartnerState, RootState> = {
   namespaced: true,

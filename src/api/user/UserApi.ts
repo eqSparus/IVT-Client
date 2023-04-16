@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { User } from '@/types/UserTypes';
+import { User } from '@/types/user.types';
 import UserEndPoints from '@/api/user/UserEndPoints';
 
 export const requestAuthentication = async (user: User) => {

@@ -23,7 +23,7 @@
 </template>
 
 <script lang="ts">
-import { Direction } from '@/types/SiteContentTypes';
+import { Direction } from '@/types/site.types';
 import { defineComponent, PropType, computed } from 'vue';
 import direction1 from '@/assets/images/draws/direction1.svg';
 import direction2 from '@/assets/images/draws/direction2.svg';

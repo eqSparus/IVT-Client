@@ -37,7 +37,7 @@
 
 <script lang="ts">
 
-import { Entrant } from '@/types/SiteContentTypes';
+import { Entrant } from '@/types/site.types';
 import { computed, defineComponent, PropType } from 'vue';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';

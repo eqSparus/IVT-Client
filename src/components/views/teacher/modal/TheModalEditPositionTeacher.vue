@@ -19,7 +19,7 @@
 
 import { defineComponent, PropType } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
-import { Teacher } from '@/types/SiteContentTypes';
+import { Teacher } from '@/types/site.types';
 import TeacherPositionItem from '@/components/views/teacher/modal/TeacherPositionItem.vue';
 
 export default defineComponent({

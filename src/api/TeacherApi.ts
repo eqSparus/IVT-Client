@@ -1,5 +1,5 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
-import { Teacher } from '@/types/SiteContentTypes';
+import { Teacher } from '@/types/site.types';
 import EndPoints from '@/api/EndPoints';
 
 export const requestCreateTeacher = async (body: FormData) => {

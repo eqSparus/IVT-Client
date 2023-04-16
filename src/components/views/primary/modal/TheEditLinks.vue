@@ -40,7 +40,7 @@ import {
   defineComponent, PropType,
 } from 'vue';
 import AppLinkItem from '@/components/views/primary/modal/AppLinkItem.vue';
-import { Link } from '@/types/SiteContentTypes';
+import { Link } from '@/types/site.types';
 import AppSelectImg from '@/components/UI/AppSelectImg.vue';
 import useEditSiteLinks from '@/hooks/useEditSiteLinks';
 import useAlerts from '@/hooks/useAlerts';

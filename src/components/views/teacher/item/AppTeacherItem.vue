@@ -36,7 +36,7 @@
 
 <script lang="ts">
 
-import { Teacher } from '@/types/SiteContentTypes';
+import { Teacher } from '@/types/site.types';
 import { defineComponent, PropType } from 'vue';
 
 export default defineComponent({

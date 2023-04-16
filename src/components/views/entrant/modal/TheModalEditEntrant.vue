@@ -49,7 +49,7 @@ import {
   defineComponent, onMounted, PropType,
 } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
-import { Entrant } from '@/types/SiteContentTypes';
+import { Entrant } from '@/types/site.types';
 import AppEntrantItem from '@/components/views/entrant/modal/AppEntrantItem.vue';
 import AppPlusMinusButton from '@/components/UI/AppPlusMinusButton.vue';
 import useEditEntrant from '@/hooks/useEditEntrant';

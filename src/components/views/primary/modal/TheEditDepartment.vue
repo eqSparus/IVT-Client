@@ -91,7 +91,7 @@ import {
   defineComponent,
   PropType,
 } from 'vue';
-import { Department, Teacher } from '@/types/SiteContentTypes';
+import { Department, Teacher } from '@/types/site.types';
 import { useStore } from 'vuex';
 import useEditDepartment from '@/hooks/useEditDepartment';
 import useAlerts from '@/hooks/useAlerts';

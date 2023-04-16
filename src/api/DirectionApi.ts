@@ -1,5 +1,5 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
-import { Direction } from '@/types/SiteContentTypes';
+import { Direction } from '@/types/site.types';
 import EndPoints from '@/api/EndPoints';
 
 export const requestCreateDirection = async (direction: Omit<Direction, 'position'>) => {

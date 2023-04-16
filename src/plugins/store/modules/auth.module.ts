@@ -1,7 +1,7 @@
 import { Module } from 'vuex';
 import { AuthState, RootState } from '@/plugins/store/types';
 import { requestAuthentication, refreshToken } from '@/api/user/UserApi';
-import { User } from '@/types/UserTypes';
+import { User } from '@/types/user.types';
 
 const AuthModule: Module<AuthState, RootState> = {
   namespaced: true,

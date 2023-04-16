@@ -28,7 +28,7 @@ import {
   ref,
 } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
-import { Department, Link } from '@/types/SiteContentTypes';
+import { Department, Link } from '@/types/site.types';
 import TheEditDepartment from '@/components/views/primary/modal/TheEditDepartment.vue';
 import TheEditLinks from '@/components/views/primary/modal/TheEditLinks.vue';
 

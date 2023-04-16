@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { Entrant } from '@/types/SiteContentTypes';
+import { Entrant } from '@/types/site.types';
 import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import { requestCreateEntrant, requestDeleteEntrant, requestUpdateEntrant } from '@/api/EntrantApi';

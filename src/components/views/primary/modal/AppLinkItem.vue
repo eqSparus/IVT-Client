@@ -41,7 +41,7 @@ import { defineComponent, PropType, ref } from 'vue';
 import AppSelectImg, { SelectOption } from '@/components/UI/AppSelectImg.vue';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
-import { Link } from '@/types/SiteContentTypes';
+import { Link } from '@/types/site.types';
 import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import useAlerts from '@/hooks/useAlerts';
