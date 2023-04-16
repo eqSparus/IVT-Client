@@ -6,16 +6,19 @@
 
     <div class="change-entrant-container">
 
-      <label class="field-label" for="title">Название ступени</label>
-      <span class="field-fail" v-if="valid.title.$invalid && valid.title.$dirty">
-        Поле не может быть пустым
-      </span>
-      <input type="text"
-             id="title"
-             v-model="editEntrant.title"
-             class="field-standard"
-             @blur="valid.title.$touch()"
-             placeholder="Введите название ступени">
+      <app-base-field id="title"
+                      label="Название ступени"
+                      :fails="[{
+                        description: 'Поле не может быть пустым',
+                        isShow: valid.title.$invalid && valid.title.$dirty,
+                      }]">
+        <input type="text"
+               id="title"
+               v-model="editEntrant.title"
+               class="field-standard"
+               @blur="valid.title.$touch()"
+               placeholder="Введите название ступени">
+      </app-base-field>
 
       <div class="entrant-items">
         <app-entrant-item class="mt-10"
@@ -51,10 +54,12 @@ import AppEntrantItem from '@/components/views/entrant/modal/AppEntrantItem.vue'
 import AppPlusMinusButton from '@/components/UI/AppPlusMinusButton.vue';
 import useEditEntrant from '@/hooks/useEditEntrant';
 import useAlerts from '@/hooks/useAlerts';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheModalAddEntrant',
   components: {
+    AppBaseField,
     AppPlusMinusButton,
     AppEntrantItem,
     AppModalWindow,
@@ -151,10 +156,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .change-entrant-container {
   display: flex;
   flex-flow: column;
-  width: 50vw;
+  width: 90rem;
 
   .entrant-items {
     display: flex;

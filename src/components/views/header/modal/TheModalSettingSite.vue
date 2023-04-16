@@ -4,15 +4,18 @@
                   title="Версия для слабовидящих"
                   @close="$emit('close')">
     <div class="setting-site-container">
-      <label class="field-label" for="textSize">Размер текст: {{ textSize * 10 }}</label>
-      <input type="range"
-             min="0"
-             max="1"
-             step="0.1"
-             v-model="textSize"
-             @change="toggleTextSize"
-             id="textSize"
-             class="field-range-standard">
+      <app-base-field id="textSize"
+                      :label="`Размер текста: ${textSize * 10}`">
+        <input type="range"
+               min="0"
+               max="1"
+               step="0.1"
+               v-model="textSize"
+               @change="toggleTextSize"
+               id="textSize"
+               class="field-range-standard">
+      </app-base-field>
+
       <input type="button"
              class="btn-standard mt-20"
              :value="colorMode"
@@ -25,10 +28,14 @@
 
 import { computed, defineComponent, ref } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheModalSettingSite',
-  components: { AppBaseModal },
+  components: {
+    AppBaseField,
+    AppBaseModal,
+  },
   emits: ['close'],
   props: {
     isShow: {
@@ -83,7 +90,7 @@ export default defineComponent({
     }
 
     input[type="radio"]:checked + label {
-      background: prop.$info-color;
+      background: prop.$primary-color;
     }
 
     .block-size {

@@ -1,12 +1,14 @@
 <template>
   <form class="recover-container">
-    <label class="field-label mt-10" for="recoverPassword">Введите электронную почту</label>
-    <input type="email"
-           class="field-standard mt-10"
-           id="recoverPassword"
-           v-model="email"
-           placeholder="Введите адрес почты"
-           @keyup.enter="recoverPassword">
+    <app-base-field id="recoverPassword"
+                    label="Электронная почта">
+      <input type="email"
+             class="field-standard mt-10"
+             id="recoverPassword"
+             v-model="email"
+             placeholder="Введите адрес почты"
+             @keyup.enter="recoverPassword">
+    </app-base-field>
 
     <input type="button"
            class="btn-standard mt-30"
@@ -19,9 +21,11 @@
 
 import { defineComponent, ref } from 'vue';
 import { requestSendRecoverPasswordEmail } from '@/api/user/UserApi';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheRecoverPassword',
+  components: { AppBaseField },
   emits: ['access', 'fail'],
   setup(props, { emit }) {
     const email = ref<string>('');
@@ -45,8 +49,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .recover-container {
   display: flex;
   flex-flow: column;
 }
+
 </style>

@@ -1,56 +1,67 @@
 <template>
   <div class="direction-add">
-    <label class="field-label" for="title">Название</label>
-    <span v-if="valid.title.$invalid && valid.title.$dirty" class="field-fail">
-      Поле не должно быть пустым
-    </span>
-    <textarea id="title"
-              v-model="direction.title"
-              class="field-standard item-title"
-              @blur="valid.title.$touch()"
-              placeholder="Введите название"
-              rows="2">
-
-    </textarea>
+    <app-base-field id="title"
+                    label="Название"
+                    :fails="[{
+                      description: 'Поле не должно быть пустым',
+                      isShow: valid.title.$invalid && valid.title.$dirty,
+                    }]">
+      <textarea id="title"
+                v-model="direction.title"
+                class="field-standard field-area"
+                @blur="valid.title.$touch()"
+                placeholder="Введите название"
+                rows="2">
+      </textarea>
+    </app-base-field>
 
     <div class="directions-add-center mt-10">
       <div class="block">
-        <label class="field-label" for="degree">Степень обучение</label>
-        <span v-if="valid.degree.$invalid && valid.degree.$dirty" class="field-fail">
-          Поле не должно быть пустым
-        </span>
-        <input type="text"
-               id="degree"
-               v-model="direction.degree"
-               placeholder="Введите степень"
-               @blur="valid.degree.$touch()"
-               class="field-standard text-while">
+        <app-base-field id="degree"
+                        label="Степень обучение"
+                        :fails="[{
+                          description: 'Поле не должно быть пустым',
+                          isShow: valid.degree.$invalid && valid.degree.$dirty,
+                        }]">
+          <input type="text"
+                 id="degree"
+                 v-model="direction.degree"
+                 placeholder="Введите степень"
+                 @blur="valid.degree.$touch()"
+                 class="field-standard text-while">
+        </app-base-field>
       </div>
 
       <div class="block">
-        <label class="field-label" for="form">Форма обучения</label>
-        <span v-if="valid.form.$invalid && valid.form.$dirty" class="field-fail">
-          Поле не должно быть пустым
-        </span>
-        <input type="text"
-               id="form"
-               v-model="direction.form"
-               placeholder="Введите форма обучения"
-               @blur="valid.form.$touch()"
-               class="field-standard text-while">
+        <app-base-field id="form"
+                        label="Форма обучения"
+                        :fails="[{
+                          description: 'Поле не должно быть пустым',
+                          isShow: valid.form.$invalid && valid.form.$dirty,
+                        }]">
+          <input type="text"
+                 id="form"
+                 v-model="direction.form"
+                 placeholder="Введите форму обучения"
+                 @blur="valid.form.$touch()"
+                 class="field-standard text-while">
+        </app-base-field>
       </div>
 
       <div class="block">
-        <label class="field-label" for="duration">Время обучения</label>
-        <span v-if="valid.duration.$invalid && valid.duration.$dirty" class="field-fail">
-          Число должно быть от 1 до 10
-        </span>
-        <input type="number"
-               id="duration"
-               v-model.number="direction.duration"
-               placeholder="Введите время обучения"
-               @blur="valid.duration.$touch()"
-               class="field-standard text-while">
+        <app-base-field id="duration"
+                        label="Время обучения"
+                        :fails="[{
+                          description: 'Число должно быть от 1 до 10',
+                          isShow: valid.duration.$invalid && valid.duration.$dirty,
+                        }]">
+          <input type="number"
+                 id="duration"
+                 v-model.number="direction.duration"
+                 placeholder="Введите время обучения"
+                 @blur="valid.duration.$touch()"
+                 class="field-standard text-while">
+        </app-base-field>
       </div>
     </div>
 
@@ -66,9 +77,11 @@
 
 import { defineComponent } from 'vue';
 import useEditDirection from '@/hooks/useEditDirection';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheAddBlock',
+  components: { AppBaseField },
   setup(props, { emit }) {
     const {
       direction,
@@ -94,8 +107,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/utils.scss' as utils;
-@use '@/assets/scss/properties.scss' as props;
 
 .direction-add {
   display: flex;
@@ -112,11 +123,6 @@ export default defineComponent({
       flex-flow: column;
       flex: 1;
     }
-  }
-
-  .item-title {
-    @include utils.scrollbar(props.$scroll-slider-color, props.$scroll-slider-body-color);
-    resize: none;
   }
 }
 

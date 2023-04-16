@@ -1,47 +1,65 @@
 <template>
   <div class="item">
 
-    <span v-if="valid.title.$invalid && valid.title.$dirty" class="field-fail">
-      Поле не должно быть пустым
-    </span>
-    <textarea class="field-standard item-title mt-10 mb-10"
+    <app-base-field id="name"
+                    class="mt-10 mb-10"
+                    :fails="[{
+                      description: 'Поле не должно быть пустым',
+                      isShow: valid.title.$invalid && valid.title.$dirty,
+                    }]">
+    <textarea class="field-standard text-while field-area"
               placeholder="Введите название направления"
-              aria-label="Введите название направления"
+              aria-label="Название направления"
               @blur="valid.title.$touch()"
               rows="3"
+              id="name"
               v-model="editDirection.title">
-
     </textarea>
+    </app-base-field>
 
-    <span v-if="valid.degree.$invalid && valid.degree.$dirty" class="field-fail">
-          Поле не должно быть пустым
-    </span>
-    <input type="text"
-           placeholder="Введите тип направления"
-           aria-label="Введите тип направления"
-           @blur="valid.degree.$touch()"
-           class="field-standard text-while mb-10"
-           v-model="editDirection.degree">
+    <app-base-field id="type"
+                    class="mb-10"
+                    :fails="[{
+                      description: 'Поле не должно быть пустым',
+                      isShow: valid.degree.$invalid && valid.degree.$dirty,
+                    }]">
+      <input type="text"
+             placeholder="Введите тип направления"
+             aria-label="Тип направления"
+             id="type"
+             @blur="valid.degree.$touch()"
+             class="field-standard text-while"
+             v-model="editDirection.degree">
+    </app-base-field>
 
-    <span v-if="valid.form.$invalid && valid.form.$dirty" class="field-fail">
-          Поле не должно быть пустым
-    </span>
-    <input type="text"
-           placeholder="Форма обучения направления"
-           aria-label="Форма обучения направления"
-           @blur="valid.form.$touch()"
-           class="field-standard text-while mb-10"
-           v-model="editDirection.form">
+    <app-base-field id="form"
+                    class="mb-10"
+                    :fails="[{
+                      description: 'Поле не должно быть пустым',
+                      isShow: valid.form.$invalid && valid.form.$dirty,
+                    }]">
+      <input type="text"
+             placeholder="Введите форму обучения направления"
+             aria-label="Форма обучения направления"
+             @blur="valid.form.$touch()"
+             id="form"
+             class="field-standard text-while"
+             v-model="editDirection.form">
+    </app-base-field>
 
-    <span v-if="valid.duration.$invalid && valid.duration.$dirty" class="field-fail">
-          Число должно быть от 1 до 10
-    </span>
-    <input type="number"
-           placeholder="Время обучения на направление"
-           aria-label="Время обучения на направление"
-           @blur="valid.duration.$touch()"
-           class="field-standard text-while"
-           v-model.number="editDirection.duration">
+    <app-base-field id="duration"
+                    :fails="[{
+                      description: 'Число должно быть от 1 до 10',
+                      isShow: valid.duration.$invalid && valid.duration.$dirty,
+                    }]">
+      <input type="number"
+             placeholder="Введите время обучения на направление"
+             aria-label="Время обучения на направление"
+             @blur="valid.duration.$touch()"
+             id="duration"
+             class="field-standard text-while"
+             v-model.number="editDirection.duration">
+    </app-base-field>
 
     <div class="setting-item mt-20">
       <button class="btn-standard-icon"
@@ -88,8 +106,10 @@ import refreshIcon from '@/assets/images/icons/refresh.svg';
 import arrowCircleArrow from '@/assets/images/icons/arrow-circle.svg';
 import useEditDirection from '@/hooks/useEditDirection';
 import useAlerts from '@/hooks/useAlerts';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
+  components: { AppBaseField },
   icon: 'AppDirectionsItem',
   emits: ['update', 'delete', 'up', 'down'],
   props: {
@@ -147,12 +167,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as utils;
 
 .item {
-  border-radius: 8px;
-  padding: 10px;
-  background: prop.$direction-item-background-color;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  background: prop.$main-first-extra-color;
   display: flex;
   flex-flow: column;
 
@@ -164,18 +183,12 @@ export default defineComponent({
 
     button {
       flex: 1;
-      height: 40px;
+      height: 4rem;
     }
   }
 
-  .item-title {
-    color: prop.$direction-item-title-color;
-    @include utils.scrollbar(prop.$scroll-slider-color, prop.$scroll-slider-body-color);
-    resize: none;
-  }
-
   .text-while {
-    color: prop.$direction-item-title-color;
+    color: prop.$main-second-color;
   }
 
 }

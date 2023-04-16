@@ -1,31 +1,33 @@
 <template>
   <div class="item-about">
+    <app-base-field id="title"
+                    label="Название"
+                    :fails="[{
+                      description: 'Поле не должно быть пустым',
+                      isShow: valid.title.$invalid && valid.title.$dirty,
+                    }]">
+      <input type="text"
+             class="field-standard"
+             id="title"
+             placeholder="Введите название"
+             v-model="changeAbout.title"
+             @blur="valid.title.$touch()"/>
+    </app-base-field>
 
-    <label class="field-label" for="title">Введите описание</label>
-    <span class="field-fail" v-if="valid.title.$invalid && valid.title.$dirty">
-       Поле не должно быть пустым
-    </span>
-    <input type="text"
-           class="field-standard"
-           placeholder="Введите название"
-           v-model="changeAbout.title"
-           id="title"
-           @blur="valid.title.$touch()"
-           aria-label="Введите название"/>
-
-    <label class="field-label mt-10" for="description">Введите описание</label>
-    <span class="field-fail" v-if="valid.description.$invalid && valid.description.$dirty">
-      Поле не должно быть пустым
-    </span>
-    <textarea placeholder="Введите описание"
-              id="description"
-              class="field-standard field-area"
-              v-model="changeAbout.description"
-              rows="10"
-              @blur="valid.description.$touch()"
-              aria-label="Введите описание">
-
-    </textarea>
+    <app-base-field id="description"
+                    class="mt-10"
+                    label="Описание"
+                    :fails="[{
+                      isShow: valid.description.$invalid && valid.description.$dirty,
+                      description: 'Поле не должно быть пустым',
+                    }]">
+      <textarea placeholder="Введите описание"
+                id="description"
+                class="field-standard field-area"
+                v-model="changeAbout.description"
+                rows="10"
+                @blur="valid.description.$touch()"></textarea>
+    </app-base-field>
 
     <input type="button"
            value="применить"
@@ -42,9 +44,11 @@ import { AboutDepartment } from '@/types/SiteContentTypes';
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import useAlerts from '@/hooks/useAlerts';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'AppEditAboutBlock',
+  components: { AppBaseField },
   emits: ['update'],
   props: {
     about: {
@@ -93,8 +97,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/utils.scss' as utils;
-@use '@/assets/scss/properties.scss' as prop;
 
 .item-about {
   display: flex;

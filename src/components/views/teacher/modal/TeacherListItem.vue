@@ -33,8 +33,8 @@ button {
 
   img {
     transition: all 0.2s ease-out;
-    height: 40px;
-    width: 40px;
+    height: 4rem;
+    width: 4rem;
 
     &:hover {
       transform: scale(1.5);

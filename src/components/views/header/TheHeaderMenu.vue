@@ -7,7 +7,7 @@
           @blur="isShowMenu = false">
 
     <the-modal-authorization :is-show="isShowModalWindow"
-                             @close="changeShowModal"/>
+                             @close="toggleModal"/>
 
     <the-modal-setting-site :is-show="isShowSettingSite"
                             @close="changeShowSettingSite"/>
@@ -97,12 +97,12 @@ export default defineComponent({
 
     const {
       isShow: isShowModalWindow,
-      changeShowModal,
+      toggleModal,
     } = useShowModal();
 
     const {
       isShow: isShowSettingSite,
-      changeShowModal: changeShowSettingSite,
+      toggleModal: changeShowSettingSite,
     } = useShowModal();
 
     const eventLoginOrLogout = async () => {
@@ -114,7 +114,7 @@ export default defineComponent({
           store.commit('auth/removeAccessToken');
         }
       } else {
-        changeShowModal();
+        toggleModal();
       }
     };
 
@@ -123,7 +123,7 @@ export default defineComponent({
       isShowModalWindow,
       isShowSettingSite,
       changeShowSettingSite,
-      changeShowModal,
+      toggleModal,
       scrollTo,
       eventLoginOrLogout,
       textBtn: computed(() => (store.getters['auth/isAuth'] ? 'выйти' : 'войти')),

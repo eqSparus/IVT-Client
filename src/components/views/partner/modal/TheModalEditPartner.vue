@@ -28,16 +28,20 @@
         </div>
       </div>
 
-      <label class="field-label mt-10" for="href">Ссылка на сайт партнера</label>
-      <span class="field-fail" v-if="valid.href.$invalid || valid.href.$dirty">
-        Поле не должно быть пустым и должно являться url адресом
-      </span>
-      <input type="text"
-             class="field-standard"
-             v-model="editPartner.href"
-             @blur="valid.href.touch()"
-             id="href"
-             placeholder="Введите ссылку на сайт партнера">
+      <app-base-field id="href"
+                      class="mt-10"
+                      label="Ссылка на сайт партнера"
+                      :fails="[{
+                        isShow: valid.href.$invalid || valid.href.$dirty,
+                        description: 'Поле не должно быть пустым и должно являться url адресом',
+                      }]">
+        <input type="text"
+               class="field-standard"
+               v-model="editPartner.href"
+               @blur="valid.href.touch()"
+               id="href"
+               placeholder="Введите ссылку на сайт партнера">
+      </app-base-field>
 
       <input type="button"
              :disabled="valid.$invalid"
@@ -64,10 +68,12 @@ import { Cropper } from 'vue-advanced-cropper';
 import useAlerts from '@/hooks/useAlerts';
 import useEditPartner from '@/hooks/useEditPartner';
 import useImg from '@/hooks/useImg';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheModalEditPartner',
   components: {
+    AppBaseField,
     AppBaseModal,
     Cropper,
   },
@@ -193,7 +199,7 @@ export default defineComponent({
 .edit-partner-container {
   display: flex;
   flex-flow: column;
-  width: 40vw;
+  width: 75rem;
 
   .partner-image {
     display: flex;

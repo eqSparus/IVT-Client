@@ -72,7 +72,7 @@ export default defineComponent({
 }
 
 .footer-container {
-  background: prop.$footer-background-color;
+  background: prop.$main-first-color;
   padding-top: 5rem;
   overflow: hidden;
 
@@ -103,11 +103,11 @@ export default defineComponent({
 
     .title {
       @include utils.fontStyle($weight: 700,
-      $color: prop.$footer-text-color);
+      $color: prop.$main-second-color);
     }
 
     .content {
-      @include utils.fontStyle($color: prop.$footer-text-color);
+      @include utils.fontStyle($color: prop.$main-second-color);
     }
   }
 

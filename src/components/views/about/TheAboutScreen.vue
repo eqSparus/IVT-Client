@@ -1,15 +1,16 @@
 <template>
-  <app-base-screen title="О кафедре" type-screen="second">
+  <app-base-screen title="О кафедре"
+                   type-screen="second">
 
     <the-modal-edit-about :abouts="abouts"
                           :is-show="isShow"
-                          @close="changeShowModal"/>
+                          @close="toggleModal"/>
 
-    <div class="about-change mb-20" v-if="isAuth">
+    <div class="about-edit-container mb-20" v-if="isAuth">
       <input type="button"
              class="btn-standard"
              value="редактировать"
-             @click="changeShowModal"/>
+             @click="toggleModal"/>
     </div>
 
     <div class="about-screen-container">
@@ -40,14 +41,14 @@ export default defineComponent({
 
     const {
       isShow,
-      changeShowModal,
+      toggleModal,
     } = useShowModal();
 
     return {
       isShow,
       abouts: computed(() => store.getters['about/getAboutInfo']),
       isAuth: computed(() => store.getters['auth/isAuth']),
-      changeShowModal,
+      toggleModal,
     };
   },
 });
@@ -55,7 +56,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.about-change {
+.about-edit-container {
   display: flex;
   justify-content: center;
   height: 100%;
@@ -63,17 +64,22 @@ export default defineComponent({
 
 .about-screen-container {
   display: flex;
+}
 
-  @media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1000px) {
+  .about-screen-container {
     flex-flow: row;
     justify-content: center;
     column-gap: 5%;
   }
+}
 
-  @media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
+  .about-screen-container {
     flex-flow: column;
     align-items: center;
     row-gap: 8rem;
   }
+
 }
 </style>

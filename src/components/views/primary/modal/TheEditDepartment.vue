@@ -1,72 +1,79 @@
 <template>
   <div class="setting-container">
 
-    <label class="field-label" for="title">Название кафедры</label>
-    <span class="field-fail" v-if="valid.title.$invalid && valid.title.$dirty">
-      Поле не должно быть пустым
-    </span>
-    <input type="text"
-           placeholder="Введите название кафедры"
-           class="field-standard"
-           id="title"
-           v-model="departmentValue.title"
-           @blur="valid.title.$touch()"/>
+    <app-base-field id="title"
+                    label="Название кафедры"
+                    :fails="[{
+                      isShow: valid.title.$invalid && valid.title.$dirty,
+                      description: 'Поле не должно быть пустым',
+                    }]">
+      <input type="text"
+             placeholder="Введите название кафедры"
+             class="field-standard"
+             id="title"
+             v-model="departmentValue.title"
+             @blur="valid.title.$touch()"/>
+    </app-base-field>
 
-    <label class="field-label mt-10" for="slogan">Девиз кафедры</label>
-    <span class="field-fail" v-if="valid.slogan.$invalid && valid.slogan.$dirty">
-      Поле не должно быть пустым
-    </span>
-    <input type="text"
-           id="slogan"
-           placeholder="Введите девиз кафедры"
-           class="field-standard"
-           @blur="valid.slogan.$touch()"
-           v-model="departmentValue.slogan"/>
+    <app-base-field id="slogan"
+                    class="mt-10"
+                    label="Девиз кафедры"
+                    :fails="[{
+                      isShow: valid.slogan.$invalid && valid.slogan.$dirty,
+                      description: 'Поле не должно быть пустым',
+                    }]">
+      <input type="text"
+             id="slogan"
+             placeholder="Введите девиз кафедры"
+             class="field-standard"
+             @blur="valid.slogan.$touch()"
+             v-model="departmentValue.slogan"/>
+    </app-base-field>
 
     <div class="double-block mt-10">
-      <label class="field-label block" for="phone">Номер телефона кафедры</label>
+      <app-base-field id="phone"
+                      label="Номер телефона кафедры"
+                      :fails="[{
+                        isShow: valid.phone.$invalid && valid.phone.$dirty,
+                        description: 'Поле не должно быть пустым',
+                      }]">
+        <input type="tel"
+               placeholder="Введите телефон кафедры"
+               class="field-standard"
+               id="phone"
+               @blur="valid.phone.$touch()"
+               v-model="departmentValue.phone"/>
+      </app-base-field>
 
-      <label class="field-label block" for="email">Почта кафедры</label>
+      <app-base-field id="email"
+                      label="Почта кафедры"
+                      :fails="[{
+                        isShow: valid.email.$invalid && valid.email.$dirty,
+                        description: 'Поле не должно быть пустым и быть адресом эл. почты',
+                      }]">
+        <input type="email"
+               placeholder="Введите почту кафедры"
+               class="field-standard"
+               id="email"
+               @blur="valid.email.$touch()"
+               v-model="departmentValue.email"/>
+      </app-base-field>
     </div>
 
-    <div class="double-block">
-        <span class="field-fail block" v-if="valid.phone.$invalid && valid.phone.$dirty">
-          Поле не должно быть пустым
-        </span>
-
-      <span class="field-fail block" v-if="valid.email.$invalid && valid.email.$dirty">
-          Поле не должно быть пустым и быть адресом эл. почты
-        </span>
-    </div>
-
-    <div class="double-block">
-
-      <input type="tel"
-             placeholder="Введите телефон кафедры"
-             class="field-standard block"
-             id="phone"
-             @blur="valid.phone.$touch()"
-             v-model="departmentValue.phone"/>
-
-      <input type="email"
-             placeholder="Введите почту кафедры"
-             class="field-standard block"
-             id="email"
-             @blur="valid.email.$touch()"
-             v-model="departmentValue.email"/>
-    </div>
-
-    <label class="field-label mt-10" for="address">Адрес кафедры</label>
-    <span class="field-fail" v-if="valid.address.$invalid && valid.address.$dirty">
-          Поле не должно быть пустым
-    </span>
-    <input type="text"
-           placeholder="Введите адрес кафедры"
-           class="field-standard"
-           id="address"
-           @blur="valid.address.$touch()"
-           v-model="departmentValue.address"
-           aria-label="Введите адрес кафедры"/>
+    <app-base-field id="address"
+                    class="mt-10"
+                    label="Адрес кафедры"
+                    :fails="[{
+                      isShow: valid.address.$invalid && valid.address.$dirty,
+                      description: 'Поле не должно быть пустым',
+                    }]">
+      <input type="text"
+             placeholder="Введите адрес кафедры"
+             class="field-standard"
+             id="address"
+             @blur="valid.address.$touch()"
+             v-model="departmentValue.address"/>
+    </app-base-field>
 
     <input type="button"
            value="обновить"
@@ -88,9 +95,11 @@ import { Department, Teacher } from '@/types/SiteContentTypes';
 import { useStore } from 'vuex';
 import useEditDepartment from '@/hooks/useEditDepartment';
 import useAlerts from '@/hooks/useAlerts';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheSettingDepartment',
+  components: { AppBaseField },
   props: {
     department: {
       type: Object as PropType<Department>,
@@ -159,12 +168,10 @@ export default defineComponent({
     width: 100%;
     display: flex;
     flex-flow: row;
-    gap: 10px;
+    gap: 1rem;
 
-    .block {
-      width: 50%;
-      display: flex;
-      flex-flow: column;
+    & > div {
+      flex: 1;
     }
   }
 

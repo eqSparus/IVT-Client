@@ -2,7 +2,7 @@
   <div class="item">
 
     <the-modal-edit-entrant :is-show="isShow"
-                            @close="changeShowModal"
+                            @close="toggleModal"
                             :modal-title="`Изменить раздел &quot${entrant.title}&quot`"
                             :entrant="entrant"/>
 
@@ -11,7 +11,7 @@
 
       <button v-if="isAuth"
               class="btn-standard-icon ml-20"
-              @click="changeShowModal">
+              @click="toggleModal">
         <img :src="refreshIcon"
              alt="assets/images/icon/refresh.svg">
       </button>
@@ -62,7 +62,7 @@ export default defineComponent({
 
     const {
       isShow,
-      changeShowModal,
+      toggleModal,
     } = useShowModal();
 
     const { remove } = useEditEntrant();
@@ -85,7 +85,7 @@ export default defineComponent({
     return {
       isShow,
       isAuth: computed(() => store.getters['auth/isAuth']),
-      changeShowModal,
+      toggleModal,
       deleteEntrant,
       refreshIcon,
       trashcanIcon,

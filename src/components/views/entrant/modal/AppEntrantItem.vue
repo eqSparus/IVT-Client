@@ -76,15 +76,13 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/properties.scss' as props;
-@use '@/assets/scss/utils.scss' as utils;
 
 .item {
   align-items: center;
 
   .icon {
-    width: 40px;
-    height: 40px;
+    width: 4rem;
+    height: 4rem;
   }
 
   .arrow-transform {
@@ -102,11 +100,10 @@ export default defineComponent({
     flex-flow: column;
     margin-left: 10%;
   }
+
+  textarea {
+    flex: 3;
+  }
 }
 
-.text-area {
-  flex: 3;
-  @include utils.scrollbar(props.$scroll-slider-color, props.$scroll-slider-body-color);
-  resize: none;
-}
 </style>

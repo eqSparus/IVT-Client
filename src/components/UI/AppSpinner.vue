@@ -39,7 +39,7 @@ $red: #D52B1E;
   justify-content: center;
 
   p {
-    @include utils.fontStyle(prop.$info-color, 500)
+    @include utils.fontStyle(prop.$primary-color, 500)
   }
 }
 

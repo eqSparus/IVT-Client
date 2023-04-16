@@ -107,12 +107,12 @@ export default defineComponent({
   display: flex;
   flex-flow: row;
   justify-content: space-around;
-  gap: 10px;
+  gap: 1rem;
 
   .btn-position {
     align-self: center;
-    height: 40px;
-    width: 40px;
+    height: 4rem;
+    width: 4rem;
   }
 }
 

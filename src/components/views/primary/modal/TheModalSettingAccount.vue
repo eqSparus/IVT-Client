@@ -8,74 +8,75 @@
 
       <div class="setting-email">
 
-        <label class="field-label mb-10" for="email">Введите новую почту</label>
-        <span v-if="valid.email.$invalid && valid.email.$dirty"
-              class="field-fail">
-          Поле не должно быть пустым и являться адресом эл. почты
-        </span>
-        <input type="email"
-               class="field-standard"
-               placeholder="Адрес эл. почты"
-               v-model="email"
-               id="email"
-               @blur="valid.email.$touch()"
-               @keyup.enter="changeEmail"
-               aria-label="Эл. почта аккаунта"/>
+        <app-base-field id="email"
+                        label="Введите новую почту"
+                        :fails="[{
+                          isShow: valid.email.$invalid && valid.email.$dirty,
+                          description: 'Поле не должно быть пустым и являться адресом эл. почты',
+                        }]">
+          <input type="email"
+                 class="field-standard"
+                 placeholder="Адрес эл. почты"
+                 v-model="email"
+                 id="email"
+                 @blur="valid.email.$touch()"
+                 @keyup.enter="changeEmail"
+                 aria-label="Эл. почта аккаунта"/>
+        </app-base-field>
 
         <input type="button"
                class="btn-standard mt-20"
                @click="changeEmail"
                :disabled="valid.email.$invalid"
-               value="ОБНОВИТЬ АДРЕС">
-
+               value="обновить адрес">
       </div>
 
       <div class="setting-password">
+        <app-base-field id="password"
+                        label="Новый пароль"
+                        :fails="[
+                        {
+                          isShow: (valid.password.minLength.$invalid || valid.password.maxLength.$invalid) && valid.password.$dirty,
+                          description: 'Пароль должен быть в пределах от 12 до 64 символов',
+                        },
+                        {
+                          isShow: valid.password.required.$invalid && valid.password.$dirty,
+                          description: 'Поле не должны быть пустыми',
+                        }
+                        ]">
+          <input type="password"
+                 class="field-standard"
+                 id="password"
+                 @keyup.enter="changePassword"
+                 placeholder="Введите новый пароль"
+                 @blur="valid.password.$touch()"
+                 v-model="password"/>
+        </app-base-field>
 
-        <div class="fail-message fs-18 mt-10"
-             v-if="valid.password.samePassword.$invalid && valid.password.$dirty && valid.repeatPassword.$dirty">
-          Пароли должны совпадать
-        </div>
-
-        <label class="field-label mt-10 mb-10" for="password">Введите новый пароль</label>
-        <span v-if="(valid.password.minLength.$invalid || valid.password.maxLength.$invalid) && valid.password.$dirty"
-              class="field-fail">
-          Пароль должен быть в пределах от 12 до 64 символов
-        </span>
-        <span v-if="valid.password.required.$invalid && valid.password.$dirty" class="field-fail">
-          Поле не должны быть пустыми
-        </span>
-        <input type="password"
-               class="field-standard"
-               id="password"
-               @keyup.enter="changePassword"
-               placeholder="Введите новый пароль"
-               @blur="valid.password.$touch()"
-               v-model="password"/>
-
-        <label class="field-label mt-20 mb-10" for="repeatPassword">Повторите новый пароль</label>
-        <span v-if="valid.repeatPassword.$invalid && valid.repeatPassword.$dirty"
-              class="field-fail">
-          Поле не должны быть пустыми
-        </span>
-        <input type="password"
-               class="field-standard"
-               id="repeatPassword"
-               @keyup.enter="changePassword"
-               placeholder="Повторите пароль"
-               @blur="valid.repeatPassword.$touch()"
-               v-model="repeatPassword"/>
+        <app-base-field id="repeatPassword"
+                        class="mt-10"
+                        label="Повторите новый пароль"
+                        :fails="[{
+                          isShow: valid.repeatPassword.$invalid && valid.repeatPassword.$dirty,
+                          description: 'Поле не должны быть пустыми',
+                        }]">
+          <input type="password"
+                 class="field-standard"
+                 id="repeatPassword"
+                 @keyup.enter="changePassword"
+                 placeholder="Повторите пароль"
+                 @blur="valid.repeatPassword.$touch()"
+                 v-model="repeatPassword"/>
+        </app-base-field>
 
         <input type="button"
                class="btn-standard mt-20"
                @click="changePassword"
-               :disabled="valid.password.$invalid || valid.repeatPassword.$invalid"
+               :disabled="valid.password.required.$invalid || valid.password.minLength.$invalid
+               || valid.password.maxLength.$invalid || valid.repeatPassword.$invalid"
                value="обновить пароль">
-
       </div>
-
     </div>
-
   </app-base-modal>
 </template>
 
@@ -85,10 +86,12 @@ import AppBaseModal from '@/components/UI/AppBaseModal.vue';
 import useChangePassword from '@/hooks/useEditAccount';
 import { requestEditPassword, requestSendEditEmail } from '@/api/user/AuthUserApi';
 import useAlerts from '@/hooks/useAlerts';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   icon: 'TheModalSettingAccount',
   components: {
+    AppBaseField,
     AppBaseModal,
   },
   emits: ['close'],
@@ -109,21 +112,29 @@ export default defineComponent({
     } = useChangePassword();
 
     const changePassword = async () => {
-      try {
-        await requestEditPassword(password.value);
-        alerts.value.push({
-          type: 'info',
-          message: 'Смена пароля прошла успешно!',
-        });
-      } catch (e) {
+      if (!valid.value.password.samePassword.$invalid) {
+        try {
+          await requestEditPassword(password.value);
+          alerts.value.push({
+            type: 'info',
+            message: 'Смена пароля прошла успешно!',
+          });
+        } catch (e) {
+          alerts.value.push({
+            type: 'warning',
+            message: 'Смена пароля не удалась!',
+          });
+        }
+        password.value = '';
+        repeatPassword.value = '';
+        valid.value.$reset();
+      } else {
         alerts.value.push({
           type: 'warning',
-          message: 'Смена пароля не удалась!',
+          message: 'Пароли должны совпадать',
         });
+        repeatPassword.value = '';
       }
-      password.value = '';
-      repeatPassword.value = '';
-      valid.value.$reset();
     };
 
     const changeEmail = async () => {
@@ -173,8 +184,8 @@ export default defineComponent({
 .account-setting-container {
   display: flex;
   flex-flow: column;
-  gap: 20px;
-  width: 40vw;
+  gap: 2rem;
+  width: 75rem;
 
   .fail-message {
     text-align: center;

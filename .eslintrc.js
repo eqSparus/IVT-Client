@@ -17,10 +17,11 @@ module.exports = {
     indent: ['error', 2],
     'max-len': 'off',
     'linebreak-style': 0,
-    'vuejs-accessibility/label-has-for': ['error', {
+    'vuejs-accessibility/label-has-for': ['off', {
       required: {
         some: ['nesting', 'id'],
       },
     }],
+    'vuejs-accessibility/form-control-has-label': 'off',
   },
 };

@@ -2,13 +2,13 @@
   <app-base-screen title="Абитуриенту" type-screen="second">
 
     <the-modal-change-entrant :is-show="isShow"
-                              @close="changeShowModal"/>
+                              @close="toggleModal"/>
 
     <div class="entrant-screen-container">
       <div class="entrant-change mt-20" v-if="isAuth">
         <input type="button"
                class="btn-standard"
-               @click="changeShowModal"
+               @click="toggleModal"
                value="добавить">
       </div>
       <app-entrant-screen-item :class="[index === 0 ? '' : 'mt-30']" v-for="(entrant, index) in entrants"
@@ -37,14 +37,14 @@ export default defineComponent({
     const store = useStore();
     const {
       isShow,
-      changeShowModal,
+      toggleModal,
     } = useShowModal();
 
     return {
       isShow,
       entrants: computed(() => store.getters['entrant/getEntrants']),
       isAuth: computed(() => store.getters['auth/isAuth']),
-      changeShowModal,
+      toggleModal,
     };
   },
 });

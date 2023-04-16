@@ -2,12 +2,12 @@
   <app-base-screen title="Партнёры" type-screen="second">
 
     <the-modal-add-partner :is-show="isShow"
-                           @close="changeShowModal"/>
+                           @close="toggleModal"/>
 
     <div class="partners-change" v-if="isAuth">
       <input type="button"
              class="btn-standard"
-             @click="changeShowModal"
+             @click="toggleModal"
              value="добавить">
     </div>
 
@@ -38,12 +38,12 @@ export default defineComponent({
     const store = useStore();
     const {
       isShow,
-      changeShowModal,
+      toggleModal,
     } = useShowModal();
 
     return {
       isShow,
-      changeShowModal,
+      toggleModal,
       isAuth: computed(() => store.getters['auth/isAuth']),
       partners: computed(() => store.getters['partner/getPartners']),
     };

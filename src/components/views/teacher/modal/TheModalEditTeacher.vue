@@ -81,7 +81,7 @@ export default defineComponent({
 .edit-teacher-container {
   display: flex;
   flex-flow: column;
-  width: 60vw;
+  width: 115rem;
 
   .edit-teacher {
     display: flex;

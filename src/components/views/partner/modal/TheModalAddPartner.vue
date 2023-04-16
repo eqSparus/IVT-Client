@@ -18,16 +18,22 @@
              @change="uploadImg"
              style="display: none"
              id="img-partner">
-      <label class="field-label mt-10" for="href-partner">Ссылка на сайт</label>
-      <span class="field-fail" v-if="valid.href.$invalid && valid.href.$dirty">
-        Поле не должно быть пустым и должно являться url адресом
-      </span>
-      <input type="text"
-             id="href-partner"
-             v-model="partner.href"
-             placeholder="Введите ссылку на сайт партнера"
-             @blur="valid.href.$touch()"
-             class="field-standard">
+
+      <app-base-field id="href-partner"
+                      class="mt-10"
+                      label="Ссылка на сайт"
+                      :fails="[{
+                        isShow: valid.href.$invalid && valid.href.$dirty,
+                        description: 'Поле не должно быть пустым и должно являться url адресом',
+                      }]">
+        <input type="text"
+               id="href-partner"
+               v-model="partner.href"
+               placeholder="Введите ссылку на сайт партнера"
+               @blur="valid.href.$touch()"
+               class="field-standard">
+      </app-base-field>
+
       <input type="button"
              :disabled="valid.$invalid"
              @click="addPartner"
@@ -46,10 +52,12 @@ import useAlerts from '@/hooks/useAlerts';
 import useImg from '@/hooks/useImg';
 import useEditPartner from '@/hooks/useEditPartner';
 import { Cropper } from 'vue-advanced-cropper';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheModalAddPartner',
   components: {
+    AppBaseField,
     AppBaseModal,
     Cropper,
   },
@@ -123,7 +131,7 @@ export default defineComponent({
 .add-partner-container {
   display: flex;
   flex-flow: column;
-  width: 40vw;
+  width: 75rem;
 
   .partner-cropper {
     align-self: center;

@@ -6,41 +6,44 @@
 
       <div class="recover-content">
 
-        <div class="fail-message fs-18 mt-10"
-             v-if="valid.password.samePassword.$invalid && valid.password.$dirty && valid.repeatPassword.$dirty">
-          Пароли должны совпадать
-        </div>
+        <app-base-field id="password"
+                        class="mt-20 mb-10"
+                        label="Введите новый пароль"
+                        :fails="[
+                          {
+                            isShow: (valid.password.minLength.$invalid || valid.password.maxLength.$invalid) && valid.password.$dirty,
+                            description: 'Пароль должен быть в пределах от 12 до 64 символов',
+                          },
+                          {
+                            isShow: valid.password.required.$invalid && valid.password.$dirty,
+                            description: 'Поле не должны быть пустыми',
+                          },
+                        ]">
+          <input type="password"
+                 id="password"
+                 v-model="password"
+                 @blur="valid.password.$touch()"
+                 class="field-standard">
+        </app-base-field>
 
-        <label class="field-label mt-20 mb-10" for="password">Введите новый пароль</label>
-        <span v-if="(valid.password.minLength.$invalid || valid.password.maxLength.$invalid) && valid.password.$dirty"
-              class="field-fail">
-          Пароль должен быть в пределах от 12 до 64 символов
-        </span>
-        <span v-if="valid.password.required.$invalid && valid.password.$dirty"
-              class="field-fail">
-          Поле не должны быть пустыми
-        </span>
-        <input type="password"
-               id="password"
-               v-model="password"
-               @blur="valid.password.$touch()"
-               class="field-standard">
-
-        <label class="field-label mt-20 mb-10" for="repeat-password">Повторите новый пароль</label>
-        <span v-if="valid.repeatPassword.$invalid && valid.repeatPassword.$dirty"
-              class="field-fail">
-          Поле не должны быть пустыми
-        </span>
-        <input type="password"
-               id="repeat-password"
-               v-model="repeatPassword"
-               @blur="valid.repeatPassword.$touch()"
-               class="field-standard">
+        <app-base-field id="repeat-password"
+                        label="Повторите новый пароль"
+                        :fails="[{
+                            isShow: valid.repeatPassword.$invalid && valid.repeatPassword.$dirty,
+                            description: 'Поле не должны быть пустыми',
+                        }]">
+          <input type="password"
+                 id="repeat-password"
+                 v-model="repeatPassword"
+                 @blur="valid.repeatPassword.$touch()"
+                 class="field-standard">
+        </app-base-field>
 
         <input type="button"
                class="btn-standard mt-30"
                value="восстановить пароль"
-               :disabled="valid.password.$invalid || valid.repeatPassword.$invalid"
+               :disabled="valid.password.required.$invalid || valid.password.minLength.$invalid
+               || valid.password.maxLength.$invalid || valid.repeatPassword.$invalid"
                @click="recoverPassword">
       </div>
     </div>
@@ -54,8 +57,10 @@ import { useRoute, useRouter } from 'vue-router';
 import { requestRecoverPassword } from '@/api/user/UserApi';
 import useChangePassword from '@/hooks/useEditAccount';
 import useAlerts from '@/hooks/useAlerts';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
+  components: { AppBaseField },
   icon: 'TheRecoverPasswordPage',
   setup() {
     const { alerts } = useAlerts();
@@ -70,18 +75,26 @@ export default defineComponent({
     } = useChangePassword();
 
     const recoverPassword = async () => {
-      try {
-        await requestRecoverPassword(password.value, token as string);
-        await router.push('/main');
-      } catch (e) {
-        password.value = '';
-        repeatPassword.value = '';
+      if (!valid.value.password.samePassword.$invalid) {
+        try {
+          await requestRecoverPassword(password.value, token as string);
+          await router.push('/main');
+        } catch (e) {
+          password.value = '';
+          repeatPassword.value = '';
+          alerts.value.push({
+            type: 'warning',
+            message: 'Вы уже восстанавливали пароль по этой ссылке или время доступа ссылки истекло',
+          });
+        }
+        valid.value.$reset();
+      } else {
         alerts.value.push({
           type: 'warning',
-          message: 'Вы уже восстанавливали пароль по этой ссылке или время доступа ссылки истекло',
+          message: 'Пароли должны совпадать',
         });
+        repeatPassword.value = '';
       }
-      valid.value.$reset();
     };
 
     return {
@@ -102,7 +115,7 @@ export default defineComponent({
 .recover-container {
   width: 100%;
   height: 100vh;
-  background: prop.$base-screen-main-background-color;
+  background: prop.$main-first-color;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -110,27 +123,22 @@ export default defineComponent({
   .recover-block {
     width: 40%;
     margin-top: 10%;
-    background: prop.$modal-window-background-color;
-    border-radius: 10px;
-    padding: 20px 0 20px 0;
+    background: prop.$main-second-color;
+    border-radius: 1rem;
+    padding: 2rem 0 2rem 0;
     display: flex;
     flex-flow: column;
 
-    .fail-message {
-      text-align: center;
-      @include utils.fontStyle(prop.$warning-color, 500);
-    }
-
     h3 {
       text-align: center;
-      @include utils.fontStyle($weight: 400, $color: prop.$modal-window-text-color);
-      border-bottom: 1px solid black;
+      @include utils.fontStyle($weight: 400, $color: prop.$main-first-color);
+      border-bottom: 0.1rem solid black;
     }
 
     .recover-content {
       display: flex;
       flex-flow: column;
-      padding: 0 20px;
+      padding: 0 2rem;
     }
   }
 }

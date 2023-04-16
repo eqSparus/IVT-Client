@@ -79,12 +79,12 @@ export default defineComponent(
 
       const {
         isShow: isShowDepartment,
-        changeShowModal: changeShowModalDepartment,
+        toggleModal: changeShowModalDepartment,
       } = useShowModal();
 
       const {
         isShow: isShowAccount,
-        changeShowModal: changeShowModalAccount,
+        toggleModal: changeShowModalAccount,
       } = useShowModal();
 
       return {

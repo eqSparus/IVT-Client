@@ -145,8 +145,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/properties.scss' as props;
-@use '@/assets/scss/utils.scss' as utils;
 
 .direction-leave-to,
 .direction-enter-from {
@@ -161,13 +159,13 @@ export default defineComponent({
 .directions-container {
   display: flex;
   flex-flow: column;
-  min-width: 50vw;
+  min-width: 90rem;
 
   .directions-items {
     display: flex;
     flex-flow: row;
     justify-content: center;
-    gap: 30px;
+    gap: 3rem;
 
     .direction-items-move,
     .direction-items-enter-active,

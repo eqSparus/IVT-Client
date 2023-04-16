@@ -8,13 +8,13 @@
     <div class="item-content-container">
       <div class="item-content">
 
-        <h3 class="title fs-26">{{ directionInfo.title }}</h3>
+        <h3 class="title fs-26">{{ direction.title }}</h3>
 
-        <span class="fs-24 mt-20">{{ directionInfo.degree }}</span>
+        <span class="fs-24 mt-20">{{ direction.degree }}</span>
 
-        <span class="fs-24 mt-10">{{ directionInfo.form }}</span>
+        <span class="fs-24 mt-10">{{ direction.form }}</span>
 
-        <span class="fs-24 mt-10">{{ directionInfo.duration + durationText }}</span>
+        <span class="fs-24 mt-10">{{ direction.duration + durationText }}</span>
 
       </div>
     </div>
@@ -32,7 +32,7 @@ import direction3 from '@/assets/images/draws/direction3.svg';
 export default defineComponent({
   icon: 'AppDirectionScreenItem',
   props: {
-    directionInfo: {
+    direction: {
       type: Object as PropType<Direction>,
       required: true,
     },
@@ -50,7 +50,7 @@ export default defineComponent({
     return {
       drawings,
       index,
-      durationText: computed(() => (props.directionInfo.duration >= 5 ? ' лет' : ' года')),
+      durationText: computed(() => (props.direction.duration >= 5 ? ' лет' : ' года')),
     };
   },
 });

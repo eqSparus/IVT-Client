@@ -1,7 +1,7 @@
 <template>
   <the-modal-edit-partner :is-show="isShow"
                           :partner="partner"
-                          @close="changeShowModal"/>
+                          @close="toggleModal"/>
   <div class="partner-item">
     <a :href="partner.href"
        target="_blank">
@@ -10,7 +10,7 @@
 
     <button class="btn-standard-icon ml-10"
             v-if="isAuth"
-            @click="changeShowModal">
+            @click="toggleModal">
       <img :src="refreshIcon"
            class="icon-trashcan"
            alt="assets/images/icon/refresh.svg">
@@ -41,13 +41,13 @@ export default defineComponent({
 
     const {
       isShow,
-      changeShowModal,
+      toggleModal,
     } = useShowModal();
 
     return {
       isShow,
       isAuth: computed(() => store.getters['auth/isAuth']),
-      changeShowModal,
+      toggleModal,
       refreshIcon,
     };
   },
@@ -68,7 +68,7 @@ export default defineComponent({
     }
     &:focus{
       outline: none;
-      border-bottom: 0.2rem solid prop.$info-color;
+      border-bottom: 0.2rem solid prop.$primary-color;
     }
   }
 

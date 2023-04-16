@@ -3,12 +3,12 @@ import { ref } from 'vue';
 export default () => {
   const isShow = ref<boolean>(false);
 
-  const changeShowModal = () => {
+  const toggleModal = () => {
     isShow.value = !isShow.value;
   };
 
   return {
     isShow,
-    changeShowModal,
+    toggleModal,
   };
 };

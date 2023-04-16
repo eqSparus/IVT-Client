@@ -37,7 +37,7 @@ export default defineComponent({
 .activate-email-container {
   width: 100%;
   height: 100vh;
-  background: prop.$base-screen-main-background-color;
+  background: prop.$main-first-color;
   display: flex;
   justify-content: center;
 }

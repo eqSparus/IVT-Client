@@ -1,20 +1,19 @@
 <template>
   <app-base-screen title="Направления">
-    <the-modal-edit-directions
-      :directions="directions"
-      :is-show="isShow"
-      @close="changeShowModal"/>
+    <the-modal-edit-directions :directions="directions"
+                               :is-show="isShow"
+                               @close="toggleModal"/>
 
     <div class="direction-change mb-20" v-if="isAuth">
       <input type="button"
              class="btn-standard"
              value="редактировать"
-             @click="changeShowModal"/>
+             @click="toggleModal"/>
     </div>
     <div :class="[directions.length === 3? 'gap-5':'gap-1','directions-screen-container']">
       <app-direction-screen-item v-for="(info, index) in directions" :key="info.id"
                                  :index-drawing="Number(index)"
-                                 :direction-info="info"/>
+                                 :direction="info"/>
     </div>
   </app-base-screen>
 </template>
@@ -39,14 +38,14 @@ export default defineComponent({
     const store = useStore();
     const {
       isShow,
-      changeShowModal,
+      toggleModal,
     } = useShowModal();
 
     return {
       isShow,
       directions: computed(() => store.getters['direction/getDirections']),
       isAuth: computed(() => store.getters['auth/isAuth']),
-      changeShowModal,
+      toggleModal,
     };
   },
 });

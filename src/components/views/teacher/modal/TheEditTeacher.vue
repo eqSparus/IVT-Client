@@ -39,72 +39,89 @@
       <div class="edit-block ml-20">
         <div class="double-block">
           <div class="block-column">
-            <label class="field-label" for="last-name">Фамилия преподавателя*</label>
-            <span class="field-fail" v-if="valid.lastName.$invalid && valid.lastName.$dirty">
-              Поле не должно быть пустым
-            </span>
-            <input type="text"
-                   class="field-standard"
-                   v-model="editableTeacher.lastName"
-                   @blur="valid.lastName.$touch()"
-                   placeholder="Введите фамилию преподавателя"
-                   id="last-name">
-          </div>
-
-          <div class="block-column">
-            <label class="field-label" for="first-name">Имя преподавателя*</label>
-            <span class="field-fail" v-if="valid.firstName.$invalid && valid.firstName.$dirty">
-              Поле не должно быть пустым
-            </span>
-            <input type="text"
-                   class="field-standard"
-                   @blur="valid.firstName.$touch()"
-                   v-model="editableTeacher.firstName"
-                   placeholder="Введите имя преподавателя"
-                   id="first-name">
-          </div>
-        </div>
-
-        <div class="double-block">
-          <div class="block-column">
-            <label class="field-label mt-10" for="middle-name">Отчество преподавателя</label>
-            <input type="text"
-                   class="field-standard"
-                   v-model="editableTeacher.middleName"
-                   placeholder="Введите отчество преподавателя"
-                   id="middle-name">
-          </div>
-          <div class="block-column">
-            <label class="field-label mt-10" for="post-department">Должность на кафедре</label>
-            <app-tooltip text="Должность преподавателя по АУП (Административно-управленческий персонал) например
-зав. кафедрой, заместитель зав. кафедры и тд.">
+            <app-base-field id="last-name"
+                            label="Фамилия преподавателя*"
+                            :fails="[{
+                              isShow: valid.lastName.$invalid && valid.lastName.$dirty,
+                              description: 'Поле не должно быть пустым',
+                            }]">
               <input type="text"
-                     id="post-department"
-                     v-model="editableTeacher.postDepartment"
                      class="field-standard"
-                     placeholder="Введите должность преподавателя">
-            </app-tooltip>
+                     v-model="editableTeacher.lastName"
+                     @blur="valid.lastName.$touch()"
+                     placeholder="Введите фамилию преподавателя"
+                     id="last-name">
+            </app-base-field>
+          </div>
+
+          <div class="block-column">
+            <app-base-field id="first-name"
+                            label="Имя преподавателя*"
+                            :fails="[{
+                              isShow: valid.firstName.$invalid && valid.firstName.$dirty,
+                              description: 'Поле не должно быть пустым',
+                            }]">
+              <input type="text"
+                     class="field-standard"
+                     @blur="valid.firstName.$touch()"
+                     v-model="editableTeacher.firstName"
+                     placeholder="Введите имя преподавателя"
+                     id="first-name">
+            </app-base-field>
           </div>
         </div>
 
-        <label class="field-label mt-10" for="post-teacher">Должность преподавателя</label>
-        <app-tooltip text="Должность преподавателя по ППС (профессорско-преподавательский состав) например
+        <div class="double-block mt-10">
+          <div class="block-column">
+            <app-base-field id="middle-name"
+                            label="Отчество преподавателя">
+              <input type="text"
+                     class="field-standard"
+                     v-model="editableTeacher.middleName"
+                     placeholder="Введите отчество преподавателя"
+                     id="middle-name">
+            </app-base-field>
+          </div>
+          <div class="block-column">
+            <app-base-field id="post-department"
+                            label="Должность на кафедре">
+              <app-tooltip text="Должность преподавателя по АУП (Административно-управленческий персонал) например
+зав. кафедрой, заместитель зав. кафедры и тд.">
+                <input type="text"
+                       id="post-department"
+                       v-model="editableTeacher.postDepartment"
+                       class="field-standard"
+                       placeholder="Введите должность преподавателя">
+              </app-tooltip>
+            </app-base-field>
+          </div>
+        </div>
+
+        <app-base-field id="post-teacher"
+                        class="mt-10"
+                        label="Должность преподавателя">
+          <app-tooltip text="Должность преподавателя по ППС (профессорско-преподавательский состав) например
 профессор, доцент, стр. преподаватель, ассистент и тд.">
-              <textarea class="field-standard text-area"
+              <textarea class="field-standard field-area"
                         id="post-teacher"
                         v-model="editableTeacher.postTeacher"
                         placeholder="Введите ученую степень преподавателя">
               </textarea>
-        </app-tooltip>
+          </app-tooltip>
+        </app-base-field>
 
-        <label class="field-label mt-10" for="post-additional">Дополнительная должность</label>
-        <app-tooltip text="Дополнительная должность преподавателя с предприятия при наличие таковой">
-          <input type="text"
-                 class="field-standard"
-                 id="post-additional"
-                 placeholder="Введите дополнительную должность"
-                 v-model="editableTeacher.postAdditional">
-        </app-tooltip>
+        <app-base-field id="post-additional"
+                        class="mt-10"
+                        label="Дополнительная должность">
+          <app-tooltip text="Дополнительная должность преподавателя с предприятия при наличие таковой">
+            <input type="text"
+                   class="field-standard"
+                   id="post-additional"
+                   placeholder="Введите дополнительную должность"
+                   v-model="editableTeacher.postAdditional">
+          </app-tooltip>
+        </app-base-field>
+
         <div class="double-block mt-20">
           <div class="block-column">
             <button @click="updateTeacher"
@@ -145,11 +162,13 @@ import useAlerts from '@/hooks/useAlerts';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
 import AppTooltip from '@/components/UI/AppTooltip.vue';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheEditTeacher',
   emits: ['remove'],
   components: {
+    AppBaseField,
     AppTooltip,
     Cropper,
   },
@@ -279,8 +298,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/properties.scss' as props;
-@use '@/assets/scss/utils.scss' as utils;
 
 .edit-teacher-container {
   display: flex;
@@ -289,6 +306,10 @@ export default defineComponent({
   .edit-container {
     display: flex;
     flex-flow: row;
+
+    textarea {
+      flex: 1;
+    }
 
     div:first-child {
       flex: 1;
@@ -329,12 +350,6 @@ export default defineComponent({
       }
     }
   }
-}
-
-.text-area {
-  flex: 3;
-  @include utils.scrollbar(props.$scroll-slider-color, props.$scroll-slider-body-color);
-  resize: none;
 }
 
 </style>

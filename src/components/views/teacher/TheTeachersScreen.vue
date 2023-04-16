@@ -82,12 +82,12 @@ export default defineComponent({
 
     const {
       isShow: isShowEditTeacher,
-      changeShowModal: changeShowEditTeacher,
+      toggleModal: changeShowEditTeacher,
     } = useShowModal();
 
     const {
       isShow: isShowEditPosition,
-      changeShowModal: changeShowEditPosition,
+      toggleModal: changeShowEditPosition,
     } = useShowModal();
 
     const changeIsAll = () => {
@@ -181,16 +181,16 @@ button {
   border: none;
   background: none;
   text-transform: uppercase;
-  color: prop.$info-color;
+  color: prop.$primary-color;
   margin-top: 8rem;
 
   &:hover {
-    color: adjust-color($color: prop.$info-color, $red: 37, $green: 26, $blue: -2);
+    color: adjust-color($color: prop.$primary-color, $red: 37, $green: 26, $blue: -2);
     cursor: pointer;
   }
 
   &:focus {
-    color: adjust-color($color: prop.$info-color, $red: 37, $green: 26, $blue: -2);
+    color: adjust-color($color: prop.$primary-color, $red: 37, $green: 26, $blue: -2);
     outline: none;
   }
 }

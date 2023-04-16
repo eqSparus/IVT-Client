@@ -43,20 +43,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/properties.scss' as props;
-@use '@/assets/scss/utils.scss' as utils;
+@import '@/assets/scss/extends.scss';
 
 .teachers-move {
   transition: all 0.5s ease;
 }
 
 .position-edit-container {
-  width: 50vw;
+  width: 100rem;
   display: flex;
   flex-flow: column;
   max-height: 40rem;
   overflow-y: auto;
-  @include utils.scrollbar(props.$scroll-slider-color, props.$scroll-slider-body-color)
+  @extend %standard-scroll-bar;
 }
 
 </style>

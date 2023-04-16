@@ -53,7 +53,7 @@ export default defineComponent({
       width: 5.8rem;
       height: 5.8rem;
       border-radius: 50%;
-      background: prop.$about-item-circle-color;
+      background: prop.$main-second-additional-two-color;
 
       img {
         user-select: none;
@@ -72,7 +72,7 @@ export default defineComponent({
 
     .title {
       @include utils.fontStyle($weight: 500,
-      $color: prop.$about-item-title-color);
+      $color: prop.$main-first-color);
     }
   }
 
@@ -80,7 +80,7 @@ export default defineComponent({
     margin-top: 1.5rem;
 
     .description {
-      @include utils.fontStyle($color: prop.$about-item-description-color);
+      @include utils.fontStyle($color: prop.$main-second-elevated-color);
     }
   }
 

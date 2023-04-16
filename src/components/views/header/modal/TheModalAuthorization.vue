@@ -3,7 +3,7 @@
                     @close="close"
                     :title="modalTitle">
 
-    <div class="modal-container">
+    <div class="modal-authentication-container">
       <the-login v-if="!isRecoverPassword"
                  @access="close"
                  @fail="alerts.push({ type: 'warning', message: 'Не верная почта или пароль' })"/>
@@ -66,10 +66,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as props;
 
-.modal-container {
+.modal-authentication-container {
   display: flex;
   flex-flow: column;
-  width: 420px;
+  width: 42rem;
 
   .forgot-block {
     text-align: center;
@@ -77,15 +77,15 @@ export default defineComponent({
     .forgot-password {
       background: none;
       border: none;
-      color: props.$info-color;
-      font-size: 2rem;
-      text-decoration: props.$info-color 2px underline;
+      color: props.$primary-color;
+      font-size: 0.2rem;
+      text-decoration: props.$primary-color 0.2rem underline;
 
       &:hover {
-        $color-hover: adjust-color($color: nth(props.$info-color, 1), $red: 37, $green: 26, $blue: -2);;
+        $color-hover: adjust-color($color: nth(props.$primary-color, 1), $red: 37, $green: 26, $blue: -2);;
         cursor: pointer;
         color: $color-hover;
-        text-decoration: $color-hover 2px underline;
+        text-decoration: $color-hover 0.2rem underline;
       }
     }
   }

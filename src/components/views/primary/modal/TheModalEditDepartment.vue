@@ -75,7 +75,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 
 .modal-size {
-  width: 50vw;
+  width: 90rem;
 
   .begin-edit-container {
     display: flex;
@@ -84,7 +84,7 @@ export default defineComponent({
     .edit-block {
       display: flex;
       flex-flow: row;
-      gap: 10px;
+      gap: 1rem;
 
       input {
         flex: 1;

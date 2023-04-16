@@ -19,7 +19,7 @@
 
         <input type="text"
                placeholder="Введите ссылку"
-               aria-label="Введите ссылку"
+               aria-label="Ссылка на сайт"
                @blur="valid.href.$touch()"
                v-model="newLink.href"
                class="field-standard"/>
@@ -167,7 +167,7 @@ export default defineComponent({
   .setting-links-push {
     display: flex;
     flex-flow: row;
-    gap: 10px;
+    gap: 1rem;
 
     input:nth-child(2) {
       flex: 1;

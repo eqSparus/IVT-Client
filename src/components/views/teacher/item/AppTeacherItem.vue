@@ -60,7 +60,7 @@ export default defineComponent({
 
 .item-container {
   @media only screen and (min-width: 1081px) {
-    border-left: 1rem prop.$info-color solid;
+    border-left: 1rem prop.$primary-color solid;
     padding-left: 3rem;
   }
 }
@@ -146,11 +146,11 @@ export default defineComponent({
   }
 
   .post {
-    @include utils.fontStyle($color: prop.$info-color);
+    @include utils.fontStyle($color: prop.$primary-color);
   }
 
   .content {
-    @include utils.fontStyle($color: prop.$teacher-item-main-color);
+    @include utils.fontStyle($color: prop.$main-first-color);
     word-wrap: break-word;
   }
 

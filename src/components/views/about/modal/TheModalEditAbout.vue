@@ -4,13 +4,11 @@
                     @close="$emit('close')"
                     :is-footer="true">
 
-    <div class="modal-about-container">
-
+    <div class="modal-about-edit-container">
       <div class="item-about" v-for="about in abouts" :key="about.id">
         <app-edit-about-block :about="about"
                                @update="updateAbout"/>
       </div>
-
     </div>
 
   </app-modal-window>
@@ -72,10 +70,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.modal-about-container {
+
+.modal-about-edit-container {
   display: flex;
   flex-flow: row;
-  gap: 20px;
+  gap: 2rem;
 }
 
 </style>
