@@ -112,13 +112,13 @@ export default defineComponent({
       padding: 11% 5%;
 
       .title {
-        @include utils.fontStyle($weight: 700,
+        @include utils.font-style($weight: 700,
         $color: prop.$main-second-color);
       }
 
       span {
         display: block;
-        @include utils.fontStyle($color: prop.$main-second-text-transparent-color);
+        @include utils.font-style($color: prop.$main-second-text-transparent-color);
       }
 
     }

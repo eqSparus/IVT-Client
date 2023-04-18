@@ -7,7 +7,7 @@
                       description: 'Поле не должно быть пустым',
                       isShow: valid.title.$invalid && valid.title.$dirty,
                     }]">
-    <textarea class="field-standard text-while field-area"
+    <textarea class="field-standard text-while"
               placeholder="Введите название направления"
               aria-label="Название направления"
               @blur="valid.title.$touch()"

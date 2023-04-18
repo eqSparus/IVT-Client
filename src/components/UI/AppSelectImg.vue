@@ -4,7 +4,7 @@
       <!--TODO Сменить адрес-->
       <img :src="select.img" :alt="select.img"/>
     </div>
-    <transition name="select-open">
+    <transition name="select">
       <div class="item-select-container" v-if="isOpen">
         <img class="item-select"
              v-for="option in options" :key="option"
@@ -60,21 +60,22 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss';
+
+$animation-name: 'select';
 
 .custom-select {
-  display: flex;
+  @include utils.flex-container($direction: row);
   position: relative;
   align-self: center;
   justify-content: center;
   align-items: center;
 
-  .select-open-enter-active,
-  .select-open-leave-active {
+  @include utils.animation-to($name: 'select') {
     transition: all 0.5s ease;
   }
 
-  .select-open-enter-from,
-  .select-open-leave-to {
+  @include utils.animation-from($name: 'select') {
     transform: translateY(-20%);
     opacity: 0;
   }

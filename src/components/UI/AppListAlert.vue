@@ -40,29 +40,28 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/utils.scss';
+
+$animation-name: 'alerts';
 
 .alert-list {
   position: fixed;
   top: 0;
   right: 0;
   width: auto;
-  display: flex;
-  flex-flow: column;
+  @include utils.flex-container();
   z-index: 9999999;
 
-  .alerts-move,
-  .alerts-enter-active,
-  .alerts-leave-active {
+  @include utils.animation-to($name: $animation-name, $move: true) {
     transition: all 0.5s ease;
   }
 
-  .alerts-enter-from,
-  .alerts-leave-to {
+  @include utils.animation-from($name: $animation-name) {
     transform: translateX(20vw);
     opacity: 0;
   }
 
-  .alerts-leave-active {
+  .#{$animation-name}-leave-active {
     position: absolute;
   }
 }

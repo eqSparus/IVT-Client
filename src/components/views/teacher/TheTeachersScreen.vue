@@ -196,11 +196,11 @@ button {
 }
 
 .content {
-  @include utils.fontStyle($color: prop.$main-first-color);
+  @include utils.font-style($color: prop.$main-first-color);
 }
 
 .additional {
-  @include utils.fontStyle($color: prop.$main-first-dark-transparent-color);
+  @include utils.font-style($color: prop.$main-first-dark-transparent-color);
 }
 
 .span-new-line {

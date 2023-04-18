@@ -107,14 +107,14 @@ export default defineComponent({
 
   h3 {
     text-align: justify;
-    @include utils.fontStyle($weight: 500, $color: prop.$main-first-dark-color);
+    @include utils.font-style($weight: 500, $color: prop.$main-first-dark-color);
   }
 
   .item-content {
 
     h5 {
       text-align: justify;
-      @include utils.fontStyle($weight: 600, $color: prop.$main-first-color);
+      @include utils.font-style($weight: 600, $color: prop.$main-first-color);
     }
 
     ul {
@@ -124,7 +124,7 @@ export default defineComponent({
 
       li {
         text-align: justify;
-        @include utils.fontStyle($color: prop.$main-first-elevate-color);
+        @include utils.font-style($color: prop.$main-first-elevate-color);
 
         &:before {
           content: "·";

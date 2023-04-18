@@ -71,7 +71,7 @@ export default defineComponent({
     margin-top: 1.5rem;
 
     .title {
-      @include utils.fontStyle($weight: 500,
+      @include utils.font-style($weight: 500,
       $color: prop.$main-first-color);
     }
   }
@@ -80,7 +80,7 @@ export default defineComponent({
     margin-top: 1.5rem;
 
     .description {
-      @include utils.fontStyle($color: prop.$main-second-elevated-color);
+      @include utils.font-style($color: prop.$main-second-elevated-color);
     }
   }
 

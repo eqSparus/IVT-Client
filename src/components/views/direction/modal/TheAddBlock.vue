@@ -8,7 +8,7 @@
                     }]">
       <textarea id="title"
                 v-model="direction.title"
-                class="field-standard field-area"
+                class="field-standard"
                 @blur="valid.title.$touch()"
                 placeholder="Введите название"
                 rows="2">

@@ -1,48 +1,77 @@
 @mixin button-size($font-weight: 500, $font-size: 2px, $border-radius: 0, $p-x: 30px, $p-y: 15px) {
-    border-radius: $border-radius;
-    font-weight: $font-weight;
-    font-size: $font-size;
-    padding: $p-y $p-x;
+  border-radius: $border-radius;
+  font-weight: $font-weight;
+  font-size: $font-size;
+  padding: $p-y $p-x;
 
-    @media only screen and (min-width: 2000px){
-        border-radius: $border-radius * 1.5;
-        font-weight: $font-weight * 1.5;
-        font-size: $font-size * 1.5;
-        padding: $p-y * 1.5 $p-x * 1.5;
-    }
+  @media only screen and (min-width: 2000px) {
+    border-radius: $border-radius * 1.5;
+    font-weight: $font-weight * 1.5;
+    font-size: $font-size * 1.5;
+    padding: $p-y * 1.5 $p-x * 1.5;
+  }
 }
 
 @mixin scrollbar($color-slider, $color-body) {
-    scrollbar-width: thin;
-    scrollbar-color: $color-slider $color-body;
+  scrollbar-width: thin;
+  scrollbar-color: $color-slider $color-body;
 
-    *::-webkit-scrollbar,
-    html *::-webkit-scrollbar {
-        height: 1rem;
-        width: 1rem;
-    }
+  *::-webkit-scrollbar,
+  html *::-webkit-scrollbar {
+    height: 1rem;
+    width: 1rem;
+  }
 
-    *::-webkit-scrollbar-track,
-    html *::-webkit-scrollbar-track {
-        background: $color-body;
-    }
+  *::-webkit-scrollbar-track,
+  html *::-webkit-scrollbar-track {
+    background: $color-body;
+  }
 
-    *::-webkit-scrollbar-thumb,
-    html *::-webkit-scrollbar-thumb {
-        background-color: $color-slider;
-        border: 0.1rem solid $color-body;
-    }
+  *::-webkit-scrollbar-thumb,
+  html *::-webkit-scrollbar-thumb {
+    background-color: $color-slider;
+    border: 0.1rem solid $color-body;
+  }
 }
 
-@mixin fontStyle($color: #FFFFFF, $weight: 400, $style: normal) {
-    font-weight: $weight ;
-    font-style: $style;
-    color: $color;
+@mixin flex-container($direction: column, $wrap: wrap, $gap-c: 0, $gap-r: 0) {
+  display: flex;
+  flex-flow: $direction $wrap;
+  column-gap: $gap-c;
+  row-gap: $gap-r;
 }
 
-@function calcFontSize($f-min, $f-max, $v-min, $v-max) {
-    $k: ($f-max - $f-min)/($v-max - $v-min);
-    $b: $f-min - $k * $v-min;
-    $b: $b * 0.1rem;
-    @return calc(#{$k} * 100vw + #{$b} + var(--font-size));
+@mixin animation-to($name, $move: false) {
+  @if ($move) {
+    .#{$name}-move,
+    .#{$name}-enter-active,
+    .#{$name}-leave-active {
+      @content;
+    }
+  } @else {
+    .#{$name}-enter-active,
+    .#{$name}-leave-active {
+      @content;
+    }
+  }
+}
+
+@mixin animation-from($name) {
+  .#{$name}-enter-from,
+  .#{$name}-leave-to {
+    @content;
+  }
+}
+
+@mixin font-style($color: #FFFFFF, $weight: 400, $style: normal) {
+  font-weight: $weight;
+  font-style: $style;
+  color: $color;
+}
+
+@function calc-font-size($f-min, $f-max, $v-min, $v-max) {
+  $k: ($f-max - $f-min)/($v-max - $v-min);
+  $b: $f-min - $k * $v-min;
+  $b: $b * 0.1rem;
+  @return calc(#{$k} * 100vw + #{$b} + var(--font-size));
 }

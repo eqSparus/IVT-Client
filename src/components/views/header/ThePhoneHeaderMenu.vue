@@ -140,7 +140,7 @@ export default defineComponent({
         margin: 0;
 
         .link {
-          @include utils.fontStyle($color: prop.$main-second-additional-color);
+          @include utils.font-style($color: prop.$main-second-additional-color);
           border: none;
           background: transparent;
           list-style: none;

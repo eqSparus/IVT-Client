@@ -189,7 +189,7 @@ export default defineComponent({
 
   .fail-message {
     text-align: center;
-    @include utils.fontStyle(prop.$warning-color, 500);
+    @include utils.font-style(prop.$warning-color, 500);
   }
 
   .setting-email {

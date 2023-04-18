@@ -173,12 +173,12 @@ export default defineComponent(
     }
 
     h1 {
-      @include utils.fontStyle($color: prop.$main-second-color, $weight: 700);
+      @include utils.font-style($color: prop.$main-second-color, $weight: 700);
       user-select: none;
     }
 
     h3 {
-      @include utils.fontStyle($weight: 300, $color: prop.$main-second-additional-color);
+      @include utils.font-style($weight: 300, $color: prop.$main-second-additional-color);
       user-select: none;
       margin-top: 4rem;
     }

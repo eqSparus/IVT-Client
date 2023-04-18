@@ -15,7 +15,7 @@
 
           <div class="modal-footer" v-if="isFooter">
             <slot v-if="$slots.footer" name="footer"></slot>
-            <div class="footer-container" v-else>
+            <div class="footer-default" v-else>
               <input type="button" value="закрыть" class="btn-warning" @click="closeModal"/>
             </div>
           </div>
@@ -72,8 +72,9 @@ export default defineComponent({
 @use '@/assets/scss/utils.scss';
 @import '@/assets/scss/extends.scss';
 
-.modal-enter-active,
-.modal-leave-active {
+$animation-name: 'modal';
+
+@include utils.animation-to($name: $animation-name) {
   transition: all 0.5s ease;
 
   .modal-window {
@@ -81,12 +82,10 @@ export default defineComponent({
   }
 }
 
-.modal-enter-from,
-.modal-leave-to {
+@include utils.animation-from($name: $animation-name) {
   .modal-window {
     transform: translateY(-20vh);
   }
-
   opacity: 0;
 }
 
@@ -105,8 +104,7 @@ export default defineComponent({
     margin: 20vh auto;
     background: prop.$main-second-color;
     border-radius: 2rem;
-    display: flex;
-    flex-flow: column;
+    @include utils.flex-container();
     max-width: max-content;
 
     .modal-title {
@@ -114,7 +112,7 @@ export default defineComponent({
       text-align: center;
       border-bottom: 1px solid prop.$main-first-color;
       user-select: none;
-      @include utils.fontStyle($color: prop.$main-first-color);
+      @include utils.font-style($color: prop.$main-first-color);
     }
 
     .modal-content {
@@ -125,9 +123,8 @@ export default defineComponent({
       border-top: 1px solid prop.$main-first-color;
       padding: 2rem;
 
-      .footer-container {
-        display: flex;
-        flex-flow: column;
+      .footer-default {
+        @include utils.flex-container();
         align-items: flex-end;
       }
     }

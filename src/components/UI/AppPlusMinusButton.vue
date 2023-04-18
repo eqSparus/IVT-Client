@@ -27,7 +27,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as props;
-@use '@/assets/scss/utils.scss' as utils;
+@use '@/assets/scss/utils.scss';
 
 $color: adjust-color(props.$main-first-extra-color, $red: 160, $green: 160, $blue: 160);
 
@@ -35,10 +35,10 @@ $color: adjust-color(props.$main-first-extra-color, $red: 160, $green: 160, $blu
   background: none;
   border-radius: 0.8rem;
   border: 0.3rem solid $color;
-  display: flex;
+  @include utils.flex-container($direction: row);
   justify-content: center;
   align-items: center;
-  @include utils.fontStyle($color: $color, $weight: 700);
+  @include utils.font-style($color: $color, $weight: 700);
 
   &:hover {
     transition: all 0.2s ease-in;

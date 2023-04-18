@@ -26,20 +26,19 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as utils;
+@use '@/assets/scss/utils.scss';
 
 $while: #FFFFFF;
 $blue: #0039A6;
 $red: #D52B1E;
 
 .spinner-loader {
-  display: flex;
-  flex-flow: column;
+  @include utils.flex-container();
   align-items: center;
   justify-content: center;
 
   p {
-    @include utils.fontStyle(prop.$primary-color, 500)
+    @include utils.font-style(prop.$primary-color, 500)
   }
 }
 

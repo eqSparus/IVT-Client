@@ -41,10 +41,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as props;
+@use '@/assets/scss/utils.scss';
+
+$animation-name: 'tooltip';
 
 .tooltip-container {
-  display: flex;
-  flex-flow: column;
+  @include utils.flex-container();
   position: relative;
 
   .tooltip {
@@ -73,18 +75,16 @@ export default defineComponent({
 }
 
 .slot-content {
-  display: flex;
-  flex-flow: column;
+  @include utils.flex-container();
 }
 
-.tooltip-enter-active,
-.tooltip-leave-active {
-  transition: all 0.5s ease;
+@include utils.animation-to($name: $animation-name){
+  transition: all 0.3s ease-in-out;
 }
 
-.tooltip-enter-from,
-.tooltip-leave-to {
+@include utils.animation-from($name: $animation-name){
   transform: translateY(50%);
   opacity: 0;
 }
+
 </style>

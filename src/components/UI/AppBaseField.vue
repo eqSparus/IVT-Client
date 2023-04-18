@@ -37,10 +37,10 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/utils.scss';
 
 .field-container {
-  display: flex;
-  flex-flow: column;
+  @include utils.flex-container();
 }
 
 </style>

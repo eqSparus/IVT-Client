@@ -57,8 +57,7 @@ export default defineComponent({
   }
 
   .base-screen-container {
-    display: flex;
-    flex-flow: column;
+    @include utils.flex-container();
     margin: 0 auto;
     width: 90%;
 

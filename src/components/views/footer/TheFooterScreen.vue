@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer-container">
+  <footer class="footer-default">
 
     <div id="map" class="map"></div>
 
@@ -71,7 +71,7 @@ export default defineComponent({
   }
 }
 
-.footer-container {
+.footer-default {
   background: prop.$main-first-color;
   padding-top: 5rem;
   overflow: hidden;
@@ -102,12 +102,12 @@ export default defineComponent({
     }
 
     .title {
-      @include utils.fontStyle($weight: 700,
+      @include utils.font-style($weight: 700,
       $color: prop.$main-second-color);
     }
 
     .content {
-      @include utils.fontStyle($color: prop.$main-second-color);
+      @include utils.font-style($color: prop.$main-second-color);
     }
   }
 

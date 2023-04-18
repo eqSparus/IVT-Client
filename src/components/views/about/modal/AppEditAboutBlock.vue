@@ -23,7 +23,7 @@
                     }]">
       <textarea placeholder="Введите описание"
                 id="description"
-                class="field-standard field-area"
+                class="field-standard textarea"
                 v-model="changeAbout.description"
                 rows="10"
                 @blur="valid.description.$touch()"></textarea>

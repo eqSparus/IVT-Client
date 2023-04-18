@@ -146,21 +146,21 @@ export default defineComponent({
   }
 
   .post {
-    @include utils.fontStyle($color: prop.$primary-color);
+    @include utils.font-style($color: prop.$primary-color);
   }
 
   .content {
-    @include utils.fontStyle($color: prop.$main-first-color);
+    @include utils.font-style($color: prop.$main-first-color);
     word-wrap: break-word;
   }
 
   .header {
-    @include utils.fontStyle($weight: 500,
+    @include utils.font-style($weight: 500,
     $color: prop.$main-first-color);
   }
 
   .additional {
-    @include utils.fontStyle($color: prop.$main-first-transparent-color);
+    @include utils.font-style($color: prop.$main-first-transparent-color);
   }
 
   .span-new-line {

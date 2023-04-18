@@ -57,18 +57,16 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as util;
+@use '@/assets/scss/utils.scss';
 
 .message-alert-container {
   width: auto;
   height: auto;
-  display: flex;
-  justify-content: flex-end;
+  @include utils.flex-container($direction: row);
   z-index: 999999;
 
   .message-alert {
-    display: flex;
-    flex-flow: row;
+    @include utils.flex-container($direction: row);
     align-items: center;
     user-select: none;
     background: white;
@@ -84,7 +82,7 @@ export default defineComponent({
   }
 
   .message-info {
-    @include util.fontStyle(prop.$primary-color);
+    @include utils.font-style(prop.$primary-color);
     border-left-color: prop.$primary-color;
 
     img {
@@ -93,7 +91,7 @@ export default defineComponent({
   }
 
   .message-warning {
-    @include util.fontStyle(prop.$warning-color);
+    @include utils.font-style(prop.$warning-color);
     border-left-color: prop.$warning-color;
 
     img {

@@ -131,7 +131,7 @@ export default defineComponent({
 
     h3 {
       text-align: center;
-      @include utils.fontStyle($weight: 400, $color: prop.$main-first-color);
+      @include utils.font-style($weight: 400, $color: prop.$main-first-color);
       border-bottom: 0.1rem solid black;
     }
 

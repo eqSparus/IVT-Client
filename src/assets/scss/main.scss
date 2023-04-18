@@ -8,7 +8,6 @@
 $color-buttons: (
         "standard": (prop.$primary-color, prop.$main-second-color),
         "warning": (prop.$warning-color, prop.$main-second-color),
-        "transparent": (transparent, prop.$main-second-color),
 );
 
 $color-fields: (
@@ -162,6 +161,8 @@ $colors in $color-fields {
     @extend %field;
     border: 0.2rem solid nth($colors, 1);
     color: nth($colors, 2);
+    resize: none;
+    @extend %standard-scroll-bar;
 
     &:not(:disabled, :focus):hover {
       border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
@@ -175,27 +176,23 @@ $colors in $color-fields {
     &:disabled {
       border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
     }
+
   }
 }
 
-.field-area {
-  resize: none;
-  @extend %standard-scroll-bar;
-}
-
 .field-fail {
-  font-size: 1.2rem;
-  @include utils.fontStyle(prop.$warning-color, 400);
+  font-size: utils.calc-font-size(12 - 12 / 5, 12, 1024, 1920);
+  @include utils.font-style(prop.$warning-color);
 }
 
 .field-label {
-  color: black;
-  font-size: 2rem;
+  font-size: utils.calc-font-size(20 - 20 / 5, 20, 1024, 1920);
+  @include utils.font-style(prop.$main-first-dark-color)
 }
 
 @each $size in $font-size-text {
   .fs-#{$size} {
-    font-size: utils.calcFontSize($size - $size / 5, $size, 1024, 1920);
+    font-size: utils.calc-font-size($size - $size / 5, $size, 1024, 1920);
   }
 }
 
