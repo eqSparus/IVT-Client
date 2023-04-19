@@ -35,7 +35,8 @@ $color: adjust-color(props.$main-first-extra-color, $red: 160, $green: 160, $blu
   background: none;
   border-radius: 0.8rem;
   border: 0.3rem solid $color;
-  @include utils.flex-container($direction: row);
+  display: flex;
+  flex-flow: row;
   justify-content: center;
   align-items: center;
   @include utils.font-style($color: $color, $weight: 700);

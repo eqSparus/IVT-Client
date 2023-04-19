@@ -135,7 +135,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as utils;
+@use '@/assets/scss/utils.scss';
+
+$animation-name-menu: 'header';
+$animation-name-hint: 'hint';
 
 .header {
   position: fixed;
@@ -147,26 +150,23 @@ export default defineComponent({
     outline: none;
   }
 
-  .header-leave-to,
-  .header-enter-from {
+  @include utils.animation-to($name: $animation-name-menu){
+    transition: all 0.5s ease-in;
+  }
+
+  @include utils.animation-from($name: $animation-name-menu){
     transform: translateY(-60px);
     opacity: 0;
   }
 
-  .header-leave-active,
-  .header-enter-active {
+  @include utils.animation-to($name: $animation-name-hint){
     transition: all 0.5s ease-in;
+
   }
 
-  .hint-leave-to,
-  .hint-enter-from {
+  @include utils.animation-from($name: $animation-name-hint){
     transform: translateY(7rem);
     opacity: 0;
-  }
-
-  .hint-leave-active,
-  .hint-enter-active {
-    transition: all 0.5s ease-in;
   }
 
   .hint-container {

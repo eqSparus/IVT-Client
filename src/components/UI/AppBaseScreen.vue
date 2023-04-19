@@ -38,7 +38,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as utils;
+@use '@/assets/scss/utils.scss';
 
 .base-screen {
   width: 100vw;
@@ -57,7 +57,8 @@ export default defineComponent({
   }
 
   .base-screen-container {
-    @include utils.flex-container();
+    display: flex;
+    flex-flow: column;
     margin: 0 auto;
     width: 90%;
 

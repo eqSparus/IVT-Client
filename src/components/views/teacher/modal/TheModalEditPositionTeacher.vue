@@ -44,8 +44,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @import '@/assets/scss/extends.scss';
+@import '@/assets/scss/utils.scss';
 
-.teachers-move {
+$animation-name: 'teachers';
+
+@include animation-to($name: $animation-name, $move: true){
   transition: all 0.5s ease;
 }
 

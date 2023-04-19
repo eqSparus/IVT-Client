@@ -123,7 +123,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as utils;
+@use '@/assets/scss/utils.scss';
+
+$animation-name: 'teacher';
 
 .teacher-change {
   display: flex;
@@ -166,13 +168,11 @@ export default defineComponent({
 
 }
 
-.teacher-enter-active,
-.teacher-leave-active {
+@include utils.animation-to($name: $animation-name){
   transition: all 0.5s ease;
 }
 
-.teacher-enter-from,
-.teacher-leave-to {
+@include utils.animation-from($name: $animation-name){
   transform: translateY(-20%);
   opacity: 0;
 }

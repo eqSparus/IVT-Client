@@ -74,19 +74,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as utils;
+@use '@/assets/scss/utils.scss';
 @import '@/assets/scss/extends.scss';
 
-.header-leave-to,
-.header-enter-from {
-  transform: translateX(20vh);
-  opacity: 0;
-}
-
-.header-leave-active,
-.header-enter-active {
-  transition: all 0.5s ease-in;
-}
+$animation-name: 'header';
 
 .header-container {
   position: fixed;
@@ -100,6 +91,15 @@ export default defineComponent({
     justify-content: space-between;
     position: absolute;
     width: 100%;
+
+    @include utils.animation-to($name: $animation-name) {
+      transition: all 0.5s ease-in;
+    }
+
+    @include utils.animation-from($name: $animation-name) {
+      transform: translateX(20vh);
+      opacity: 0;
+    }
 
     .header-logo {
       align-self: center;

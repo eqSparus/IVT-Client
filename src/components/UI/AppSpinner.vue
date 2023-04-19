@@ -33,7 +33,8 @@ $blue: #0039A6;
 $red: #D52B1E;
 
 .spinner-loader {
-  @include utils.flex-container();
+  display: flex;
+  flex-flow: column;
   align-items: center;
   justify-content: center;
 

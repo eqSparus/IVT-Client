@@ -51,6 +51,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
 .entrant-screen-container {
   display: grid;
   grid-template-columns: 1fr;

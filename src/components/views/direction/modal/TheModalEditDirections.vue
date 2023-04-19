@@ -8,13 +8,13 @@
       <div class="directions-items">
         <transition-group name="direction-items">
           <app-directions-item v-for="direction in directions" :key="direction.id"
-                                     :direction="direction"
-                                     :disable-up="directions[directions.length - 1].position"
-                                     :disable-down="directions[0].position"
-                                     @delete="removeDirection"
-                                     @update="updateDirection"
-                                     @up="directionUp"
-                                     @down="directionDown"/>
+                               :direction="direction"
+                               :disable-up="directions[directions.length - 1].position"
+                               :disable-down="directions[0].position"
+                               @delete="removeDirection"
+                               @update="updateDirection"
+                               @up="directionUp"
+                               @down="directionDown"/>
         </transition-group>
       </div>
       <app-plus-minus-button v-if="directions.length !== 4"
@@ -24,8 +24,8 @@
 
       <transition name="direction">
         <the-add-block v-if="isAdd && directions.length !== 4"
-                                 class="mt-10"
-                                 @add="addDirection"/>
+                       class="mt-10"
+                       @add="addDirection"/>
       </transition>
 
     </div>
@@ -145,15 +145,17 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/utils.scss';
 
-.direction-leave-to,
-.direction-enter-from {
-  opacity: 0;
+$animation-name-direction: 'direction';
+$animation-name-direction-item: 'direction-items';
+
+@include utils.animation-to($name: $animation-name-direction) {
+  transition: all 0.5s ease-in;
 }
 
-.direction-leave-active,
-.direction-enter-active {
-  transition: all 0.5s ease-in;
+@include utils.animation-from($name: $animation-name-direction) {
+  opacity: 0;
 }
 
 .directions-container {
@@ -167,14 +169,11 @@ export default defineComponent({
     justify-content: center;
     gap: 3rem;
 
-    .direction-items-move,
-    .direction-items-enter-active,
-    .direction-items-leave-active {
+    @include utils.animation-to($name: $animation-name-direction-item, $move: true) {
       transition: all 0.5s ease;
     }
 
-    .direction-items-enter-from,
-    .direction-items-leave-to {
+    @include utils.animation-from($name: $animation-name-direction-item) {
       opacity: 0;
     }
   }

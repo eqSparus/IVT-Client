@@ -34,25 +34,15 @@
   }
 }
 
-@mixin flex-container($direction: column, $wrap: wrap, $gap-c: 0, $gap-r: 0) {
-  display: flex;
-  flex-flow: $direction $wrap;
-  column-gap: $gap-c;
-  row-gap: $gap-r;
-}
-
 @mixin animation-to($name, $move: false) {
   @if ($move) {
-    .#{$name}-move,
-    .#{$name}-enter-active,
-    .#{$name}-leave-active {
-      @content;
+    .#{$name}-move {
+      @content
     }
-  } @else {
-    .#{$name}-enter-active,
-    .#{$name}-leave-active {
-      @content;
-    }
+  }
+  .#{$name}-enter-active,
+  .#{$name}-leave-active {
+    @content;
   }
 }
 

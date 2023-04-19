@@ -65,7 +65,8 @@ export default defineComponent({
 $animation-name: 'select';
 
 .custom-select {
-  @include utils.flex-container($direction: row);
+  display: flex;
+  flex-flow: row;
   position: relative;
   align-self: center;
   justify-content: center;

@@ -179,7 +179,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
-@use '@/assets/scss/utils.scss' as utils;
+@use '@/assets/scss/utils.scss';
 
 .account-setting-container {
   display: flex;

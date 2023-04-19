@@ -62,11 +62,13 @@ export default defineComponent({
 .message-alert-container {
   width: auto;
   height: auto;
-  @include utils.flex-container($direction: row);
+  display: flex;
+  flex-flow: row;
   z-index: 999999;
 
   .message-alert {
-    @include utils.flex-container($direction: row);
+    display: flex;
+    flex-flow: row;
     align-items: center;
     user-select: none;
     background: white;

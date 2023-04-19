@@ -49,7 +49,8 @@ $animation-name: 'alerts';
   top: 0;
   right: 0;
   width: auto;
-  @include utils.flex-container();
+  display: flex;
+  flex-flow: column;
   z-index: 9999999;
 
   @include utils.animation-to($name: $animation-name, $move: true) {

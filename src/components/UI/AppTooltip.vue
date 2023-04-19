@@ -46,7 +46,8 @@ export default defineComponent({
 $animation-name: 'tooltip';
 
 .tooltip-container {
-  @include utils.flex-container();
+  display: flex;
+  flex-flow: column;
   position: relative;
 
   .tooltip {
@@ -75,7 +76,8 @@ $animation-name: 'tooltip';
 }
 
 .slot-content {
-  @include utils.flex-container();
+  display: flex;
+  flex-flow: column;
 }
 
 @include utils.animation-to($name: $animation-name){

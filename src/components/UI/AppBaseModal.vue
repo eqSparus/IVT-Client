@@ -104,7 +104,8 @@ $animation-name: 'modal';
     margin: 20vh auto;
     background: prop.$main-second-color;
     border-radius: 2rem;
-    @include utils.flex-container();
+    display: flex;
+    flex-flow: column;
     max-width: max-content;
 
     .modal-title {
@@ -124,7 +125,8 @@ $animation-name: 'modal';
       padding: 2rem;
 
       .footer-default {
-        @include utils.flex-container();
+        display: flex;
+        flex-flow: column;
         align-items: flex-end;
       }
     }
