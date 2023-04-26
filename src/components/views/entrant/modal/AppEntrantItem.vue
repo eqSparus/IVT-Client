@@ -1,7 +1,7 @@
 <template>
-  <div class="item">
+  <div class="edit-entrant-item-container">
     <div class="item-row">
-      <textarea class="text-area field-standard"
+      <textarea class="field-standard"
                 placeholder="Введите название раздела"
                 aria-label="Введите название пункта"
                 @input="$emit('update:name', $event)"
@@ -22,7 +22,7 @@
 
     <div class="item-points" v-if="isOpen">
       <div class="item-row mt-10" v-for="(point, index) in item.points" :key="point">
-        <textarea class="text-area field-standard"
+        <textarea class="field-standard"
                   aria-label="Введите название пункта"
                   placeholder="Введите название пункта"
                   @input="point.point = $event.target.value"
@@ -35,7 +35,8 @@
         </button>
       </div>
 
-      <app-plus-minus-button class="mt-10" @action="addPoint"/>
+      <app-plus-minus-button class="mt-10"
+                             @action="addPoint"/>
     </div>
   </div>
 </template>
@@ -46,7 +47,7 @@ import { defineComponent, PropType, ref } from 'vue';
 import { EntrantItem } from '@/types/site.types';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import arrowIcon from '@/assets/images/icons/arrow.svg';
-import AppPlusMinusButton from '@/components/UI/AppPlusMinusButton.vue';
+import AppPlusMinusButton from '@/components/UI/AppAdditionalLongButton.vue';
 
 export default defineComponent({
   name: 'TheModalAddEntrantItem',
@@ -77,7 +78,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.item {
+.edit-entrant-item-container {
   align-items: center;
 
   .icon {

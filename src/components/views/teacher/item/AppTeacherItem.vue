@@ -1,6 +1,6 @@
 <template>
   <div :class="{'item-container': !isMain}">
-    <div class="item">
+    <div class="edit-entrant-item-container">
 
       <img :src="teacher.urlImg" :class="[isMain ? 'img-size-main' : 'img-size']" alt="Фотография преподавателя"/>
 
@@ -59,65 +59,38 @@ export default defineComponent({
 @use '@/assets/scss/utils.scss';
 
 .item-container {
-  @media only screen and (min-width: 1081px) {
-    border-left: 1rem prop.$primary-color solid;
-    padding-left: 3rem;
+  border-left: 1rem prop.$primary-color solid;
+  padding-left: 3rem;
+
+  @include utils.phone-style {
+    border-left: 0;
+    padding-left: 0;
   }
 }
 
-.item {
+.edit-entrant-item-container {
   display: grid;
   grid-template-columns: auto 4fr;
   background: prop.$main-second-color;
+  border-radius: 4px;
 
   .img-size {
+    width: 30rem;
     height: auto;
     align-self: center;
   }
 
   .img-size-main {
+    width: 36.8rem;
     height: auto;
     align-self: center;
-  }
-
-  @media only screen and (min-width: 1080px) {
-    .img-size {
-      width: 30rem;
-    }
-
-    .img-size-main {
-      width: 36.8rem;
-    }
-  }
-
-  @media only screen and (max-width: 1080px) {
-    border-radius: 4px;
-
-    .img-size {
-      width: 120px;
-      border-bottom-left-radius: 4px;
-      border-top-left-radius: 4px;
-    }
-
-    .img-size-main {
-      width: 120px;
-      border-bottom-left-radius: 4px;
-      border-top-left-radius: 4px;
-    }
   }
 
   .item-content {
     display: grid;
     align-content: center;
     padding: 1rem 0 1rem 0;
-
-    @media only screen and (min-width: 1080px) {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @media only screen and (max-width: 1080px) {
-      grid-template-columns: 1fr;
-    }
+    grid-template-columns: 1fr 1fr;
 
     .block-main-left {
       display: flex;
@@ -129,9 +102,6 @@ export default defineComponent({
       display: flex;
       flex-flow: column;
       width: auto;
-      @media only screen and (max-width: 1080px) {
-        display: none;
-      }
     }
 
     .block-secondary-left {
@@ -165,6 +135,28 @@ export default defineComponent({
 
   .span-new-line {
     display: block;
+  }
+
+  @include utils.phone-style {
+    .img-size {
+      width: 120px;
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+    }
+
+    .img-size-main {
+      width: 120px;
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+    }
+
+    .item-content {
+      grid-template-columns: 1fr;
+
+      .block-main-right {
+        display: none;
+      }
+    }
   }
 }
 </style>

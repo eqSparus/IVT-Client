@@ -3,7 +3,7 @@
     <span class="field-fail" v-if="validate.href.$invalid && validate.href.$dirty">
       Поле не должно быть пустым и должно являться url адресом
     </span>
-    <div class="item-container">
+    <div class="item-link-container">
 
       <app-select-img :options="links"
                       :select="{img:editLink.icon, value:editLink.icon}"
@@ -32,7 +32,6 @@
 
     </div>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -103,7 +102,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as props;
 
-.item-container {
+.item-link-container {
   display: flex;
   flex-flow: row;
   justify-content: space-around;

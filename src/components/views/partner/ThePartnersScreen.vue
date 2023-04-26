@@ -4,14 +4,14 @@
     <the-modal-add-partner :is-show="isShow"
                            @close="toggleModal"/>
 
-    <div class="partners-change" v-if="isAuth">
+    <div class="partners-edit-block" v-if="isAuth">
       <input type="button"
              class="btn-standard"
              @click="toggleModal"
              value="добавить">
     </div>
 
-    <div class="partners-container mt-20">
+    <div class="partners-screen-container mt-20">
       <app-partner-item v-for="partner in partners" :key="partner.id"
                         :partner="partner"/>
     </div>
@@ -53,12 +53,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.partners-change {
+.partners-edit-block {
   display: flex;
   justify-content: center;
 }
 
-.partners-container {
+.partners-screen-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   justify-items: center;

@@ -1,26 +1,23 @@
 <template>
   <button class="btn-plus fs-24" @click="$emit('action')">
-    {{ type }}
+    {{ char }}
   </button>
 </template>
 
 <script lang="ts">
 
-import { computed, defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
+
+export type CharButton = '+' | '-'
 
 export default defineComponent({
   name: 'AppPlusMinusButton',
   emits: ['action'],
   props: {
-    isPlus: {
-      type: Boolean,
-      default: true,
+    char: {
+      type: String as PropType<CharButton>,
+      default: '+',
     },
-  },
-  setup(props) {
-    return {
-      type: computed(() => (props.isPlus ? '+' : '-')),
-    };
   },
 });
 </script>

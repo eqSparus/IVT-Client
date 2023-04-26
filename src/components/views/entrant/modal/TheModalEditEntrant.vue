@@ -4,7 +4,7 @@
                     :title="modalTitle"
                     @close="close">
 
-    <div class="change-entrant-container">
+    <div class="edit-entrant-container">
 
       <app-base-field id="title"
                       label="Название ступени"
@@ -51,7 +51,7 @@ import {
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
 import { Entrant } from '@/types/site.types';
 import AppEntrantItem from '@/components/views/entrant/modal/AppEntrantItem.vue';
-import AppPlusMinusButton from '@/components/UI/AppPlusMinusButton.vue';
+import AppPlusMinusButton from '@/components/UI/AppAdditionalLongButton.vue';
 import useEditEntrant from '@/hooks/useEditEntrant';
 import useAlerts from '@/hooks/useAlerts';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
@@ -157,7 +157,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.change-entrant-container {
+.edit-entrant-container {
   display: flex;
   flex-flow: column;
   width: 90rem;

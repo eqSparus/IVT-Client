@@ -5,7 +5,7 @@
                               @close="toggleModal"/>
 
     <div class="entrant-screen-container">
-      <div class="entrant-change mt-20" v-if="isAuth">
+      <div class="entrant-edit-block mt-20" v-if="isAuth">
         <input type="button"
                class="btn-standard"
                @click="toggleModal"
@@ -51,17 +51,18 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/utils.scss';
 
 .entrant-screen-container {
   display: grid;
   grid-template-columns: 1fr;
   margin: 0 auto;
 
-  @media only screen and (min-width: 1000px) {
+  @include utils.phone-style {
     width: 95%;
   }
 
-  .entrant-change {
+  .entrant-edit-block {
     display: flex;
     justify-content: center;
   }

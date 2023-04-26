@@ -11,29 +11,30 @@
 
     <div class="begin-screen-block-left">
 
-      <h1 class="fs-64"> {{ department.title }} </h1>
-      <h3 class="fs-32"> {{ department.slogan }} </h3>
+      <h1 class="title fs-64"> {{ department.title }} </h1>
+      <h3 class="slogan fs-32"> {{ department.slogan }} </h3>
 
       <div class="begin-screen-button">
         <input type="button"
                value="узнать больше"
-               class="btn-standard"
+               class="btn-standard btn-setting"
                @click="scrollTo(scrollSelect)"/>
         <input v-if="isAuth"
                type="button"
                value="редактировать"
-               class="btn-standard"
+               class="btn-standard btn-setting"
                @click="changeShowModalDepartment"/>
         <input v-if="isAuth"
                type="button"
                value="настройки пользователя"
-               class="btn-standard"
+               class="btn-standard btn-setting"
                @click="changeShowModalAccount"/>
       </div>
 
       <div class="begin-screen-links">
         <app-link-icon v-for="link in links" :key="link.id"
                        :href="link.href"
+                       class="link-site"
                        :icon="link.icon"
                        :alt="link.icon"/>
       </div>
@@ -41,7 +42,9 @@
 
     <div class="begin-screen-block-right">
       <div class="img-background"></div>
-      <img src="@/assets/images/logo.svg" alt="/assets/images/logo.svg"/>
+      <img class="big-logo"
+           src="@/assets/images/logo.svg"
+           alt="/assets/images/logo.svg"/>
     </div>
 
   </section>
@@ -111,73 +114,34 @@ export default defineComponent(
   width: 100vw;
   padding: 15% 10%;
   display: flex;
-
-  @media only screen and (max-width: 1000px){
-    padding-top: 30%;
-  }
-
-  @media only screen and (min-width: 1000px) {
-    flex-flow: row;
-  }
-
-  @media only screen and (max-width: 1000px) {
-    flex-flow: column;
-
-    & > div[class="begin-screen-block-left"] {
-      margin-top: 10rem;
-      order: 2;
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      text-align: center;
-
-      h1 {
-        display: none;
-      }
-
-      a {
-        display: none;
-      }
-    }
-
-    & > div {
-      order: 1;
-    }
-  }
+  flex-flow: row;
 
   .begin-screen-block-left {
+    margin-top: 10rem;
     flex: 2;
 
     .begin-screen-button {
-      margin-top: 7.5rem;
+      margin-top: 4.8rem;
 
-      input {
-        @media only screen and (min-width: 1000px) {
-          margin-right: 2rem;
-        }
-
-        @media only screen and (max-width: 1000px) {
-          margin-top: 2rem;
-        }
-      }
-    }
-
-    .begin-screen-links {
-      @media only screen and (min-width: 1000px) {
-        margin-top: 10rem;
-      }
-
-      a {
+      .btn-setting {
         margin-right: 2rem;
       }
     }
 
-    h1 {
+    .begin-screen-links {
+      margin-top: 6.4rem;
+
+      .link-site {
+        margin-right: 2rem;
+      }
+    }
+
+    .title {
       @include utils.font-style($color: prop.$main-second-color, $weight: 700);
       user-select: none;
     }
 
-    h3 {
+    .slogan {
       @include utils.font-style($weight: 300, $color: prop.$main-second-additional-color);
       user-select: none;
       margin-top: 4rem;
@@ -193,20 +157,51 @@ export default defineComponent(
       background: adjust-color($color: prop.$primary-color, $alpha: -0.8);
     }
 
-    img {
+    .big-logo {
       height: auto;
       width: 45vw;
       max-width: 45rem;
     }
+  }
 
-    @media screen and (max-width: 1000px) {
+  @include utils.phone-style {
+    padding-top: 30%;
+    flex-flow: column;
+
+    .begin-screen-block-left {
+      margin-top: 10rem;
+      order: 2;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      text-align: center;
+
+      .title {
+        display: none;
+      }
+
+      .link-site {
+        display: none;
+      }
+
+      .begin-screen-button {
+        .btn-setting {
+          margin-top: 2rem;
+          margin-right: 0;
+        }
+      }
+    }
+
+    .begin-screen-block-right {
+      order: 1;
+
       .img-background {
         position: absolute;
         width: 45vw;
         height: 45vw;
       }
 
-      img {
+      .big-logo {
         transform: perspective(25rem) rotateY(-5deg) rotateX(5deg) rotateZ(5deg);
       }
     }

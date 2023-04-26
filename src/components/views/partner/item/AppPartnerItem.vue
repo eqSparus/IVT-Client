@@ -2,10 +2,11 @@
   <the-modal-edit-partner :is-show="isShow"
                           :partner="partner"
                           @close="toggleModal"/>
-  <div class="partner-item">
+  <div class="partner-item-container">
     <a :href="partner.href"
+       class="partner-link"
        target="_blank">
-      <img :src="partner.urlImg" :alt="partner.urlImg">
+      <img class="link-logo" :src="partner.urlImg" :alt="partner.urlImg">
     </a>
 
     <button class="btn-standard-icon ml-10"
@@ -57,13 +58,13 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
 
-.partner-item {
+.partner-item-container {
   display: flex;
   flex-flow: row;
   align-items: center;
 
-  a {
-    img {
+  .partner-link {
+    .link-logo {
       width: 30rem;
     }
     &:focus{

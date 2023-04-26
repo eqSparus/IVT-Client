@@ -9,7 +9,7 @@
                                      :teachers="allTeachers"
                                      @close="changeShowEditPosition"/>
 
-    <div class="teacher-change mb-20" v-if="isAuth">
+    <div class="teacher-change-block mb-20" v-if="isAuth">
       <input type="button"
              @click="changeShowEditTeacher"
              class="btn-standard"
@@ -49,7 +49,9 @@
         </transition-group>
       </div>
 
-      <button v-if="allTeachers.length > 5" class="fs-24" @click="changeIsAll">
+      <button v-if="allTeachers.length > 5"
+              class="fs-24 load-teacher"
+              @click="changeIsAll">
         {{ textIsAll }}
       </button>
 
@@ -127,7 +129,7 @@ export default defineComponent({
 
 $animation-name: 'teacher';
 
-.teacher-change {
+.teacher-change-block {
   display: flex;
   justify-content: center;
 }
@@ -152,10 +154,10 @@ $animation-name: 'teacher';
     flex-flow: column;
 
     .teacher {
-      width: 80%;
+      width: 90%;
       margin: 3.2% auto 0 auto;
 
-      @media only screen and (max-width: 1080px) {
+      @include utils.phone-style {
         width: 100%;
       }
 
@@ -168,16 +170,16 @@ $animation-name: 'teacher';
 
 }
 
-@include utils.animation-to($name: $animation-name){
+@include utils.animation-to($name: $animation-name) {
   transition: all 0.5s ease;
 }
 
-@include utils.animation-from($name: $animation-name){
+@include utils.animation-from($name: $animation-name) {
   transform: translateY(-20%);
   opacity: 0;
 }
 
-button {
+.load-teacher {
   border: none;
   background: none;
   text-transform: uppercase;

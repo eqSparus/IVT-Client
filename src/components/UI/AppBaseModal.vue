@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <transition name="modal">
-      <div class="background-modal-window"
+      <div class="modal-window-background"
            v-if="isShow"
            @click="closeModal"
            @keydown.esc="closeModal">
@@ -16,7 +16,10 @@
           <div class="modal-footer" v-if="isFooter">
             <slot v-if="$slots.footer" name="footer"></slot>
             <div class="footer-default" v-else>
-              <input type="button" value="закрыть" class="btn-warning" @click="closeModal"/>
+              <input type="button"
+                     value="закрыть"
+                     class="btn-warning"
+                     @click="closeModal"/>
             </div>
           </div>
 
@@ -83,14 +86,14 @@ $animation-name: 'modal';
 }
 
 @include utils.animation-from($name: $animation-name) {
+  opacity: 0;
+
   .modal-window {
     transform: translateY(-20vh);
   }
-  opacity: 0;
 }
 
-.background-modal-window {
-  @extend %standard-scroll-bar;
+.modal-window-background {
   overflow-y: auto;
   position: fixed;
   top: 0;
@@ -111,7 +114,7 @@ $animation-name: 'modal';
     .modal-title {
       padding: 1rem 2rem;
       text-align: center;
-      border-bottom: 1px solid prop.$main-first-color;
+      border-bottom: 0.1rem solid prop.$main-first-color;
       user-select: none;
       @include utils.font-style($color: prop.$main-first-color);
     }
@@ -121,7 +124,7 @@ $animation-name: 'modal';
     }
 
     .modal-footer {
-      border-top: 1px solid prop.$main-first-color;
+      border-top: 0.1rem solid prop.$main-first-color;
       padding: 2rem;
 
       .footer-default {
@@ -130,7 +133,6 @@ $animation-name: 'modal';
         align-items: flex-end;
       }
     }
-
   }
 }
 </style>

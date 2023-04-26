@@ -5,12 +5,10 @@
                     :is-footer="true">
 
     <div class="modal-about-edit-container">
-      <div class="item-about" v-for="about in abouts" :key="about.id">
-        <app-edit-about-block :about="about"
-                               @update="updateAbout"/>
-      </div>
+      <app-edit-about-item v-for="about in abouts" :key="about.id"
+                            :about="about"
+                            @update="updateAbout"/>
     </div>
-
   </app-modal-window>
 </template>
 
@@ -21,13 +19,13 @@ import AppModalWindow from '@/components/UI/AppBaseModal.vue';
 import { AboutDepartment } from '@/types/site.types';
 import requestUpdateAboutDepartment from '@/api/AboutDepartmentApi';
 import { useStore } from 'vuex';
-import AppEditAboutBlock from '@/components/views/about/modal/AppEditAboutBlock.vue';
+import AppEditAboutItem from '@/components/views/about/modal/AppEditAboutItem.vue';
 import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'TheModalEditAbout',
   components: {
-    AppEditAboutBlock,
+    AppEditAboutItem,
     AppModalWindow,
   },
   props: {

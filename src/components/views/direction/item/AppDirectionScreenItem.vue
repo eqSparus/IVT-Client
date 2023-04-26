@@ -1,8 +1,7 @@
 <template>
-  <div class="item item-size">
-
+  <div class="edit-entrant-item-container">
     <div class="item-drawing">
-      <img :src="drawings[index]" alt="Рисунок фигур в формате svg"/>
+      <img class="img-drawing" :src="drawings[index]" :alt="drawings[index]"/>
     </div>
 
     <div class="item-content-container">
@@ -10,15 +9,13 @@
 
         <h3 class="title fs-26">{{ direction.title }}</h3>
 
-        <span class="fs-24 mt-20">{{ direction.degree }}</span>
+        <span class="additional-block fs-24 mt-20">{{ direction.degree }}</span>
 
-        <span class="fs-24 mt-10">{{ direction.form }}</span>
+        <span class="additional-block fs-24 mt-10">{{ direction.form }}</span>
 
-        <span class="fs-24 mt-10">{{ direction.duration + durationText }}</span>
-
+        <span class="additional-block fs-24 mt-10">{{ direction.duration + durationText }}</span>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -60,45 +57,21 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss';
 
-.item {
+.edit-entrant-item-container {
   display: flex;
   border-radius: 0.8rem;
   background: prop.$main-first-extra-color;
-  //background: linear-gradient(90deg, prop.$main-first-extra-color, 95%, #545454 100%);
-
-  @media only screen and (min-width: 1080px) {
-    flex-flow: column;
-  }
-
-  @media only screen and (max-width: 1080px) {
-    flex-flow: row;
-
-    & > div[class="item-drawing"] {
-      order: 2;
-    }
-
-    & > div[class="item-content-container"] {
-      .item-content {
-        align-self: flex-end;
-        padding: 5% 11%;
-      }
-    }
-  }
+  flex-flow: column;
 
   .item-drawing {
     display: flex;
     flex-flow: row;
     justify-content: flex-end;
 
-    img {
+    .img-drawing {
       height: auto;
       width: 100%;
       border-radius: 0.8rem 0.8rem 0 0;
-
-      @media only screen and (max-width: 1080px) {
-        width: auto;
-        height: 120px;
-      }
     }
   }
 
@@ -116,11 +89,30 @@ export default defineComponent({
         $color: prop.$main-second-color);
       }
 
-      span {
+      .additional-block {
         display: block;
         @include utils.font-style($color: prop.$main-second-text-transparent-color);
       }
+    }
+  }
 
+  @include utils.phone-style {
+    flex-flow: row;
+
+    .item-drawing {
+      order: 2;
+
+      .img-drawing {
+        width: auto;
+        height: 120px;
+      }
+    }
+
+    .item-content-container {
+      .item-content {
+        align-self: flex-end;
+        padding: 5% 8%;
+      }
     }
   }
 }

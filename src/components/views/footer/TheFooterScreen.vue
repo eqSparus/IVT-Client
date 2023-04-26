@@ -3,7 +3,7 @@
 
     <div id="map" class="map"></div>
 
-    <div class="information">
+    <div class="contact-information">
       <div>
         <span class="fs-24 title">Телефон</span>
         <span class="fs-24 span-new-line content">{{ department.phone }}</span>
@@ -52,25 +52,6 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss';
 
-@media screen and (min-width: 1500px) {
-  .map {
-    height: 520px;
-  }
-
-}
-
-@media screen and (max-width: 1500px) {
-  .map {
-    height: 350px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .map {
-    display: none;
-  }
-}
-
 .footer-default {
   background: prop.$main-first-color;
   padding-top: 5rem;
@@ -80,22 +61,12 @@ export default defineComponent({
   flex-flow: column;
 
 
-  .information {
+  .contact-information {
     display: flex;
     margin-bottom: 3rem;
-
-    @media only screen and (min-width: 1000px) {
-      margin-top: 3rem;
-      flex-flow: row;
-      justify-content: space-around;
-    }
-
-    @media only screen and (max-width: 1000px) {
-      flex-flow: column;
-      align-items: center;
-      text-align: center;
-      row-gap: 3rem;
-    }
+    margin-top: 3rem;
+    flex-flow: row;
+    justify-content: space-around;
 
     .span-new-line {
       display: block;
@@ -111,10 +82,24 @@ export default defineComponent({
     }
   }
 
-
   .map {
     grid-column: 1/4;
     width: 100%;
+    height: 52rem;
+  }
+
+  @include utils.phone-style {
+
+    .contact-information {
+      flex-flow: column;
+      align-items: center;
+      text-align: center;
+      row-gap: 3rem;
+    }
+
+    .map {
+      display: none;
+    }
   }
 }
 </style>

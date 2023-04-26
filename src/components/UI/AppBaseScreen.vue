@@ -1,5 +1,5 @@
 <template>
-  <section :class="[typeScreen, 'base-screen']">
+  <section :class="[typeScreen, 'base-screen-component']">
     <div class="base-screen-container">
 
       <div v-if="title" class="base-screen-title">
@@ -40,7 +40,7 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss';
 
-.base-screen {
+.base-screen-component {
   width: 100vw;
   overflow: hidden;
   height: 100%;
@@ -65,8 +65,7 @@ export default defineComponent({
     .base-screen-title {
       font-weight: 700;
       font-style: normal;
-
-      @media only screen and (orientation: portrait){
+      @include utils.phone-style {
         text-align: center;
       }
     }

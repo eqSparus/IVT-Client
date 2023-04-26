@@ -4,18 +4,14 @@
                   @close="closeModal"
                   :is-footer="true">
 
-    <div class="modal-size">
+    <div class="begin-edit-container">
+      <the-edit-department v-if="isWindow" :department="department"/>
+      <the-edit-links v-else :links="links"/>
 
-      <div class="begin-edit-container">
-
-        <the-edit-department v-if="isWindow" :department="department"/>
-        <the-edit-links v-else :links="links"/>
-
-        <input type="button"
-               :value="btnText"
-               class="btn-standard mt-20"
-               @click="isWindow = !isWindow"/>
-      </div>
+      <input type="button"
+             :value="btnText"
+             class="btn-standard mt-20"
+             @click="isWindow = !isWindow"/>
     </div>
   </app-base-modal>
 </template>
@@ -74,21 +70,18 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.modal-size {
+.begin-edit-container {
+  display: flex;
+  flex-flow: column;
   width: 90rem;
 
-  .begin-edit-container {
+  .edit-block {
     display: flex;
-    flex-flow: column;
+    flex-flow: row;
+    gap: 1rem;
 
-    .edit-block {
-      display: flex;
-      flex-flow: row;
-      gap: 1rem;
-
-      input {
-        flex: 1;
-      }
+    input {
+      flex: 1;
     }
   }
 }

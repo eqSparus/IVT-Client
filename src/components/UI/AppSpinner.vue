@@ -1,11 +1,11 @@
 <template>
-  <div class="spinner-loader">
-    <div class="spin-w spinner-loader">
-      <div class="spin-b spinner-loader">
+  <div class="spinner-loader-component">
+    <div class="spin-w spinner-loader-component">
+      <div class="spin-b spinner-loader-component">
         <div class="spin-r"/>
       </div>
     </div>
-    <p v-if="title" class="fs-32 mt-20"> {{ title }} </p>
+    <p v-if="title" class="text-loader fs-32 mt-20"> {{ title }} </p>
   </div>
 </template>
 
@@ -32,15 +32,15 @@ $while: #FFFFFF;
 $blue: #0039A6;
 $red: #D52B1E;
 
-.spinner-loader {
+.spinner-loader-component {
   display: flex;
   flex-flow: column;
   align-items: center;
   justify-content: center;
+}
 
-  p {
-    @include utils.font-style(prop.$primary-color, 500)
-  }
+.text-loader {
+  @include utils.font-style(prop.$primary-color, 500)
 }
 
 .spin-w {

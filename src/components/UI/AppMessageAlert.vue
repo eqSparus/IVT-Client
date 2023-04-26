@@ -1,7 +1,7 @@
 <template>
-  <div class="message-alert-container fs-32">
+  <div class="message-alert-component fs-32">
     <div :class="['message-alert', `message-${type}`]">
-      <img :src="iconAlert" :alt="iconAlert"/>
+      <img class="img-alert" :src="iconAlert" :alt="iconAlert"/>
       <span class="fs-26 ml-10"> {{ message }} </span>
     </div>
   </div>
@@ -59,7 +59,7 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss';
 
-.message-alert-container {
+.message-alert-component {
   width: auto;
   height: auto;
   display: flex;
@@ -77,7 +77,7 @@ export default defineComponent({
     border-left-width: 0.5rem;
     border-left-style: solid;
 
-    img {
+    .img-alert {
       height: auto;
       width: 4rem;
     }
@@ -87,7 +87,7 @@ export default defineComponent({
     @include utils.font-style(prop.$primary-color);
     border-left-color: prop.$primary-color;
 
-    img {
+    .img-alert {
       filter: prop.$icon-svg-hover-color-primary;
     }
   }
@@ -96,7 +96,7 @@ export default defineComponent({
     @include utils.font-style(prop.$warning-color);
     border-left-color: prop.$warning-color;
 
-    img {
+    .img-alert {
       filter: prop.$icon-svg-hover-color-warning;
     }
   }

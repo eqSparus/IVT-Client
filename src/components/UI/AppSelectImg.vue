@@ -1,17 +1,22 @@
 <template>
-  <div class="custom-select" @mouseleave="isOpen = false" @blur="isOpen = false" @keyup.esc="isOpen = false">
-    <div class="active-option" @click="isOpen = !isOpen" @keyup.tab="isOpen = !isOpen">
+  <div class="custom-select-component"
+       @mouseleave="isOpen = false"
+       @blur="isOpen = false"
+       @keyup.esc="isOpen = false">
+    <div class="active-option"
+         @click="isOpen = !isOpen"
+         @keyup.tab="isOpen = !isOpen">
       <!--TODO Сменить адрес-->
       <img :src="select.img" :alt="select.img"/>
     </div>
     <transition name="select">
-      <div class="item-select-container" v-if="isOpen">
-        <img class="item-select"
+      <div class="selection-list" v-if="isOpen">
+        <img class="selection-item"
              v-for="option in options" :key="option"
              :src="option.img"
              :alt="option.img"
-             @click="changeSelect(option.value)"
-             @keyup.enter="changeSelect(option.value)"/>
+             @click="toggleSelection(option.value)"
+             @keyup.enter="toggleSelection(option.value)"/>
       </div>
     </transition>
   </div>
@@ -42,7 +47,7 @@ export default defineComponent({
   setup(props, { emit }) {
     const isOpen = ref<boolean>(false);
 
-    const changeSelect = (value: string) => {
+    const toggleSelection = (value: string) => {
       const el = props.options.find((op) => op.value === value);
       if (el) {
         isOpen.value = false;
@@ -52,7 +57,7 @@ export default defineComponent({
 
     return {
       isOpen,
-      changeSelect,
+      toggleSelection,
     };
   },
 });
@@ -64,7 +69,7 @@ export default defineComponent({
 
 $animation-name: 'select';
 
-.custom-select {
+.custom-select-component {
   display: flex;
   flex-flow: row;
   position: relative;
@@ -92,7 +97,7 @@ $animation-name: 'select';
     }
   }
 
-  .item-select-container {
+  .selection-list {
     z-index: 333;
     position: absolute;
     top: 100%;
@@ -102,7 +107,7 @@ $animation-name: 'select';
     border-left: 0.2rem solid adjust-color($color: prop.$primary-color, $red: 37, $green: 26, $blue: -2);
     border-radius: 0 0 0.5rem 0.5rem;
 
-    .item-select {
+    .selection-item {
       z-index: 444;
       padding: 0.5rem 1.5rem;
 

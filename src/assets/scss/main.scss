@@ -53,21 +53,27 @@ $spacing-type: (
   --font-size: 0px;
 }
 
+*,
 html {
   @extend %standard-scroll-bar;
   $font-size-default: 10px;
 
-  @media only screen and ((-webkit-min-device-pixel-ratio: 1) or (min-device-pixel-ratio: 1)) and (min-width: 2000px) {
-    font-size: $font-size-default + 6px;
-  }
-  @media only screen and ((-webkit-min-device-pixel-ratio: 1) or (min-device-pixel-ratio: 1)) and (max-width: 2000px) {
-    font-size: $font-size-default;
-  }
-  @media only screen and ((-webkit-min-device-pixel-ratio: 1) or (min-device-pixel-ratio: 1)) and (max-width: 1400px) {
-    font-size: $font-size-default - 2px;
-  }
-  @media only screen and ((-webkit-min-device-pixel-ratio: 2) or (min-device-pixel-ratio: 2)) {
-    font-size: $font-size-default - 2.5px;
+  @media screen {
+    @include utils.phone-style {
+      font-size: $font-size-default - 2.5px;
+    }
+
+    @media ((-webkit-min-device-pixel-ratio: 1) or (min-device-pixel-ratio: 1)) {
+      @media (min-width: prop.$min-width-desktop-min) {
+        font-size: $font-size-default - 2px;
+      }
+      @media (min-width: prop.$min-width-desktop-avg) {
+        font-size: $font-size-default;
+      }
+      @media (min-width: prop.$min-width-desktop-max) {
+        font-size: $font-size-default + 6px;
+      }
+    }
   }
 
   body {
@@ -162,7 +168,6 @@ $colors in $color-fields {
     border: 0.2rem solid nth($colors, 1);
     color: nth($colors, 2);
     resize: none;
-    @extend %standard-scroll-bar;
 
     &:not(:disabled, :focus):hover {
       border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);

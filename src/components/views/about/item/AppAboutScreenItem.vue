@@ -1,8 +1,8 @@
 <template>
-  <div class="item">
+  <div class="edit-entrant-item-container">
     <div class="item-icon ml-20">
       <div class="circle">
-        <img :src="aboutInfo.icon" :alt="aboutInfo.icon"/>
+        <img class="img-icon" :src="aboutInfo.icon" :alt="aboutInfo.icon"/>
       </div>
     </div>
 
@@ -35,11 +35,11 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss';
 
-.item {
+.edit-entrant-item-container {
   display: flex;
   flex-flow: column;
 
-  @media only screen and (max-width: 1000px){
+  @include utils.phone-style {
     text-align: center;
     align-items: center;
   }
@@ -55,7 +55,7 @@ export default defineComponent({
       border-radius: 50%;
       background: prop.$main-second-additional-two-color;
 
-      img {
+      .img-icon {
         user-select: none;
         position: absolute;
         top: 25%;
@@ -83,6 +83,5 @@ export default defineComponent({
       @include utils.font-style($color: prop.$main-second-elevated-color);
     }
   }
-
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="position-teacher-item">
+  <div class="position-teacher-item-container">
     <img :src="teacher.urlImg"
          :alt="teacher.urlImg"
          class="position-teacher-item-img"/>
@@ -63,7 +63,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.position-teacher-item {
+.position-teacher-item-container {
   display: grid;
   grid-template-columns: 5rem 2fr 1fr;
   align-items: center;

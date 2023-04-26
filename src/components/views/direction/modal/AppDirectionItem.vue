@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="edit-entrant-item-container">
 
     <app-base-field id="name"
                     class="mt-10 mb-10"
@@ -77,7 +77,7 @@
     </div>
 
     <div class="setting-item mt-20">
-      <button class="btn-standard-icon"
+      <button class="btn-standard-icon arrow-button"
               :disabled="direction.position === disableDown"
               @click="$emit('down', direction.id, direction.position)">
         <img :src="arrowCircleArrow"
@@ -85,7 +85,7 @@
              alt="assets/images/icon/arrow-circle.svg">
       </button>
 
-      <button class="btn-standard-icon"
+      <button class="btn-standard-icon arrow-button"
               :disabled="direction.position === disableUp"
               @click="$emit('up', direction.id, direction.position)">
         <img :src="arrowCircleArrow"
@@ -168,7 +168,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 @use '@/assets/scss/properties.scss' as prop;
 
-.item {
+.edit-entrant-item-container {
   border-radius: 0.8rem;
   padding: 1rem;
   background: prop.$main-first-extra-color;
@@ -181,7 +181,7 @@ export default defineComponent({
     justify-content: space-between;
     gap: 5%;
 
-    button {
+    .arrow-button {
       flex: 1;
       height: 4rem;
     }
@@ -190,7 +190,6 @@ export default defineComponent({
   .text-while {
     color: prop.$main-second-color;
   }
-
 }
 
 </style>

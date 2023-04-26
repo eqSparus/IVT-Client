@@ -1,6 +1,10 @@
 <template>
-  <a class="link-icon" :href="href" target="_blank">
-    <img :src="icon" :alt="alt"/>
+  <a class="link-icon"
+     :href="href"
+     target="_blank">
+    <img class="icon-img"
+         :src="icon"
+         :alt="alt"/>
   </a>
 </template>
 
@@ -41,7 +45,7 @@ export default defineComponent({
     outline: none;
   }
 
-  img {
+  .icon-img {
     width: 2.4rem;
     height: 2.4rem;
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="direction-add">
+  <div class="add-direction-container">
     <app-base-field id="title"
                     label="Название"
                     :fails="[{
@@ -15,7 +15,7 @@
       </textarea>
     </app-base-field>
 
-    <div class="directions-add-center mt-10">
+    <div class="add-direction-center mt-10">
       <div class="block">
         <app-base-field id="degree"
                         label="Степень обучение"
@@ -108,11 +108,11 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.direction-add {
+.add-direction-container {
   display: flex;
   flex-flow: column;
 
-  .directions-add-center {
+  .add-direction-center {
     display: flex;
     flex-flow: row;
     justify-content: space-between;

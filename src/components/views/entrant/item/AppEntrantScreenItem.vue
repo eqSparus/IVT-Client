@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="edit-entrant-item-container">
 
     <the-modal-edit-entrant :is-show="isShow"
                             @close="toggleModal"
@@ -7,7 +7,7 @@
                             :entrant="entrant"/>
 
     <div class="item-title">
-      <h3 class="fs-32 ml-20">{{ entrant.title }}</h3>
+      <h3 class="title-item fs-32 ml-20">{{ entrant.title }}</h3>
 
       <button v-if="isAuth"
               class="btn-standard-icon ml-20"
@@ -26,10 +26,10 @@
     <div v-for="(item, index) in entrant.items" :key="item"
          :class="[index === 0 ? 'mt-10' : 'mt-30', 'item-content']">
 
-      <h5 class="fs-24 ml-20">{{ item.name }}</h5>
+      <h5 class="item-point fs-24 ml-20">{{ item.name }}</h5>
 
-      <ul>
-        <li class="fs-24" v-for="point in item.points" :key="point">{{ point.point }}</li>
+      <ul class="list">
+        <li class="item-point-list fs-24" v-for="point in item.points" :key="point">{{ point.point }}</li>
       </ul>
     </div>
   </div>
@@ -98,31 +98,30 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss';
 
-.item {
+.edit-entrant-item-container {
 
   .item-title {
     display: flex;
     flex-flow: row;
   }
 
-  h3 {
+  .title-item {
     text-align: justify;
     @include utils.font-style($weight: 500, $color: prop.$main-first-dark-color);
   }
 
   .item-content {
-
-    h5 {
+    .item-point {
       text-align: justify;
       @include utils.font-style($weight: 600, $color: prop.$main-first-color);
     }
 
-    ul {
+    .list {
       margin: 0;
       padding: 0;
       list-style: none;
 
-      li {
+      .item-point-list {
         text-align: justify;
         @include utils.font-style($color: prop.$main-first-elevate-color);
 

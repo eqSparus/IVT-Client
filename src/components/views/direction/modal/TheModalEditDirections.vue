@@ -4,7 +4,7 @@
                     :is-footer="true"
                     @close="close">
 
-    <div class="directions-container">
+    <div class="modal-edit-directions-container">
       <div class="directions-items">
         <transition-group name="direction-items">
           <app-directions-item v-for="direction in directions" :key="direction.id"
@@ -18,12 +18,12 @@
         </transition-group>
       </div>
       <app-plus-minus-button v-if="directions.length !== 4"
-                             :is-plus="!isAdd"
+                             :char="charButton"
                              class="mt-10"
                              @action="showAddDirection"/>
 
       <transition name="direction">
-        <the-add-block v-if="isAdd && directions.length !== 4"
+        <the-add-block v-if="charButton === '-' && directions.length !== 4"
                        class="mt-10"
                        @add="addDirection"/>
       </transition>
@@ -39,7 +39,7 @@ import { defineComponent, PropType, ref } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
 import { Direction } from '@/types/site.types';
 import AppDirectionsItem from '@/components/views/direction/modal/AppDirectionItem.vue';
-import AppPlusMinusButton from '@/components/UI/AppPlusMinusButton.vue';
+import AppPlusMinusButton, { CharButton } from '@/components/UI/AppAdditionalLongButton.vue';
 import TheAddBlock from '@/components/views/direction/modal/TheAddBlock.vue';
 import useEditDirection, { EditDirection } from '@/hooks/useEditDirection';
 import useAlerts from '@/hooks/useAlerts';
@@ -65,7 +65,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const { alerts } = useAlerts();
-    const isAdd = ref<boolean>(false);
+    const charButton = ref<CharButton>('+');
 
     const {
       remove,
@@ -76,11 +76,15 @@ export default defineComponent({
     } = useEditDirection();
 
     const showAddDirection = () => {
-      isAdd.value = !isAdd.value;
+      if (charButton.value === '+') {
+        charButton.value = '-';
+      } else {
+        charButton.value = '+';
+      }
     };
 
     const close = () => {
-      isAdd.value = false;
+      charButton.value = '+';
       emit('close');
     };
 
@@ -130,7 +134,7 @@ export default defineComponent({
     };
 
     return {
-      isAdd,
+      charButton,
       alerts,
       showAddDirection,
       close,
@@ -158,7 +162,7 @@ $animation-name-direction-item: 'direction-items';
   opacity: 0;
 }
 
-.directions-container {
+.modal-edit-directions-container {
   display: flex;
   flex-flow: column;
   min-width: 90rem;

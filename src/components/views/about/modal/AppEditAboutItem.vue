@@ -23,7 +23,7 @@
                     }]">
       <textarea placeholder="Введите описание"
                 id="description"
-                class="field-standard textarea"
+                class="field-standard"
                 v-model="changeAbout.description"
                 rows="10"
                 @blur="valid.description.$touch()"></textarea>
@@ -47,7 +47,7 @@ import useAlerts from '@/hooks/useAlerts';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
-  name: 'AppEditAboutBlock',
+  name: 'AppEditAboutItem',
   components: { AppBaseField },
   emits: ['update'],
   props: {

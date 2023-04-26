@@ -1,5 +1,5 @@
 <template>
-  <div class="setting-links-container">
+  <div class="edit-links-container">
 
     <app-link-item v-for="link in links" :key="link.id"
                    :link="link"
@@ -160,7 +160,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.setting-links-container {
+.edit-links-container {
   display: flex;
   flex-flow: column;
 

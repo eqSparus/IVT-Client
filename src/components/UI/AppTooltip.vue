@@ -1,13 +1,16 @@
 <template>
-  <div class="tooltip-container">
+  <div class="tooltip-component">
     <transition name="tooltip">
-      <div class="tooltip" v-if="isShow">
+      <div class="tooltip-content" v-if="isShow">
         {{ text }}
       </div>
     </transition>
   </div>
-  <div class="slot-content" @mouseenter="onToggle" @mouseleave="onToggle"
-       @focus="isShow = true" @blur="isShow = false">
+  <div class="slot-content"
+       @mouseenter="onToggle"
+       @mouseleave="onToggle"
+       @focus="isShow = true"
+       @blur="isShow = false">
     <slot></slot>
   </div>
 </template>
@@ -45,12 +48,12 @@ export default defineComponent({
 
 $animation-name: 'tooltip';
 
-.tooltip-container {
+.tooltip-component {
   display: flex;
   flex-flow: column;
   position: relative;
 
-  .tooltip {
+  .tooltip-content {
     word-wrap: break-word;
     position: absolute;
     bottom: 1rem;
@@ -80,11 +83,11 @@ $animation-name: 'tooltip';
   flex-flow: column;
 }
 
-@include utils.animation-to($name: $animation-name){
+@include utils.animation-to($name: $animation-name) {
   transition: all 0.3s ease-in-out;
 }
 
-@include utils.animation-from($name: $animation-name){
+@include utils.animation-from($name: $animation-name) {
   transform: translateY(50%);
   opacity: 0;
 }

@@ -1,6 +1,5 @@
 <template>
-  <div class="setting-container">
-
+  <div class="edit-department-container">
     <app-base-field id="title"
                     label="Название кафедры"
                     :fails="[{
@@ -160,7 +159,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.setting-container {
+.edit-department-container {
   display: flex;
   flex-flow: column;
 
@@ -170,7 +169,7 @@ export default defineComponent({
     flex-flow: row;
     gap: 1rem;
 
-    & > div {
+    div {
       flex: 1;
     }
   }

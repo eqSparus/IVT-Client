@@ -1,6 +1,8 @@
 <template>
-  <button @click="$emit('action')" :title="title">
-    <img :src="pathImg" alt="Фотография преподавателя">
+  <button class="button-img-teacher"
+          @click="$emit('action')"
+          :title="title">
+    <img class="img-teacher" :src="pathImg" alt="Фотография преподавателя">
   </button>
 </template>
 
@@ -26,12 +28,12 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-button {
+.button-img-teacher {
   background: none;
   border: none;
   padding: 0;
 
-  img {
+  .img-teacher {
     transition: all 0.2s ease-out;
     height: 4rem;
     width: 4rem;

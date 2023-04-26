@@ -1,5 +1,5 @@
 <template>
-  <div class="field-container">
+  <div class="field-component">
     <label v-if="label" class="field-label" :for="id">{{ label }}</label>
     <span v-for="fail in failsActive" :key="fail.description"
           class="field-fail">{{ fail.description }}</span>
@@ -38,7 +38,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.field-container {
+.field-component {
   display: flex;
   flex-flow: column;
 }

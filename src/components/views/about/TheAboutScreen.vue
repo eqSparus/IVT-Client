@@ -6,7 +6,7 @@
                           :is-show="isShow"
                           @close="toggleModal"/>
 
-    <div class="about-edit-container mb-20" v-if="isAuth">
+    <div class="screen-editing-block mb-20" v-if="isAuth">
       <input type="button"
              class="btn-standard"
              value="редактировать"
@@ -55,8 +55,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/utils.scss';
 
-.about-edit-container {
+.screen-editing-block {
   display: flex;
   justify-content: center;
   height: 100%;
@@ -64,22 +65,16 @@ export default defineComponent({
 
 .about-screen-container {
   display: flex;
+  flex-flow: row;
+  justify-content: center;
+  column-gap: 5%;
 }
 
-@media only screen and (min-width: 1000px) {
-  .about-screen-container {
-    flex-flow: row;
-    justify-content: center;
-    column-gap: 5%;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
+@include utils.phone-style {
   .about-screen-container {
     flex-flow: column;
     align-items: center;
     row-gap: 8rem;
   }
-
 }
 </style>
