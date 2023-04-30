@@ -11,9 +11,9 @@
                max="1"
                step="0.1"
                v-model="textSize"
+               class="field-range-standard"
                @change="toggleTextSize"
-               id="textSize"
-               class="field-range-standard">
+               id="textSize">
       </app-base-field>
 
       <input type="button"
@@ -84,14 +84,6 @@ export default defineComponent({
   .setting-site-row {
     display: flex;
     flex-flow: row;
-
-    input[type="radio"]:hover + label {
-      background: prop.$main-second-additional-color;
-    }
-
-    input[type="radio"]:checked + label {
-      background: prop.$primary-color;
-    }
 
     .block-size {
       border: 2px solid prop.$main-first-extra-color;

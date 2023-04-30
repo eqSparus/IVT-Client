@@ -7,15 +7,15 @@
       <div class="item-content ml-30">
 
         <div class="block-main-left" v-if="isMain">
-          <span class="span-new-line header fs-32">{{ teacher.lastName }}</span>
-          <span class="fs-32 header">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
+          <span class="span-new-line header-container fs-32">{{ teacher.lastName }}</span>
+          <span class="fs-32 header-container">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
           <span class="fs-20 post span-new-line mt-10">{{ teacher.postDepartment }}</span>
           <span class="fs-20 content span-new-line mt-10">{{ teacher.postTeacher }}</span>
           <span class="fs-20 content span-new-line mt-10">{{ teacher.postAdditional }}</span>
         </div>
         <div v-else class="block-secondary-left">
-          <span class="span-new-line header fs-32">{{ teacher.lastName }}</span>
-          <span class="fs-32 header">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
+          <span class="span-new-line header-container fs-32">{{ teacher.lastName }}</span>
+          <span class="fs-32 header-container">{{ `${teacher.firstName} ${teacher.middleName}` }}</span>
         </div>
 
         <div class="block-main-right" v-if="isMain">
@@ -124,7 +124,7 @@ export default defineComponent({
     word-wrap: break-word;
   }
 
-  .header {
+  .header-container {
     @include utils.font-style($weight: 500,
     $color: prop.$main-first-color);
   }

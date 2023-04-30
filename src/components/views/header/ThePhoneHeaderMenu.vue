@@ -2,10 +2,10 @@
   <header class="header-container">
     <div class="header-content">
       <div class="header-logo">
-        <img src="@/assets/images/logo-text.svg" alt="assets/images/logo-text.svg"/>
+        <img class="img-logo" src="@/assets/images/logo-text.svg" alt="assets/images/logo-text.svg"/>
       </div>
-      <label class="menu-btn" for="show-menu">
-        <img :src="menuIcon" alt="assets/images/icons/menu.svg">
+      <label class="open-menu" for="show-menu">
+        <img  class="img-menu" :src="menuIcon" alt="assets/images/icons/menu.svg">
       </label>
       <input type="checkbox"
              style="display: none"
@@ -105,18 +105,18 @@ $animation-name: 'header';
       align-self: center;
       padding: 2rem 0 2rem 2rem;
 
-      img {
+      .img-logo {
         width: 25rem;
       }
     }
 
-    .menu-btn {
+    .open-menu {
       width: 3.5rem;
       height: 3.5rem;
       align-self: center;
       margin-right: 3rem;
 
-      img {
+      .img-menu {
         &:hover {
           cursor: pointer;
           filter: prop.$icon-svg-hover-color;

@@ -4,10 +4,10 @@
          :alt="teacher.urlImg"
          class="position-teacher-item-img"/>
 
-    <div class="fs-24 not-copy">
-      <span class="ml-20">{{ teacher.lastName }}</span>
-      <span class="ml-10">{{ teacher.firstName }}</span>
-      <span class="ml-10">{{ teacher.middleName }}</span>
+    <div class="not-copy">
+      <span class="ml-20 fs-24">{{ teacher.lastName }}</span>
+      <span class="ml-10 fs-24">{{ teacher.firstName }}</span>
+      <span class="ml-10 fs-24">{{ teacher.middleName }}</span>
     </div>
 
     <input type="number"

@@ -155,7 +155,6 @@ $colors in $color-buttons {
         filter: prop.$icon-svg-hover-color;
       }
     }
-
   }
 }
 
@@ -181,7 +180,33 @@ $colors in $color-fields {
     &:disabled {
       border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
     }
+  }
 
+  .field-range-#{$title} {
+    -webkit-appearance: none;
+    margin: 0.5rem 0;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::-webkit-slider-runnable-track {
+      @include utils.slider-track;
+    }
+
+    &::-webkit-slider-thumb {
+      @include utils.slider-thumb(nth($colors, 1));
+      -webkit-appearance: none;
+      margin-top: -0.8rem;
+    }
+
+    &::-moz-range-track {
+      @include utils.slider-track;
+    }
+
+    &::-moz-range-thumb {
+      @include utils.slider-thumb(nth($colors, 1));
+    }
   }
 }
 

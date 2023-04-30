@@ -73,3 +73,20 @@
   $b: $b * 0.1rem;
   @return calc(#{$k} * 100vw + #{$b} + var(--font-size));
 }
+
+@mixin slider-track {
+  height: 0.8rem;
+  cursor: pointer;
+  background: prop.$main-second-additional-color;
+  border-radius: 1.3px;
+  border: 0.2px solid prop.$main-first-dark-color;
+}
+
+@mixin slider-thumb($color) {
+  border: 0.1rem solid prop.$main-first-dark-color;
+  height: 2rem;
+  width: 1.6rem;
+  border-radius: 3px;
+  background: $color;
+  cursor: pointer;
+}
