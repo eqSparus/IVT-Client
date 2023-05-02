@@ -6,8 +6,8 @@
              class="field-standard mt-10"
              id="recoverPassword"
              v-model="email"
-             placeholder="Введите адрес почты"
-             @keyup.enter="recoverPassword">
+             placeholder="Введите электронную почту"
+             @keydown.enter.prevent="recoverPassword">
     </app-base-field>
 
     <input type="button"
@@ -22,20 +22,27 @@
 import { defineComponent, ref } from 'vue';
 import { requestSendRecoverPasswordEmail } from '@/api/user/UserApi';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   name: 'TheRecoverPassword',
   components: { AppBaseField },
-  emits: ['access', 'fail'],
-  setup(props, { emit }) {
+  setup() {
+    const { alerts } = useAlerts();
     const email = ref<string>('');
 
     const recoverPassword = async () => {
       try {
         await requestSendRecoverPasswordEmail(email.value);
-        emit('access');
+        alerts.value.push({
+          type: 'info',
+          message: 'Проверьте почту',
+        });
       } catch (e) {
-        emit('fail');
+        alerts.value.push({
+          type: 'warning',
+          message: 'Неверный адрес электронной почты',
+        });
       }
       email.value = '';
     };

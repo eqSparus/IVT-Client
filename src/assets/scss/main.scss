@@ -183,6 +183,7 @@ $colors in $color-fields {
   }
 
   .field-range-#{$title} {
+    $color-focus: adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
     -webkit-appearance: none;
     margin: 0.5rem 0;
 
@@ -200,12 +201,20 @@ $colors in $color-fields {
       margin-top: -0.8rem;
     }
 
+    &:focus::-webkit-slider-thumb {
+      background: $color-focus;
+    }
+
     &::-moz-range-track {
       @include utils.slider-track;
     }
 
     &::-moz-range-thumb {
       @include utils.slider-thumb(nth($colors, 1));
+    }
+
+    &:focus::-moz-range-thumb {
+      background: $color-focus;
     }
   }
 }

@@ -6,6 +6,7 @@
                            :message="alert.message"
                            :timeout="time"
                            :type="alert.type"
+                           class="alert-item"
                            @vanish="$emit('deleteAlert')"/>
       </transition-group>
     </div>
@@ -48,10 +49,13 @@ $animation-name: 'alerts';
   position: fixed;
   top: 0;
   right: 0;
-  width: auto;
   display: flex;
   flex-flow: column;
   z-index: 9999999;
+
+  .alert-item {
+    align-self: flex-end;
+  }
 
   @include utils.animation-to($name: $animation-name, $move: true) {
     transition: all 0.5s ease;

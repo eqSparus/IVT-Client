@@ -4,12 +4,8 @@
                     :title="modalTitle">
 
     <div class="modal-authentication-container">
-      <the-login v-if="!isRecoverPassword"
-                 @access="close"
-                 @fail="alerts.push({ type: 'warning', message: 'Не верная почта или пароль' })"/>
-      <the-recover-password v-else
-                            @access="alerts.push({ type: 'info', message: 'Проверьте почту' })"
-                            @fail="alerts.push({ type: 'warning', message: 'Неверный адрес электронной почты' })"/>
+      <the-login v-if="!isRecoverPassword" @login="close"/>
+      <the-recover-password v-else/>
       <div class="forgot-block mt-10">
         <input type="button"
                class="forgot-password fs-20"
@@ -26,7 +22,6 @@ import { computed, defineComponent, ref } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
 import TheLogin from '@/components/views/header/modal/TheLogin.vue';
 import TheRecoverPassword from '@/components/views/header/modal/TheRecoverPassword.vue';
-import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   icon: 'TheModalAuthorization',
@@ -45,8 +40,6 @@ export default defineComponent({
   setup(prop, context) {
     const isRecoverPassword = ref<boolean>(false);
 
-    const { alerts } = useAlerts();
-
     const close = () => {
       isRecoverPassword.value = false;
       context.emit('close');
@@ -54,7 +47,6 @@ export default defineComponent({
 
     return {
       isRecoverPassword,
-      alerts,
       close,
       modalTitle: computed(() => (isRecoverPassword.value ? 'Восстановления пароля' : 'Авторизация')),
       textChangeBtn: computed(() => (isRecoverPassword.value ? 'Вернуться' : 'Забыли пароль?')),
@@ -81,8 +73,15 @@ export default defineComponent({
       text-decoration: props.$primary-color 0.2rem underline;
 
       &:hover {
-        $color-hover: adjust-color($color: nth(props.$primary-color, 1), $red: 37, $green: 26, $blue: -2);;
+        $color-hover: adjust-color($color: nth(props.$primary-color, 1), $red: 37, $green: 26, $blue: -2);
         cursor: pointer;
+        color: $color-hover;
+        text-decoration: $color-hover 0.2rem underline;
+      }
+
+      &:focus {
+        outline: none;
+        $color-hover: adjust-color($color: nth(props.$primary-color, 1), $red: 37, $green: 26, $blue: -2);
         color: $color-hover;
         text-decoration: $color-hover 0.2rem underline;
       }

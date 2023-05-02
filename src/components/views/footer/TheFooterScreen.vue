@@ -1,20 +1,20 @@
 <template>
-  <footer class="footer-default">
+  <footer class="footer-container">
 
     <div id="map" class="map"></div>
 
-    <div class="contact-information">
-      <div>
+    <div class="contact-information-container">
+      <div class="contact-item">
         <span class="fs-24 title">Телефон</span>
-        <span class="fs-24 span-new-line content">{{ department.phone }}</span>
+        <span class="fs-24 content">{{ department.phone }}</span>
       </div>
-      <div>
+      <div class="contact-item">
         <span class="fs-24 title">Электронная почта:</span>
-        <span class="fs-24 span-new-line content">{{ department.email }}</span>
+        <span class="fs-24 content">{{ department.email }}</span>
       </div>
-      <div>
+      <div class="contact-item">
         <span class="fs-24 title">Адрес:</span>
-        <span class="fs-24 span-new-line content">{{ department.address }}</span>
+        <span class="fs-24 content">{{ department.address }}</span>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, onMounted } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
@@ -39,7 +39,17 @@ export default defineComponent({
       });
     }
 
-    ymaps.ready(init);
+    onMounted(() => {
+      try {
+        ymaps.ready(init);
+      } catch (e) {
+        const map = document.querySelector('#map');
+        if (map) {
+          (map as HTMLElement).style.height = '0';
+        }
+        console.log('Ошибка карты');
+      }
+    });
 
     return {
       department: computed(() => store.getters['department/getDepartment']),
@@ -52,24 +62,24 @@ export default defineComponent({
 @use '@/assets/scss/properties.scss' as prop;
 @use '@/assets/scss/utils.scss';
 
-.footer-default {
+.footer-container {
   background: prop.$main-first-color;
   padding-top: 5rem;
   overflow: hidden;
-
   display: flex;
   flex-flow: column;
 
 
-  .contact-information {
+  .contact-information-container {
     display: flex;
     margin-bottom: 3rem;
     margin-top: 3rem;
     flex-flow: row;
     justify-content: space-around;
 
-    .span-new-line {
-      display: block;
+    .contact-item {
+      display: flex;
+      flex-flow: column;
     }
 
     .title {
@@ -90,11 +100,12 @@ export default defineComponent({
 
   @include utils.phone-style {
 
-    .contact-information {
+    .contact-information-container {
       flex-flow: column;
       align-items: center;
       text-align: center;
       row-gap: 3rem;
+      margin-top: 0;
     }
 
     .map {

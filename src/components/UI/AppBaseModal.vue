@@ -15,7 +15,7 @@
 
           <div class="modal-footer" v-if="isFooter">
             <slot v-if="$slots.footer" name="footer"></slot>
-            <div class="footer-default" v-else>
+            <div class="footer-container" v-else>
               <input type="button"
                      value="закрыть"
                      class="btn-warning"
@@ -53,6 +53,11 @@ export default defineComponent({
   setup(props, { emit }) {
     onUpdated(() => {
       if (props.isShow) {
+        const elementContainer = document.querySelector('.modal-content');
+        if (elementContainer) {
+          const elementFocus = elementContainer.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          (elementFocus as HTMLInputElement).focus();
+        }
         document.body.classList.add('modal-open');
       } else {
         document.body.classList.remove('modal-open');
@@ -127,7 +132,7 @@ $animation-name: 'modal';
       border-top: 0.1rem solid prop.$main-first-color;
       padding: 2rem;
 
-      .footer-default {
+      .footer-container {
         display: flex;
         flex-flow: column;
         align-items: flex-end;

@@ -7,9 +7,7 @@
              type="email"
              id="email"
              v-model="email"
-             aria-label="Введите электронную почту"
-             placeholder="Электронная почта"
-             @keyup.enter="login"/>
+             placeholder="Введите электронную почту"/>
     </app-base-field>
 
     <app-base-field id="password"
@@ -19,8 +17,8 @@
              type="password"
              id="password"
              v-model="password"
-             placeholder="Пароль"
-             @keyup.enter="login"/>
+             placeholder="Введите пароль"
+             @keydown.enter.prevent="login"/>
     </app-base-field>
 
     <input type="button"
@@ -35,13 +33,15 @@
 import { defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
   name: 'TheLogin',
   components: { AppBaseField },
-  emits: ['access', 'fail'],
+  emits: ['login'],
   setup(props, { emit }) {
     const store = useStore();
+    const { alerts } = useAlerts();
     const email = ref<string>('');
     const password = ref<string>('');
 
@@ -53,11 +53,14 @@ export default defineComponent({
         });
         email.value = '';
         password.value = '';
-        emit('access');
+        emit('login');
       } catch (e) {
         email.value = '';
         password.value = '';
-        emit('fail');
+        alerts.value.push({
+          type: 'warning',
+          message: 'Не верная почта или пароль',
+        });
       }
     };
 
