@@ -3,7 +3,7 @@
     <app-base-field id="recoverPassword"
                     label="Электронная почта">
       <input type="email"
-             class="field-standard mt-10"
+             class="field-standard"
              id="recoverPassword"
              v-model="email"
              placeholder="Введите электронную почту"
@@ -32,18 +32,11 @@ export default defineComponent({
     const email = ref<string>('');
 
     const recoverPassword = async () => {
-      try {
-        await requestSendRecoverPasswordEmail(email.value);
-        alerts.value.push({
-          type: 'info',
-          message: 'Проверьте почту',
-        });
-      } catch (e) {
-        alerts.value.push({
-          type: 'warning',
-          message: 'Неверный адрес электронной почты',
-        });
-      }
+      await requestSendRecoverPasswordEmail(email.value);
+      alerts.value.push({
+        type: 'info',
+        message: 'Проверьте почту',
+      });
       email.value = '';
     };
 

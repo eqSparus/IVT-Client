@@ -1,7 +1,7 @@
 <template>
-  <div class="spinner-loader-component">
-    <div class="spin-w spinner-loader-component">
-      <div class="spin-b spinner-loader-component">
+  <div class="spinner-loader-component position-component">
+    <div class="spin-w position-component">
+      <div class="spin-b position-component">
         <div class="spin-r"/>
       </div>
     </div>
@@ -33,6 +33,15 @@ $blue: #0039A6;
 $red: #D52B1E;
 
 .spinner-loader-component {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+}
+
+.position-component {
   display: flex;
   flex-flow: column;
   align-items: center;

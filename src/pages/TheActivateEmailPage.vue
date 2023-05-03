@@ -22,9 +22,9 @@ export default defineComponent({
     onMounted(async () => {
       try {
         await requestEditEmail(token as string);
-        await router.push('/main');
+        await router.replace('/main');
       } catch (e) {
-        await router.push('/main');
+        await router.replace('/main');
       }
     });
   },

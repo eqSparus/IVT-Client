@@ -78,7 +78,7 @@ export default defineComponent({
       if (!valid.value.password.samePassword.$invalid) {
         try {
           await requestRecoverPassword(password.value, token as string);
-          await router.push('/main');
+          await router.replace('/main');
         } catch (e) {
           password.value = '';
           repeatPassword.value = '';
