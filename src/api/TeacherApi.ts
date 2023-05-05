@@ -53,3 +53,14 @@ export const requestDeleteTeacher = async (id: string) => {
   });
   return response.data;
 };
+
+export const requestGetTeacher = async (skip?: number, size?: number) => {
+  const response = await authorizedRequests.get(EndPoints.TEACHER, {
+    params: {
+      skip,
+      size,
+    },
+  });
+
+  return response.data;
+};

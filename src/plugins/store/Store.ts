@@ -7,10 +7,12 @@ import direction from '@/plugins/store/modules/direction.module';
 import entrant from '@/plugins/store/modules/entrant.module';
 import teacher from '@/plugins/store/modules/teacher.module';
 import partner from '@/plugins/store/modules/partner.module';
+import { RootState } from '@/plugins/store/types';
+import { Teacher } from '@/types/site.types';
 
 const store = createStore({
   state: {
-    version: '1',
+    isLoadAllTeacher: true,
   },
   modules: {
     auth,
@@ -21,6 +23,22 @@ const store = createStore({
     entrant,
     teacher,
     partner,
+  },
+  mutations: {
+    toggleLoadTeacher(state: RootState) {
+      state.isLoadAllTeacher = false;
+    },
+  },
+  actions: {
+    async loadTeacher({
+      state,
+      commit,
+    }, loadTeacher: () => void) {
+      if (state.isLoadAllTeacher) {
+        loadTeacher();
+        commit('toggleLoadTeacher');
+      }
+    },
   },
 });
 

@@ -33,7 +33,7 @@ const PartnerModule: Module<PartnerState, RootState> = {
     },
   },
   getters: {
-    getPartners(state) {
+    getPartners(state: PartnerState) {
       return state.partners;
     },
   },

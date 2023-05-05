@@ -40,10 +40,10 @@ const TeacherModule: Module<TeacherState, RootState> = {
     },
   },
   getters: {
-    getTeachers(state) {
+    getTeachers(state: TeacherState) {
       return state.teachers.sort((a, b) => a.position - b.position);
     },
-    getMinPosition(state) {
+    getMinPosition(state: TeacherState) {
       return state.teachers.reduce((pr, cu) => (pr.position < cu.position ? pr : cu)).position;
     },
   },

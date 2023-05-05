@@ -10,6 +10,8 @@ import store from '@/plugins/store/Store';
 import { refreshToken, requestIsValidTokenPassword } from '@/api/user/UserApi';
 import TheActivateEmailPage from '@/pages/TheActivateEmailPage.vue';
 import { requestGetData } from '@/api/DataApi';
+import { requestGetTeacher } from '@/api/TeacherApi';
+import { MIN_LOAD_TEACHER } from '@/hooks/useEditTeacher';
 
 const routers = [
   {
@@ -27,14 +29,16 @@ const routers = [
         }
       }
 
-      const data = await requestGetData();
-      store.commit('department/setDepartment', data.department.mainInfo);
-      store.commit('siteLinks/setLinks', data.department.links);
-      store.commit('about/setAbout', data.about);
-      store.commit('direction/setDirections', data.directions);
-      store.commit('entrant/setEntrants', data.entrants);
-      store.commit('teacher/setTeachers', data.teachers);
-      store.commit('partner/setPartners', data.partners);
+      const dataSite = await requestGetData();
+      store.commit('department/setDepartment', dataSite.department.mainInfo);
+      store.commit('siteLinks/setLinks', dataSite.department.links);
+      store.commit('about/setAbout', dataSite.about);
+      store.commit('direction/setDirections', dataSite.directions);
+      store.commit('entrant/setEntrants', dataSite.entrants);
+      store.commit('partner/setPartners', dataSite.partners);
+
+      const teachers = await requestGetTeacher(0, MIN_LOAD_TEACHER);
+      store.commit('teacher/setTeachers', teachers);
       next();
     },
   },

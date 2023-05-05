@@ -1,7 +1,15 @@
-import { AboutDepartment, Entrant, Direction, Link, Teacher, Department, Partner } from '@/types/site.types';
+import {
+  AboutDepartment,
+  Entrant,
+  Direction,
+  Link,
+  Teacher,
+  Department,
+  Partner,
+} from '@/types/site.types';
 
 export interface RootState {
-  version: string;
+  isLoadAllTeacher: boolean;
 }
 
 export interface AuthState {

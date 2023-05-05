@@ -4,13 +4,14 @@ import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import {
   requestCreateTeacher,
-  requestDeleteTeacher,
+  requestDeleteTeacher, requestGetTeacher,
   requestUpdateTeacher,
   requestUpdateTeacherImg, requestUpdateTeacherPosition,
 } from '@/api/TeacherApi';
 import { useStore } from 'vuex';
 
 export type EditTeacher = Omit<Teacher, 'position' | 'urlImg'>
+export const MIN_LOAD_TEACHER = 6;
 
 const defaultTeacher = {
   firstName: '',
@@ -74,6 +75,13 @@ const useEditTeacher = (customTeacher: EditTeacher = defaultTeacher) => {
     });
   };
 
+  const loadAllTeacher = async () => {
+    await store.dispatch('loadTeacher', async () => {
+      const teachers = await requestGetTeacher(MIN_LOAD_TEACHER);
+      store.commit('teacher/setTeachers', teachers);
+    });
+  };
+
   return {
     teacher,
     valid,
@@ -82,6 +90,7 @@ const useEditTeacher = (customTeacher: EditTeacher = defaultTeacher) => {
     remove,
     updateImg,
     updatePosition,
+    loadAllTeacher,
   };
 };
 

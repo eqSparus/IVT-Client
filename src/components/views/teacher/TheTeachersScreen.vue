@@ -11,11 +11,11 @@
 
     <div class="teacher-change-block mb-20" v-if="isAuth">
       <input type="button"
-             @click="changeShowEditTeacher"
+             @click="changeShowEditTeacher(); loadAllTeacher()"
              class="btn-standard"
              value="изменить состав">
       <input type="button"
-             @click="changeShowEditPosition"
+             @click="changeShowEditPosition(); loadAllTeacher()"
              class="btn-standard ml-20"
              value="изменить последовательность">
     </div>
@@ -51,7 +51,7 @@
 
       <button v-if="allTeachers.length > 5"
               class="fs-24 load-teacher"
-              @click="changeIsAll">
+              @click="changeIsAll(); loadAllTeacher()">
         {{ textIsAll }}
       </button>
 
@@ -68,7 +68,8 @@ import AppTeacherItem from '@/components/views/teacher/item/AppTeacherItem.vue';
 import TheModalEditTeacher from '@/components/views/teacher/modal/TheModalEditTeacher.vue';
 import useShowModal from '@/hooks/useShowModal';
 import TheModalEditPositionTeacher from '@/components/views/teacher/modal/TheModalEditPositionTeacher.vue';
-import AppBaseScreen from '../../UI/AppBaseScreen.vue';
+import useEditTeacher from '@/hooks/useEditTeacher';
+import AppBaseScreen from '@/components/UI/AppBaseScreen.vue';
 
 export default defineComponent({
   icon: 'TheTeachersScreen',
@@ -81,6 +82,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const isAll = ref<boolean>(false);
+    const { loadAllTeacher } = useEditTeacher();
 
     const {
       isShow: isShowEditTeacher,
@@ -92,7 +94,7 @@ export default defineComponent({
       toggleModal: changeShowEditPosition,
     } = useShowModal();
 
-    const changeIsAll = () => {
+    const changeIsAll = async () => {
       isAll.value = !isAll.value;
     };
 
@@ -108,6 +110,7 @@ export default defineComponent({
       isShowEditPosition,
       isAll,
       changeIsAll,
+      loadAllTeacher,
       changeShowEditTeacher,
       changeShowEditPosition,
       listTeachers,
