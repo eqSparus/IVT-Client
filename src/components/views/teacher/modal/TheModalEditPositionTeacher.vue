@@ -5,13 +5,22 @@
                   @close="$emit('close')">
 
     <div class="position-edit-container">
-      <transition-group name="teachers">
-        <teacher-position-item v-for="teacher in teachers" :key="teacher.id"
-                               :teacher="teacher"
-                               class="mt-10 pl-10 pr-10"/>
-      </transition-group>
+      <table>
+        <thead>
+        <tr>
+          <th class="fs-18 thead-title">Фото</th>
+          <th class="fs-18 thead-title">ФИО</th>
+          <th class="fs-18 thead-title">Номер</th>
+        </tr>
+        </thead>
+        <tbody>
+        <transition-group name="teachers">
+          <app-teacher-position-item v-for="teacher in teachers" :key="teacher.id"
+                                     :teacher="teacher"/>
+        </transition-group>
+        </tbody>
+      </table>
     </div>
-
   </app-base-modal>
 </template>
 
@@ -20,12 +29,12 @@
 import { defineComponent, PropType } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
 import { Teacher } from '@/types/site.types';
-import TeacherPositionItem from '@/components/views/teacher/modal/TeacherPositionItem.vue';
+import AppTeacherPositionItem from '@/components/views/teacher/modal/AppTeacherPositionItem.vue';
 
 export default defineComponent({
   name: 'TheModalEditPositionTeacher',
   components: {
-    TeacherPositionItem,
+    AppTeacherPositionItem,
     AppBaseModal,
   },
   emits: ['close'],
@@ -43,22 +52,26 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/properties.scss' as prop;
+@use '@/assets/scss/utils.scss';
 @import '@/assets/scss/extends.scss';
-@import '@/assets/scss/utils.scss';
 
 $animation-name: 'teachers';
 
-@include animation-to($name: $animation-name, $move: true){
+@include utils.animation-to($name: $animation-name, $move: true) {
   transition: all 0.5s ease;
 }
 
 .position-edit-container {
-  width: 100rem;
-  display: flex;
-  flex-flow: column;
   max-height: 40rem;
+  max-width: 80vw;
   overflow-y: auto;
-  @extend %standard-scroll-bar;
+  overflow-x: auto;
+  padding: 1rem;
+
+  .thead-title{
+    @include utils.font-style(prop.$main-first-dark-color)
+  }
 }
 
 </style>

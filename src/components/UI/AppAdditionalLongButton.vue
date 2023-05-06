@@ -8,7 +8,7 @@
 
 import { defineComponent, PropType } from 'vue';
 
-export type CharButton = '+' | '-'
+export type CharButton = '+' | '-';
 
 export default defineComponent({
   name: 'AppPlusMinusButton',

@@ -9,9 +9,9 @@
       </textarea>
       <button class="btn-standard-icon icon ml-10"
               @click="isOpen = !isOpen">
-        <img :src="arrowIcon"
-             :class="{'arrow-transform': isOpen}"
-             alt="assets/images/icon/refresh.svg">
+          <img :src="arrowIcon"
+               :class="{'arrow-transform': isOpen}"
+               alt="assets/images/icon/arrowIcon.svg">
       </button>
       <button class="btn-warning-icon icon ml-10"
               @click="$emit('deleteItem')">
@@ -77,6 +77,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/utils.scss';
 
 .edit-entrant-item-container {
   align-items: center;

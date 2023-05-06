@@ -1,21 +1,27 @@
 <template>
-  <div class="position-teacher-item-container">
-    <img :src="teacher.urlImg"
-         :alt="teacher.urlImg"
-         class="position-teacher-item-img"/>
+  <tr>
+    <td>
+      <img :src="teacher.urlImg"
+           :alt="teacher.urlImg"
+           class="position-teacher-item-img"/>
+    </td>
 
-    <div class="not-copy">
-      <span class="ml-20 fs-24">{{ teacher.lastName }}</span>
-      <span class="ml-10 fs-24">{{ teacher.firstName }}</span>
-      <span class="ml-10 fs-24">{{ teacher.middleName }}</span>
-    </div>
+    <td>
+      <div class="not-copy">
+        <span class="ml-20 fs-24">{{ teacher.lastName }}</span>
+        <span class="ml-10 fs-24">{{ teacher.firstName }}</span>
+        <span class="ml-10 fs-24">{{ teacher.middleName }}</span>
+      </div>
+    </td>
 
-    <input type="number"
-           class="ml-20 field-standard input-position"
-           aria-label="Позиция преподавателя"
-           @blur="changePosition"
-           v-model.number="position">
-  </div>
+    <td>
+      <input type="number"
+             class="ml-20 field-standard input-position"
+             aria-label="Позиция преподавателя"
+             @blur="changePosition"
+             v-model.number="position">
+    </td>
+  </tr>
 </template>
 
 <script lang="ts">
@@ -26,7 +32,7 @@ import useEditTeacher from '@/hooks/useEditTeacher';
 import useAlerts from '@/hooks/useAlerts';
 
 export default defineComponent({
-  name: 'TeacherPositionItem',
+  name: 'AppTeacherPositionItem',
   props: {
     teacher: {
       type: Object as PropType<Teacher>,
@@ -63,23 +69,20 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.position-teacher-item-container {
-  display: grid;
-  grid-template-columns: 5rem 2fr 1fr;
-  align-items: center;
+.position-teacher-item-img {
+  width: 5rem;
+  height: 5rem;
+}
 
-  .position-teacher-item-img {
-    width: 5rem;
-    height: 5rem;
-  }
+.not-copy {
+  display: flex;
+  flex-flow: row;
+  user-select: none;
+}
 
-  .not-copy {
-    user-select: none;
-  }
-
-  .input-position {
-    text-align: center;
-  }
+.input-position {
+  width: 10rem;
+  text-align: center;
 }
 
 </style>

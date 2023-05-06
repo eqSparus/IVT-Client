@@ -17,6 +17,7 @@
       <input type="button"
              @click="changeShowEditPosition(); loadAllTeacher()"
              class="btn-standard ml-20"
+             :disabled="allTeachers.length === 0"
              value="изменить последовательность">
     </div>
 

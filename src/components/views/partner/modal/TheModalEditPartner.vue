@@ -9,9 +9,11 @@
         <div class="partner-cropper mr-20" v-if="cropperFile">
           <cropper :src="cropperFile"
                    ref="cropperRef"
+                   :resizeImage="{ wheel: false }"
+                   backgroundClass="cropper-background"
                    class="cropper"/>
         </div>
-        <div class="upload-img">
+        <div class="upload-img mt-20">
           <label class="btn-standard" for="img-partner">
             Загрузить новый логотип
           </label>
@@ -22,7 +24,7 @@
                  id="img-partner">
 
           <input type="button"
-                 class="btn-standard mt-20"
+                 class="btn-standard"
                  @click="updateImgPartner"
                  value="Обновить логотип">
         </div>
@@ -203,7 +205,7 @@ export default defineComponent({
 
   .partner-image {
     display: flex;
-    flex-flow: row;
+    flex-flow: column;
     align-items: center;
 
     .partner-cropper {
@@ -216,8 +218,17 @@ export default defineComponent({
 
     .upload-img {
       display: flex;
-      flex-flow: column;
-      flex: 1;
+      flex-flow: row;
+      width: 100%;
+      gap: 1rem;
+
+      label {
+        flex: 1;
+      }
+
+      input {
+        flex: 1;
+      }
     }
   }
 }

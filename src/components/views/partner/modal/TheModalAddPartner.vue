@@ -8,6 +8,8 @@
         <cropper :src="cropperFile"
                  v-if="cropperFile"
                  ref="cropperRef"
+                 :resizeImage="{ wheel: false }"
+                 backgroundClass="cropper-background"
                  class="cropper"/>
       </div>
       <label class="btn-standard mt-20" for="img-partner">

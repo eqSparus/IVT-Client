@@ -8,15 +8,16 @@
           <cropper :src="cropperFile"
                    ref="cropperRef"
                    class="cropper"
+                   :auto-zoom="false"
                    :stencil-props="{
                     handlers:{},
                     movable: false,
-                    resizable: false,
                     }"
                    :stencil-size="{
                     width: 368,
-                    height: 368
+                    height: 368,
                     }"
+                   :resizeImage="{ wheel: false }"
                    adjustStencil: true
                    image-restriction="stencil"/>
         </div>
