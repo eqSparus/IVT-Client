@@ -58,7 +58,7 @@ $animation-name: 'alerts';
   }
 
   @include utils.animation-to($name: $animation-name, $move: true) {
-    transition: all 0.5s ease;
+    transition: all 0.5s ease-out;
   }
 
   @include utils.animation-from($name: $animation-name) {

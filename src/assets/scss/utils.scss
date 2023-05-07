@@ -55,6 +55,12 @@
   }
 }
 
+@mixin animation-active($name) {
+  .#{$name}-enter-to {
+    @content;
+  }
+}
+
 @mixin phone-style {
   @media ((-webkit-min-device-pixel-ratio: prop.$pixel-ratio-min) or (min-device-pixel-ratio: prop.$pixel-ratio-min)) {
     @content;

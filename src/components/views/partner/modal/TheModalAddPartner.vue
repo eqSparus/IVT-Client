@@ -8,7 +8,6 @@
         <cropper :src="cropperFile"
                  v-if="cropperFile"
                  ref="cropperRef"
-                 :resizeImage="{ wheel: false }"
                  backgroundClass="cropper-background"
                  class="cropper"/>
       </div>

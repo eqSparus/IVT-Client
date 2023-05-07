@@ -18,7 +18,6 @@
                     width: 368,
                     height: 368
                     }"
-                   :resizeImage="{ wheel: false }"
                    adjustStencil: true
                    image-restriction="stencil"/>
         </div>

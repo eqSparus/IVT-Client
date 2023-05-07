@@ -115,7 +115,7 @@ $colors in $color-buttons {
       &:not(:disabled):focus {
         background: adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
         border: map-get($property, "border") solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
-        outline: solid 0.2rem adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+        outline: solid 0.1rem adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
       }
     }
   }
@@ -173,7 +173,7 @@ $colors in $color-fields {
     }
 
     &:focus {
-      outline: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      outline: 0.1rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
       border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
     }
 

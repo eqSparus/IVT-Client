@@ -8,7 +8,6 @@ import entrant from '@/plugins/store/modules/entrant.module';
 import teacher from '@/plugins/store/modules/teacher.module';
 import partner from '@/plugins/store/modules/partner.module';
 import { RootState } from '@/plugins/store/types';
-import { Teacher } from '@/types/site.types';
 
 const store = createStore({
   state: {

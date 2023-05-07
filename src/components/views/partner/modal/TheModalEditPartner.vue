@@ -9,7 +9,6 @@
         <div class="partner-cropper mr-20" v-if="cropperFile">
           <cropper :src="cropperFile"
                    ref="cropperRef"
-                   :resizeImage="{ wheel: false }"
                    backgroundClass="cropper-background"
                    class="cropper"/>
         </div>
