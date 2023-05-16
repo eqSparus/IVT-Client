@@ -69,8 +69,8 @@ import AppTeacherItem from '@/components/views/teacher/item/AppTeacherItem.vue';
 import TheModalEditTeacher from '@/components/views/teacher/modal/TheModalEditTeacher.vue';
 import useShowModal from '@/hooks/useShowModal';
 import TheModalEditPositionTeacher from '@/components/views/teacher/modal/TheModalEditPositionTeacher.vue';
-import useEditTeacher from '@/hooks/useEditTeacher';
 import AppBaseScreen from '@/components/UI/AppBaseScreen.vue';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent({
   icon: 'TheTeachersScreen',
@@ -81,9 +81,9 @@ export default defineComponent({
     AppTeacherItem,
   },
   setup() {
+    const { isAuth } = useTokenAuthentication();
     const store = useStore();
     const isAll = ref<boolean>(false);
-    const { loadAllTeacher } = useEditTeacher();
 
     const {
       isShow: isShowEditTeacher,
@@ -106,6 +106,10 @@ export default defineComponent({
       return store.getters['teacher/getTeachers'].slice(0, 5);
     });
 
+    const loadAllTeacher = () => {
+      store.dispatch('teacher/loadAllTeacher');
+    };
+
     return {
       isShowEditTeacher,
       isShowEditPosition,
@@ -117,7 +121,7 @@ export default defineComponent({
       listTeachers,
       minPosition: computed(() => store.getters['teacher/getMinPosition']),
       allTeachers: computed(() => store.getters['teacher/getTeachers']),
-      isAuth: computed(() => store.getters['auth/isAuth']),
+      isAuth,
       textIsAll: computed(() => (isAll.value ? 'скрыть' : 'показать всех')),
       address: computed(() => store.getters['department/getDepartment'].address),
       email: computed(() => store.getters['department/getDepartment'].email),

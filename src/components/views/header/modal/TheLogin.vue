@@ -31,23 +31,23 @@
 <script lang="ts">
 
 import { defineComponent, ref } from 'vue';
-import { useStore } from 'vuex';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
 import useAlerts from '@/hooks/useAlerts';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent({
   name: 'TheLogin',
   components: { AppBaseField },
   emits: ['login'],
   setup(props, { emit }) {
-    const store = useStore();
+    const { login: loginUser } = useTokenAuthentication();
     const { alerts } = useAlerts();
     const email = ref<string>('');
     const password = ref<string>('');
 
     const login = async () => {
       try {
-        await store.dispatch('auth/login', {
+        await loginUser({
           email: email.value,
           password: password.value,
         });

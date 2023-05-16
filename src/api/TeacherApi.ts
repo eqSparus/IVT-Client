@@ -1,6 +1,7 @@
 import authorizedRequests from '@/api/request/AuthorizedRequests';
 import { Teacher } from '@/types/site.types';
 import EndPoints from '@/api/EndPoints';
+import axios from 'axios';
 
 export const requestCreateTeacher = async (body: FormData) => {
   const response = await authorizedRequests.post(EndPoints.TEACHER, body, {
@@ -55,7 +56,7 @@ export const requestDeleteTeacher = async (id: string) => {
 };
 
 export const requestGetTeacher = async (skip?: number, size?: number) => {
-  const response = await authorizedRequests.get(EndPoints.TEACHER, {
+  const response = await axios.get(EndPoints.TEACHER, {
     params: {
       skip,
       size,

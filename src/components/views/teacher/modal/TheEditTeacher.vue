@@ -196,9 +196,6 @@ export default defineComponent({
     const {
       teacher: editableTeacher,
       valid,
-      update,
-      remove,
-      updateImg,
     } = useEditTeacher({
       id: props.teacher.id,
       firstName: props.teacher.firstName,
@@ -218,7 +215,7 @@ export default defineComponent({
         || editableTeacher.value.postAdditional !== props.teacher.postAdditional
       ) {
         try {
-          await update();
+          await store.dispatch('teacher/update', editableTeacher.value);
           alerts.value.push({
             type: 'info',
             message: 'Преподаватель обновлен',
@@ -240,7 +237,7 @@ export default defineComponent({
     const removeTeacher = async () => {
       emit('remove');
       try {
-        await remove(props.teacher.id as string);
+        await store.dispatch('teacher/remove', props.teacher.id);
         alerts.value.push({
           type: 'info',
           message: 'Преподаватель удален',
@@ -257,7 +254,10 @@ export default defineComponent({
       if (cropperFile.value) {
         resizedImg(async (bl: Blob) => {
           try {
-            await updateImg(bl, props.teacher.id as string);
+            await store.dispatch('teacher/updateImage', {
+              id: props.teacher.id,
+              image: bl,
+            });
             cropperFile.value = null;
             alerts.value.push({
               type: 'info',

@@ -1,6 +1,7 @@
 import { Module } from 'vuex';
 import { DepartmentState, RootState } from '@/plugins/store/types';
 import { Department } from '@/types/site.types';
+import requestUpdateDepartment from '@/api/DepartmentApi';
 
 const DepartmentModule: Module<DepartmentState, RootState> = {
   namespaced: true,
@@ -24,6 +25,12 @@ const DepartmentModule: Module<DepartmentState, RootState> = {
   getters: {
     getDepartment(state: DepartmentState) {
       return state.department;
+    },
+  },
+  actions: {
+    async update({ commit }, department: Department) {
+      const data = await requestUpdateDepartment(department);
+      commit('setDepartment', data);
     },
   },
 };

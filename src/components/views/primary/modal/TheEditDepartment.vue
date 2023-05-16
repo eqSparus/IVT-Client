@@ -112,7 +112,6 @@ export default defineComponent({
     const {
       department: departmentValue,
       valid,
-      update,
     } = useEditDepartment(props.department);
 
     const updateDepartment = async () => {
@@ -122,7 +121,7 @@ export default defineComponent({
         || departmentValue.value.phone !== props.department.phone
         || departmentValue.value.address !== props.department.address) {
         try {
-          await update();
+          await store.dispatch('department/update', departmentValue.value);
           alerts.value.push({
             message: 'Данные обновлены',
             type: 'info',

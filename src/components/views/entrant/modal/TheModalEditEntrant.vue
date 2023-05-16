@@ -55,6 +55,7 @@ import AppPlusMinusButton from '@/components/UI/AppAdditionalLongButton.vue';
 import useEditEntrant from '@/hooks/useEditEntrant';
 import useAlerts from '@/hooks/useAlerts';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import store from '@/plugins/store/Store';
 
 export default defineComponent({
   name: 'TheModalAddEntrant',
@@ -86,8 +87,6 @@ export default defineComponent({
       valid,
       setEntrant,
       addItem,
-      add,
-      update,
       clearingBlank,
     } = useEditEntrant();
 
@@ -109,7 +108,7 @@ export default defineComponent({
     const addEntrant = async () => {
       try {
         clearingBlank();
-        await add();
+        await store.dispatch('entrant/add', editEntrant.value);
         close();
       } catch (e) {
         alerts.value.push({
@@ -122,7 +121,7 @@ export default defineComponent({
     const updateEntrant = async () => {
       try {
         clearingBlank();
-        await update();
+        await store.dispatch('entrant/update', editEntrant.value);
         alerts.value.push({
           type: 'info',
           message: 'Обновлено',

@@ -1,6 +1,7 @@
 import { Module } from 'vuex';
 import { RootState, SiteLinksState } from '@/plugins/store/types';
 import { Link } from '@/types/site.types';
+import { requestCreateLink, requestDeleteLink, requestUpdateLink } from '@/api/SiteLinkApi';
 
 const SiteLinksModule: Module<SiteLinksState, RootState> = {
   namespaced: true,
@@ -27,6 +28,20 @@ const SiteLinksModule: Module<SiteLinksState, RootState> = {
   getters: {
     getLinks(state: SiteLinksState) {
       return state.links;
+    },
+  },
+  actions: {
+    async add({ commit }, link: Link) {
+      const data = await requestCreateLink(link);
+      commit('addLink', data);
+    },
+    async update({ commit }, link: Link) {
+      const data = await requestUpdateLink(link);
+      commit('updateLink', data);
+    },
+    async remove({ commit }, id: string) {
+      await requestDeleteLink(id);
+      commit('removeLink', id);
     },
   },
 };

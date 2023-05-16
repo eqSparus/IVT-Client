@@ -2,11 +2,8 @@ import { ref } from 'vue';
 import { Entrant } from '@/types/site.types';
 import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-import { requestCreateEntrant, requestDeleteEntrant, requestUpdateEntrant } from '@/api/EntrantApi';
-import { useStore } from 'vuex';
 
 const useEditEntrant = () => {
-  const store = useStore();
   const entrant = ref<Entrant>({
     title: '',
     items: [],
@@ -38,21 +35,6 @@ const useEditEntrant = () => {
     });
   };
 
-  const add = async () => {
-    const data = await requestCreateEntrant(entrant.value);
-    store.commit('entrant/setEntrant', data);
-  };
-
-  const update = async () => {
-    const data = await requestUpdateEntrant(entrant.value);
-    store.commit('entrant/updateEntrant', data);
-  };
-
-  const remove = async (id: string) => {
-    await requestDeleteEntrant(id);
-    store.commit('entrant/removeEntrant', id);
-  };
-
   const clearingBlank = () => {
     entrant.value.items = entrant.value.items.filter((item) => item.name)
       .map((item) => {
@@ -67,9 +49,6 @@ const useEditEntrant = () => {
     valid,
     setEntrant,
     addItem,
-    add,
-    update,
-    remove,
     clearingBlank,
   };
 };

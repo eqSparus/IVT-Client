@@ -28,6 +28,7 @@ import AppAboutScreenItem from '@/components/views/about/item/AppAboutScreenItem
 import { useStore } from 'vuex';
 import TheModalEditAbout from '@/components/views/about/modal/TheModalEditAbout.vue';
 import useShowModal from '@/hooks/useShowModal';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent({
   icon: 'TheAboutScreen',
@@ -37,6 +38,7 @@ export default defineComponent({
     AppAboutScreenItem,
   },
   setup() {
+    const { isAuth } = useTokenAuthentication();
     const store = useStore();
 
     const {
@@ -47,7 +49,7 @@ export default defineComponent({
     return {
       isShow,
       abouts: computed(() => store.getters['about/getAboutInfo']),
-      isAuth: computed(() => store.getters['auth/isAuth']),
+      isAuth,
       toggleModal,
     };
   },

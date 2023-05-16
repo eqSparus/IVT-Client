@@ -38,14 +38,14 @@
 <script lang="ts">
 
 import { Entrant } from '@/types/site.types';
-import { computed, defineComponent, PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
-import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
 import TheModalEditEntrant from '@/components/views/entrant/modal/TheModalEditEntrant.vue';
-import useEditEntrant from '@/hooks/useEditEntrant';
 import useAlerts from '@/hooks/useAlerts';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   components: { TheModalEditEntrant },
@@ -57,19 +57,18 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { alerts } = useAlerts();
     const store = useStore();
+    const { isAuth } = useTokenAuthentication();
+    const { alerts } = useAlerts();
 
     const {
       isShow,
       toggleModal,
     } = useShowModal();
 
-    const { remove } = useEditEntrant();
-
     const deleteEntrant = async () => {
       try {
-        await remove(props.entrant.id as string);
+        await store.dispatch('entrant/remove', props.entrant.id);
         alerts.value.push({
           type: 'info',
           message: 'Успешное удаление',
@@ -84,7 +83,7 @@ export default defineComponent({
 
     return {
       isShow,
-      isAuth: computed(() => store.getters['auth/isAuth']),
+      isAuth,
       toggleModal,
       deleteEntrant,
       refreshIcon,

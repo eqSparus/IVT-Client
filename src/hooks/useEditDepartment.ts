@@ -2,11 +2,8 @@ import { Department } from '@/types/site.types';
 import { ref } from 'vue';
 import { email, required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-import requestUpdateDepartment from '@/api/DepartmentApi';
-import { useStore } from 'vuex';
 
 const useEditDepartment = (dep: Department) => {
-  const store = useStore();
   const department = ref<Department>({
     title: dep.title,
     slogan: dep.slogan,
@@ -35,15 +32,9 @@ const useEditDepartment = (dep: Department) => {
   };
   const valid = useVuelidate(rules, department.value);
 
-  const update = async () => {
-    const data = await requestUpdateDepartment(department.value);
-    store.commit('department/setDepartment', data);
-  };
-
   return {
     department,
     valid,
-    update,
   };
 };
 

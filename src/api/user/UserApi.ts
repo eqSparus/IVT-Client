@@ -43,7 +43,7 @@ export const requestIsValidTokenPassword = async (token: string) => {
   return response.data;
 };
 
-export const refreshToken = async () => {
+export const requestRefreshToken = async () => {
   const response = await axios.post(UserEndPoints.REFRESH_TOKEN, {}, {
     withCredentials: true,
   });

@@ -25,6 +25,7 @@ import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
 import TheModalEditDirections from '@/components/views/direction/modal/TheModalEditDirections.vue';
 import AppDirectionScreenItem from '@/components/views/direction/item/AppDirectionScreenItem.vue';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 import AppBaseScreen from '../../UI/AppBaseScreen.vue';
 
 export default defineComponent({
@@ -35,6 +36,7 @@ export default defineComponent({
     AppDirectionScreenItem,
   },
   setup() {
+    const { isAuth } = useTokenAuthentication();
     const store = useStore();
     const {
       isShow,
@@ -44,7 +46,7 @@ export default defineComponent({
     return {
       isShow,
       directions: computed(() => store.getters['direction/getDirections']),
-      isAuth: computed(() => store.getters['auth/isAuth']),
+      isAuth,
       toggleModal,
     };
   },

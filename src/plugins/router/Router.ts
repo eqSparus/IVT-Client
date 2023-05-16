@@ -6,12 +6,13 @@ import {
 } from 'vue-router';
 import TheMainPage from '@/pages/TheMainPage.vue';
 import TheRecoverPasswordPage from '@/pages/TheRecoverPasswordPage.vue';
+import { requestIsValidTokenPassword } from '@/api/user/UserApi';
 import store from '@/plugins/store/Store';
-import { refreshToken, requestIsValidTokenPassword } from '@/api/user/UserApi';
 import TheActivateEmailPage from '@/pages/TheActivateEmailPage.vue';
 import { requestGetData } from '@/api/DataApi';
 import { requestGetTeacher } from '@/api/TeacherApi';
 import { MIN_LOAD_TEACHER } from '@/hooks/useEditTeacher';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 const routers = [
   {
@@ -19,13 +20,16 @@ const routers = [
     component: TheMainPage,
     alias: ['/main'],
     async beforeEnter(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
-      if (store.getters['auth/isAuth']
-        || !document.cookie.match(/^(.*;)?\s*refresh\s*=\s*[^;]+(.*)?$/)) {
+      const {
+        isAuth,
+        refreshToken,
+        logout,
+      } = useTokenAuthentication();
+      if (isAuth.value) {
         try {
-          const data = await refreshToken();
-          store.commit('auth/setAccessToken', data.accessToken);
+          await refreshToken();
         } catch (e) {
-          store.commit('auth/removeAccessToken');
+          logout();
         }
       }
 

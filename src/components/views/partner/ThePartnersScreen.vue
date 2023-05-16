@@ -26,6 +26,7 @@ import TheModalAddPartner from '@/components/views/partner/modal/TheModalAddPart
 import useShowModal from '@/hooks/useShowModal';
 import { useStore } from 'vuex';
 import AppPartnerItem from '@/components/views/partner/item/AppPartnerItem.vue';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent({
   name: 'ThePartnersScreen',
@@ -35,6 +36,7 @@ export default defineComponent({
     AppBaseScreen,
   },
   setup() {
+    const { isAuth } = useTokenAuthentication();
     const store = useStore();
     const {
       isShow,
@@ -44,7 +46,7 @@ export default defineComponent({
     return {
       isShow,
       toggleModal,
-      isAuth: computed(() => store.getters['auth/isAuth']),
+      isAuth,
       partners: computed(() => store.getters['partner/getPartners']),
     };
   },

@@ -61,6 +61,7 @@ import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
 import TheModalEditDepartment from '@/components/views/primary/modal/TheModalEditDepartment.vue';
 import TheModalSettingAccount from '@/components/views/primary/modal/TheModalSettingAccount.vue';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent(
   {
@@ -77,6 +78,7 @@ export default defineComponent(
       },
     },
     setup() {
+      const { isAuth } = useTokenAuthentication();
       const store = useStore();
       const { scrollTo } = useScroll();
 
@@ -96,7 +98,7 @@ export default defineComponent(
         scrollTo,
         changeShowModalDepartment,
         changeShowModalAccount,
-        isAuth: computed(() => store.getters['auth/isAuth']),
+        isAuth,
         department: computed(() => store.getters['department/getDepartment']),
         links: computed(() => store.getters['siteLinks/getLinks']),
       };

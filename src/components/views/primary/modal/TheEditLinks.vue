@@ -44,6 +44,7 @@ import { Link } from '@/types/site.types';
 import AppSelectImg from '@/components/UI/AppSelectImg.vue';
 import useEditSiteLinks from '@/hooks/useEditSiteLinks';
 import useAlerts from '@/hooks/useAlerts';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'TheSettingLinks',
@@ -58,6 +59,7 @@ export default defineComponent({
     },
   },
   setup() {
+    const store = useStore();
     const { alerts } = useAlerts();
 
     // TODO Сменить адрес
@@ -91,14 +93,11 @@ export default defineComponent({
     const {
       newLink,
       valid,
-      remove,
-      update,
-      add,
     } = useEditSiteLinks();
 
     const addLink = async () => {
       try {
-        await add();
+        await store.dispatch('siteLinks/add', newLink.value);
         alerts.value.push({
           type: 'info',
           message: 'Ссылка добавлена',
@@ -115,9 +114,9 @@ export default defineComponent({
       }
     };
 
-    const removeLink = (id: string) => {
+    const removeLink = async (id: string) => {
       try {
-        remove(id);
+        await store.dispatch('siteLinks/remove', id);
         alerts.value.push({
           type: 'info',
           message: 'Ссылка удалена',
@@ -132,7 +131,7 @@ export default defineComponent({
 
     const updateLink = async (link: Link) => {
       try {
-        await update(link);
+        await store.dispatch('siteLinks/update', link);
         alerts.value.push({
           type: 'info',
           message: 'Ссылка обновлена',

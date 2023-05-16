@@ -72,12 +72,12 @@ import {
 } from 'vue';
 import useScroll from '@/hooks/useScroll';
 import useShowModal from '@/hooks/useShowModal';
-import { useStore } from 'vuex';
 import TheModalAuthorization from '@/components/views/header/modal/TheModalAuthorization.vue';
 import { requestExit } from '@/api/user/AuthUserApi';
 import { Anchor } from '@/types/util.types';
 import TheModalSettingSite from '@/components/views/header/modal/TheModalSettingSite.vue';
 import eyeIcon from '@/assets/images/icons/eye.svg';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent({
   components: {
@@ -92,7 +92,10 @@ export default defineComponent({
     },
   },
   setup() {
-    const store = useStore();
+    const {
+      isAuth,
+      logout,
+    } = useTokenAuthentication();
     const isShowMenu = ref<boolean>(false);
     const { scrollTo } = useScroll();
 
@@ -107,13 +110,9 @@ export default defineComponent({
     } = useShowModal();
 
     const eventLoginOrLogout = async () => {
-      if (store.getters['auth/isAuth']) {
-        try {
-          await requestExit();
-          store.commit('auth/removeAccessToken');
-        } catch (e) {
-          store.commit('auth/removeAccessToken');
-        }
+      if (isAuth.value) {
+        await requestExit();
+        logout();
       } else {
         toggleModal();
       }
@@ -127,7 +126,7 @@ export default defineComponent({
       toggleModal,
       scrollTo,
       eventLoginOrLogout,
-      textBtn: computed(() => (store.getters['auth/isAuth'] ? 'выйти' : 'войти')),
+      textBtn: computed(() => (isAuth.value ? 'выйти' : 'войти')),
       eyeIcon,
     };
   },

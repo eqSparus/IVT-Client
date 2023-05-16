@@ -6,8 +6,8 @@
 
     <div class="modal-about-edit-container">
       <app-edit-about-item v-for="about in abouts" :key="about.id"
-                            :about="about"
-                            @update="updateAbout"/>
+                           :about="about"
+                           @update="updateAbout"/>
     </div>
   </app-modal-window>
 </template>
@@ -17,7 +17,6 @@
 import { defineComponent, PropType } from 'vue';
 import AppModalWindow from '@/components/UI/AppBaseModal.vue';
 import { AboutDepartment } from '@/types/site.types';
-import requestUpdateAboutDepartment from '@/api/AboutDepartmentApi';
 import { useStore } from 'vuex';
 import AppEditAboutItem from '@/components/views/about/modal/AppEditAboutItem.vue';
 import useAlerts from '@/hooks/useAlerts';
@@ -44,8 +43,7 @@ export default defineComponent({
 
     const updateAbout = async (about: AboutDepartment) => {
       try {
-        const data = await requestUpdateAboutDepartment(about);
-        store.commit('about/updateAbout', data);
+        await store.dispatch('about/update', about);
         alerts.value.push({
           type: 'info',
           message: 'Данные успешно обновлены',

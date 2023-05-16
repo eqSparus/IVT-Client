@@ -76,8 +76,8 @@
       </button>
     </div>
 
-    <div class="setting-item mt-20">
-      <button class="btn-standard-icon arrow-button"
+    <div class="setting-item mt-10">
+      <button class="btn-standard-icon"
               :disabled="direction.position === disableDown"
               @click="$emit('down', direction.id, direction.position)">
         <img :src="arrowCircleArrow"
@@ -85,7 +85,7 @@
              alt="assets/images/icon/arrow-circle.svg">
       </button>
 
-      <button class="btn-standard-icon arrow-button"
+      <button class="btn-standard-icon"
               :disabled="direction.position === disableUp"
               @click="$emit('up', direction.id, direction.position)">
         <img :src="arrowCircleArrow"
@@ -181,7 +181,7 @@ export default defineComponent({
     justify-content: space-between;
     gap: 5%;
 
-    .arrow-button {
+    button {
       flex: 1;
       height: 4rem;
     }

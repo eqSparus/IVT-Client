@@ -1,16 +1,20 @@
 import axios from 'axios';
-import store from '@/plugins/store/Store';
-import { refreshToken } from '@/api/user/UserApi';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 const BASE_URL = 'http://localhost:8080/api/v1';
 
 axios.defaults.baseURL = BASE_URL;
 
 const AuthorizedRequest = axios.create();
+const {
+  accessToken,
+  refreshToken,
+  logout,
+} = useTokenAuthentication();
 
 AuthorizedRequest.interceptors.request.use((config) => {
   const configuration = config;
-  configuration.headers.Authorization = `Bearer_${store.getters['auth/getAccessToken']}`;
+  configuration.headers.Authorization = `Bearer_${accessToken.value}`;
   return configuration;
 });
 
@@ -25,13 +29,12 @@ AuthorizedRequest.interceptors.response.use((response) => response, async (error
   }
 
   try {
-    const data = await refreshToken();
-    store.commit('auth/setAccessToken', data.accessToken);
-    config.headers.Authorization = data.accessToken;
+    await refreshToken();
+    config.headers.Authorization = accessToken.value;
     return AuthorizedRequest(config)
-      .catch(() => store.commit('auth/removeAccessToken'));
+      .catch(() => logout());
   } catch (e) {
-    store.commit('auth/removeAccessToken');
+    logout();
     return Promise.reject(error);
   }
 });

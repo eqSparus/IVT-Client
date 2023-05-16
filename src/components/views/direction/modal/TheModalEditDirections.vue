@@ -41,8 +41,9 @@ import { Direction } from '@/types/site.types';
 import AppDirectionsItem from '@/components/views/direction/modal/AppDirectionItem.vue';
 import AppPlusMinusButton, { CharButton } from '@/components/UI/AppAdditionalLongButton.vue';
 import TheAddBlock from '@/components/views/direction/modal/TheAddBlock.vue';
-import useEditDirection, { EditDirection } from '@/hooks/useEditDirection';
+import { EditDirection } from '@/hooks/useEditDirection';
 import useAlerts from '@/hooks/useAlerts';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   icon: 'TheModalEditDirections',
@@ -64,16 +65,9 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const store = useStore();
     const { alerts } = useAlerts();
     const charButton = ref<CharButton>('+');
-
-    const {
-      remove,
-      update,
-      add,
-      directionUp,
-      directionDown,
-    } = useEditDirection();
 
     const showAddDirection = () => {
       if (charButton.value === '+') {
@@ -90,7 +84,7 @@ export default defineComponent({
 
     const addDirection = async (direction: EditDirection) => {
       try {
-        await add(direction);
+        await store.dispatch('direction/add', direction);
         alerts.value.push({
           type: 'info',
           message: 'Направление добавлено',
@@ -105,7 +99,7 @@ export default defineComponent({
 
     const updateDirection = async (direction: EditDirection) => {
       try {
-        await update(direction);
+        await store.dispatch('direction/update', direction);
         alerts.value.push({
           type: 'info',
           message: 'Направление обновлено',
@@ -120,7 +114,7 @@ export default defineComponent({
 
     const removeDirection = async (id: string) => {
       try {
-        await remove(id);
+        await store.dispatch('direction/remove', id);
         alerts.value.push({
           type: 'info',
           message: 'Направление удалено',
@@ -131,6 +125,20 @@ export default defineComponent({
           message: 'Не удалось удалить направления',
         });
       }
+    };
+
+    const directionUp = async (id: string, position: number) => {
+      await store.dispatch('direction/directionUp', {
+        id,
+        position,
+      });
+    };
+
+    const directionDown = async (id: string, position: number) => {
+      await store.dispatch('direction/directionDown', {
+        id,
+        position,
+      });
     };
 
     return {

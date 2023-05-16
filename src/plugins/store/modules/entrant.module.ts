@@ -1,6 +1,7 @@
 import { Module } from 'vuex';
 import { EntrantState, RootState } from '@/plugins/store/types';
 import { Entrant } from '@/types/site.types';
+import { requestCreateEntrant, requestDeleteEntrant, requestUpdateEntrant } from '@/api/EntrantApi';
 
 const DirectionModule: Module<EntrantState, RootState> = {
   namespaced: true,
@@ -28,6 +29,20 @@ const DirectionModule: Module<EntrantState, RootState> = {
   getters: {
     getEntrants(state: EntrantState) {
       return state.entrants;
+    },
+  },
+  actions: {
+    async add({ commit }, entrant: Entrant) {
+      const data = await requestCreateEntrant(entrant);
+      commit('setEntrant', data);
+    },
+    async update({ commit }, entrant: Entrant) {
+      const data = await requestUpdateEntrant(entrant);
+      commit('updateEntrant', data);
+    },
+    async remove({ commit }, id: string) {
+      await requestDeleteEntrant(id);
+      commit('removeEntrant', id);
     },
   },
 };

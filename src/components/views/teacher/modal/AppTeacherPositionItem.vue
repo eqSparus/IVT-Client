@@ -28,8 +28,8 @@
 
 import { defineComponent, PropType, ref } from 'vue';
 import { Teacher } from '@/types/site.types';
-import useEditTeacher from '@/hooks/useEditTeacher';
 import useAlerts from '@/hooks/useAlerts';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'AppTeacherPositionItem',
@@ -40,15 +40,17 @@ export default defineComponent({
     },
   },
   setup(props) {
+    const store = useStore();
     const { alerts } = useAlerts();
     const position = ref<number>(props.teacher.position);
 
-    const { updatePosition } = useEditTeacher();
-
-    const changePosition = () => {
+    const changePosition = async () => {
       if (position.value !== props.teacher.position) {
         if (Number.isInteger(position.value)) {
-          updatePosition(position.value, props.teacher.id as string);
+          await store.dispatch('teacher/updatePosition', {
+            id: props.teacher.id,
+            position: position.value,
+          });
         } else {
           position.value = props.teacher.position;
           alerts.value.push({

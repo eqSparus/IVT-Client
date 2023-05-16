@@ -12,10 +12,6 @@ export interface RootState {
   isLoadAllTeacher: boolean;
 }
 
-export interface AuthState {
-  accessToken: null | string,
-}
-
 export interface DepartmentState {
   department: Department;
 }

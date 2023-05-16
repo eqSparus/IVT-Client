@@ -1,6 +1,15 @@
 import { Module } from 'vuex';
 import { RootState, TeacherState } from '@/plugins/store/types';
 import { Teacher } from '@/types/site.types';
+import { EditTeacher, MIN_LOAD_TEACHER } from '@/hooks/useEditTeacher';
+import {
+  requestCreateTeacher,
+  requestDeleteTeacher,
+  requestGetTeacher,
+  requestUpdateTeacher,
+  requestUpdateTeacherImg,
+  requestUpdateTeacherPosition,
+} from '@/api/TeacherApi';
 
 const TeacherModule: Module<TeacherState, RootState> = {
   namespaced: true,
@@ -45,6 +54,60 @@ const TeacherModule: Module<TeacherState, RootState> = {
     },
     getMinPosition(state: TeacherState) {
       return state.teachers.reduce((pr, cu) => (pr.position < cu.position ? pr : cu)).position;
+    },
+  },
+  actions: {
+    async add({ commit }, teacher: {
+      dataTeacher: EditTeacher,
+      image: Blob,
+    }) {
+      const formData = new FormData();
+      formData.append('img', teacher.image, 'img.jpg');
+      formData.append('data', new Blob([JSON.stringify(teacher.dataTeacher)], {
+        type: 'application/json',
+      }));
+      const data = await requestCreateTeacher(formData);
+      commit('setTeacher', data);
+    },
+    async update({ commit }, teacher: EditTeacher) {
+      const data = await requestUpdateTeacher(teacher);
+      commit('updateTeacher', data);
+    },
+    async remove({ commit }, id: string) {
+      await requestDeleteTeacher(id);
+      commit('removeTeacher', id);
+    },
+    async updateImage({ commit }, args: {
+      id: string,
+      image: Blob,
+    }) {
+      const formData = new FormData();
+      formData.append('img', args.image, 'img.jpg');
+      const data = await requestUpdateTeacherImg(formData, args.id);
+      commit('updateImgTeacher', {
+        path: data.url,
+        id: args.id,
+      });
+    },
+    async updatePosition({ commit }, args: {
+      id: string,
+      position: number,
+    }) {
+      const data = await requestUpdateTeacherPosition(args.position, args.id);
+      commit('updatePositionTeacher', {
+        position: data.position,
+        id: args.id,
+      });
+    },
+    async loadAllTeacher({
+      commit,
+      rootState,
+    }) {
+      if (rootState.isLoadAllTeacher) {
+        const teachers = await requestGetTeacher(MIN_LOAD_TEACHER);
+        commit('setTeachers', teachers);
+        commit('toggleLoadTeacher', {}, { root: true });
+      }
     },
   },
 };

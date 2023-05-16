@@ -138,6 +138,7 @@ import useEditTeacher from '@/hooks/useEditTeacher';
 import useAlerts from '@/hooks/useAlerts';
 import AppTooltip from '@/components/UI/AppTooltip.vue';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'TheAddTeacher',
@@ -147,6 +148,7 @@ export default defineComponent({
     Cropper,
   },
   setup() {
+    const store = useStore();
     const { alerts } = useAlerts();
 
     const {
@@ -160,14 +162,16 @@ export default defineComponent({
     const {
       teacher: newTeacher,
       valid,
-      add,
     } = useEditTeacher();
 
     const addTeacher = () => {
       if (cropperFile.value) {
         resizedImg(async (bl: Blob) => {
           try {
-            await add(newTeacher.value, bl);
+            await store.dispatch('teacher/add', {
+              dataTeacher: newTeacher.value,
+              image: bl,
+            });
             newTeacher.value.firstName = '';
             newTeacher.value.lastName = '';
             newTeacher.value.middleName = '';

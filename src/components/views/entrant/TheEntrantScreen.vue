@@ -25,6 +25,7 @@ import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
 import TheModalChangeEntrant from '@/components/views/entrant/modal/TheModalEditEntrant.vue';
 import AppBaseScreen from '../../UI/AppBaseScreen.vue';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent({
   icon: 'TheEntrantScreen',
@@ -34,6 +35,7 @@ export default defineComponent({
     AppEntrantScreenItem,
   },
   setup() {
+    const { isAuth } = useTokenAuthentication();
     const store = useStore();
     const {
       isShow,
@@ -43,7 +45,7 @@ export default defineComponent({
     return {
       isShow,
       entrants: computed(() => store.getters['entrant/getEntrants']),
-      isAuth: computed(() => store.getters['auth/isAuth']),
+      isAuth,
       toggleModal,
     };
   },

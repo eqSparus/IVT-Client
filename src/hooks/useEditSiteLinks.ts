@@ -2,11 +2,8 @@ import { ref } from 'vue';
 import { Link } from '@/types/site.types';
 import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-import { requestCreateLink, requestDeleteLink, requestUpdateLink } from '@/api/SiteLinkApi';
-import { useStore } from 'vuex';
 
 const useEditSiteLinks = () => {
-  const store = useStore();
   // TODO Сменить адрес
   const newLink = ref<Link>({
     href: '',
@@ -22,27 +19,9 @@ const useEditSiteLinks = () => {
 
   const valid = useVuelidate(rules, newLink.value);
 
-  const remove = async (id: string) => {
-    await requestDeleteLink(id);
-    store.commit('siteLinks/removeLink', id);
-  };
-
-  const update = async (link: Link) => {
-    const data = await requestUpdateLink(link);
-    store.commit('siteLinks/updateLink', data);
-  };
-
-  const add = async () => {
-    const data = await requestCreateLink(newLink.value);
-    store.commit('siteLinks/addLink', data);
-  };
-
   return {
     newLink,
     valid,
-    remove,
-    update,
-    add,
   };
 };
 

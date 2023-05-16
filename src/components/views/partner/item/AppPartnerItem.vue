@@ -21,12 +21,12 @@
 
 <script lang="ts">
 
-import { computed, defineComponent, PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { Partner } from '@/types/site.types';
-import { useStore } from 'vuex';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
 import TheModalEditPartner from '@/components/views/partner/modal/TheModalEditPartner.vue';
 import useShowModal from '@/hooks/useShowModal';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent({
   name: 'AppPartnerItem',
@@ -38,7 +38,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const store = useStore();
+    const { isAuth } = useTokenAuthentication();
 
     const {
       isShow,
@@ -47,7 +47,7 @@ export default defineComponent({
 
     return {
       isShow,
-      isAuth: computed(() => store.getters['auth/isAuth']),
+      isAuth,
       toggleModal,
       refreshIcon,
     };
@@ -67,7 +67,8 @@ export default defineComponent({
     .link-logo {
       width: 30rem;
     }
-    &:focus{
+
+    &:focus {
       outline: none;
       border-bottom: 0.2rem solid prop.$primary-color;
     }
