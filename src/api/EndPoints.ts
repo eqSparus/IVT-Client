@@ -7,4 +7,5 @@ export default {
   SITE_LINK: '/link',
   TEACHER: '/teacher',
   PARTNER: '/partner',
+  REVIEW: '/review',
 } as const;

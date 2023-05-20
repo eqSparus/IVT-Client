@@ -25,7 +25,10 @@ const routers = [
         refreshToken,
         logout,
       } = useTokenAuthentication();
-      if (isAuth.value) {
+      console.log(document.cookie.indexOf('refresh') === 0);
+      console.log(document.cookie.indexOf('refresh'));
+      console.log(document.cookie);
+      if (isAuth.value || document.cookie.indexOf('refresh') === 0) {
         try {
           await refreshToken();
         } catch (e) {
@@ -40,6 +43,7 @@ const routers = [
       store.commit('direction/setDirections', dataSite.directions);
       store.commit('entrant/setEntrants', dataSite.entrants);
       store.commit('partner/setPartners', dataSite.partners);
+      store.commit('review/setReviews', dataSite.reviews);
 
       const teachers = await requestGetTeacher(0, MIN_LOAD_TEACHER);
       store.commit('teacher/setTeachers', teachers);

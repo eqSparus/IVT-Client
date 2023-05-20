@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { DirectionState, RootState } from '@/plugins/store/types';
+import { DirectionState, RootState } from '@/plugins/store/store.types';
 import { Direction } from '@/types/site.types';
 import {
   requestCreateDirection,
@@ -20,8 +20,8 @@ const DirectionModule: Module<DirectionState, RootState> = {
     setDirections(state: DirectionState, directions: Direction[]) {
       state.directions.push(...directions);
     },
-    addDirection(state: DirectionState, directions: Direction) {
-      state.directions.push(directions);
+    addDirection(state: DirectionState, direction: Direction) {
+      state.directions.push(direction);
     },
     removeDirection(state: DirectionState, id: string) {
       state.directions = state.directions.filter((d) => d.id !== id);

@@ -6,7 +6,8 @@ import direction from '@/plugins/store/modules/direction.module';
 import entrant from '@/plugins/store/modules/entrant.module';
 import teacher from '@/plugins/store/modules/teacher.module';
 import partner from '@/plugins/store/modules/partner.module';
-import { RootState } from '@/plugins/store/types';
+import review from '@/plugins/store/modules/review.module';
+import { RootState } from '@/plugins/store/store.types';
 
 const store = createStore({
   state: {
@@ -20,6 +21,7 @@ const store = createStore({
     entrant,
     teacher,
     partner,
+    review,
   },
   mutations: {
     toggleLoadTeacher(state: RootState) {

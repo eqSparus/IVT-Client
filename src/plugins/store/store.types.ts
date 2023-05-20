@@ -5,7 +5,7 @@ import {
   Link,
   Teacher,
   Department,
-  Partner,
+  Partner, Review,
 } from '@/types/site.types';
 
 export interface RootState {
@@ -38,4 +38,8 @@ export interface TeacherState {
 
 export interface PartnerState {
   partners: Array<Partner>;
+}
+
+export interface ReviewState {
+  reviews: Array<Review>;
 }

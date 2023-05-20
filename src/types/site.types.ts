@@ -61,3 +61,11 @@ export type Partner = {
   href: string,
   urlImg: string,
 }
+
+export type Review = {
+  id?: string,
+  name: string,
+  jobTitle: string,
+  comment: string,
+  urlImg: string,
+}

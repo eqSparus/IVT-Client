@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { PartnerState, RootState } from '@/plugins/store/types';
+import { PartnerState, RootState } from '@/plugins/store/store.types';
 import { Partner } from '@/types/site.types';
 import {
   requestCreatePartner,
@@ -20,7 +20,7 @@ const PartnerModule: Module<PartnerState, RootState> = {
     setPartners(state: PartnerState, partners: Partner[]) {
       state.partners.push(...partners);
     },
-    setPartner(state: PartnerState, partner: Partner) {
+    addPartner(state: PartnerState, partner: Partner) {
       state.partners.push(partner);
     },
     updatePartner(state: PartnerState, partner: Partner) {
@@ -55,15 +55,15 @@ const PartnerModule: Module<PartnerState, RootState> = {
         type: 'application/json',
       }));
       const data = await requestCreatePartner(formData);
-      commit('partner/setPartner', data);
+      commit('addPartner', data);
     },
     async update({ commit }, partner: EditPartner) {
       const data = await requestUpdatePartner(partner);
-      commit('partner/updatePartner', data);
+      commit('updatePartner', data);
     },
     async remove({ commit }, id: string) {
       await requestDeletePartner(id);
-      commit('partner/removePartner', id);
+      commit('removePartner', id);
     },
     async updateImg({ commit }, partner: {
       id: string,
@@ -72,7 +72,7 @@ const PartnerModule: Module<PartnerState, RootState> = {
       const formData = new FormData();
       formData.append('img', partner.image, 'partner.png');
       const data = await requestUpdatePartnerImg(formData, partner.id);
-      commit('partner/updateImgPartner', {
+      commit('updateImgPartner', {
         path: data.url,
         id: partner.id,
       });

@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { AboutState, RootState } from '@/plugins/store/types';
+import { AboutState, RootState } from '@/plugins/store/store.types';
 import { AboutDepartment } from '@/types/site.types';
 import requestUpdateAboutDepartment from '@/api/AboutDepartmentApi';
 

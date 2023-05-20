@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { RootState, TeacherState } from '@/plugins/store/types';
+import { RootState, TeacherState } from '@/plugins/store/store.types';
 import { Teacher } from '@/types/site.types';
 import { EditTeacher, MIN_LOAD_TEACHER } from '@/hooks/useEditTeacher';
 import {
@@ -22,7 +22,7 @@ const TeacherModule: Module<TeacherState, RootState> = {
     setTeachers(state: TeacherState, teachers: Teacher[]) {
       state.teachers.push(...teachers);
     },
-    setTeacher(state: TeacherState, teacher: Teacher) {
+    addTeacher(state: TeacherState, teacher: Teacher) {
       state.teachers.push(teacher);
     },
     updateTeacher(state: TeacherState, teacher: Teacher) {

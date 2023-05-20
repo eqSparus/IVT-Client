@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { RootState, SiteLinksState } from '@/plugins/store/types';
+import { RootState, SiteLinksState } from '@/plugins/store/store.types';
 import { Link } from '@/types/site.types';
 import { requestCreateLink, requestDeleteLink, requestUpdateLink } from '@/api/SiteLinkApi';
 

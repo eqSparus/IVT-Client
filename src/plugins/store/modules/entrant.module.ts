@@ -1,5 +1,5 @@
 import { Module } from 'vuex';
-import { EntrantState, RootState } from '@/plugins/store/types';
+import { EntrantState, RootState } from '@/plugins/store/store.types';
 import { Entrant } from '@/types/site.types';
 import { requestCreateEntrant, requestDeleteEntrant, requestUpdateEntrant } from '@/api/EntrantApi';
 
@@ -14,7 +14,7 @@ const DirectionModule: Module<EntrantState, RootState> = {
     setEntrants(state: EntrantState, entrants: Entrant[]) {
       state.entrants.push(...entrants);
     },
-    setEntrant(state: EntrantState, entrant: Entrant) {
+    addEntrant(state: EntrantState, entrant: Entrant) {
       state.entrants.push(entrant);
     },
     removeEntrant(state: EntrantState, id: string) {
@@ -34,7 +34,7 @@ const DirectionModule: Module<EntrantState, RootState> = {
   actions: {
     async add({ commit }, entrant: Entrant) {
       const data = await requestCreateEntrant(entrant);
-      commit('setEntrant', data);
+      commit('addEntrant', data);
     },
     async update({ commit }, entrant: Entrant) {
       const data = await requestUpdateEntrant(entrant);
