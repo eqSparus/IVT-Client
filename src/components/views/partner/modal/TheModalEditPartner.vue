@@ -70,6 +70,7 @@ import useAlerts from '@/hooks/useAlerts';
 import useEditPartner from '@/hooks/useEditPartner';
 import useImg from '@/hooks/useImg';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'TheModalEditPartner',
@@ -90,6 +91,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
+    const store = useStore();
     const { alerts } = useAlerts();
 
     const {
@@ -103,9 +105,6 @@ export default defineComponent({
     const {
       partner: editPartner,
       valid,
-      remove,
-      update,
-      updateImg,
     } = useEditPartner({
       id: props.partner.id,
       href: props.partner.href,
@@ -118,7 +117,7 @@ export default defineComponent({
     const deletePartner = async () => {
       close();
       try {
-        await remove(props.partner.id as string);
+        await store.dispatch('partner/remove', props.partner.id);
         alerts.value.push({
           type: 'info',
           message: 'Партнер удален',
@@ -134,7 +133,7 @@ export default defineComponent({
     const updatePartner = async () => {
       if (props.partner.href !== editPartner.value.href) {
         try {
-          await update();
+          await store.dispatch('partner/update', editPartner.value);
           alerts.value.push({
             type: 'info',
             message: 'Партнер обновлен',
@@ -157,7 +156,10 @@ export default defineComponent({
       if (cropperFile.value) {
         resizedImg(async (bl: Blob) => {
           try {
-            await updateImg(bl, props.partner.id as string);
+            await store.dispatch('partner/updateImg', {
+              id: props.partner.id,
+              image: bl,
+            });
             cropperFile.value = null;
             alerts.value.push({
               type: 'info',

@@ -54,6 +54,7 @@ import useImg from '@/hooks/useImg';
 import useEditPartner from '@/hooks/useEditPartner';
 import { Cropper } from 'vue-advanced-cropper';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'TheModalAddPartner',
@@ -70,6 +71,7 @@ export default defineComponent({
     },
   },
   setup() {
+    const store = useStore();
     const { alerts } = useAlerts();
 
     const {
@@ -83,14 +85,16 @@ export default defineComponent({
     const {
       partner,
       valid,
-      add,
     } = useEditPartner();
 
     const addPartner = async () => {
       if (cropperFile.value) {
-        resizedImg((blob: Blob) => {
+        resizedImg(async (blob: Blob) => {
           try {
-            add(partner.value, blob);
+            await store.dispatch('partner/add', {
+              dataPartner: partner.value,
+              image: blob,
+            });
             partner.value.href = '';
             cropperFile.value = null;
             valid.value.$reset();
