@@ -80,15 +80,14 @@
       <button class="btn-standard-icon"
               :disabled="direction.position === disableDown"
               @click="$emit('down', direction.id, direction.position)">
-        <img :src="arrowCircleArrow"
-             style="transform: rotate(180deg)"
+        <img :src="arrowLeft"
              alt="assets/images/icon/arrow-circle.svg">
       </button>
 
       <button class="btn-standard-icon"
               :disabled="direction.position === disableUp"
               @click="$emit('up', direction.id, direction.position)">
-        <img :src="arrowCircleArrow"
+        <img :src="arrowRight"
              alt="assets/images/icon/arrow-circle.svg">
       </button>
     </div>
@@ -103,7 +102,8 @@ import {
 import { Direction } from '@/types/site.types';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
-import arrowCircleArrow from '@/assets/images/icons/arrow-circle.svg';
+import arrowLeft from '@/assets/images/icons/pointer-left.svg';
+import arrowRight from '@/assets/images/icons/pointer-right.svg';
 import useEditDirection from '@/hooks/useEditDirection';
 import useAlerts from '@/hooks/useAlerts';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
@@ -159,7 +159,8 @@ export default defineComponent({
       update,
       trashcanIcon,
       refreshIcon,
-      arrowCircleArrow,
+      arrowLeft,
+      arrowRight,
     };
   },
 });

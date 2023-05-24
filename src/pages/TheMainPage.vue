@@ -12,7 +12,9 @@
 
     <the-teachers-screen id="teachers"/>
 
-    <the-partners-screen/>
+    <the-partners-screen id="partners"/>
+
+    <the-review-screen id="reviews"/>
 
     <the-footer-screen id="contact"/>
   </main>
@@ -29,10 +31,12 @@ import TheFooterScreen from '@/components/views/footer/TheFooterScreen.vue';
 import TheTeachersScreen from '@/components/views/teacher/TheTeachersScreen.vue';
 import ThePartnersScreen from '@/components/views/partner/ThePartnersScreen.vue';
 import TheHeaderMenu from '@/components/views/header/TheHeaderMenu.vue';
+import TheReviewScreen from '@/components/views/review/TheReviewScreen.vue';
 
 export default defineComponent({
   icon: 'TheMainPage',
   components: {
+    TheReviewScreen,
     TheHeaderMenu,
     ThePartnersScreen,
     ThePrimaryScreen,
@@ -59,6 +63,14 @@ export default defineComponent({
       {
         title: 'Состав кафедры',
         select: '#teachers',
+      },
+      {
+        title: 'Партнеры',
+        select: '#partners',
+      },
+      {
+        title: 'Отзывы',
+        select: '#reviews',
       },
       {
         title: 'Контакты',

@@ -37,11 +37,11 @@ export default defineComponent({
 .link-icon {
 
   &:hover {
-    filter: props.$icon-svg-hover-color-primary;
+    filter: props.$icon-svg-hover-color-info;
   }
 
   &:focus {
-    filter: props.$icon-svg-hover-color-primary;
+    filter: props.$icon-svg-hover-color-info;
     outline: none;
   }
 

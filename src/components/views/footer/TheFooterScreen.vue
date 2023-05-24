@@ -64,7 +64,6 @@ export default defineComponent({
 
 .footer-container {
   background: prop.$main-first-color;
-  padding-top: 5rem;
   overflow: hidden;
   display: flex;
   flex-flow: column;

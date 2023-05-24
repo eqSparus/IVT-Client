@@ -20,8 +20,10 @@ $property-buttons: (
 );
 
 $font-size-text: (
+        14,
         18,
         20,
+        22,
         24,
         26,
         32,
@@ -131,8 +133,8 @@ $colors in $color-buttons {
     padding: 0.5rem;
 
     img {
-      width: 100%;
-      height: 100%;
+      width: 2.4rem;
+      height: 2.4rem;
     }
 
     &:not(:disabled):hover {

@@ -13,7 +13,6 @@
             v-if="isAuth"
             @click="toggleModal">
       <img :src="refreshIcon"
-           class="icon-trashcan"
            alt="assets/images/icon/refresh.svg">
     </button>
   </div>

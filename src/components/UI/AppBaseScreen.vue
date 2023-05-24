@@ -8,9 +8,7 @@
         </h1>
       </div>
 
-      <div class="base-screen-content">
-        <slot></slot>
-      </div>
+      <slot></slot>
 
     </div>
   </section>
@@ -65,13 +63,10 @@ export default defineComponent({
     .base-screen-title {
       font-weight: 700;
       font-style: normal;
+      margin-bottom: 8rem;
       @include utils.phone-style {
         text-align: center;
       }
-    }
-
-    .base-screen-content {
-      margin-top: 8rem;
     }
   }
 }

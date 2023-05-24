@@ -48,13 +48,17 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    isFocus: {
+      type: Boolean,
+      require: true,
+    },
   },
   emits: ['close'],
   setup(props, { emit }) {
     onUpdated(() => {
       if (props.isShow) {
         const elementContainer = document.querySelector('.modal-content');
-        if (elementContainer) {
+        if (elementContainer && props.isFocus) {
           const elementFocus = elementContainer.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
           (elementFocus as HTMLInputElement).focus();
         }

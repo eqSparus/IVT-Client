@@ -34,4 +34,4 @@ const useEditReview = (customReview: EditReview = defaultReview) => {
   };
 };
 
-export default useEditReview();
+export default useEditReview;

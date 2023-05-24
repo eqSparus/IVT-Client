@@ -25,10 +25,7 @@ const routers = [
         refreshToken,
         logout,
       } = useTokenAuthentication();
-      console.log(document.cookie.indexOf('refresh') === 0);
-      console.log(document.cookie.indexOf('refresh'));
-      console.log(document.cookie);
-      if (isAuth.value || document.cookie.indexOf('refresh') === 0) {
+      if (isAuth.value) {
         try {
           await refreshToken();
         } catch (e) {

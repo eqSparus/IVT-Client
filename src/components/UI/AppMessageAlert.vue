@@ -88,7 +88,7 @@ export default defineComponent({
     border-left-color: prop.$primary-color;
 
     .img-alert {
-      filter: prop.$icon-svg-hover-color-primary;
+      filter: prop.$icon-svg-hover-color-info;
     }
   }
 

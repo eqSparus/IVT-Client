@@ -10,7 +10,7 @@
       <button class="btn-standard-icon icon ml-10"
               @click="isOpen = !isOpen">
           <img :src="arrowIcon"
-               :class="{'arrow-transform': isOpen}"
+               :class="{'arrow-transform': !isOpen}"
                alt="assets/images/icon/arrowIcon.svg">
       </button>
       <button class="btn-warning-icon icon ml-10"

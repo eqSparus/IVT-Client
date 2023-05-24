@@ -11,15 +11,8 @@
                    ref="cropperRef"
                    class="cropper"
                    :stencil-props="{
-                    handlers:{},
-                    movable: false,
-                    }"
-                   :stencil-size="{
-                    width: 368,
-                    height: 368
-                    }"
-                   adjustStencil: true
-                   image-restriction="stencil"/>
+                      aspectRatio: 1/1
+                   }"/>
         </div>
         <label class="btn-standard mt-10" for="img-teacher">
           Загрузить
