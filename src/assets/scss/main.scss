@@ -166,21 +166,43 @@ $colors in $color-fields {
 
   .field-#{$title} {
     @extend %field;
-    border: 0.2rem solid nth($colors, 1);
+    //border: 0.2rem solid nth($colors, 1);
+    border: none;
+    border-bottom: 0.2rem solid prop.$main-second-additional-color;
     color: nth($colors, 2);
-    resize: none;
 
     &:not(:disabled, :focus):hover {
-      border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      border: none;
+      border-bottom: 0.2rem solid nth($colors, 1);
     }
 
     &:focus {
-      outline: 0.1rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      border: none;
+      outline: none;
+      border-bottom: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+    }
+
+    &:disabled {
+      border: none;
+      border-bottom: 0.2rem solid nth($colors, 1);
+    }
+  }
+
+  textarea.field-#{$title}{
+    border: 0.2rem solid prop.$main-second-additional-color;
+    resize: none;
+
+    &:not(:disabled, :focus):hover {
+      border: 0.2rem solid nth($colors, 1);
+    }
+
+    &:focus {
+      outline: none;
       border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
     }
 
     &:disabled {
-      border: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+      border: 0.2rem solid nth($colors, 1);
     }
   }
 
