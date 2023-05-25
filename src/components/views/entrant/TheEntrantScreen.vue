@@ -24,8 +24,8 @@ import AppEntrantScreenItem from '@/components/views/entrant/item/AppEntrantScre
 import { useStore } from 'vuex';
 import useShowModal from '@/hooks/useShowModal';
 import TheModalChangeEntrant from '@/components/views/entrant/modal/TheModalEditEntrant.vue';
-import AppBaseScreen from '../../UI/AppBaseScreen.vue';
 import useTokenAuthentication from '@/hooks/useTokenAuthentication';
+import AppBaseScreen from '../../UI/AppBaseScreen.vue';
 
 export default defineComponent({
   icon: 'TheEntrantScreen',
