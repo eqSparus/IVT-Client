@@ -67,7 +67,7 @@ const TeacherModule: Module<TeacherState, RootState> = {
         type: 'application/json',
       }));
       const data = await requestCreateTeacher(formData);
-      commit('setTeacher', data);
+      commit('addTeacher', data);
     },
     async update({ commit }, teacher: EditTeacher) {
       const data = await requestUpdateTeacher(teacher);
