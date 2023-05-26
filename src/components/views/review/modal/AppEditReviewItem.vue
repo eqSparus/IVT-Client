@@ -80,14 +80,17 @@
                           label="Текст отзыва"
                           :fails="[{
                               isShow: valid.comment.$invalid && valid.comment.$dirty,
-                              description: 'Поле не должно быть пустым',
+                              description: 'Поле не должно быть пустым и быть до 500 символов',
                         }]">
-          <textarea class="field-standard"
-                    v-model="editableReview.comment"
-                    @blur="valid.comment.$touch()"
-                    placeholder="Введите отзыв"
-                    id="comment">
-          </textarea>
+            <app-tooltip text="Размер текста не должен превышать 500 символов включая пробелы.">
+              <textarea class="field-standard"
+                                  v-model="editableReview.comment"
+                                  @blur="valid.comment.$touch()"
+                                  placeholder="Введите отзыв"
+                                  id="comment">
+              </textarea>
+              <span class="fs-14" style="align-self: flex-end">{{ `${editableReview.comment.length}/500` }}</span>
+            </app-tooltip>
           </app-base-field>
           <button class="btn-standard-icon mt-20"
                   style="width: 100%"
@@ -115,10 +118,12 @@ import useEditReview from '@/hooks/useEditReview';
 import { Cropper, CircleStencil } from 'vue-advanced-cropper';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
 import useImg from '@/hooks/useImg';
+import AppTooltip from '@/components/UI/AppTooltip.vue';
 
 export default defineComponent({
   name: 'AppEditReviewItem',
   components: {
+    AppTooltip,
     AppBaseField,
     Cropper,
     // eslint-disable-next-line vue/no-unused-components

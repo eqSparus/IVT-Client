@@ -2,7 +2,7 @@
   <app-modal-window :is-footer="true"
                     title="Изменение состава кафедры"
                     :is-show="isShow"
-                    @close="$emit('close')">
+                    @close="close">
 
     <div class="edit-teacher-container">
       <div class="edit-teacher">
@@ -58,7 +58,7 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
+  setup(props, context) {
     const indexTeacher = ref<string>('');
     const isAdd = ref<boolean>(true);
 
@@ -66,10 +66,17 @@ export default defineComponent({
       isAdd.value = false;
       indexTeacher.value = id;
     };
+
+    const close = () => {
+      isAdd.value = true;
+      context.emit('close');
+    };
+
     return {
       isAdd,
       indexTeacher,
       selectTeacher,
+      close,
       addIcon,
     };
   },

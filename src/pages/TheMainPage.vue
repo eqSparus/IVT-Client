@@ -16,7 +16,7 @@
 
     <the-review-screen id="reviews"/>
 
-    <the-footer-screen id="contact"/>
+    <the-footer-screen/>
   </main>
 </template>
 
@@ -71,10 +71,6 @@ export default defineComponent({
       {
         title: 'Отзывы',
         select: '#reviews',
-      },
-      {
-        title: 'Контакты',
-        select: '#contact',
       },
     ];
 

@@ -53,14 +53,17 @@
                         label="Текст отзыва"
                         :fails="[{
                               isShow: valid.comment.$invalid && valid.comment.$dirty,
-                              description: 'Поле не должно быть пустым',
+                              description: 'Поле не должно быть пустым и быть не более 500 символов',
                         }]">
-          <textarea class="field-standard"
-                    v-model="review.comment"
-                    @blur="valid.comment.$touch()"
-                    placeholder="Введите отзыв"
-                    id="comment">
-          </textarea>
+          <app-tooltip text="Размер текста не должен превышать 500 символов включая пробелы.">
+            <textarea class="field-standard"
+                      v-model="review.comment"
+                      @blur="valid.comment.$touch()"
+                      placeholder="Введите отзыв"
+                      id="comment">
+            </textarea>
+            <span class="fs-14" style="align-self: flex-end">{{ `${review.comment.length}/500` }}</span>
+          </app-tooltip>
         </app-base-field>
       </div>
     </div>
@@ -81,10 +84,12 @@ import AppBaseField from '@/components/UI/AppBaseField.vue';
 import useEditReview from '@/hooks/useEditReview';
 import { useStore } from 'vuex';
 import useAlerts from '@/hooks/useAlerts';
+import AppTooltip from '@/components/UI/AppTooltip.vue';
 
 export default defineComponent({
   name: 'TheAddReviewBlock',
   components: {
+    AppTooltip,
     AppBaseField,
     Cropper,
     // eslint-disable-next-line vue/no-unused-components

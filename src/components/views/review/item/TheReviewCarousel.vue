@@ -42,12 +42,17 @@ export default defineComponent({
   },
   setup(props) {
     let bias = 100;
+    let center = 100;
 
     if (window.devicePixelRatio > 2) {
       bias = 0;
     }
 
-    const offsetOrder = ref<number>(bias);
+    if (props.reviews.length === 1) {
+      center = 0;
+    }
+
+    const offsetOrder = ref<number>(bias - center);
 
     const nextIndex = () => {
       if (offsetOrder.value !== props.reviews.length * -100 + (100 + bias)) {

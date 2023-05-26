@@ -1,7 +1,7 @@
 import { Review } from '@/types/site.types';
 import { ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
-import { required } from '@vuelidate/validators';
+import { required, maxLength } from '@vuelidate/validators';
 
 export type EditReview = Omit<Review, 'urlImg'>;
 
@@ -23,6 +23,7 @@ const useEditReview = (customReview: EditReview = defaultReview) => {
     },
     comment: {
       required,
+      maxLength: maxLength(500),
     },
   };
 

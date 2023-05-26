@@ -99,7 +99,7 @@
         <app-base-field id="post-additional"
                         class="mt-10"
                         label="Дополнительная должность">
-          <app-tooltip text="Дополнительная должность преподавателя с предприятия при наличие таковой">
+          <app-tooltip text="Дополнительная должность преподавателя с предприятия при наличие таковой.">
             <input type="text"
                    class="field-standard"
                    id="post-additional"

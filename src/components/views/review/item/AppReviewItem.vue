@@ -103,10 +103,6 @@ export default defineComponent({
     }
 
     .comment-content-scroll {
-      overflow-y: scroll;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-      height: 30rem;
 
       .comment-text {
         word-wrap: break-word;
@@ -117,11 +113,6 @@ export default defineComponent({
         @include utils.phone-style {
           font-size: 12px;
         }
-      }
-
-      &::-webkit-scrollbar {
-        width: 0;
-        height: 0;
       }
     }
   }
