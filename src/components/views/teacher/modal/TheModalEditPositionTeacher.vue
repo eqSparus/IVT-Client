@@ -5,14 +5,7 @@
                   @close="$emit('close')">
 
     <div class="position-edit-container">
-      <table>
-        <thead>
-        <tr>
-          <th class="fs-18 thead-title">Фото</th>
-          <th class="fs-18 thead-title">ФИО</th>
-          <th class="fs-18 thead-title">Номер</th>
-        </tr>
-        </thead>
+      <table class="table-teacher">
         <tbody>
         <transition-group name="teachers">
           <app-teacher-position-item v-for="teacher in teachers" :key="teacher.id"
@@ -64,12 +57,15 @@ $animation-name: 'teachers';
 
 .position-edit-container {
   max-height: 40rem;
-  max-width: 80vw;
   overflow-y: auto;
   overflow-x: auto;
   padding: 1rem;
 
-  .thead-title{
+  .table-teacher {
+    width: 60vw;
+  }
+
+  .thead-title {
     @include utils.font-style(prop.$main-first-dark-color)
   }
 }

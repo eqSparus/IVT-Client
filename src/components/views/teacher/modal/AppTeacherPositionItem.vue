@@ -85,6 +85,7 @@ export default defineComponent({
 .input-position {
   width: 10rem;
   text-align: center;
+  float: right;
 }
 
 </style>
