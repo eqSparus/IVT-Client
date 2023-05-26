@@ -5,7 +5,7 @@
                               @close="toggleModal"/>
 
     <div class="entrant-screen-container">
-      <div class="entrant-edit-block mt-20" v-if="isAuth">
+      <div class="entrant-edit-block" v-if="isAuth">
         <input type="button"
                class="btn-standard"
                @click="toggleModal"
@@ -65,8 +65,7 @@ export default defineComponent({
   }
 
   .entrant-edit-block {
-    display: flex;
-    justify-content: center;
+    margin: 0 auto 2rem auto;
   }
 }
 </style>

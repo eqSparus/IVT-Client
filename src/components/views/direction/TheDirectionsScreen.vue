@@ -4,7 +4,7 @@
                                :is-show="isShow"
                                @close="toggleModal"/>
 
-    <div class="screen-edit-block mb-20" v-if="isAuth">
+    <div class="screen-edit-block" v-if="isAuth">
       <input type="button"
              class="btn-standard"
              value="редактировать"
@@ -71,8 +71,7 @@ export default defineComponent({
 }
 
 .screen-edit-block {
-  display: flex;
-  justify-content: center;
+  margin: 0 auto 2rem auto;
 }
 
 </style>

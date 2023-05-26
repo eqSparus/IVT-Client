@@ -7,11 +7,12 @@
 
 $color-buttons: (
         "standard": (prop.$primary-color, prop.$main-second-color),
-        "warning": (prop.$warning-color, prop.$main-second-color),
+        "warning": (prop.$warning-color, prop.$main-second-color)
 );
 
+// TODO Убрать 3 элемент
 $color-fields: (
-        "standard":(prop.$primary-color, prop.$main-first-color)
+        "standard":(prop.$primary-color, prop.$main-first-color, prop.$warning-color)
 );
 
 $property-buttons: (
@@ -152,6 +153,7 @@ $colors in $color-buttons {
       color: adjust-color($color: nth($colors, 2), $red: -255, $green: -255, $blue: -255, $alpha: -0.74);
       background: adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
       border: 0.1rem solid adjust-color($color: nth($colors, 1), $red: 127, $green: 126, $blue: -1);
+      pointer-events: none;
 
       img {
         filter: prop.$icon-svg-hover-color;
@@ -168,27 +170,38 @@ $colors in $color-fields {
     @extend %field;
     //border: 0.2rem solid nth($colors, 1);
     border: none;
-    border-bottom: 0.2rem solid prop.$main-second-additional-color;
+    border-bottom: 0.3rem solid prop.$main-second-additional-color;
     color: nth($colors, 2);
 
     &:not(:disabled, :focus):hover {
       border: none;
-      border-bottom: 0.2rem solid nth($colors, 1);
+      border-bottom: 0.3rem solid nth($colors, 1);
+
+      // TODO Удалить
+      &.field-error {
+        border-bottom: 0.3rem solid nth($colors, 3);
+      }
     }
 
     &:focus {
       border: none;
       outline: none;
-      border-bottom: 0.2rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
+      border-bottom: 0.3rem solid adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
     }
 
     &:disabled {
       border: none;
-      border-bottom: 0.2rem solid nth($colors, 1);
+      border-bottom: 0.3rem solid nth($colors, 1);
+    }
+
+    // TODO Удалить
+    &.field-error {
+      border: none;
+      border-bottom: 0.3rem solid nth($colors, 3);
     }
   }
 
-  textarea.field-#{$title}{
+  textarea.field-#{$title} {
     border: 0.2rem solid prop.$main-second-additional-color;
     resize: none;
 

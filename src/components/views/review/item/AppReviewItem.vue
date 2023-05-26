@@ -15,7 +15,9 @@
 
       <span class="job-text fs-14">{{ review.jobTitle }}</span>
 
-      <div class="comment-text fs-18 mt-20">{{ review.comment }}</div>
+      <div class="comment-content-scroll mt-20">
+        <div class="comment-text fs-18">{{ review.comment }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +54,11 @@ export default defineComponent({
   width: 46.2rem;
   height: 52rem;
   position: relative;
+  padding: 3.5rem 5rem 2rem 5rem;
+
+  @include utils.phone-style {
+    padding: 3.5rem 2rem 2rem 2rem;
+  }
 
   .quotation-marks {
     position: absolute;
@@ -64,11 +71,6 @@ export default defineComponent({
   .review-content {
     display: flex;
     flex-flow: column;
-    padding: 3.5rem 7.5rem 0 7.5rem;
-
-    @include utils.phone-style {
-      padding: 3.5rem 2rem 0 2rem;
-    }
 
     .review-image {
       z-index: 99;
@@ -81,6 +83,7 @@ export default defineComponent({
     .name-text {
       z-index: 99;
       text-align: center;
+      user-select: none;
       @include utils.font-style($color: props.$main-first-color, $weight: 500);
 
       @include utils.phone-style {
@@ -91,6 +94,7 @@ export default defineComponent({
     .job-text {
       z-index: 99;
       text-align: center;
+      user-select: none;
       @include utils.font-style($color: props.$main-first-color);
 
       @include utils.phone-style {
@@ -98,13 +102,26 @@ export default defineComponent({
       }
     }
 
-    .comment-text {
-      word-wrap: break-word;
-      text-align: justify;
-      @include utils.font-style($color: props.$main-first-color);
+    .comment-content-scroll {
+      overflow-y: scroll;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      height: 30rem;
 
-      @include utils.phone-style {
-        font-size: 12px;
+      .comment-text {
+        word-wrap: break-word;
+        text-align: justify;
+        user-select: none;
+        @include utils.font-style($color: props.$main-first-color);
+
+        @include utils.phone-style {
+          font-size: 12px;
+        }
+      }
+
+      &::-webkit-scrollbar {
+        width: 0;
+        height: 0;
       }
     }
   }

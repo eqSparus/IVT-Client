@@ -56,8 +56,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 
 .partners-edit-block {
-  display: flex;
-  justify-content: center;
+  margin: 0 auto 2rem auto;
 }
 
 .partners-screen-container {

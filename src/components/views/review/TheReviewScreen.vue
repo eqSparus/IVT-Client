@@ -55,7 +55,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 
 .edit-review-block {
-  margin: 0 auto;
+  margin: 0 auto 2rem auto;
 }
 
 </style>

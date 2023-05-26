@@ -7,10 +7,8 @@
     </transition>
   </div>
   <div class="slot-content"
-       @mouseenter="onToggle"
-       @mouseleave="onToggle"
-       @focus="isShow = true"
-       @blur="isShow = false">
+       @focusin="isShow = true"
+       @focusout="isShow = false">
     <slot></slot>
   </div>
 </template>
@@ -63,6 +61,7 @@ $animation-name: 'tooltip';
     padding: 1rem 1rem;
     font-size: 1.5rem;
     max-width: 25rem;
+    pointer-events: none;
 
     &:before {
       position: absolute;

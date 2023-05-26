@@ -88,12 +88,11 @@
                         label="Должность преподавателя">
           <app-tooltip text="Должность преподавателя по ППС (профессорско-преподавательский состав) например
 профессор, доцент, стр. преподаватель, ассистент и тд.">
-                  <textarea class="field-standard"
-                            id="post-teacher"
-                            v-model="newTeacher.postTeacher"
-                            placeholder="Введите должность преподавателя">
-
-        </textarea>
+            <input type="text"
+                   id="post-teacher"
+                   class="field-standard"
+                   v-model="newTeacher.postTeacher"
+                   placeholder="Введите должность преподавателя">
           </app-tooltip>
         </app-base-field>
 

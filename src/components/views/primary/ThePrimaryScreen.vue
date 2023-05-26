@@ -17,17 +17,17 @@
       <div class="begin-screen-button">
         <input type="button"
                value="узнать больше"
-               class="btn-standard btn-setting"
+               class="btn-standard"
                @click="scrollTo(scrollSelect)"/>
         <input v-if="isAuth"
                type="button"
                value="редактировать"
-               class="btn-standard btn-setting"
+               class="btn-standard"
                @click="changeShowModalDepartment"/>
         <input v-if="isAuth"
                type="button"
                value="настройки пользователя"
-               class="btn-standard btn-setting"
+               class="btn-standard"
                @click="changeShowModalAccount"/>
       </div>
 
@@ -124,10 +124,9 @@ export default defineComponent(
 
     .begin-screen-button {
       margin-top: 4.8rem;
-
-      .btn-setting {
-        margin-right: 2rem;
-      }
+      display: flex;
+      flex-flow: row wrap;
+      gap: 2rem;
     }
 
     .begin-screen-links {

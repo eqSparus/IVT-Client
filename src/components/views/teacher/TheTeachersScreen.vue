@@ -9,7 +9,7 @@
                                      :teachers="allTeachers"
                                      @close="changeShowEditPosition"/>
 
-    <div class="teacher-change-block mb-20" v-if="isAuth">
+    <div class="teacher-change-block" v-if="isAuth">
       <input type="button"
              @click="changeShowEditTeacher(); loadAllTeacher()"
              class="btn-standard"
@@ -138,8 +138,7 @@ export default defineComponent({
 $animation-name: 'teacher';
 
 .teacher-change-block {
-  display: flex;
-  justify-content: center;
+  margin: 0 auto 2rem auto;
 }
 
 .teachers-screen-container {

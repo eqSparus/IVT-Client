@@ -19,7 +19,8 @@
   }
 
   &:disabled {
-    cursor: default
+    cursor: default;
+    pointer-events: none;
   }
 }
 
