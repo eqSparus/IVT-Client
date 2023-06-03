@@ -1,7 +1,7 @@
 import { Module } from 'vuex';
 import { EntrantState, RootState } from '@/plugins/store/store.types';
 import { Entrant } from '@/types/site.types';
-import { requestCreateEntrant, requestDeleteEntrant, requestUpdateEntrant } from '@/api/EntrantApi';
+import { requestCreateEntrant, requestDeleteEntrant, requestUpdateEntrant } from '@/http/HttpEntrantApi';
 
 const DirectionModule: Module<EntrantState, RootState> = {
   namespaced: true,

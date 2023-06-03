@@ -1,5 +1,5 @@
 import { computed, ref } from 'vue';
-import { requestRefreshToken, requestAuthentication } from '@/api/user/UserApi';
+import { requestRefreshToken, requestAuthentication } from '@/http/user/HttpСredentialsApi';
 import { User } from '@/types/user.types';
 
 const LOCAL_ACCESS_TOKEN = 'access';

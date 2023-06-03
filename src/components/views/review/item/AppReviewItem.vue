@@ -26,7 +26,7 @@
 
 import { defineComponent, PropType } from 'vue';
 import { Review } from '@/types/site.types';
-import quotationMarks from '@/assets/images/draws/quotation_marks.svg';
+import quotationMarks from '@/assets/images/draws/quotation-marks.svg';
 
 export default defineComponent({
   name: 'AppReviewItem',

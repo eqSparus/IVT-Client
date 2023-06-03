@@ -1,6 +1,6 @@
-import authorizedRequests from '@/api/request/AuthorizedRequests';
+import authorizedRequests from '@/http/index';
 import { Direction } from '@/types/site.types';
-import EndPoints from '@/api/EndPoints';
+import EndPoints from '@/http/EndPoints';
 
 export const requestCreateDirection = async (direction: Omit<Direction, 'position'>) => {
   const response = await authorizedRequests.post(EndPoints.DIRECTION, JSON.stringify(direction), {

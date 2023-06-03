@@ -20,7 +20,7 @@
 <script lang="ts">
 
 import { defineComponent, ref } from 'vue';
-import { requestSendRecoverPasswordEmail } from '@/api/user/UserApi';
+import { requestSendRecoverPasswordEmail } from '@/http/user/HttpСredentialsApi';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
 import useAlerts from '@/hooks/useAlerts';
 

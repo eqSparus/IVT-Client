@@ -7,7 +7,7 @@ import {
   requestDeleteReview,
   requestUpdateReview,
   requestUpdateReviewImg,
-} from '@/api/ReviewApi';
+} from '@/http/HttpReviewApi';
 
 const ReviewModule: Module<ReviewState, RootState> = {
   namespaced: true,

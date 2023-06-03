@@ -1,7 +1,7 @@
 import { Module } from 'vuex';
 import { AboutState, RootState } from '@/plugins/store/store.types';
 import { AboutDepartment } from '@/types/site.types';
-import requestUpdateAboutDepartment from '@/api/AboutDepartmentApi';
+import requestUpdateAboutDepartment from '@/http/HttpHttpAboutDepartment';
 
 const AboutDepartmentModule: Module<AboutState, RootState> = {
   namespaced: true,

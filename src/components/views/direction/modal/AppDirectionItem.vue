@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-entrant-item-container">
+  <form class="edit-entrant-item-container">
 
     <app-base-field id="name"
                     class="mt-10 mb-10"
@@ -91,7 +91,7 @@
              alt="assets/images/icon/arrow-circle.svg">
       </button>
     </div>
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

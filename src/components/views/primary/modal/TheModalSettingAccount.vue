@@ -4,7 +4,7 @@
                   @close="closeModal"
                   :is-footer="true">
 
-    <div class="account-setting-container">
+    <form class="account-setting-container">
 
       <div class="setting-email">
 
@@ -76,15 +76,15 @@
                || valid.password.maxLength.$invalid || valid.repeatPassword.$invalid"
                value="обновить пароль">
       </div>
-    </div>
+    </form>
   </app-base-modal>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import AppBaseModal from '@/components/UI/AppBaseModal.vue';
-import useChangePassword from '@/hooks/useEditAccount';
-import { requestEditPassword, requestSendEditEmail } from '@/api/user/AuthUserApi';
+import useCredentials from '@/hooks/useCredentials';
+import { requestEditPassword, requestSendEditEmail } from '@/http/user/HttpAdmin';
 import useAlerts from '@/hooks/useAlerts';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
 
@@ -109,7 +109,7 @@ export default defineComponent({
       password,
       repeatPassword,
       valid,
-    } = useChangePassword();
+    } = useCredentials();
 
     const changePassword = async () => {
       if (!valid.value.password.samePassword.$invalid) {

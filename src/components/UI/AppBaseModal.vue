@@ -50,7 +50,7 @@ export default defineComponent({
     },
     isFocus: {
       type: Boolean,
-      require: true,
+      default: false,
     },
   },
   emits: ['close'],

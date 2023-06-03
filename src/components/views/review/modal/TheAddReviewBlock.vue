@@ -1,5 +1,5 @@
 <template>
-  <div class="add-review-container">
+  <form class="add-review-container">
     <div class="edit-content">
       <div class="data-block">
         <div class="img-cropper">
@@ -72,7 +72,7 @@
            value="Добавить"
            @click="addReview"
            :disabled="valid.$invalid">
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

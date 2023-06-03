@@ -6,7 +6,7 @@ import {
   requestDeletePartner,
   requestUpdatePartner,
   requestUpdatePartnerImg,
-} from '@/api/PartnerApi';
+} from '@/http/HttpPartnerApi';
 import { EditPartner } from '@/hooks/useEditPartner';
 
 const PartnerModule: Module<PartnerState, RootState> = {

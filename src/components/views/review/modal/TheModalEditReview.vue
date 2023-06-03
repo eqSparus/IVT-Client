@@ -2,7 +2,6 @@
   <app-base-modal title="Редактировать отзывы"
                   :is-show="isShow"
                   :is-footer="true"
-                  :is-focus="false"
                   @close="close">
 
     <div class="review-edit-container">

@@ -1,5 +1,5 @@
-import AuthorizedRequests from '@/api/request/AuthorizedRequests';
-import UserEndPoints from '@/api/user/UserEndPoints';
+import AuthorizedRequests from '@/http';
+import UserEndPoints from '@/http/user/UserEndPoints';
 
 export const requestExit = async () => {
   const response = await AuthorizedRequests.post(UserEndPoints.EXIT, {}, {

@@ -4,7 +4,7 @@
                     :title="modalTitle"
                     @close="close">
 
-    <div class="edit-entrant-container">
+    <form class="edit-entrant-container">
 
       <app-base-field id="title"
                       label="Название ступени"
@@ -39,7 +39,7 @@
              :disabled="valid.$invalid"
              @click="typeClickEvent">
 
-    </div>
+    </form>
   </app-modal-window>
 </template>
 

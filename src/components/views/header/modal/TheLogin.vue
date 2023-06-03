@@ -30,10 +30,11 @@
 
 <script lang="ts">
 
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
 import useAlerts from '@/hooks/useAlerts';
 import useTokenAuthentication from '@/hooks/useTokenAuthentication';
+import useCredentials from '@/hooks/useCredentials';
 
 export default defineComponent({
   name: 'TheLogin',
@@ -42,8 +43,10 @@ export default defineComponent({
   setup(props, { emit }) {
     const { login: loginUser } = useTokenAuthentication();
     const { alerts } = useAlerts();
-    const email = ref<string>('');
-    const password = ref<string>('');
+    const {
+      email,
+      password,
+    } = useCredentials();
 
     const login = async () => {
       try {

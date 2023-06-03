@@ -1,6 +1,6 @@
-import authorizedRequests from '@/api/request/AuthorizedRequests';
+import authorizedRequests from '@/http/index';
 import { Entrant } from '@/types/site.types';
-import EndPoints from '@/api/EndPoints';
+import EndPoints from '@/http/EndPoints';
 
 export const requestCreateEntrant = async (entrant: Entrant) => {
   const response = await authorizedRequests.post(EndPoints.ENTRANT, JSON.stringify(entrant), {

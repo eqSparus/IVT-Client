@@ -1,5 +1,5 @@
 <template>
-  <div class="add-teacher-container">
+  <form class="add-teacher-container">
 
     <div class="change-container">
 
@@ -116,7 +116,7 @@
            :disabled="valid.$invalid"
            @click="addTeacher">
 
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

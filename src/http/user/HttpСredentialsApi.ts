@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { User } from '@/types/user.types';
-import UserEndPoints from '@/api/user/UserEndPoints';
+import UserEndPoints from '@/http/user/UserEndPoints';
 
 export const requestAuthentication = async (user: User) => {
   const response = await axios.post(UserEndPoints.LOGIN, JSON.stringify(user), {

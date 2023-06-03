@@ -1,7 +1,7 @@
 <template>
   <div class="edit-entrant-item-container">
     <div class="item-drawing">
-      <img class="img-drawing" :src="drawings[index]" :alt="drawings[index]"/>
+      <img class="img-drawing" :src="drawings[indexImg]" :alt="drawings[indexImg]"/>
     </div>
 
     <div class="item-content-container">
@@ -22,9 +22,11 @@
 <script lang="ts">
 import { Direction } from '@/types/site.types';
 import { defineComponent, PropType, computed } from 'vue';
-import direction1 from '@/assets/images/draws/direction1.svg';
-import direction2 from '@/assets/images/draws/direction2.svg';
-import direction3 from '@/assets/images/draws/direction3.svg';
+import directionLeft from '@/assets/images/draws/direction-left.svg';
+import directionCenter from '@/assets/images/draws/direction-center.svg';
+import directionRight from '@/assets/images/draws/direction-right.svg';
+
+export type NumberImg = 0 | 1 | 2 | 3;
 
 export default defineComponent({
   icon: 'AppDirectionScreenItem',
@@ -33,20 +35,16 @@ export default defineComponent({
       type: Object as PropType<Direction>,
       required: true,
     },
-    indexDrawing: {
-      type: Number,
+    indexImg: {
+      type: Number as PropType<NumberImg>,
       default: 0,
     },
   },
   setup(props) {
-    const drawings = [direction1, direction2, direction3];
-
-    const index = computed(() => props.indexDrawing
-      - (drawings.length * (Math.floor(props.indexDrawing / drawings.length))));
+    const drawings = [directionLeft, directionCenter, directionRight, directionLeft];
 
     return {
       drawings,
-      index,
       durationText: computed(() => (props.direction.duration >= 5 ? ' лет' : ' года')),
     };
   },

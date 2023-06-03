@@ -1,6 +1,6 @@
 import { Department } from '@/types/site.types';
-import authorizedRequests from '@/api/request/AuthorizedRequests';
-import EndPoints from '@/api/EndPoints';
+import authorizedRequests from '@/http/index';
+import EndPoints from '@/http/EndPoints';
 
 const requestUpdateDepartment = async (department: Department) => {
   const response = await authorizedRequests.put(EndPoints.DEPARTMENT, JSON.stringify(department), {

@@ -1,7 +1,7 @@
 import { Module } from 'vuex';
 import { RootState, SiteLinksState } from '@/plugins/store/store.types';
 import { Link } from '@/types/site.types';
-import { requestCreateLink, requestDeleteLink, requestUpdateLink } from '@/api/SiteLinkApi';
+import { requestCreateLink, requestDeleteLink, requestUpdateLink } from '@/http/HttpSiteLinkApi';
 
 const SiteLinksModule: Module<SiteLinksState, RootState> = {
   namespaced: true,

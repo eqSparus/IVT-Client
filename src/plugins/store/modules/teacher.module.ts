@@ -9,7 +9,7 @@ import {
   requestUpdateTeacher,
   requestUpdateTeacherImg,
   requestUpdateTeacherPosition,
-} from '@/api/TeacherApi';
+} from '@/http/HttpTeacherApi';
 
 const TeacherModule: Module<TeacherState, RootState> = {
   namespaced: true,

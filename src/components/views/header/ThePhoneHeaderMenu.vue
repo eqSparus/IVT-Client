@@ -1,6 +1,6 @@
 <template>
   <header class="header-container">
-    <div class="header-content">
+    <div class="header-content" @click="toggle" @keydown.esc="toggle">
       <div class="header-logo">
         <img class="img-logo" src="@/assets/images/logo-text.svg" alt="assets/images/logo-text.svg"/>
       </div>
@@ -17,6 +17,7 @@
         <nav class="header-menu" v-if="isCheck">
           <ul class="header-menu-links">
             <li v-for="anchor in anchors" :key="anchor.title"
+                @click.stop
                 class="link-margin link fs-48"
                 @click="scroll(anchor.select)"
                 @keyup.enter="scroll(anchor.select)">

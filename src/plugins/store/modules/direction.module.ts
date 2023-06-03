@@ -6,7 +6,7 @@ import {
   requestDeleteDirection,
   requestSwapPosition,
   requestUpdateDirection,
-} from '@/api/DirectionApi';
+} from '@/http/HttpDirectionApi';
 import { EditDirection } from '@/hooks/useEditDirection';
 
 const DirectionModule: Module<DirectionState, RootState> = {

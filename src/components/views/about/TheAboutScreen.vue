@@ -66,8 +66,12 @@ export default defineComponent({
 .about-screen-container {
   display: flex;
   flex-flow: row;
-  justify-content: center;
+  justify-items: center;
   column-gap: 5%;
+
+  & > * {
+    flex: 1;
+  }
 }
 
 @include utils.phone-style {

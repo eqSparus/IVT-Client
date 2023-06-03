@@ -1,5 +1,5 @@
 import axios from 'axios';
-import EndPoints from '@/api/EndPoints';
+import EndPoints from '@/http/EndPoints';
 
 export const requestGetData = async () => {
   const response = await axios.get(EndPoints.DATA);

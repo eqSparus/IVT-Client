@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-links-container">
+  <form class="edit-links-container">
 
     <app-link-item v-for="link in links" :key="link.id"
                    :link="link"
@@ -31,7 +31,7 @@
            :disabled="valid.href.$invalid"
            class="btn-standard mt-20"
            @click="addLink"/>
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

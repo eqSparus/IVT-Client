@@ -1,6 +1,7 @@
 <template>
   <app-modal-window :is-show="isShow"
                     @close="close"
+                    :is-focus="true"
                     :title="modalTitle">
 
     <div class="modal-authentication-container">

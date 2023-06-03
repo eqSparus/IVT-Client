@@ -73,7 +73,7 @@ import {
 import useScroll from '@/hooks/useScroll';
 import useShowModal from '@/hooks/useShowModal';
 import TheModalAuthorization from '@/components/views/header/modal/TheModalAuthorization.vue';
-import { requestExit } from '@/api/user/AuthUserApi';
+import { requestExit } from '@/http/user/HttpAdmin';
 import { Anchor } from '@/types/util.types';
 import TheModalSettingSite from '@/components/views/header/modal/TheModalSettingSite.vue';
 import eyeIcon from '@/assets/images/icons/eye.svg';

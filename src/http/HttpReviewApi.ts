@@ -1,5 +1,5 @@
-import authorizedRequests from '@/api/request/AuthorizedRequests';
-import EndPoints from '@/api/EndPoints';
+import authorizedRequests from '@/http/index';
+import EndPoints from '@/http/EndPoints';
 import { Review } from '@/types/site.types';
 
 export const requestCreateReview = async (body: FormData) => {

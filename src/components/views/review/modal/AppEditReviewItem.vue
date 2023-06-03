@@ -1,5 +1,5 @@
 <template>
-  <div class="review-item-container">
+  <form class="review-item-container">
 
     <div class="review-point-container">
 
@@ -101,8 +101,7 @@
         </div>
       </div>
     </div>
-
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

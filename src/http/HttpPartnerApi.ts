@@ -1,5 +1,5 @@
-import authorizedRequests from '@/api/request/AuthorizedRequests';
-import EndPoints from '@/api/EndPoints';
+import authorizedRequests from '@/http/index';
+import EndPoints from '@/http/EndPoints';
 import { Partner } from '@/types/site.types';
 
 export const requestCreatePartner = async (body: FormData) => {

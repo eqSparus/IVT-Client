@@ -7,7 +7,7 @@
 <script lang="ts">
 
 import { defineComponent, onMounted } from 'vue';
-import { requestEditEmail } from '@/api/user/AuthUserApi';
+import { requestEditEmail } from '@/http/user/HttpAdmin';
 import { useRoute, useRouter } from 'vue-router';
 import AppSpinner from '@/components/UI/AppSpinner.vue';
 

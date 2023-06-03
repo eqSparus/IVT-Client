@@ -6,11 +6,11 @@ import {
 } from 'vue-router';
 import TheMainPage from '@/pages/TheMainPage.vue';
 import TheRecoverPasswordPage from '@/pages/TheRecoverPasswordPage.vue';
-import { requestIsValidTokenPassword } from '@/api/user/UserApi';
+import { requestIsValidTokenPassword } from '@/http/user/HttpСredentialsApi';
 import store from '@/plugins/store/Store';
 import TheActivateEmailPage from '@/pages/TheActivateEmailPage.vue';
-import { requestGetData } from '@/api/DataApi';
-import { requestGetTeacher } from '@/api/TeacherApi';
+import { requestGetData } from '@/http/HttpDataApi';
+import { requestGetTeacher } from '@/http/HttpTeacherApi';
 import { MIN_LOAD_TEACHER } from '@/hooks/useEditTeacher';
 import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 

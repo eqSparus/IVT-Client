@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-department-container">
+  <form class="edit-department-container">
     <app-base-field id="title"
                     label="Название кафедры"
                     :fails="[{
@@ -80,7 +80,7 @@
            :disabled="valid.$invalid"
            @click="updateDepartment"/>
 
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

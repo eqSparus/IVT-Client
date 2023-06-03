@@ -3,7 +3,7 @@
                   :is-footer="true"
                   title="Добавить партнера"
                   @close="$emit('close')">
-    <div class="add-partner-container">
+    <form class="add-partner-container">
       <div class="partner-cropper">
         <cropper :src="cropperFile"
                  v-if="cropperFile"
@@ -40,8 +40,7 @@
              @click="addPartner"
              class="btn-standard mt-20"
              value="Создать">
-    </div>
-
+    </form>
   </app-base-modal>
 </template>
 

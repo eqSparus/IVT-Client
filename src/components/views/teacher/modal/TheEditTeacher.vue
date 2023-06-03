@@ -1,5 +1,5 @@
 <template>
-  <div v-if="show" class="edit-teacher-container">
+  <form v-if="show" class="edit-teacher-container">
 
     <div class="edit-container">
 
@@ -136,7 +136,7 @@
       </div>
     </div>
 
-  </div>
+  </form>
 </template>
 
 <script lang="ts">

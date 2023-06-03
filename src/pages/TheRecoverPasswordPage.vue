@@ -54,8 +54,8 @@
 
 import { defineComponent } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { requestRecoverPassword } from '@/api/user/UserApi';
-import useChangePassword from '@/hooks/useEditAccount';
+import { requestRecoverPassword } from '@/http/user/HttpСredentialsApi';
+import useCredentials from '@/hooks/useCredentials';
 import useAlerts from '@/hooks/useAlerts';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
 
@@ -72,7 +72,7 @@ export default defineComponent({
       password,
       repeatPassword,
       valid,
-    } = useChangePassword();
+    } = useCredentials();
 
     const recoverPassword = async () => {
       if (!valid.value.password.samePassword.$invalid) {

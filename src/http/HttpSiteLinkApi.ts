@@ -1,6 +1,6 @@
-import authorizedRequests from '@/api/request/AuthorizedRequests';
+import authorizedRequests from '@/http/index';
 import { Link } from '@/types/site.types';
-import EndPoints from '@/api/EndPoints';
+import EndPoints from '@/http/EndPoints';
 
 export const requestCreateLink = async (link: Link) => {
   const response = await authorizedRequests.post(EndPoints.SITE_LINK, JSON.stringify(link), {

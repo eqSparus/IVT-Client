@@ -1,6 +1,6 @@
-import authorizedRequests from '@/api/request/AuthorizedRequests';
+import authorizedRequests from '@/http/index';
 import { Teacher } from '@/types/site.types';
-import EndPoints from '@/api/EndPoints';
+import EndPoints from '@/http/EndPoints';
 import axios from 'axios';
 
 export const requestCreateTeacher = async (body: FormData) => {

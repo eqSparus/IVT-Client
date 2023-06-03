@@ -12,7 +12,7 @@
     </div>
     <div :class="[directions.length === 3? 'gap-5':'gap-1','directions-screen-container']">
       <app-direction-screen-item v-for="(info, index) in directions" :key="info.id"
-                                 :index-drawing="Number(index)"
+                                 :index-img="Number(index)"
                                  :direction="info"/>
     </div>
   </app-base-screen>

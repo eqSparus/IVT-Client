@@ -4,7 +4,7 @@
                   :is-footer="true"
                   @close="close">
 
-    <div class="edit-partner-container">
+    <form class="edit-partner-container">
       <div class="partner-image">
         <div class="partner-cropper mr-20" v-if="cropperFile">
           <cropper :src="cropperFile"
@@ -55,8 +55,7 @@
              @click="deletePartner"
              value="Удалить">
 
-    </div>
-
+    </form>
   </app-base-modal>
 </template>
 

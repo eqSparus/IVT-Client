@@ -2,6 +2,7 @@
   <app-base-modal :is-show="isShow"
                   :is-footer="true"
                   title="Версия для слабовидящих"
+                  :is-focus="true"
                   @close="$emit('close')">
     <div class="setting-site-container">
       <app-base-field id="textSize"

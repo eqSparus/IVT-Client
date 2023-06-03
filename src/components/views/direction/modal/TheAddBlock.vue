@@ -1,5 +1,5 @@
 <template>
-  <div class="add-direction-container">
+  <form class="add-direction-container">
     <app-base-field id="title"
                     label="Название"
                     :fails="[{
@@ -70,7 +70,7 @@
            @click="addDirection"
            :disabled="valid.$invalid"
            value="добавить">
-  </div>
+  </form>
 </template>
 
 <script lang="ts">
