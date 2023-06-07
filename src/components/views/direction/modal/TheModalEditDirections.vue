@@ -1,6 +1,6 @@
 <template>
   <app-modal-window :is-show="isShow"
-                    title="Редактирование направлений"
+                    title="Раздел &quotНаправления&quot"
                     :is-footer="true"
                     @close="close">
 

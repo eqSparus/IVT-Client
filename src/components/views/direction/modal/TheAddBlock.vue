@@ -1,5 +1,5 @@
 <template>
-  <form class="add-direction-container">
+  <div class="add-direction-container">
     <app-base-field id="title"
                     label="Название"
                     :fails="[{
@@ -10,7 +10,7 @@
                 v-model="direction.title"
                 class="field-standard"
                 @blur="valid.title.$touch()"
-                placeholder="Введите название"
+                placeholder="Введите название направления"
                 rows="2">
       </textarea>
     </app-base-field>
@@ -70,7 +70,7 @@
            @click="addDirection"
            :disabled="valid.$invalid"
            value="добавить">
-  </form>
+  </div>
 </template>
 
 <script lang="ts">

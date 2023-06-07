@@ -1,5 +1,5 @@
 <template>
-  <form class="edit-links-container">
+  <div class="edit-links-container">
 
     <app-link-item v-for="link in links" :key="link.id"
                    :link="link"
@@ -9,20 +9,23 @@
                    @updateLink="updateLink"/>
 
     <div class="mt-10">
-      <span class="field-fail" v-if="valid.href.$invalid && valid.href.$dirty">
-        Поле не должно быть пустым и должно являться url адресом
-      </span>
       <div class="setting-links-push">
         <app-select-img :options="optionLinks"
                         :select="{img: newLink.icon, value:newLink.icon}"
                         @changeIcon="newLink.icon = $event"/>
 
-        <input type="text"
-               placeholder="Введите ссылку"
-               aria-label="Ссылка на сайт"
-               @blur="valid.href.$touch()"
-               v-model="newLink.href"
-               class="field-standard"/>
+        <app-base-field :fails="[{
+          description: 'Поле не должно быть пустым и должно являться url адресом',
+          isShow: valid.href.$invalid && valid.href.$dirty,
+        }]" style="width: 100%;">
+          <input type="text"
+                 placeholder="Введите ссылку"
+                 aria-label="Ссылка на сайт"
+                 @blur="valid.href.$touch()"
+                 v-model="newLink.href"
+                 class="field-standard"/>
+        </app-base-field>
+
       </div>
     </div>
 
@@ -31,7 +34,7 @@
            :disabled="valid.href.$invalid"
            class="btn-standard mt-20"
            @click="addLink"/>
-  </form>
+  </div>
 </template>
 
 <script lang="ts">
@@ -45,12 +48,14 @@ import AppSelectImg from '@/components/UI/AppSelectImg.vue';
 import useEditSiteLinks from '@/hooks/useEditSiteLinks';
 import useAlerts from '@/hooks/useAlerts';
 import { useStore } from 'vuex';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   name: 'TheSettingLinks',
   components: {
     AppSelectImg,
     AppLinkItem,
+    AppBaseField,
   },
   props: {
     links: {
@@ -167,6 +172,10 @@ export default defineComponent({
     display: flex;
     flex-flow: row;
     gap: 1rem;
+
+    div:nth-child(1){
+      align-self: flex-end;
+    }
 
     input:nth-child(2) {
       flex: 1;

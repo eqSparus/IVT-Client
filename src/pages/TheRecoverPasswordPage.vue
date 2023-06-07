@@ -2,13 +2,13 @@
   <div class="recover-container">
     <div class="recover-block">
 
-      <h3 class="fs-32">Восстановить пароль</h3>
+      <h3 class="fs-32">Восстановление пароля</h3>
 
       <div class="recover-content">
 
         <app-base-field id="password"
                         class="mt-20 mb-10"
-                        label="Введите новый пароль"
+                        label="Новый пароль"
                         :fails="[
                           {
                             isShow: (valid.password.minLength.$invalid || valid.password.maxLength.$invalid) && valid.password.$dirty,
@@ -22,6 +22,7 @@
           <input type="password"
                  id="password"
                  v-model="password"
+                 placeholder="Введите новый пароль"
                  @blur="valid.password.$touch()"
                  class="field-standard">
         </app-base-field>
@@ -34,6 +35,7 @@
                         }]">
           <input type="password"
                  id="repeat-password"
+                 placeholder="Повторите новый пароль"
                  v-model="repeatPassword"
                  @blur="valid.repeatPassword.$touch()"
                  class="field-standard">

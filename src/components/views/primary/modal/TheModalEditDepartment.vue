@@ -61,7 +61,7 @@ export default defineComponent({
     return {
       isWindow,
       btnText: computed(() => (isWindow.value ? 'изменить ссылки' : 'изменить информацию о кафедре')),
-      modalTitle: computed(() => (isWindow.value ? 'Информация о кафедре' : 'Ссылки на сайты кафедры')),
+      modalTitle: computed(() => (isWindow.value ? 'Информация о кафедре' : 'Внешние ссылки')),
       closeModal,
     };
   },

@@ -1,6 +1,6 @@
 <template>
   <app-modal-window :is-show="isShow"
-                    title="Редактировать информацию о кафедре"
+                    title="Раздел &quotО кафедре&quot"
                     @close="$emit('close')"
                     :is-footer="true">
 

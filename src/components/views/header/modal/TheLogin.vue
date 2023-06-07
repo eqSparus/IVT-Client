@@ -1,13 +1,13 @@
 <template>
-  <form class="login-container">
+  <div class="login-container">
     <app-base-field id="email"
                     class="mt-10"
-                    label="Электронную почту">
+                    label="Адрес электронной почты">
       <input class="field-standard"
              type="email"
              id="email"
              v-model="email"
-             placeholder="Введите электронную почту"/>
+             placeholder="Введите адрес электронной почты"/>
     </app-base-field>
 
     <app-base-field id="password"
@@ -25,7 +25,7 @@
            class="btn-standard mt-30"
            value="войти"
            @click="login"/>
-  </form>
+  </div>
 </template>
 
 <script lang="ts">

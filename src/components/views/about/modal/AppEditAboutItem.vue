@@ -1,5 +1,5 @@
 <template>
-  <form class="item-about">
+  <div class="item-about">
     <app-base-field id="title"
                     label="Название"
                     :fails="[{
@@ -34,7 +34,7 @@
            :disabled="valid.$invalid"
            @click="editAbout"
            class="btn-standard mt-20">
-  </form>
+  </div>
 </template>
 
 <script lang="ts">

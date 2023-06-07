@@ -1,5 +1,5 @@
 <template>
-  <app-base-modal title="Редактировать отзывы"
+  <app-base-modal title="Раздел &quotОтзывы&quot"
                   :is-show="isShow"
                   :is-footer="true"
                   @close="close">

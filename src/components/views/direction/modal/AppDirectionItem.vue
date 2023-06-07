@@ -1,5 +1,5 @@
 <template>
-  <form class="edit-entrant-item-container">
+  <div class="edit-entrant-item-container">
 
     <app-base-field id="name"
                     class="mt-10 mb-10"
@@ -24,8 +24,8 @@
                       isShow: valid.degree.$invalid && valid.degree.$dirty,
                     }]">
       <input type="text"
-             placeholder="Введите тип направления"
-             aria-label="Тип направления"
+             placeholder="Введите степень обучения"
+             aria-label="Степень обучения"
              id="type"
              @blur="valid.degree.$touch()"
              class="field-standard text-while"
@@ -39,7 +39,7 @@
                       isShow: valid.form.$invalid && valid.form.$dirty,
                     }]">
       <input type="text"
-             placeholder="Введите форму обучения направления"
+             placeholder="Введите форму обучения"
              aria-label="Форма обучения направления"
              @blur="valid.form.$touch()"
              id="form"
@@ -53,7 +53,7 @@
                       isShow: valid.duration.$invalid && valid.duration.$dirty,
                     }]">
       <input type="number"
-             placeholder="Введите время обучения на направление"
+             placeholder="Введите время обучения"
              aria-label="Время обучения на направление"
              @blur="valid.duration.$touch()"
              id="duration"
@@ -91,7 +91,7 @@
              alt="assets/images/icon/arrow-circle.svg">
       </button>
     </div>
-  </form>
+  </div>
 </template>
 
 <script lang="ts">

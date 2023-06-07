@@ -4,7 +4,7 @@
                     :title="modalTitle"
                     @close="close">
 
-    <form class="edit-entrant-container">
+    <div class="edit-entrant-container">
 
       <app-base-field id="title"
                       label="Название ступени"
@@ -39,7 +39,7 @@
              :disabled="valid.$invalid"
              @click="typeClickEvent">
 
-    </form>
+    </div>
   </app-modal-window>
 </template>
 
@@ -77,7 +77,7 @@ export default defineComponent({
     },
     modalTitle: {
       type: String,
-      default: 'Добавить новый раздел',
+      default: 'Добавить новую информацию',
     },
   },
   setup(props, { emit }) {

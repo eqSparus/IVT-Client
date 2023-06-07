@@ -6,7 +6,9 @@
       <img :src="pointerLeft" alt="assets/images/icons/pointer-left.svg">
     </button>
 
-    <div class="review-list">
+    <div class="review-list"
+         @touchstart="touchStart"
+         @touchmove="touchMove">
       <div v-for="(review, i) in reviews" :key="review.id" :style="{ transform: `translateX(${offsetOrder}%)` }">
         <app-review-item :review="review" :class="{'active-slider': offsetOrder === i * -100 + 100}"/>
       </div>
@@ -70,10 +72,38 @@ export default defineComponent({
       }
     };
 
+    const touchValueX = ref<number | null>(null);
+
+    const touchStart = (event: TouchEvent) => {
+      touchValueX.value = event.touches[0].clientX;
+    };
+
+    const touchMove = (event: TouchEvent) => {
+      const touchDown = touchValueX.value;
+
+      if (touchDown === null) {
+        return;
+      }
+
+      const currentTouch = event.touches[0].clientX;
+      const diff = touchDown - currentTouch;
+      console.log(diff);
+      if (diff > 8) {
+        nextIndex();
+      }
+
+      if (diff < -8) {
+        previousIndex();
+      }
+      touchValueX.value = null;
+    };
+
     return {
       offsetOrder,
       nextIndex,
       previousIndex,
+      touchStart,
+      touchMove,
       pointerLeft,
       pointerRight,
     };
@@ -98,6 +128,7 @@ export default defineComponent({
     will-change: auto;
     width: 100%;
     overflow: hidden;
+    border-radius: 1rem;
 
     & > div {
       display: flex;

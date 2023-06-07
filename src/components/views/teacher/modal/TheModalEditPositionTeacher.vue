@@ -1,7 +1,7 @@
 <template>
   <app-base-modal :is-show="isShow"
                   :is-footer="true"
-                  title="Изменить порядок преподавателей"
+                  title="Порядок преподавателей"
                   @close="$emit('close')">
 
     <div class="position-edit-container">

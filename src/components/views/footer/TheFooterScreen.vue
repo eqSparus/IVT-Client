@@ -2,6 +2,7 @@
   <footer class="footer-container">
 
     <div id="map" class="map"></div>
+    <div class="line"/>
 
     <div class="contact-information-container">
       <div class="contact-item">
@@ -97,6 +98,10 @@ export default defineComponent({
     height: 52rem;
   }
 
+  .line {
+    display: none;
+  }
+
   @include utils.phone-style {
 
     .contact-information-container {
@@ -109,6 +114,15 @@ export default defineComponent({
 
     .map {
       display: none;
+    }
+
+    .line {
+      border: 0.05rem solid prop.$main-second-color;
+      background: prop.$main-second-color;
+      display: block;
+      margin: 0 auto 4rem auto;
+      opacity: 50%;
+      width: 80%;
     }
   }
 }

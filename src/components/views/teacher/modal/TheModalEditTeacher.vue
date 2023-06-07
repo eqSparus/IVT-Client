@@ -1,6 +1,6 @@
 <template>
   <app-modal-window :is-footer="true"
-                    title="Изменение состава кафедры"
+                    title="Раздел &quotСостав кафедры&quot"
                     :is-show="isShow"
                     @close="close">
 

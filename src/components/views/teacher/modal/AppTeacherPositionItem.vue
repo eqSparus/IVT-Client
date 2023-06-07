@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td>
+    <td class="img-cell">
       <img :src="teacher.urlImg"
            :alt="teacher.urlImg"
            class="position-teacher-item-img"/>
@@ -14,7 +14,7 @@
       </div>
     </td>
 
-    <td>
+    <td class="edit-position-cell">
       <input type="number"
              class="ml-20 field-standard input-position"
              aria-label="Позиция преподавателя"
@@ -71,9 +71,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 
-.position-teacher-item-img {
+.img-cell {
   width: 5rem;
-  height: 5rem;
+
+  .position-teacher-item-img {
+    width: 100%;
+    height: auto;
+  }
 }
 
 .not-copy {
@@ -82,10 +86,14 @@ export default defineComponent({
   user-select: none;
 }
 
-.input-position {
+.edit-position-cell {
   width: 10rem;
-  text-align: center;
-  float: right;
+
+  .input-position {
+    width: 100%;
+    text-align: center;
+    float: right;
+  }
 }
 
 </style>

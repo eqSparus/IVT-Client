@@ -17,7 +17,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      required: true,
+      default: '',
     },
     label: {
       type: String,

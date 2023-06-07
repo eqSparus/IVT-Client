@@ -4,24 +4,23 @@
                   @close="closeModal"
                   :is-footer="true">
 
-    <form class="account-setting-container">
+    <div class="account-setting-container">
 
       <div class="setting-email">
 
         <app-base-field id="email"
-                        label="Введите новую почту"
+                        label="Новая почта"
                         :fails="[{
                           isShow: valid.email.$invalid && valid.email.$dirty,
                           description: 'Поле не должно быть пустым и являться адресом эл. почты',
                         }]">
           <input type="email"
                  class="field-standard"
-                 placeholder="Адрес эл. почты"
+                 placeholder="Введите новую почту"
                  v-model="email"
                  id="email"
                  @blur="valid.email.$touch()"
-                 @keyup.enter="changeEmail"
-                 aria-label="Эл. почта аккаунта"/>
+                 @keyup.enter="changeEmail"/>
         </app-base-field>
 
         <input type="button"
@@ -64,7 +63,7 @@
                  class="field-standard"
                  id="repeatPassword"
                  @keyup.enter="changePassword"
-                 placeholder="Повторите пароль"
+                 placeholder="Повторите новый пароль"
                  @blur="valid.repeatPassword.$touch()"
                  v-model="repeatPassword"/>
         </app-base-field>
@@ -76,7 +75,7 @@
                || valid.password.maxLength.$invalid || valid.repeatPassword.$invalid"
                value="обновить пароль">
       </div>
-    </form>
+    </div>
   </app-base-modal>
 </template>
 

@@ -44,6 +44,10 @@ export default defineComponent({
   height: 100%;
   padding: 10rem 0 25rem 0;
 
+  @include utils.phone-style {
+    padding: 5rem 0 10rem 0;
+  }
+
   &.main {
     background: prop.$main-first-color;
     color: prop.$main-second-color;

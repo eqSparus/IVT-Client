@@ -54,6 +54,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/utils.scss';
 
 .partners-edit-block {
   margin: 0 auto 2rem auto;
@@ -64,6 +65,13 @@ export default defineComponent({
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   justify-items: center;
   row-gap: 50%;
+
+  @include utils.phone-style {
+    display: flex;
+    flex-flow: column;
+    row-gap: 8rem;
+    align-items: center;
+  }
 }
 
 </style>

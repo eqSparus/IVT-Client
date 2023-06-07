@@ -1,20 +1,20 @@
 <template>
-  <form class="recover-container">
+  <div class="recover-container">
     <app-base-field id="recoverPassword"
-                    label="Электронная почта">
+                    label="Адрес электронной почты">
       <input type="email"
              class="field-standard"
              id="recoverPassword"
              v-model="email"
-             placeholder="Введите электронную почту"
+             placeholder="Введите адрес электронной почты"
              @keydown.enter.prevent="recoverPassword">
     </app-base-field>
 
     <input type="button"
            class="btn-standard mt-30"
-           value="восстановить"
+           value="отправить письмо"
            @click="recoverPassword"/>
-  </form>
+  </div>
 </template>
 
 <script lang="ts">

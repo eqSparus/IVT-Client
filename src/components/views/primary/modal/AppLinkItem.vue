@@ -1,36 +1,36 @@
 <template>
-  <div>
-    <span class="field-fail" v-if="validate.href.$invalid && validate.href.$dirty">
-      Поле не должно быть пустым и должно являться url адресом
-    </span>
-    <div class="item-link-container">
+  <div class="item-link-container">
 
-      <app-select-img :options="links"
-                      :select="{img:editLink.icon, value:editLink.icon}"
-                      @changeIcon="editLink.icon = $event"/>
+    <app-select-img :options="links"
+                    :select="{img:editLink.icon, value:editLink.icon}"
+                    @changeIcon="editLink.icon = $event"/>
 
+    <app-base-field :fails="[{
+          description: 'Поле не должно быть пустым и должно являться url адресом',
+          isShow: validate.href.$invalid && validate.href.$dirty,
+        }]" style="width: 100%;">
       <input type="text"
              placeholder="Введите ссылку"
              aria-label="Введите ссылку"
              v-model="editLink.href"
              @blur="validate.href.$touch()"
              class="field-standard"/>
+    </app-base-field>
 
-      <button @click="updateLink"
-              :disabled="validate.$invalid"
-              class="btn-standard-icon btn-position">
-        <img :src="refreshIcon"
-             class="icon-trashcan"
-             alt="assets/images/icon/refresh.svg">
-      </button>
+    <button @click="updateLink"
+            :disabled="validate.$invalid"
+            class="btn-standard-icon btn-position">
+      <img :src="refreshIcon"
+           class="icon-trashcan"
+           alt="assets/images/icon/refresh.svg">
+    </button>
 
-      <button @click="$emit('deleteLink', editLink.id)"
-              class="btn-warning-icon btn-position">
-        <img :src="trashcanIcon"
-             alt="assets/images/icon/trashcan.svg">
-      </button>
+    <button @click="$emit('deleteLink', editLink.id)"
+            class="btn-warning-icon btn-position">
+      <img :src="trashcanIcon"
+           alt="assets/images/icon/trashcan.svg">
+    </button>
 
-    </div>
   </div>
 </template>
 
@@ -44,10 +44,14 @@ import { Link } from '@/types/site.types';
 import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import useAlerts from '@/hooks/useAlerts';
+import AppBaseField from '@/components/UI/AppBaseField.vue';
 
 export default defineComponent({
   icon: 'AppLinkItem',
-  components: { AppSelectImg },
+  components: {
+    AppBaseField,
+    AppSelectImg,
+  },
   emits: ['deleteLink', 'updateLink'],
   props: {
     link: {
@@ -109,9 +113,13 @@ export default defineComponent({
   gap: 1rem;
 
   .btn-position {
-    align-self: center;
+    align-self: flex-end;
     height: 4rem;
     width: 4rem;
+  }
+
+  div:nth-child(1) {
+    align-self: flex-end;
   }
 }
 
