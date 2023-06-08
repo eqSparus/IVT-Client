@@ -6,7 +6,7 @@
     <div class="active-option"
          @click="isOpen = !isOpen"
          @keyup.tab="isOpen = !isOpen">
-      <!--TODO Сменить адрес-->
+
       <img :src="select.img" :alt="select.img"/>
     </div>
     <transition name="select">

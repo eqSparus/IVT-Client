@@ -10,9 +10,8 @@ $color-buttons: (
         "warning": (prop.$warning-color, prop.$main-second-color)
 );
 
-// TODO Убрать 3 элемент
 $color-fields: (
-        "standard":(prop.$primary-color, prop.$main-first-color, prop.$warning-color)
+        "standard":(prop.$primary-color, prop.$main-first-color)
 );
 
 $property-buttons: (
@@ -168,7 +167,6 @@ $colors in $color-fields {
 
   .field-#{$title} {
     @extend %field;
-    //border: 0.2rem solid nth($colors, 1);
     border: none;
     border-bottom: 0.3rem solid prop.$main-second-additional-color;
     color: nth($colors, 2);
@@ -176,11 +174,6 @@ $colors in $color-fields {
     &:not(:disabled, :focus):hover {
       border: none;
       border-bottom: 0.3rem solid nth($colors, 1);
-
-      // TODO Удалить
-      &.field-error {
-        border-bottom: 0.3rem solid nth($colors, 3);
-      }
     }
 
     &:focus {
@@ -192,12 +185,6 @@ $colors in $color-fields {
     &:disabled {
       border: none;
       border-bottom: 0.3rem solid nth($colors, 1);
-    }
-
-    // TODO Удалить
-    &.field-error {
-      border: none;
-      border-bottom: 0.3rem solid nth($colors, 3);
     }
   }
 

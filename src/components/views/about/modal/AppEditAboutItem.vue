@@ -101,6 +101,7 @@ export default defineComponent({
 .item-about {
   display: flex;
   flex-flow: column;
+  width: 100%;
 }
 
 </style>

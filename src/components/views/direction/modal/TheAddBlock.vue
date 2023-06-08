@@ -18,7 +18,7 @@
     <div class="add-direction-center mt-10">
       <div class="block">
         <app-base-field id="degree"
-                        label="Степень обучение"
+                        label="Ступень обучения"
                         :fails="[{
                           description: 'Поле не должно быть пустым',
                           isShow: valid.degree.$invalid && valid.degree.$dirty,
@@ -26,7 +26,7 @@
           <input type="text"
                  id="degree"
                  v-model="direction.degree"
-                 placeholder="Введите степень"
+                 placeholder="Введите ступень обучения"
                  @blur="valid.degree.$touch()"
                  class="field-standard text-while">
         </app-base-field>

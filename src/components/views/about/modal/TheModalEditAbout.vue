@@ -71,6 +71,7 @@ export default defineComponent({
   display: flex;
   flex-flow: row;
   gap: 2rem;
+  min-width: 90rem;
 }
 
 </style>

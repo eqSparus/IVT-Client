@@ -87,7 +87,6 @@ export default defineComponent({
 
       const currentTouch = event.touches[0].clientX;
       const diff = touchDown - currentTouch;
-      console.log(diff);
       if (diff > 8) {
         nextIndex();
       }

@@ -24,8 +24,8 @@
                       isShow: valid.degree.$invalid && valid.degree.$dirty,
                     }]">
       <input type="text"
-             placeholder="Введите степень обучения"
-             aria-label="Степень обучения"
+             placeholder="Введите ступень обучения"
+             aria-label="Ступень обучения"
              id="type"
              @blur="valid.degree.$touch()"
              class="field-standard text-while"
@@ -175,6 +175,7 @@ export default defineComponent({
   background: prop.$main-first-extra-color;
   display: flex;
   flex-flow: column;
+  width: 100%;
 
   .setting-item {
     display: flex;
