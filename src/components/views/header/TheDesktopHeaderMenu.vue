@@ -1,10 +1,9 @@
 <template>
   <header class="header-container"
-          @mouseover="isShowMenu = true"
           @mouseleave="isShowMenu = false"
+          @blur="isShowMenu = false"
           @focus="isShowMenu = true"
-          tabindex="0"
-          @blur="isShowMenu = false">
+          tabindex="0">
 
     <the-modal-authorization :is-show="isShowModalWindow"
                              @close="toggleModal"/>
@@ -57,7 +56,10 @@
     </transition>
 
     <transition name="hint">
-      <div class="hint-container" v-show="!isShowMenu">
+      <div class="hint-container"
+           @mouseover="isShowMenu = true"
+           @focus="isShowMenu = true"
+           v-show="!isShowMenu">
         <div class="hint-block"/>
       </div>
     </transition>
@@ -230,11 +232,19 @@ $animation-name-hint: 'hint';
   .hint-container {
     display: flex;
     justify-content: center;
+    margin: 0 auto;
+    width: 10%;
+    height: 4rem;
+
+    &:focus {
+      outline: none;
+    }
 
     .hint-block {
       padding: 0.3rem;
+      width: 100%;
+      height: 0.3rem;
       border-radius: 0 0 1rem 1rem;
-      width: 10%;
       background: prop.$primary-color;
       border: 0.1rem solid prop.$primary-color;
     }

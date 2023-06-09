@@ -3,7 +3,7 @@
     <transition name="modal">
       <div class="modal-window-background"
            v-if="isShow"
-           @click="closeModal"
+           @mousedown.self="closeModal"
            @keydown.esc="closeModal">
         <div class="modal-window" @click.stop>
 
