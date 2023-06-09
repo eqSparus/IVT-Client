@@ -228,6 +228,7 @@ export default defineComponent({
     .change-container-block {
       display: flex;
       flex-flow: column;
+      align-self: flex-end;
 
       .img-cropper {
         width: 25rem;

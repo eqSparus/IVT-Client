@@ -175,7 +175,6 @@ export default defineComponent({
   background: prop.$main-first-extra-color;
   display: flex;
   flex-flow: column;
-  width: 100%;
 
   .setting-item {
     display: flex;

@@ -181,6 +181,10 @@ $animation-name-direction-item: 'direction-items';
     justify-content: center;
     gap: 3rem;
 
+    & > div {
+      flex: 1;
+    }
+
     @include utils.animation-to($name: $animation-name-direction-item, $move: true) {
       transition: all 0.5s ease;
     }
