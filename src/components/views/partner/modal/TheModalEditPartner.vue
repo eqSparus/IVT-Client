@@ -39,7 +39,7 @@
         <input type="text"
                class="field-standard"
                v-model="editPartner.href"
-               @blur="valid.href.touch()"
+               @blur="valid.href.$touch()"
                id="href"
                placeholder="Введите ссылку на сайт партнера">
       </app-base-field>
