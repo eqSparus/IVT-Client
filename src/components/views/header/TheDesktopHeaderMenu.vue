@@ -50,7 +50,6 @@
                    :class="textBtn === 'выйти'? 'btn-warning-sm': 'btn-standard-sm'"
                    @click="eventLoginOrLogout"/>
           </div>
-
         </nav>
       </div>
     </transition>
@@ -232,9 +231,8 @@ $animation-name-hint: 'hint';
   .hint-container {
     display: flex;
     justify-content: center;
-    margin: 0 auto;
-    width: 10%;
-    height: 4rem;
+    width: 100%;
+    height: 3rem;
 
     &:focus {
       outline: none;
@@ -242,7 +240,7 @@ $animation-name-hint: 'hint';
 
     .hint-block {
       padding: 0.3rem;
-      width: 100%;
+      width: 10%;
       height: 0.3rem;
       border-radius: 0 0 1rem 1rem;
       background: prop.$primary-color;
@@ -256,17 +254,16 @@ $animation-name-hint: 'hint';
 }
 
 @include utils.animation-from($name: $animation-name-menu) {
-  transform: translateY(-60px);
+  transform: translateY(-6rem);
   opacity: 0;
 }
 
 @include utils.animation-to($name: $animation-name-hint) {
-  transition: all 0.5s ease-in;
-
+  transition: all 0.3s ease-in;
 }
 
 @include utils.animation-from($name: $animation-name-hint) {
-  transform: translateY(7rem);
+  transform: translateY(-3rem);
   opacity: 0;
 }
 

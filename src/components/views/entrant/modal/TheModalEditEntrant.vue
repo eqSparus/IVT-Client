@@ -119,17 +119,24 @@ export default defineComponent({
     };
 
     const updateEntrant = async () => {
-      try {
-        clearingBlank();
-        await store.dispatch('entrant/update', editEntrant.value);
-        alerts.value.push({
-          type: 'info',
-          message: 'Обновлено',
-        });
-      } catch (e) {
+      if (editEntrant.value.title !== props.entrant?.title) {
+        try {
+          clearingBlank();
+          await store.dispatch('entrant/update', editEntrant.value);
+          alerts.value.push({
+            type: 'info',
+            message: 'Обновлено',
+          });
+        } catch (e) {
+          alerts.value.push({
+            type: 'warning',
+            message: 'Не удалось обновить',
+          });
+        }
+      } else {
         alerts.value.push({
           type: 'warning',
-          message: 'Не удалось обновить',
+          message: 'Данные не изменены',
         });
       }
     };
