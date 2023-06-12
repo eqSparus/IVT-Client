@@ -232,7 +232,7 @@ $animation-name-hint: 'hint';
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 3rem;
+    height: 4rem;
 
     &:focus {
       outline: none;

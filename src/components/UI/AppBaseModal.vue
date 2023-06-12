@@ -87,10 +87,10 @@ export default defineComponent({
 $animation-name: 'modal';
 
 @include utils.animation-to($name: $animation-name) {
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
 
   .modal-window {
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
   }
 }
 
