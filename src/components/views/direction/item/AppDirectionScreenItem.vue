@@ -60,6 +60,7 @@ export default defineComponent({
   border-radius: 0.8rem;
   background: prop.$main-first-extra-color;
   flex-flow: column;
+  width: 100%;
 
   .item-drawing {
     display: flex;

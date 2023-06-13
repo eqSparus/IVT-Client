@@ -42,7 +42,7 @@
 
     <div class="begin-screen-block-right">
       <div class="img-background"></div>
-      <img class="big-logo"
+      <img class="img-logo"
            src="@/assets/images/logo.svg"
            alt="/assets/images/logo.svg"/>
     </div>
@@ -158,7 +158,7 @@ export default defineComponent(
       background: adjust-color($color: prop.$primary-color, $alpha: -0.8);
     }
 
-    .big-logo {
+    .img-logo {
       height: auto;
       width: 45vw;
       max-width: 45rem;
@@ -202,8 +202,8 @@ export default defineComponent(
         height: 45vw;
       }
 
-      .big-logo {
-        transform: perspective(25rem) rotateY(-5deg) rotateX(5deg) rotateZ(5deg);
+      .img-logo {
+        transform: perspective(35rem) rotateY(-10deg) rotateX(10deg) rotateZ(3deg);
       }
     }
   }

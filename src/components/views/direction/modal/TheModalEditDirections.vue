@@ -183,6 +183,7 @@ $animation-name-direction-item: 'direction-items';
 
     & > div {
       flex: 1;
+      min-width: 28rem;
     }
 
     @include utils.animation-to($name: $animation-name-direction-item, $move: true) {

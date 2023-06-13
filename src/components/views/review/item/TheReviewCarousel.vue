@@ -46,7 +46,7 @@ export default defineComponent({
     let bias = 100;
     let center = 100;
 
-    if (window.devicePixelRatio > 2) {
+    if (window.devicePixelRatio >= 2) {
       bias = 0;
     }
 
