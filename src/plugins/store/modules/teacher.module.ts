@@ -25,9 +25,14 @@ const TeacherModule: Module<TeacherState, RootState> = {
     addTeacher(state: TeacherState, teacher: Teacher) {
       state.teachers.push(teacher);
     },
-    updateTeacher(state: TeacherState, teacher: Teacher) {
+    updateTeacher(state: TeacherState, teacher: Omit<Teacher, 'urlImg' | 'position'>) {
       const indexUpdate = state.teachers.findIndex((t) => t.id === teacher.id);
-      state.teachers[indexUpdate] = teacher;
+      state.teachers[indexUpdate].firstName = teacher.firstName;
+      state.teachers[indexUpdate].lastName = teacher.lastName;
+      state.teachers[indexUpdate].middleName = teacher.middleName;
+      state.teachers[indexUpdate].postTeacher = teacher.postTeacher;
+      state.teachers[indexUpdate].postAdditional = teacher.postAdditional;
+      state.teachers[indexUpdate].postDepartment = teacher.postDepartment;
     },
     removeTeacher(state: TeacherState, id: string) {
       const deleteIndex = state.teachers.findIndex((t) => t.id === id);

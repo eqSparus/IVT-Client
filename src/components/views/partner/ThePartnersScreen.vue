@@ -61,16 +61,17 @@ export default defineComponent({
 }
 
 .partners-screen-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  justify-items: center;
-  row-gap: 50%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  row-gap: 5rem;
 
   @include utils.phone-style {
     display: flex;
     flex-flow: column;
     row-gap: 8rem;
     align-items: center;
+    justify-content: center;
   }
 }
 

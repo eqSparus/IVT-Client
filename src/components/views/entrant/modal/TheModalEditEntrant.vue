@@ -35,7 +35,7 @@
 
       <input type="button"
              class="btn-standard mt-20"
-             :value="entrant? 'обновить': 'создать'"
+             :value="entrant? 'обновить': 'добавить'"
              :disabled="valid.$invalid"
              @click="typeClickEvent">
 
@@ -109,6 +109,10 @@ export default defineComponent({
       try {
         clearingBlank();
         await store.dispatch('entrant/add', editEntrant.value);
+        alerts.value.push({
+          type: 'info',
+          message: 'Информация добавлена',
+        });
         close();
       } catch (e) {
         alerts.value.push({
@@ -119,24 +123,17 @@ export default defineComponent({
     };
 
     const updateEntrant = async () => {
-      if (editEntrant.value.title !== props.entrant?.title) {
-        try {
-          clearingBlank();
-          await store.dispatch('entrant/update', editEntrant.value);
-          alerts.value.push({
-            type: 'info',
-            message: 'Обновлено',
-          });
-        } catch (e) {
-          alerts.value.push({
-            type: 'warning',
-            message: 'Не удалось обновить',
-          });
-        }
-      } else {
+      try {
+        clearingBlank();
+        await store.dispatch('entrant/update', editEntrant.value);
+        alerts.value.push({
+          type: 'info',
+          message: 'Информация обновлена',
+        });
+      } catch (e) {
         alerts.value.push({
           type: 'warning',
-          message: 'Данные не изменены',
+          message: 'Не удалось обновить',
         });
       }
     };

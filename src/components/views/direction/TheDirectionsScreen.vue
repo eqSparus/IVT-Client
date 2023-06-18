@@ -10,7 +10,7 @@
              value="редактировать"
              @click="toggleModal"/>
     </div>
-    <div :class="[directions.length === 3? 'gap-5':'gap-1','directions-screen-container']">
+    <div :class="[directions.length <= 3? 'gap-5':'gap-1','directions-screen-container']">
       <app-direction-screen-item v-for="(info, index) in directions" :key="info.id"
                                  :index-img="Number(index)"
                                  :direction="info"/>
@@ -54,11 +54,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/utils.scss';
 
 .directions-screen-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  justify-items: center;
+  display: flex;
+  justify-content: center;
 
   &.gap-1 {
     gap: 1%;
@@ -66,6 +66,20 @@ export default defineComponent({
 
   &.gap-5 {
     gap: 5%;
+  }
+
+  @include utils.phone-style {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    &.gap-1 {
+      gap: 1rem;
+    }
+
+    &.gap-5 {
+      gap: 3rem;
+    }
   }
 
 }

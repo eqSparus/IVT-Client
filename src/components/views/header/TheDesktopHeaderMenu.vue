@@ -231,7 +231,8 @@ $animation-name-hint: 'hint';
   .hint-container {
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 10%;
+    margin: 0 auto;
     height: 4rem;
 
     &:focus {
@@ -240,7 +241,7 @@ $animation-name-hint: 'hint';
 
     .hint-block {
       padding: 0.3rem;
-      width: 10%;
+      width: 100%;
       height: 0.3rem;
       border-radius: 0 0 1rem 1rem;
       background: prop.$primary-color;

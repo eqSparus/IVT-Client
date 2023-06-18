@@ -156,8 +156,8 @@ export default defineComponent({
 
   .btn-pointer {
     padding: 0;
-    width: 2rem;
-    height: 4rem;
+    width: 4rem;
+    height: 6rem;
     border: none;
     background: none;
     align-self: center;

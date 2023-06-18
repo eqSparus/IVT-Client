@@ -28,9 +28,11 @@ const ReviewModule: Module<ReviewState, RootState> = {
     addReview(state: ReviewState, review: Review) {
       state.reviews.push(review);
     },
-    updateReview(state: ReviewState, review: Review) {
+    updateReview(state: ReviewState, review: Omit<Review, 'urlImg'>) {
       const indexUpdate = state.reviews.findIndex((r) => r.id === review.id);
-      state.reviews[indexUpdate] = review;
+      state.reviews[indexUpdate].name = review.name;
+      state.reviews[indexUpdate].jobTitle = review.jobTitle;
+      state.reviews[indexUpdate].comment = review.comment;
     },
     removeReview(state: ReviewState, id: string) {
       const deleteIndex = state.reviews.findIndex((r) => r.id === id);

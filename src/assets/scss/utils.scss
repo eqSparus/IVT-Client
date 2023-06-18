@@ -81,18 +81,17 @@
 }
 
 @mixin slider-track {
-  height: 0.8rem;
+  height: 1.3rem;
   cursor: pointer;
   background: prop.$main-second-additional-color;
-  border-radius: 1.3px;
-  border: 0.2px solid prop.$main-first-dark-color;
+  border-radius: 1rem;
 }
 
 @mixin slider-thumb($color) {
-  border: 0.1rem solid prop.$main-first-dark-color;
+  border: none;
   height: 2rem;
-  width: 1.6rem;
-  border-radius: 3px;
+  width: 3rem;
+  border-radius: 15%;
   background: $color;
   cursor: pointer;
 }

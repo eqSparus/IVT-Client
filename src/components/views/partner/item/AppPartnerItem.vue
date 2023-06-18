@@ -2,7 +2,7 @@
   <the-modal-edit-partner :is-show="isShow"
                           :partner="partner"
                           @close="toggleModal"/>
-  <div class="partner-item-container">
+  <div class="partner-item-container" title="Перейти на сайт">
     <a :href="partner.href"
        class="partner-link"
        target="_blank">
@@ -61,10 +61,13 @@ export default defineComponent({
   display: flex;
   flex-flow: row;
   align-items: center;
+  justify-content: center;
+  flex: 33.333%;
 
   .partner-link {
     .link-logo {
       width: 30rem;
+      height: auto;
     }
 
     &:focus {

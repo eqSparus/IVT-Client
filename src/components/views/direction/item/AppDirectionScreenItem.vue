@@ -60,7 +60,8 @@ export default defineComponent({
   border-radius: 0.8rem;
   background: prop.$main-first-extra-color;
   flex-flow: column;
-  width: 100%;
+  width: 41.5rem;
+  height: 75rem;
 
   .item-drawing {
     display: flex;
@@ -96,20 +97,25 @@ export default defineComponent({
   }
 
   @include utils.phone-style {
+    height: 20rem;
+    width: 100%;
     flex-flow: row;
+    justify-content: space-between;
 
     .item-drawing {
       order: 2;
 
       .img-drawing {
+        position: absolute;
         width: auto;
-        height: 120px;
+        height: 20rem;
       }
     }
 
     .item-content-container {
       .item-content {
-        align-self: flex-end;
+        z-index: 9999;
+        width: 85%;
         padding: 5% 8%;
       }
     }

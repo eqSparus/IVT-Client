@@ -71,7 +71,7 @@ export default defineComponent({
         await store.dispatch('entrant/remove', props.entrant.id);
         alerts.value.push({
           type: 'info',
-          message: 'Успешное удаление',
+          message: 'Информация удалена',
         });
       } catch (e) {
         alerts.value.push({

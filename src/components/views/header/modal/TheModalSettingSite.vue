@@ -6,13 +6,13 @@
                   @close="$emit('close')">
     <div class="setting-site-container">
       <app-base-field id="textSize"
-                      :label="`Размер текста: ${textSize * 10}`">
+                      :label="`Размер текста: ${textSize * 10 + 1}`">
         <input type="range"
                min="0"
-               max="1"
+               max="0.9"
                step="0.1"
                v-model="textSize"
-               class="field-range-standard"
+               class="field-standard"
                @change="toggleTextSize"
                id="textSize">
       </app-base-field>

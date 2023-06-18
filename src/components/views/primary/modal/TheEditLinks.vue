@@ -19,7 +19,7 @@
           isShow: valid.href.$invalid && valid.href.$dirty,
         }]" style="width: 100%;">
           <input type="text"
-                 placeholder="Введите ссылку"
+                 placeholder="Введите новую ссылку"
                  aria-label="Ссылка на сайт"
                  @blur="valid.href.$touch()"
                  v-model="newLink.href"

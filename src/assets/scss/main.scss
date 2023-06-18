@@ -206,13 +206,20 @@ $colors in $color-fields {
     }
   }
 
-  .field-range-#{$title} {
+  input[type=range].field-#{$title} {
     $color-focus: adjust-color($color: nth($colors, 1), $red: 37, $green: 26, $blue: -2);
     -webkit-appearance: none;
     margin: 0.5rem 0;
+    border: none;
 
     &:focus {
       outline: none;
+      border: none;
+    }
+
+
+    &:hover {
+      border: none;
     }
 
     &::-webkit-slider-runnable-track {

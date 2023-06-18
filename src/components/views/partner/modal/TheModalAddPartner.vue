@@ -2,7 +2,7 @@
   <app-base-modal :is-show="isShow"
                   :is-footer="true"
                   title="Добавить партнера"
-                  @close="$emit('close')">
+                  @close="close">
     <div class="add-partner-container">
       <div class="partner-cropper">
         <cropper :src="cropperFile"
@@ -69,9 +69,13 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
+  setup(props, context) {
     const store = useStore();
     const { alerts } = useAlerts();
+
+    const close = () => {
+      context.emit('close');
+    };
 
     const {
       imgRef,
@@ -101,6 +105,7 @@ export default defineComponent({
               type: 'info',
               message: 'Партнер добавлен',
             });
+            close();
           } catch (e) {
             alerts.value.push({
               type: 'warning',
@@ -125,6 +130,7 @@ export default defineComponent({
       addPartner,
       uploadImg,
       resizedImg,
+      close,
     };
   },
 });

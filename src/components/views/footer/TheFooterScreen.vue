@@ -1,7 +1,8 @@
 <template>
   <footer class="footer-container">
 
-    <div id="map" class="map"></div>
+    <div id="map" class="map">
+    </div>
     <div class="line"/>
 
     <div class="contact-information-container">

@@ -23,9 +23,9 @@ const PartnerModule: Module<PartnerState, RootState> = {
     addPartner(state: PartnerState, partner: Partner) {
       state.partners.push(partner);
     },
-    updatePartner(state: PartnerState, partner: Partner) {
+    updatePartner(state: PartnerState, partner: Omit<Partner, 'urlImg'>) {
       const indexUpdate = state.partners.findIndex((p) => p.id === partner.id);
-      state.partners[indexUpdate] = partner;
+      state.partners[indexUpdate].href = partner.href;
     },
     removePartner(state: PartnerState, id: string) {
       const deleteIndex = state.partners.findIndex((p) => p.id === id);

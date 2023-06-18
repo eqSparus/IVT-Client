@@ -21,6 +21,7 @@
                            @action="selectTeacher(teacher.id)"/>
         <teacher-list-item :path-img="addIcon"
                            class="m-5"
+                           title="Добавить преподавателя"
                            @action="isAdd = true"/>
       </div>
     </div>

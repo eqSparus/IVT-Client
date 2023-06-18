@@ -33,7 +33,7 @@
                       class="mt-10"
                       label="Ссылка на сайт партнера"
                       :fails="[{
-                        isShow: valid.href.$invalid || valid.href.$dirty,
+                        isShow: valid.href.$invalid && valid.href.$dirty,
                         description: 'Поле не должно быть пустым и должно являться url адресом',
                       }]">
         <input type="text"

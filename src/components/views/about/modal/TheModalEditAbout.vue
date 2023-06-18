@@ -46,12 +46,12 @@ export default defineComponent({
         await store.dispatch('about/update', about);
         alerts.value.push({
           type: 'info',
-          message: 'Данные успешно обновлены',
+          message: 'Блок раздела обновлен',
         });
       } catch (e) {
         alerts.value.push({
           type: 'warning',
-          message: 'Не удалось обновить данные',
+          message: 'Не удалось обновить блок раздела',
         });
       }
     };

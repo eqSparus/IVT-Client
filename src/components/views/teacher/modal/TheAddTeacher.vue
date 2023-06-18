@@ -112,7 +112,7 @@
 
     <input type="button"
            class="btn-standard mt-20"
-           value="создать"
+           value="добавить"
            :disabled="valid.$invalid"
            @click="addTeacher">
 
