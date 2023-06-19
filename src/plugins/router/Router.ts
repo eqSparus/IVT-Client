@@ -68,6 +68,10 @@ const routers = [
     path: '/activatemail',
     component: TheActivateEmailPage,
   },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/main',
+  },
 ];
 
 const router = createRouter({
