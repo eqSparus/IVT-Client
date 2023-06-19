@@ -73,10 +73,6 @@ export default defineComponent({
     const store = useStore();
     const { alerts } = useAlerts();
 
-    const close = () => {
-      context.emit('close');
-    };
-
     const {
       imgRef,
       cropperRef,
@@ -90,6 +86,13 @@ export default defineComponent({
       valid,
     } = useEditPartner();
 
+    const close = () => {
+      partner.value.href = '';
+      cropperFile.value = null;
+      valid.value.$reset();
+      context.emit('close');
+    };
+
     const addPartner = async () => {
       if (cropperFile.value) {
         resizedImg(async (blob: Blob) => {
@@ -98,9 +101,6 @@ export default defineComponent({
               dataPartner: partner.value,
               image: blob,
             });
-            partner.value.href = '';
-            cropperFile.value = null;
-            valid.value.$reset();
             alerts.value.push({
               type: 'info',
               message: 'Партнер добавлен',

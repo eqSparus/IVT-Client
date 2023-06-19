@@ -1,8 +1,8 @@
 <template>
-  <the-header-menu :anchors="anchors"/>
+  <the-header-menu :anchors="anchors" logo-anchor="#primary"/>
 
   <main class="main-container">
-    <the-primary-screen :scroll-select="'#about'"/>
+    <the-primary-screen :scroll-select="'#about'" id="primary"/>
 
     <the-about-screen id="about"/>
 

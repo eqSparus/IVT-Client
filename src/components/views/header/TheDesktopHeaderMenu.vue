@@ -15,9 +15,13 @@
 
       <div class="header-content" v-show="isShowMenu">
 
-        <div class="header-logo">
+        <button class="header-logo"
+                @click="scrollTo(logoAnchor)"
+                tabindex="0"
+                @focus="isShowMenu = true"
+                @blur="isShowMenu = false">
           <img class="logo" src="@/assets/images/logo.svg" alt="assets/images/logo.svg"/>
-        </div>
+        </button>
 
         <nav class="header-menu">
 
@@ -91,6 +95,10 @@ export default defineComponent({
       type: Object as PropType<Array<Anchor>>,
       required: true,
     },
+    logoAnchor: {
+      type: String,
+      required: true,
+    },
   },
   setup() {
     const {
@@ -161,6 +169,18 @@ $animation-name-hint: 'hint';
     .header-logo {
       align-self: center;
       margin-left: 6rem;
+      border: none;
+      background: none;
+
+      &:hover {
+        cursor: pointer;
+        filter: prop.$icon-svg-hover-color-info;
+      }
+
+      &:focus {
+        filter: prop.$icon-svg-hover-color-info;
+        outline: none;
+      }
 
       .logo {
         width: 4.1rem;

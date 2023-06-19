@@ -96,6 +96,8 @@ export default defineComponent({
           message: 'Пароли должны совпадать',
         });
         repeatPassword.value = '';
+        password.value = '';
+        valid.value.$reset();
       }
     };
 

@@ -9,6 +9,7 @@
 <script lang="ts">
 
 import { defineComponent } from 'vue';
+import addIcon from '@/assets/images/icons/add.svg';
 
 export default defineComponent({
   name: 'TeacherListItem',
@@ -16,7 +17,7 @@ export default defineComponent({
   props: {
     pathImg: {
       type: String,
-      required: true,
+      default: addIcon,
     },
     title: {
       type: String,

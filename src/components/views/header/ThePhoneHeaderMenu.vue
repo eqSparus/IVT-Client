@@ -5,7 +5,7 @@
         <img class="img-logo" src="@/assets/images/logo-text.svg" alt="assets/images/logo-text.svg"/>
       </div>
       <label class="open-menu" for="show-menu">
-        <img  class="img-menu" :src="menuIcon" alt="assets/images/icons/menu.svg">
+        <img class="img-menu" :src="menuIcon" alt="assets/images/icons/menu.svg">
       </label>
       <input type="checkbox"
              style="display: none"
@@ -134,6 +134,7 @@ $animation-name: 'header';
       @extend %standard-scroll-bar;
 
       .header-menu-links {
+        width: 100%;
         display: flex;
         flex-flow: column;
         mix-blend-mode: difference;

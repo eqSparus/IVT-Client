@@ -19,8 +19,7 @@
                            class="m-5"
                            :title="`${teacher.lastName} ${teacher.firstName} ${teacher.middleName}`"
                            @action="selectTeacher(teacher.id)"/>
-        <teacher-list-item :path-img="addIcon"
-                           class="m-5"
+        <teacher-list-item class="m-5"
                            title="Добавить преподавателя"
                            @action="isAdd = true"/>
       </div>
@@ -37,7 +36,6 @@ import {
 import TheAddTeacher from '@/components/views/teacher/modal/TheAddTeacher.vue';
 import { Teacher } from '@/types/site.types';
 import TeacherListItem from '@/components/views/teacher/modal/TeacherListItem.vue';
-import addIcon from '@/assets/images/icons/add.svg';
 import TheEditTeacher from '@/components/views/teacher/modal/TheEditTeacher.vue';
 
 export default defineComponent({
@@ -78,7 +76,6 @@ export default defineComponent({
       indexTeacher,
       selectTeacher,
       close,
-      addIcon,
     };
   },
 });

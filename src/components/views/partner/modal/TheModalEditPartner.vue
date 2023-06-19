@@ -110,6 +110,9 @@ export default defineComponent({
     });
 
     const close = () => {
+      editPartner.value.href = props.partner.href;
+      cropperFile.value = null;
+      valid.value.$reset();
       emit('close');
     };
 

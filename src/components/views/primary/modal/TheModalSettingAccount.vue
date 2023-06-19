@@ -133,6 +133,8 @@ export default defineComponent({
           message: 'Пароли должны совпадать',
         });
         repeatPassword.value = '';
+        password.value = '';
+        valid.value.$reset();
       }
     };
 
@@ -157,7 +159,6 @@ export default defineComponent({
       password.value = '';
       repeatPassword.value = '';
       email.value = '';
-      alerts.value.splice(0, alerts.value.length);
       valid.value.$reset();
       emit('close');
     };

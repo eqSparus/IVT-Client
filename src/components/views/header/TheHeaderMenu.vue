@@ -1,5 +1,5 @@
 <template>
-  <the-desktop-header-menu v-if="isPhone" :anchors="anchors"/>
+  <the-desktop-header-menu v-if="isPhone" :anchors="anchors" :logo-anchor="logoAnchor"/>
   <the-phone-header-menu v-else :anchors="anchors"/>
 </template>
 
@@ -19,6 +19,10 @@ export default defineComponent({
   props: {
     anchors: {
       type: Object as PropType<Array<Anchor>>,
+      required: true,
+    },
+    logoAnchor: {
+      type: String,
       required: true,
     },
   },
