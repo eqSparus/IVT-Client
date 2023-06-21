@@ -2,7 +2,7 @@
   <div class="item-link-container">
 
     <app-select-img :options="links"
-                    :select="{img:editLink.icon, value:editLink.icon}"
+                    :select="{ img:editLink.icon }"
                     @changeIcon="editLink.icon = $event"/>
 
     <app-base-field :fails="[{

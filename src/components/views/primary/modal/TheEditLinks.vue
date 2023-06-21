@@ -11,7 +11,7 @@
     <div class="mt-10">
       <div class="setting-links-push">
         <app-select-img :options="optionLinks"
-                        :select="{img: newLink.icon, value:newLink.icon}"
+                        :select="{ img: newLink.icon }"
                         @changeIcon="newLink.icon = $event"/>
 
         <app-base-field :fails="[{
@@ -67,38 +67,31 @@ export default defineComponent({
     const store = useStore();
     const { alerts } = useAlerts();
 
-    // TODO Сменить адрес
-    const optionLinks = [
-      {
-        value: 'http://localhost:8080/api/v1/images/links/default-link.svg',
-        img: 'http://localhost:8080/api/v1/images/links/default-link.svg',
-      },
-      {
-        value: 'http://localhost:8080/api/v1/images/links/message-link.svg',
-        img: 'http://localhost:8080/api/v1/images/links/message-link.svg',
-      },
-      {
-        value: 'http://localhost:8080/api/v1/images/links/omgtu-link.svg',
-        img: 'http://localhost:8080/api/v1/images/links/omgtu-link.svg',
-      },
-      {
-        value: 'http://localhost:8080/api/v1/images/links/telegram-link.svg',
-        img: 'http://localhost:8080/api/v1/images/links/telegram-link.svg',
-      },
-      {
-        value: 'http://localhost:8080/api/v1/images/links/vk-link.svg',
-        img: 'http://localhost:8080/api/v1/images/links/vk-link.svg',
-      },
-      {
-        value: 'http://localhost:8080/api/v1/images/links/whatsapp-link.svg',
-        img: 'http://localhost:8080/api/v1/images/links/whatsapp-link.svg',
-      },
-    ];
-
     const {
       newLink,
       valid,
     } = useEditSiteLinks();
+
+    const optionLinks = [
+      {
+        img: new URL('/src/assets/images/links/default-link.svg', import.meta.url).href,
+      },
+      {
+        img: new URL('/src/assets/images/links/message-link.svg', import.meta.url).href,
+      },
+      {
+        img: new URL('/src/assets/images/links/omgtu-link.svg', import.meta.url).href,
+      },
+      {
+        img: new URL('/src/assets/images/links/telegram-link.svg', import.meta.url).href,
+      },
+      {
+        img: new URL('/src/assets/images/links/vk-link.svg', import.meta.url).href,
+      },
+      {
+        img: new URL('/src/assets/images/links/whatsapp-link.svg', import.meta.url).href,
+      },
+    ];
 
     const addLink = async () => {
       try {
@@ -108,8 +101,7 @@ export default defineComponent({
           message: 'Ссылка добавлена',
         });
         newLink.value.href = '';
-        // TODO сменить
-        newLink.value.icon = 'http://localhost:8080/api/v1/images/links/default-link.svg';
+        newLink.value.icon = new URL('/src/assets/images/links/default-link.svg', import.meta.url).href;
         valid.value.$reset();
       } catch (e) {
         alerts.value.push({
@@ -173,7 +165,7 @@ export default defineComponent({
     flex-flow: row;
     gap: 1rem;
 
-    div:nth-child(1){
+    div:nth-child(1) {
       align-self: flex-end;
     }
 

@@ -4,10 +4,9 @@ import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 
 const useEditSiteLinks = () => {
-  // TODO Сменить адрес
   const newLink = ref<Link>({
     href: '',
-    icon: 'http://localhost:8080/api/v1/images/links/default-link.svg',
+    icon: new URL('/src/assets/images/links/default-link.svg', import.meta.url).href,
   });
 
   const rules = {

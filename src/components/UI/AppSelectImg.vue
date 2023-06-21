@@ -15,8 +15,8 @@
              v-for="option in options" :key="option"
              :src="option.img"
              :alt="option.img"
-             @click="toggleSelection(option.value)"
-             @keyup.enter="toggleSelection(option.value)"/>
+             @click="toggleSelection(option.img)"
+             @keyup.enter="toggleSelection(option.img)"/>
       </div>
     </transition>
   </div>
@@ -24,11 +24,14 @@
 
 <script lang="ts">
 
-import { defineComponent, PropType, ref } from 'vue';
+import {
+  defineComponent,
+  PropType,
+  ref,
+} from 'vue';
 
 export type SelectOption = {
   img: string,
-  value: string,
 }
 
 export default defineComponent({
@@ -48,10 +51,10 @@ export default defineComponent({
     const isOpen = ref<boolean>(false);
 
     const toggleSelection = (value: string) => {
-      const el = props.options.find((op) => op.value === value);
+      const el = props.options.find((op) => op.img === value);
       if (el) {
         isOpen.value = false;
-        emit('changeIcon', el.value, el.img);
+        emit('changeIcon', el.img);
       }
     };
 
