@@ -3,14 +3,15 @@
      :href="href"
      target="_blank">
     <img class="icon-img"
-         :src="icon"
-         :alt="alt"/>
+         :src="linksIcon.get(icon)"
+         :alt="linksIcon.get(icon)"/>
   </a>
 </template>
 
 <script lang="ts">
 
 import { defineComponent } from 'vue';
+import useEditSiteLinks from '@/hooks/useEditSiteLinks';
 
 export default defineComponent({
   icon: 'AppLinkIcon',
@@ -27,6 +28,15 @@ export default defineComponent({
       type: String,
       default: 'Иконка',
     },
+  },
+  setup() {
+    const {
+      linksIcon,
+    } = useEditSiteLinks();
+
+    return {
+      linksIcon,
+    };
   },
 });
 </script>

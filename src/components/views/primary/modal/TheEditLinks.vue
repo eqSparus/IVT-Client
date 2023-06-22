@@ -3,15 +3,15 @@
 
     <app-link-item v-for="link in links" :key="link.id"
                    :link="link"
-                   :links="optionLinks"
+                   :links="linksIcon"
                    class="mt-10"
                    @deleteLink="removeLink"
                    @updateLink="updateLink"/>
 
     <div class="mt-10">
       <div class="setting-links-push">
-        <app-select-img :options="optionLinks"
-                        :select="{ img: newLink.icon }"
+        <app-select-img :options="linksIcon"
+                        :select="newLink.icon"
                         @changeIcon="newLink.icon = $event"/>
 
         <app-base-field :fails="[{
@@ -70,28 +70,8 @@ export default defineComponent({
     const {
       newLink,
       valid,
+      linksIcon,
     } = useEditSiteLinks();
-
-    const optionLinks = [
-      {
-        img: new URL('/src/assets/images/links/default-link.svg', import.meta.url).href,
-      },
-      {
-        img: new URL('/src/assets/images/links/message-link.svg', import.meta.url).href,
-      },
-      {
-        img: new URL('/src/assets/images/links/omgtu-link.svg', import.meta.url).href,
-      },
-      {
-        img: new URL('/src/assets/images/links/telegram-link.svg', import.meta.url).href,
-      },
-      {
-        img: new URL('/src/assets/images/links/vk-link.svg', import.meta.url).href,
-      },
-      {
-        img: new URL('/src/assets/images/links/whatsapp-link.svg', import.meta.url).href,
-      },
-    ];
 
     const addLink = async () => {
       try {
@@ -101,7 +81,7 @@ export default defineComponent({
           message: 'Ссылка добавлена',
         });
         newLink.value.href = '';
-        newLink.value.icon = new URL('/src/assets/images/links/default-link.svg', import.meta.url).href;
+        newLink.value.icon = 'default-link';
         valid.value.$reset();
       } catch (e) {
         alerts.value.push({
@@ -143,7 +123,7 @@ export default defineComponent({
 
     return {
       alerts,
-      optionLinks,
+      linksIcon,
       newLink,
       valid,
       removeLink,

@@ -7,16 +7,16 @@
          @click="isOpen = !isOpen"
          @keyup.tab="isOpen = !isOpen">
 
-      <img :src="select.img" :alt="select.img"/>
+      <img :src="options.get(select)" :alt="options.get(select)"/>
     </div>
     <transition name="select">
       <div class="selection-list" v-if="isOpen">
         <img class="selection-item"
-             v-for="option in options" :key="option"
-             :src="option.img"
-             :alt="option.img"
-             @click="toggleSelection(option.img)"
-             @keyup.enter="toggleSelection(option.img)"/>
+             v-for="key in options.keys()" :key="key"
+             :src="options.get(key)"
+             :alt="options.get(key)"
+             @click="toggleSelection(key)"
+             @keyup.enter="toggleSelection(key)"/>
       </div>
     </transition>
   </div>
@@ -39,11 +39,11 @@ export default defineComponent({
   emits: ['changeIcon'],
   props: {
     options: {
-      type: Array as PropType<Array<SelectOption>>,
+      type: Map as PropType<Map<string, string>>,
       required: true,
     },
     select: {
-      type: Object as PropType<SelectOption>,
+      type: String,
       required: true,
     },
   },
@@ -51,11 +51,8 @@ export default defineComponent({
     const isOpen = ref<boolean>(false);
 
     const toggleSelection = (value: string) => {
-      const el = props.options.find((op) => op.img === value);
-      if (el) {
-        isOpen.value = false;
-        emit('changeIcon', el.img);
-      }
+      isOpen.value = false;
+      emit('changeIcon', value);
     };
 
     return {

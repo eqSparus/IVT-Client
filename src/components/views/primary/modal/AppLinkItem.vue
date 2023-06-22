@@ -2,7 +2,7 @@
   <div class="item-link-container">
 
     <app-select-img :options="links"
-                    :select="{ img:editLink.icon }"
+                    :select="editLink.icon"
                     @changeIcon="editLink.icon = $event"/>
 
     <app-base-field :fails="[{
@@ -37,7 +37,7 @@
 <script lang="ts">
 
 import { defineComponent, PropType, ref } from 'vue';
-import AppSelectImg, { SelectOption } from '@/components/UI/AppSelectImg.vue';
+import AppSelectImg from '@/components/UI/AppSelectImg.vue';
 import trashcanIcon from '@/assets/images/icons/trashcan.svg';
 import refreshIcon from '@/assets/images/icons/refresh.svg';
 import { Link } from '@/types/site.types';
@@ -59,7 +59,7 @@ export default defineComponent({
       required: true,
     },
     links: {
-      type: Array as PropType<Array<SelectOption>>,
+      type: Map as PropType<Map<string, string>>,
       required: true,
     },
   },
