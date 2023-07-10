@@ -10,6 +10,7 @@ import {
 
 export interface RootState {
   isLoadAllTeacher: boolean;
+  isLoadData: boolean;
 }
 
 export interface DepartmentState {

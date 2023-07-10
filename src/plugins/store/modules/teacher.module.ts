@@ -108,10 +108,10 @@ const TeacherModule: Module<TeacherState, RootState> = {
       commit,
       rootState,
     }) {
-      if (rootState.isLoadAllTeacher) {
+      if (!rootState.isLoadAllTeacher) {
         const teachers = await requestGetTeacher(MIN_LOAD_TEACHER);
         commit('setTeachers', teachers);
-        commit('toggleLoadTeacher', {}, { root: true });
+        commit('teacherLoaded', {}, { root: true });
       }
     },
   },

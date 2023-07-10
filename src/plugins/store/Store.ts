@@ -11,7 +11,8 @@ import { RootState } from '@/plugins/store/store.types';
 
 const store = createStore({
   state: {
-    isLoadAllTeacher: true,
+    isLoadAllTeacher: false,
+    isLoadData: false,
   },
   modules: {
     department,
@@ -24,8 +25,11 @@ const store = createStore({
     review,
   },
   mutations: {
-    toggleLoadTeacher(state: RootState) {
-      state.isLoadAllTeacher = false;
+    teacherLoaded(state: RootState) {
+      state.isLoadAllTeacher = true;
+    },
+    dataLoaded(state: RootState) {
+      state.isLoadData = true;
     },
   },
 });

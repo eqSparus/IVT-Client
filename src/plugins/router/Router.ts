@@ -33,17 +33,20 @@ const routers = [
         }
       }
 
-      const dataSite = await requestGetData();
-      store.commit('department/setDepartment', dataSite.department.mainInfo);
-      store.commit('siteLinks/setLinks', dataSite.department.links);
-      store.commit('about/setAbout', dataSite.about);
-      store.commit('direction/setDirections', dataSite.directions);
-      store.commit('entrant/setEntrants', dataSite.entrants);
-      store.commit('partner/setPartners', dataSite.partners);
-      store.commit('review/setReviews', dataSite.reviews);
+      if (!store.state.isLoadData) {
+        const dataSite = await requestGetData();
+        store.commit('department/setDepartment', dataSite.department.mainInfo);
+        store.commit('siteLinks/setLinks', dataSite.department.links);
+        store.commit('about/setAbout', dataSite.about);
+        store.commit('direction/setDirections', dataSite.directions);
+        store.commit('entrant/setEntrants', dataSite.entrants);
+        store.commit('partner/setPartners', dataSite.partners);
+        store.commit('review/setReviews', dataSite.reviews);
 
-      const teachers = await requestGetTeacher(0, MIN_LOAD_TEACHER);
-      store.commit('teacher/setTeachers', teachers);
+        const teachers = await requestGetTeacher(0, MIN_LOAD_TEACHER);
+        store.commit('teacher/setTeachers', teachers);
+        store.commit('dataLoaded');
+      }
       next();
     },
   },
