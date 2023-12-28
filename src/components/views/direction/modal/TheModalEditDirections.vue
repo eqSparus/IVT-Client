@@ -41,9 +41,9 @@ import { Direction } from '@/types/site.types';
 import AppDirectionsItem from '@/components/views/direction/modal/AppDirectionItem.vue';
 import AppPlusMinusButton, { CharButton } from '@/components/UI/AppAdditionalLongButton.vue';
 import TheAddBlock from '@/components/views/direction/modal/TheAddBlock.vue';
-import { EditDirection } from '@/hooks/useEditDirection';
 import useAlerts from '@/hooks/useAlerts';
 import { useStore } from 'vuex';
+import { EditDirection } from '@/types/edit.site.types';
 
 export default defineComponent({
   icon: 'TheModalEditDirections',
@@ -97,9 +97,12 @@ export default defineComponent({
       }
     };
 
-    const updateDirection = async (direction: EditDirection) => {
+    const updateDirection = async (direction: EditDirection, id: string) => {
       try {
-        await store.dispatch('direction/update', direction);
+        await store.dispatch('direction/update', {
+          direction,
+          id,
+        });
         alerts.value.push({
           type: 'info',
           message: 'Направление обновлено',

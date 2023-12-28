@@ -12,7 +12,7 @@
              @click="toggleModal">
     </div>
 
-    <the-review-carousel class="mt-20" :reviews="reviews"/>
+    <the-review-carousel v-if="reviews.length !== 0" class="mt-20" :reviews="reviews"/>
 
   </app-base-screen>
 </template>

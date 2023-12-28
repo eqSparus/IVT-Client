@@ -50,7 +50,7 @@
             <app-base-field id="first-name"
                             label="Имя преподавателя*"
                             :fails="[{
-                              isShow: valid.firstName.$invalid && valid.firstName.$dirty,
+                              isShow: valid.firstName.$dirty && valid.firstName.$invalid,
                               description: 'Поле не должно быть пустым',
                             }]">
               <input type="text"
@@ -190,7 +190,6 @@ export default defineComponent({
       teacher: editableTeacher,
       valid,
     } = useEditTeacher({
-      id: props.teacher.id,
       firstName: props.teacher.firstName,
       middleName: props.teacher.middleName,
       lastName: props.teacher.lastName,
@@ -208,7 +207,10 @@ export default defineComponent({
         || editableTeacher.value.postAdditional !== props.teacher.postAdditional
       ) {
         try {
-          await store.dispatch('teacher/update', editableTeacher.value);
+          await store.dispatch('teacher/update', {
+            teacher: editableTeacher.value,
+            id: props.teacher.id,
+          });
           alerts.value.push({
             type: 'info',
             message: 'Преподаватель обновлен',

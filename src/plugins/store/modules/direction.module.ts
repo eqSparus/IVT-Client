@@ -7,7 +7,7 @@ import {
   requestSwapPosition,
   requestUpdateDirection,
 } from '@/http/HttpDirectionApi';
-import { EditDirection } from '@/hooks/useEditDirection';
+import { EditDirection } from '@/types/edit.site.types';
 
 const DirectionModule: Module<DirectionState, RootState> = {
   namespaced: true,
@@ -41,8 +41,11 @@ const DirectionModule: Module<DirectionState, RootState> = {
       const data = await requestCreateDirection(direction);
       commit('addDirection', data);
     },
-    async update({ commit }, direction: EditDirection) {
-      const data = await requestUpdateDirection(direction);
+    async update({ commit }, args: {
+      direction: EditDirection,
+      id: string
+    }) {
+      const data = await requestUpdateDirection(args.direction, args.id);
       commit('updateDirection', data);
     },
     async remove({ commit }, id: string) {

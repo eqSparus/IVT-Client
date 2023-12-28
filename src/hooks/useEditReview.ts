@@ -1,9 +1,7 @@
-import { Review } from '@/types/site.types';
 import { ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, maxLength } from '@vuelidate/validators';
-
-export type EditReview = Omit<Review, 'urlImg'>;
+import { EditReview } from '@/types/edit.site.types';
 
 const defaultReview = {
   name: '',

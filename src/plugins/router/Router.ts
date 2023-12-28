@@ -13,6 +13,7 @@ import { requestGetData } from '@/http/HttpDataApi';
 import { requestGetTeacher } from '@/http/HttpTeacherApi';
 import { MIN_LOAD_TEACHER } from '@/hooks/useEditTeacher';
 import useTokenAuthentication from '@/hooks/useTokenAuthentication';
+import useAlerts from '@/hooks/useAlerts';
 
 const routers = [
   {
@@ -22,30 +23,45 @@ const routers = [
     async beforeEnter(to: RouteLocationNormalized, from: RouteLocationNormalized, next: NavigationGuardNext) {
       const {
         isAuth,
+        isExpiration,
         refreshToken,
         logout,
       } = useTokenAuthentication();
+
+      const {
+        alerts,
+      } = useAlerts();
+
       if (isAuth.value) {
         try {
-          await refreshToken();
+          if (!isExpiration.value) {
+            await refreshToken();
+          }
         } catch (e) {
           logout();
         }
       }
 
       if (!store.state.isLoadData) {
-        const dataSite = await requestGetData();
-        store.commit('department/setDepartment', dataSite.department.mainInfo);
-        store.commit('siteLinks/setLinks', dataSite.department.links);
-        store.commit('about/setAbout', dataSite.about);
-        store.commit('direction/setDirections', dataSite.directions);
-        store.commit('entrant/setEntrants', dataSite.entrants);
-        store.commit('partner/setPartners', dataSite.partners);
-        store.commit('review/setReviews', dataSite.reviews);
+        try {
+          const dataSite = await requestGetData();
+          store.commit('department/setDepartment', dataSite.department.mainInfo);
+          store.commit('siteLinks/setLinks', dataSite.department.links);
+          store.commit('about/setAbout', dataSite.about);
+          store.commit('direction/setDirections', dataSite.directions);
+          store.commit('entrant/setEntrants', dataSite.entrants);
+          store.commit('partner/setPartners', dataSite.partners);
+          store.commit('review/setReviews', dataSite.reviews);
 
-        const teachers = await requestGetTeacher(0, MIN_LOAD_TEACHER);
-        store.commit('teacher/setTeachers', teachers);
-        store.commit('dataLoaded');
+          const teachers = await requestGetTeacher(0, MIN_LOAD_TEACHER);
+          store.commit('teacher/setTeachers', teachers);
+          store.commit('dataLoaded');
+        } catch (e) {
+          alerts.value.push({
+            type: 'warning',
+            message: 'Не удалось загрузить данные',
+          });
+        }
       }
       next();
     },

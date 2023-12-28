@@ -160,7 +160,7 @@ export default defineComponent({
         resizedImg(async (bl: Blob) => {
           try {
             await store.dispatch('teacher/add', {
-              dataTeacher: newTeacher.value,
+              teacher: newTeacher.value,
               image: bl,
             });
             newTeacher.value.firstName = '';

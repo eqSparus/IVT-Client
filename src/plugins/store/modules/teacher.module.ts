@@ -1,7 +1,7 @@
 import { Module } from 'vuex';
 import { RootState, TeacherState } from '@/plugins/store/store.types';
 import { Teacher } from '@/types/site.types';
-import { EditTeacher, MIN_LOAD_TEACHER } from '@/hooks/useEditTeacher';
+import { MIN_LOAD_TEACHER } from '@/hooks/useEditTeacher';
 import {
   requestCreateTeacher,
   requestDeleteTeacher,
@@ -10,6 +10,7 @@ import {
   requestUpdateTeacherImg,
   requestUpdateTeacherPosition,
 } from '@/http/HttpTeacherApi';
+import { EditTeacher } from '@/types/edit.site.types';
 
 const TeacherModule: Module<TeacherState, RootState> = {
   namespaced: true,
@@ -25,32 +26,27 @@ const TeacherModule: Module<TeacherState, RootState> = {
     addTeacher(state: TeacherState, teacher: Teacher) {
       state.teachers.push(teacher);
     },
-    updateTeacher(state: TeacherState, teacher: Omit<Teacher, 'urlImg' | 'position'>) {
+    updateTeacher(state: TeacherState, teacher: Teacher) {
       const indexUpdate = state.teachers.findIndex((t) => t.id === teacher.id);
-      state.teachers[indexUpdate].firstName = teacher.firstName;
-      state.teachers[indexUpdate].lastName = teacher.lastName;
-      state.teachers[indexUpdate].middleName = teacher.middleName;
-      state.teachers[indexUpdate].postTeacher = teacher.postTeacher;
-      state.teachers[indexUpdate].postAdditional = teacher.postAdditional;
-      state.teachers[indexUpdate].postDepartment = teacher.postDepartment;
+      state.teachers[indexUpdate] = teacher;
     },
     removeTeacher(state: TeacherState, id: string) {
       const deleteIndex = state.teachers.findIndex((t) => t.id === id);
       state.teachers.splice(deleteIndex, 1);
     },
-    updateImgTeacher(state: TeacherState, data: {
+    updateImgTeacher(state: TeacherState, args: {
       path: string,
       id: string
     }) {
-      const indexUpdate = state.teachers.findIndex((t) => t.id === data.id);
-      state.teachers[indexUpdate].urlImg = `${data.path}?range=${Date.now()}`;
+      const indexUpdate = state.teachers.findIndex((t) => t.id === args.id);
+      state.teachers[indexUpdate].urlImg = args.path;
     },
-    updatePositionTeacher(state: TeacherState, data: {
+    updatePositionTeacher(state: TeacherState, args: {
       position: string,
       id: string
     }) {
-      const indexUpdate = state.teachers.findIndex((t) => t.id === data.id);
-      state.teachers[indexUpdate].position = Number(data.position);
+      const indexUpdate = state.teachers.findIndex((t) => t.id === args.id);
+      state.teachers[indexUpdate].position = Number(args.position);
     },
   },
   getters: {
@@ -62,20 +58,23 @@ const TeacherModule: Module<TeacherState, RootState> = {
     },
   },
   actions: {
-    async add({ commit }, teacher: {
-      dataTeacher: EditTeacher,
+    async add({ commit }, args: {
+      teacher: EditTeacher,
       image: Blob,
     }) {
       const formData = new FormData();
-      formData.append('img', teacher.image, 'img.jpg');
-      formData.append('data', new Blob([JSON.stringify(teacher.dataTeacher)], {
+      formData.append('img', args.image, 'img.jpg');
+      formData.append('data', new Blob([JSON.stringify(args.teacher)], {
         type: 'application/json',
       }));
       const data = await requestCreateTeacher(formData);
       commit('addTeacher', data);
     },
-    async update({ commit }, teacher: EditTeacher) {
-      const data = await requestUpdateTeacher(teacher);
+    async update({ commit }, args: {
+      teacher: EditTeacher,
+      id: string
+    }) {
+      const data = await requestUpdateTeacher(args.teacher, args.id);
       commit('updateTeacher', data);
     },
     async remove({ commit }, id: string) {

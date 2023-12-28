@@ -105,7 +105,6 @@ export default defineComponent({
       partner: editPartner,
       valid,
     } = useEditPartner({
-      id: props.partner.id,
       href: props.partner.href,
     });
 
@@ -135,7 +134,10 @@ export default defineComponent({
     const updatePartner = async () => {
       if (props.partner.href !== editPartner.value.href) {
         try {
-          await store.dispatch('partner/update', editPartner.value);
+          await store.dispatch('partner/update', {
+            partner: editPartner.value,
+            id: props.partner.id,
+          });
           alerts.value.push({
             type: 'info',
             message: 'Партнер обновлен',

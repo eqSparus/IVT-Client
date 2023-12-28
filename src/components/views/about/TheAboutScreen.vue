@@ -14,7 +14,7 @@
     </div>
 
     <div class="about-screen-container">
-      <app-about-screen-item v-for="about in abouts" :key="about.id"
+      <app-about-screen-item v-for="(about, index) in abouts" :key="about.id" :icon="listIcons[index]"
                              :about-info="about"/>
     </div>
   </app-base-screen>
@@ -29,9 +29,12 @@ import { useStore } from 'vuex';
 import TheModalEditAbout from '@/components/views/about/modal/TheModalEditAbout.vue';
 import useShowModal from '@/hooks/useShowModal';
 import useTokenAuthentication from '@/hooks/useTokenAuthentication';
+import imgBook from '@/assets/images/about/book.svg';
+import imgSuitcase from '@/assets/images/about/suitcase.svg';
+import imgHuman from '@/assets/images/about/human.svg';
 
 export default defineComponent({
-  icon: 'TheAboutScreen',
+  name: 'TheAboutScreen',
   components: {
     TheModalEditAbout,
     AppBaseScreen,
@@ -40,6 +43,8 @@ export default defineComponent({
   setup() {
     const { isAuth } = useTokenAuthentication();
     const store = useStore();
+
+    const listIcons = [imgBook, imgSuitcase, imgHuman];
 
     const {
       isShow,
@@ -51,6 +56,7 @@ export default defineComponent({
       abouts: computed(() => store.getters['about/getAboutInfo']),
       isAuth,
       toggleModal,
+      listIcons,
     };
   },
 });

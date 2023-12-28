@@ -98,7 +98,7 @@ export default defineComponent({
         resizedImg(async (blob: Blob) => {
           try {
             await store.dispatch('partner/add', {
-              dataPartner: partner.value,
+              partner: partner.value,
               image: blob,
             });
             alerts.value.push({

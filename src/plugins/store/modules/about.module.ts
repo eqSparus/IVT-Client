@@ -1,7 +1,8 @@
 import { Module } from 'vuex';
 import { AboutState, RootState } from '@/plugins/store/store.types';
 import { AboutDepartment } from '@/types/site.types';
-import requestUpdateAboutDepartment from '@/http/HttpHttpAboutDepartment';
+import requestUpdateAboutDepartment from '@/http/HttpAboutDepartment';
+import { EditAboutDepartment } from '@/types/edit.site.types';
 
 const AboutDepartmentModule: Module<AboutState, RootState> = {
   namespaced: true,
@@ -25,8 +26,11 @@ const AboutDepartmentModule: Module<AboutState, RootState> = {
     },
   },
   actions: {
-    async update({ commit }, about: AboutDepartment) {
-      const data = await requestUpdateAboutDepartment(about);
+    async update({ commit }, args: {
+      about: EditAboutDepartment,
+      id: string,
+    }) {
+      const data = await requestUpdateAboutDepartment(args.about, args.id);
       commit('updateAbout', data);
     },
   },

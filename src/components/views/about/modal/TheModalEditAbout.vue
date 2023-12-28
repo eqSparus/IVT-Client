@@ -41,9 +41,12 @@ export default defineComponent({
     const store = useStore();
     const { alerts } = useAlerts();
 
-    const updateAbout = async (about: AboutDepartment) => {
+    const updateAbout = async (about: AboutDepartment, id: string) => {
       try {
-        await store.dispatch('about/update', about);
+        await store.dispatch('about/update', {
+          about,
+          id,
+        });
         alerts.value.push({
           type: 'info',
           message: 'Блок раздела обновлен',

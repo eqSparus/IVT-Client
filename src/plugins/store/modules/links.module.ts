@@ -2,6 +2,7 @@ import { Module } from 'vuex';
 import { RootState, SiteLinksState } from '@/plugins/store/store.types';
 import { Link } from '@/types/site.types';
 import { requestCreateLink, requestDeleteLink, requestUpdateLink } from '@/http/HttpSiteLinkApi';
+import { EditLink } from '@/types/edit.site.types';
 
 const SiteLinksModule: Module<SiteLinksState, RootState> = {
   namespaced: true,
@@ -35,8 +36,11 @@ const SiteLinksModule: Module<SiteLinksState, RootState> = {
       const data = await requestCreateLink(link);
       commit('addLink', data);
     },
-    async update({ commit }, link: Link) {
-      const data = await requestUpdateLink(link);
+    async update({ commit }, args: {
+      link: EditLink,
+      id: string
+    }) {
+      const data = await requestUpdateLink(args.link, args.id);
       commit('updateLink', data);
     },
     async remove({ commit }, id: string) {

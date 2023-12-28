@@ -1,13 +1,13 @@
 import { Module } from 'vuex';
 import { ReviewState, RootState } from '@/plugins/store/store.types';
 import { Review } from '@/types/site.types';
-import { EditReview } from '@/hooks/useEditReview';
 import {
   requestCreateReview,
   requestDeleteReview,
   requestUpdateReview,
   requestUpdateReviewImg,
 } from '@/http/HttpReviewApi';
+import { EditReview } from '@/types/edit.site.types';
 
 const ReviewModule: Module<ReviewState, RootState> = {
   namespaced: true,
@@ -28,11 +28,9 @@ const ReviewModule: Module<ReviewState, RootState> = {
     addReview(state: ReviewState, review: Review) {
       state.reviews.push(review);
     },
-    updateReview(state: ReviewState, review: Omit<Review, 'urlImg'>) {
+    updateReview(state: ReviewState, review: Review) {
       const indexUpdate = state.reviews.findIndex((r) => r.id === review.id);
-      state.reviews[indexUpdate].name = review.name;
-      state.reviews[indexUpdate].jobTitle = review.jobTitle;
-      state.reviews[indexUpdate].comment = review.comment;
+      state.reviews[indexUpdate] = review;
     },
     removeReview(state: ReviewState, id: string) {
       const deleteIndex = state.reviews.findIndex((r) => r.id === id);
@@ -59,24 +57,27 @@ const ReviewModule: Module<ReviewState, RootState> = {
       const data = await requestCreateReview(formData);
       commit('addReview', data);
     },
-    async update({ commit }, review: EditReview) {
-      const data = await requestUpdateReview(review);
+    async update({ commit }, args: {
+      review: EditReview,
+      id: string,
+    }) {
+      const data = await requestUpdateReview(args.review, args.id);
       commit('updateReview', data);
     },
     async remove({ commit }, id: string) {
       await requestDeleteReview(id);
       commit('removeReview', id);
     },
-    async updateImg({ commit }, review: {
+    async updateImg({ commit }, args: {
       id: string,
       image: Blob,
     }) {
       const formData = new FormData();
-      formData.append('img', review.image, 'review.png');
-      const data = await requestUpdateReviewImg(formData, review.id);
+      formData.append('img', args.image, 'review.png');
+      const data = await requestUpdateReviewImg(formData, args.id);
       commit('updateImgReview', {
         path: data.url,
-        id: review.id,
+        id: args.id,
       });
     },
   },

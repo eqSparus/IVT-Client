@@ -1,11 +1,10 @@
 export type Link = {
-  id?: string,
+  id: string,
   icon: string,
   href: string
 }
 
 export type Department = {
-  id?: string,
   title: string,
   slogan: string,
   phone: string,
@@ -14,7 +13,7 @@ export type Department = {
 }
 
 export type Direction = {
-  id?: string,
+  id: string,
   title: string,
   degree: string,
   form: string,
@@ -32,20 +31,19 @@ export type EntrantItem = {
 }
 
 export type Entrant = {
-  id?: string,
+  id: string,
   title: string,
   items: Array<EntrantItem>,
 }
 
 export type AboutDepartment = {
-  id?: string,
+  id: string,
   title: string,
   description: string,
-  icon?: string,
 }
 
 export type Teacher = {
-  id?: string,
+  id: string,
   urlImg: string,
   firstName: string,
   middleName: string,
@@ -57,13 +55,13 @@ export type Teacher = {
 }
 
 export type Partner = {
-  id?: string,
+  id: string,
   href: string,
   urlImg: string,
 }
 
 export type Review = {
-  id?: string,
+  id: string,
   name: string,
   jobTitle: string,
   comment: string,

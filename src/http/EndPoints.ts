@@ -1,11 +1,11 @@
 export default {
-  ABOUT: '/about',
+  ABOUT: '/abouts',
   DATA: '/data',
   DEPARTMENT: '/department',
-  DIRECTION: '/direction',
-  ENTRANT: '/entrant',
-  SITE_LINK: '/link',
-  TEACHER: '/teacher',
-  PARTNER: '/partner',
-  REVIEW: '/review',
+  DIRECTION: '/directions',
+  ENTRANT: '/entrants',
+  SITE_LINK: '/links',
+  TEACHER: '/teachers',
+  PARTNER: '/partners',
+  REVIEW: '/reviews',
 } as const;

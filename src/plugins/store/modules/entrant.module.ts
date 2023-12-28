@@ -2,6 +2,7 @@ import { Module } from 'vuex';
 import { EntrantState, RootState } from '@/plugins/store/store.types';
 import { Entrant } from '@/types/site.types';
 import { requestCreateEntrant, requestDeleteEntrant, requestUpdateEntrant } from '@/http/HttpEntrantApi';
+import { EditEntrant } from '@/types/edit.site.types';
 
 const DirectionModule: Module<EntrantState, RootState> = {
   namespaced: true,
@@ -32,12 +33,15 @@ const DirectionModule: Module<EntrantState, RootState> = {
     },
   },
   actions: {
-    async add({ commit }, entrant: Entrant) {
+    async add({ commit }, entrant: EditEntrant) {
       const data = await requestCreateEntrant(entrant);
       commit('addEntrant', data);
     },
-    async update({ commit }, entrant: Entrant) {
-      const data = await requestUpdateEntrant(entrant);
+    async update({ commit }, args: {
+      entrant: EditEntrant,
+      id: string,
+    }) {
+      const data = await requestUpdateEntrant(args.entrant, args.id);
       commit('updateEntrant', data);
     },
     async remove({ commit }, id: string) {

@@ -25,7 +25,7 @@
            alt="assets/images/icon/refresh.svg">
     </button>
 
-    <button @click="$emit('deleteLink', editLink.id)"
+    <button @click="$emit('deleteLink', link.id)"
             class="btn-warning-icon btn-position">
       <img :src="trashcanIcon"
            alt="assets/images/icon/trashcan.svg">
@@ -45,6 +45,7 @@ import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import useAlerts from '@/hooks/useAlerts';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import { EditLink } from '@/types/edit.site.types';
 
 export default defineComponent({
   icon: 'AppLinkItem',
@@ -65,8 +66,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const { alerts } = useAlerts();
-    const editLink = ref<Link>({
-      id: props.link.id,
+    const editLink = ref<EditLink>({
       href: props.link.href,
       icon: props.link.icon,
     });
@@ -81,7 +81,7 @@ export default defineComponent({
     const updateLink = () => {
       if (props.link.icon !== editLink.value.icon
         || props.link.href !== editLink.value.href) {
-        emit('updateLink', editLink.value);
+        emit('updateLink', editLink.value, props.link.id);
       } else {
         alerts.value.push({
           type: 'warning',

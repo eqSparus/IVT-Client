@@ -125,7 +125,10 @@ export default defineComponent({
     const updateEntrant = async () => {
       try {
         clearingBlank();
-        await store.dispatch('entrant/update', editEntrant.value);
+        await store.dispatch('entrant/update', {
+          entrant: editEntrant.value,
+          id: props.entrant?.id,
+        });
         alerts.value.push({
           type: 'info',
           message: 'Информация обновлена',

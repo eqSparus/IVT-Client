@@ -1,9 +1,7 @@
 import { ref } from 'vue';
-import { Partner } from '@/types/site.types';
 import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
-
-export type EditPartner = Omit<Partner, 'urlImg'>
+import { EditPartner } from '@/types/edit.site.types';
 
 const defaultPartner = {
   href: '',

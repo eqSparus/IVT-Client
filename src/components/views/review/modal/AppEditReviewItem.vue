@@ -84,10 +84,10 @@
                         }]">
             <app-tooltip text="Размер текста не должен превышать 500 символов включая пробелы.">
               <textarea class="field-standard"
-                                  v-model="editableReview.comment"
-                                  @blur="valid.comment.$touch()"
-                                  placeholder="Введите отзыв"
-                                  id="comment">
+                        v-model="editableReview.comment"
+                        @blur="valid.comment.$touch()"
+                        placeholder="Введите отзыв"
+                        id="comment">
               </textarea>
               <span class="fs-14" style="align-self: flex-end">{{ `${editableReview.comment.length}/500` }}</span>
             </app-tooltip>
@@ -147,7 +147,6 @@ export default defineComponent({
       review: editableReview,
       valid,
     } = useEditReview({
-      id: props.review.id,
       name: props.review.name,
       jobTitle: props.review.jobTitle,
       comment: props.review.comment,
@@ -210,7 +209,10 @@ export default defineComponent({
         || editableReview.value.comment !== props.review.comment
       ) {
         try {
-          await store.dispatch('review/update', editableReview.value);
+          await store.dispatch('review/update', {
+            review: editableReview.value,
+            id: props.review.id,
+          });
           alerts.value.push({
             type: 'info',
             message: 'Отзыв обновлен',

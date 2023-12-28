@@ -10,6 +10,7 @@ import { defineComponent, onMounted } from 'vue';
 import { requestEditEmail } from '@/http/user/HttpAdmin';
 import { useRoute, useRouter } from 'vue-router';
 import AppSpinner from '@/components/UI/AppSpinner.vue';
+import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
 export default defineComponent({
   name: 'TheActivateEmail',
@@ -19,9 +20,14 @@ export default defineComponent({
     const route = useRoute();
     const { token } = route.query;
 
+    const {
+      refreshToken,
+    } = useTokenAuthentication();
+
     onMounted(async () => {
       try {
         await requestEditEmail(token as string);
+        await refreshToken();
         await router.replace('/main');
       } catch (e) {
         await router.replace('/main');

@@ -1,8 +1,8 @@
 <template>
   <div class="edit-entrant-item-container">
     <div class="item-icon ml-20">
-      <div class="circle">
-        <img class="img-icon" :src="pathImg" :alt="aboutInfo.icon"/>
+      <div class="circle" v-if="icon">
+        <img class="img-icon" :src="icon" :alt="icon"/>
       </div>
     </div>
 
@@ -22,9 +22,6 @@ import {
   defineComponent,
   PropType,
 } from 'vue';
-import imgBook from '@/assets/images/about/book.svg';
-import imgSuitcase from '@/assets/images/about/suitcase.svg';
-import imgHuman from '@/assets/images/about/human.svg';
 
 export default defineComponent({
   icon: 'AppAboutScreenItem',
@@ -33,27 +30,10 @@ export default defineComponent({
       type: Object as PropType<AboutDepartment>,
       required: true,
     },
-  },
-  setup(props) {
-    let pathImg;
-
-    switch (props.aboutInfo.icon) {
-    case 'book':
-      pathImg = imgBook;
-      break;
-    case 'human':
-      pathImg = imgHuman;
-      break;
-    case 'suitcase':
-      pathImg = imgSuitcase;
-      break;
-    default:
-      pathImg = imgBook;
-    }
-
-    return {
-      pathImg,
-    };
+    icon: {
+      type: String,
+      required: false,
+    },
   },
 });
 </script>

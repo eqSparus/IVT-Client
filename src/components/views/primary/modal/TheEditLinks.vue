@@ -49,6 +49,7 @@ import useEditSiteLinks from '@/hooks/useEditSiteLinks';
 import useAlerts from '@/hooks/useAlerts';
 import { useStore } from 'vuex';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import { EditLink } from '@/types/edit.site.types';
 
 export default defineComponent({
   name: 'TheSettingLinks',
@@ -106,9 +107,12 @@ export default defineComponent({
       }
     };
 
-    const updateLink = async (link: Link) => {
+    const updateLink = async (link: EditLink, id: string) => {
       try {
-        await store.dispatch('siteLinks/update', link);
+        await store.dispatch('siteLinks/update', {
+          link,
+          id,
+        });
         alerts.value.push({
           type: 'info',
           message: 'Ссылка обновлена',

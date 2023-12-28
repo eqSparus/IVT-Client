@@ -1,9 +1,8 @@
-import { Teacher } from '@/types/site.types';
 import { ref } from 'vue';
 import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
+import { EditTeacher } from '@/types/edit.site.types';
 
-export type EditTeacher = Omit<Teacher, 'position' | 'urlImg'>
 export const MIN_LOAD_TEACHER = 6;
 
 const defaultTeacher = {

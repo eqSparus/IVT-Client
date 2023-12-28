@@ -45,6 +45,7 @@ import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators';
 import useAlerts from '@/hooks/useAlerts';
 import AppBaseField from '@/components/UI/AppBaseField.vue';
+import { EditAboutDepartment } from '@/types/edit.site.types';
 
 export default defineComponent({
   name: 'AppEditAboutItem',
@@ -58,8 +59,7 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const { alerts } = useAlerts();
-    const changeAbout = ref({
-      id: props.about.id,
+    const changeAbout = ref<EditAboutDepartment>({
       title: props.about.title,
       description: props.about.description,
     });
@@ -76,7 +76,7 @@ export default defineComponent({
     const editAbout = () => {
       if (props.about.title !== changeAbout.value.title
         || props.about.description !== changeAbout.value.description) {
-        emit('update', changeAbout.value);
+        emit('update', changeAbout.value, props.about.id);
       } else {
         alerts.value.push({
           type: 'warning',

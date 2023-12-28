@@ -7,7 +7,7 @@ import {
   requestUpdatePartner,
   requestUpdatePartnerImg,
 } from '@/http/HttpPartnerApi';
-import { EditPartner } from '@/hooks/useEditPartner';
+import { EditPartner } from '@/types/edit.site.types';
 
 const PartnerModule: Module<PartnerState, RootState> = {
   namespaced: true,
@@ -23,9 +23,9 @@ const PartnerModule: Module<PartnerState, RootState> = {
     addPartner(state: PartnerState, partner: Partner) {
       state.partners.push(partner);
     },
-    updatePartner(state: PartnerState, partner: Omit<Partner, 'urlImg'>) {
+    updatePartner(state: PartnerState, partner: Partner) {
       const indexUpdate = state.partners.findIndex((p) => p.id === partner.id);
-      state.partners[indexUpdate].href = partner.href;
+      state.partners[indexUpdate] = partner;
     },
     removePartner(state: PartnerState, id: string) {
       const deleteIndex = state.partners.findIndex((p) => p.id === id);
@@ -45,36 +45,39 @@ const PartnerModule: Module<PartnerState, RootState> = {
     },
   },
   actions: {
-    async add({ commit }, partner: {
-      dataPartner: EditPartner,
+    async add({ commit }, args: {
+      partner: EditPartner,
       image: Blob,
     }) {
       const formData = new FormData();
-      formData.append('img', partner.image, 'partner.png');
-      formData.append('data', new Blob([JSON.stringify(partner.dataPartner)], {
+      formData.append('img', args.image, 'partner.png');
+      formData.append('data', new Blob([JSON.stringify(args.partner)], {
         type: 'application/json',
       }));
       const data = await requestCreatePartner(formData);
       commit('addPartner', data);
     },
-    async update({ commit }, partner: EditPartner) {
-      const data = await requestUpdatePartner(partner);
+    async update({ commit }, args:{
+      partner: EditPartner,
+      id: string
+    }) {
+      const data = await requestUpdatePartner(args.partner, args.id);
       commit('updatePartner', data);
     },
     async remove({ commit }, id: string) {
       await requestDeletePartner(id);
       commit('removePartner', id);
     },
-    async updateImg({ commit }, partner: {
+    async updateImg({ commit }, args: {
       id: string,
       image: Blob,
     }) {
       const formData = new FormData();
-      formData.append('img', partner.image, 'partner.png');
-      const data = await requestUpdatePartnerImg(formData, partner.id);
+      formData.append('img', args.image, 'partner.png');
+      const data = await requestUpdatePartnerImg(formData, args.id);
       commit('updateImgPartner', {
         path: data.url,
-        id: partner.id,
+        id: args.id,
       });
     },
   },

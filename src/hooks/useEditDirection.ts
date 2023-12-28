@@ -1,7 +1,7 @@
-import { Direction } from '@/types/site.types';
 import { ref, toRefs } from 'vue';
 import { maxValue, minValue, required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
+import { EditDirection } from '@/types/edit.site.types';
 
 const defaultDirection = {
   title: '',
@@ -9,8 +9,6 @@ const defaultDirection = {
   form: '',
   duration: 0,
 };
-
-export type EditDirection = Omit<Direction, 'position'>;
 
 const useEditDirection = (customDir: EditDirection = defaultDirection) => {
   const direction = ref<EditDirection>(customDir);

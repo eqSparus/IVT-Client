@@ -2,9 +2,10 @@ import { ref } from 'vue';
 import { Entrant } from '@/types/site.types';
 import { required } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
+import { EditEntrant } from '@/types/edit.site.types';
 
 const useEditEntrant = () => {
-  const entrant = ref<Entrant>({
+  const entrant = ref<EditEntrant>({
     title: '',
     items: [],
   });
@@ -18,7 +19,6 @@ const useEditEntrant = () => {
   const valid = useVuelidate(rules, entrant.value);
 
   const setEntrant = (ent: Entrant) => {
-    entrant.value.id = ent.id;
     entrant.value.title = ent.title;
     entrant.value.items = ent.items.map((value) => ({
       name: value.name,

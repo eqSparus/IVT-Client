@@ -70,7 +70,7 @@
       </button>
 
       <button class="btn-warning-icon"
-              @click="$emit('delete', editDirection.id)">
+              @click="$emit('delete', direction.id)">
         <img :src="trashcanIcon"
              alt="assets/images/icon/trashcan.svg">
       </button>
@@ -132,7 +132,6 @@ export default defineComponent({
       direction: editDirection,
       valid,
     } = useEditDirection({
-      id: props.direction.id,
       title: props.direction.title,
       degree: props.direction.degree,
       form: props.direction.form,
@@ -144,7 +143,7 @@ export default defineComponent({
         || editDirection.value.degree !== props.direction.degree
         || editDirection.value.form !== props.direction.form
         || editDirection.value.duration !== props.direction.duration) {
-        emit('update', editDirection.value);
+        emit('update', editDirection.value, props.direction.id);
       } else {
         alerts.value.push({
           type: 'warning',

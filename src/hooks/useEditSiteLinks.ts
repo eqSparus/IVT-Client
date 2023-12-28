@@ -1,5 +1,4 @@
 import { ref } from 'vue';
-import { Link } from '@/types/site.types';
 import { required, url } from '@vuelidate/validators';
 import useVuelidate from '@vuelidate/core';
 import linkDefault from '@/assets/images/links/default-link.svg';
@@ -8,6 +7,7 @@ import linkVk from '@/assets/images/links/vk-link.svg';
 import linkMessage from '@/assets/images/links/message-link.svg';
 import linkWhatsapp from '@/assets/images/links/whatsapp-link.svg';
 import linkTelegram from '@/assets/images/links/telegram-link.svg';
+import { EditLink } from '@/types/edit.site.types';
 
 const linksIcon = new Map<string, string>();
 linksIcon.set('default-link', linkDefault);
@@ -18,7 +18,7 @@ linksIcon.set('whatsapp-link', linkWhatsapp);
 linksIcon.set('telegram-link', linkTelegram);
 
 const useEditSiteLinks = () => {
-  const newLink = ref<Link>({
+  const newLink = ref<EditLink>({
     href: '',
     icon: 'default-link',
   });
