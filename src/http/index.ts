@@ -1,8 +1,7 @@
 import axios from 'axios';
 import useTokenAuthentication from '@/hooks/useTokenAuthentication';
 
-// TODO заменить
-const BASE_URL = 'http://localhost:8080/api/v1';
+const BASE_URL = `http://${process.env.VUE_APP_HOSTNAME}/api/v1`;
 
 axios.defaults.baseURL = BASE_URL;
 
